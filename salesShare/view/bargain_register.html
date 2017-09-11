@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+<link rel="stylesheet" href="../css/framework/weui/weui.css">
+<link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
+
+
+  </head>
+
+  <body ontouchstart>
+
+
+    <header class='demos-header'>
+      <h1 class="demos-title">表单</h1>
+    </header>
+    
+    
+    <div class="weui-cells">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请输入所属行业">
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="home-city" class="weui-label">所在城市</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" id="home-city" type="text">
+        </div>
+      </div>
+    </div>
+    
+    <div class="weui-cells weui-cells_form">
+
+      <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd">
+          <label class="weui-label">手机号</label>
+        </div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="tel" placeholder="请输入手机号">
+        </div>
+        <div class="weui-cell__ft">
+          <button class="weui-vcode-btn">获取验证码</button>
+        </div>
+      </div>
+
+      <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="number" placeholder="请输入验证码">
+        </div>
+        <div class="weui-cell__ft">
+          <img class="weui-vcode-img" src="./images/vcode.jpg">
+        </div>
+      </div>
+    </div>
+    
+   <div class="weui-cells">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请设置新密码（6-20位字母和数字组合）">
+        </div>
+      </div>
+    </div>
+
+    <label for="weuiAgree" class="weui-agree">
+      <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+      <span class="weui-agree__text">
+        阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+      </span>
+    </label>
+
+    <div class="weui-btn-area">
+      <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips">提交注册</a>
+    </div>
+
+    <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<script src="../js/libs/weui/fastclick.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script src="../js/libs/weui/jquery-weui.js"></script>
+<script src="../js/libs/weui/city-picker.js"></script>
+
+    <script>
+    	
+    	
+    	$("#home-city").cityPicker({
+        //title: "选择目的地",
+        showDistrict: false,
+        onChange: function (picker, values, displayValues) {
+          console.log(values, displayValues);
+        }
+      });
+    	
+    	
+      $("#showTooltips").click(function() {
+        var tel = $('#tel').val();
+        var code = $('#code').val();
+        if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入手机号');
+        else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
+        else $.toptip('提交成功', 'success');
+      });
+    </script>
+  </body>
+</html>

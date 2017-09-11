@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<link rel="stylesheet" href="../lib/weui.min.css">
+<link rel="stylesheet" href="../css/jquery-weui.css">
+<link rel="stylesheet" href="css/demos.css">
+
+  </head>
+
+  <body ontouchstart>
+
+    <div class="weui-tab">
+      <div class="weui-navbar">
+        <a class="weui-navbar__item weui-bar__item--on" href="#tab1">
+          全部
+        </a>
+        <a class="weui-navbar__item" href="#tab2">
+          未开始
+        </a>
+        <a class="weui-navbar__item" href="#tab3">
+          进行中
+        </a>
+        <a class="weui-navbar__item" href="#tab4">
+          已结束
+        </a>
+        <a class="weui-navbar__item" href="#tab5">
+          已下载
+        </a>
+      </div>
+      <div class="weui-tab__bd">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+        	 <div v-for="item in activityList">
+        	 	<section v-show="item.type == 0" class="">
+        	 		<div class="banner">
+        	 			<img src="{{ item.headerBannerUrl }}" alt="" />
+        	 		</div>
+        	 		<div class="progress-info">
+        	 			
+        	 				<icon></icon>
+        	 				<label>{{ item.headerBannerUrl }}</label>
+        	 				
+        	 				<icon></icon>
+        	 				<label>{{ item.headerBannerUrl }}</label>
+        	 				
+        	 				<icon></icon>
+        	 				<label>{{ item.headerBannerUrl }}</label>
+        	 				
+        	 				<icon></icon>
+        	 				<label>{{ item.headerBannerUrl }}</label>
+        
+        	 		</div>
+        	 	</section>
+            
+        	</div>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+          <h1>页面二</h1>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+          <h1>页面二</h1>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+          <h1>页面二</h1>
+        </div>
+        <div id="tab2" class="weui-tab__bd-item">
+          <h1>页面二</h1>
+        </div>
+        
+      </div>
+    </div>
+
+    <script src="../lib/jquery-2.1.4.js"></script>
+<script src="../lib/fastclick.js"></script>
+ <script src="../js/vue.js"></script>
+<script>
+  $(function() {
+    FastClick.attach(document.body);
+  });
+</script>
+<script src="../js/jquery-weui.js"></script>
+
+    <script>
+      $("#a").select({
+        title: "选择职业",
+        items: ["法官", "医生", "猎人", "学生", "记者", "其他"]
+      });
+    </script>
+  </body>
+</html>
