@@ -9,23 +9,66 @@
 <meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
-<link rel="stylesheet" href="../lib/weui.min.css">
-<link rel="stylesheet" href="../css/jquery-weui.css">
-<link rel="stylesheet" href="css/demos.css">
+<link rel="stylesheet" href="../css/framework/weui/weui.css">
+<link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
+<link rel="stylesheet" href="../css/layouts/common.css">
 
 <style type="text/css">
+	.container{
+		background-color: antiquewhite;
+	}
+.head-banner{
+	    background-color: #fff;
+    padding: 10px;
+}	
 .module{
 	
 }
 .module .title{
-	
+	  text-align: center;
+    height: 30px;
+    margin: 10px auto;
+    background-color: #26d624;
+    width: 30%;
+    color: #fff;
+    line-height: 30px;
 }
 .module .content{
-	
+    width: 90%;
+    margin: auto;
+    background: #fff;
+    padding: 5px;
 }
-.module .upload-panel{
-	
+.upload-panel{
+    width: 90%;
+    height: 70px;
+    border: 2px dashed #ddd;
+    margin: 4% auto;
+    text-align: center;
+    line-height: 70px;
+    display: flex;
+    justify-content: space-around;
+    color: #8e8e8e;
 }
+.upload-panel .clear,
+.upload-panel .video,
+.upload-panel .image,
+.upload-panel .text{
+		display: inline-block;
+    /* margin-right: 1%; */
+    border: 1px solid #ddd;
+    height: 40px;
+    margin: auto;
+    line-height: 40px;
+    padding: 0px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.upload-panel .clear,
+.upload-panel .edit{
+    display: none;
+}
+
 .module .upload-panel .image{
 	
 }
@@ -43,8 +86,8 @@
 <div class="container">
 	<div class="head-banner">
 		<div class="upload-panel">
-			<div class="image add"></div>
-			<div class="image edit"></div>
+			<div class="image add">添加图片</div>
+			<div class="image edit hide">替换图片</div>
 		</div>
 	</div>
 	<!--奖品描述 1-1-->
@@ -54,13 +97,13 @@
 		</div>
 		<div class="content">
 			<div class="upload-panel">
-				<div class="image add"></div>
-				<div class="image edit"></div>
+				<div class="image add">添加图片</div>
+				<div class="image edit">替换图片</div>
 				
-				<div class="text add"></div>
-				<div class="text edit"></div>
+				<div class="text add">添加描述</div>
+				<div class="text edit">修改描述</div>
 				
-				<div class="clear"></div>
+				<div class="clear">清空内容</div>
 			</div>
 		</div>	
 	</div>
@@ -72,16 +115,16 @@
 		</div>
 		<div class="content">
 			<div class="upload-panel">
-				<div class="image add"></div>
-				<div class="image edit"></div>
+				<div class="image add">添加图片</div>
+				<div class="image edit">替换图片</div>
 				
-				<div class="text add"></div>
-				<div class="text edit"></div>
+				<div class="text add">添加描述</div>
+				<div class="text edit">修改描述</div>
 				
-				<div class="video add"></div>
-				<div class="video edit"></div>
+				<div class="video add">添加视频</div>
+				<div class="video edit">修改视频</div>
 				
-				<div class="clear"></div>
+				<div class="clear">清空内容</div>
 			</div>
 		</div>	
 	</div>
@@ -215,16 +258,16 @@
 	
 </div>
 
-    <script src="../lib/jquery-2.1.4.js"></script>
-<script src="../lib/fastclick.js"></script>
+    <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<script src="../js/libs/weui/fastclick.js"></script>
  <script src="../js/vue.js"></script>
 <script>
   $(function() {
     FastClick.attach(document.body);
   });
 </script>
-<script src="../js/jquery-weui.js"></script>
-<script src="../js/city-picker.js"></script>
+<script src="../js/libs/weui/jquery-weui.js"></script>
+<script src="../js/libs/city-picker.js"></script>
 
     <script>
     	var activity = {
