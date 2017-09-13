@@ -17,12 +17,49 @@
   <body ontouchstart>
 
 
-    <header class='demos-header'>
+    <header class=''>
       <h1 class="demos-title">个人中心</h1>
     </header>
-    
+    <div class="info-panel">
+    	<div class="base">
+    		<div class="headshot">
+    			<img src="" alt="" />
+    		</div>
+    		<div class="account">
+    			
+    		</div>
+    	</div>
+    	<div class="availables">
+    		
+    	</div>
+    </div>
     
     <div class="weui_grids">
+    				<a href="javascript:;" class="weui_grid js_grid">
+                <div class="weui_grid_icon">
+                    <img src="../images/icon_nav_button.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                   制作活动
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid">
+                <div class="weui_grid_icon">
+                    <img src="../images/icon_nav_cell.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                      制作传单       
+                </p>
+            </a>
+            <a href="javascript:;" class="weui_grid js_grid">
+                <div class="weui_grid_icon">
+                    <img src="../images/icon_nav_toast.png" alt="">
+                </div>
+                <p class="weui_grid_label">
+                    制作图文
+                </p>
+            </a>
+    	
             <a href="javascript:;" class="weui_grid js_grid">
                 <div class="weui_grid_icon">
                     <img src="../images/icon_nav_button.png" alt="">
@@ -95,7 +132,7 @@
 	
 	
 	
-	 <div class="weui-tab">
+<!--	 <div class="weui-tab">
       <div class="weui-tab__bd">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
           <h1>页面一</h1>
@@ -138,7 +175,7 @@
           <p class="weui-tabbar__label">我</p>
         </a>
       </div>
-    </div>
+    </div>-->
     <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <script src="../js/libs/weui/fastclick.js"></script>
 <script>
@@ -151,9 +188,9 @@
 
     <script>
     	
-    	$("#tab_tab1").click(function(){
+    	/*$("#tab_tab1").click(function(){
 				 $("#tab1").load("bargain_personalInfo.html");
-			});
+			});*/
     	$("#home-city").cityPicker({
         //title: "选择目的地",
         showDistrict: false,
