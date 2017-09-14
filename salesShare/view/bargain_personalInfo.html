@@ -18,8 +18,9 @@
 
 
     <header class=''>
-      <h1 class="demos-title">个人中心</h1>
+      <h1 class="title">个人中心</h1>
     </header>
+    
     <div class="info-panel">
     	<div class="base">
     		<div class="headshot">
@@ -187,26 +188,17 @@
 <script src="../js/libs/weui/city-picker.js"></script>
 
     <script>
+ var  registerVue = new Vue({
+  el: '#registerVue',
+  data: {
+    info: {}
+  },
+ methods: {
+    submit: function (event) {
     	
-    	/*$("#tab_tab1").click(function(){
-				 $("#tab1").load("bargain_personalInfo.html");
-			});*/
-    	$("#home-city").cityPicker({
-        //title: "选择目的地",
-        showDistrict: false,
-        onChange: function (picker, values, displayValues) {
-          console.log(values, displayValues);
-        }
-      });
-    	
-    	
-      $("#showTooltips").click(function() {
-        var tel = $('#tel').val();
-        var code = $('#code').val();
-        if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入手机号');
-        else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
-        else $.toptip('提交成功', 'success');
-      });
+    }
+  }
+})	
     </script>
   </body>
 </html>
