@@ -203,7 +203,7 @@
 <script src="../js/libs/weui/city-picker.js"></script>
 
     <script>
-
+<<<<<<< HEAD
     	var infoVue = new Vue({
 				el:'#infoVue',
 				data:{
@@ -240,7 +240,19 @@
         else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
         else $.toptip('提交成功', 'success');
       });
-
+=======
+ var  registerVue = new Vue({
+  el: '#registerVue',
+  data: {
+    info: {}
+  },
+ methods: {
+    submit: function (event) {
+    	
+    }
+  }
+})	
+>>>>>>> 860d869b3c6f48bb23e2ed343367eaaaad6036b3
     </script>
   </body>
 </html>
