@@ -10,29 +10,105 @@
 ">
 <link rel="stylesheet" href="../css/framework/weui/weui.css">
 <link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
+<link rel="stylesheet" href="../css/layouts/common.css">
 <link rel="stylesheet" href="../css/layouts/personalInfo.css">
 
 
 
 <style type="text/css">
-	.headshot img{
-	    border-radius: 50%;
+	.headshot {
+	width:15%;
+	padding-top:15%;
+	margin-right:2.8%;
+	border-radius:50%;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	position:relative;
+	    border: 3px solid #fff;
 }
-
+.headshot img {
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-radius:50%;
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	width:100%;
+	height:100%;
+	z-Index:1;
+}
+.info-panel{
+    background-color: #FC682F;
+    color: #fff;
+}
+.info-panel .base{
+	padding: 15px 15px 0px 20px;
+    height: 75px;
+    border-bottom: 1px solid #ff9f7a;	
+}
+.info-panel .headshot{
+    float: left;
+    width: 15%;
+    padding-top: 15%;
+    /* margin-right: 2.8%; */
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    position: relative;
+    border: 3px solid #fff;
+    /* margin: 10px; */	
+}
+.info-panel .account{
+float: left;
+    margin: 17px;	
+}
+.info-panel .availables{
+    height: 40px;
+    line-height: 40px;	
+}
+.info-panel .availables{
+    height: 40px;
+    line-height: 40px;	
+}
+.info-panel .availables span:first-child{
+      margin-left: 10px;  
+}
+.info-panel .availables .date{
+     float: right;
+    margin-right: 10px;   
+}
+.info-panel .pay{
+background-color: #fff;
+    /* height: 45px; */
+    /* line-height: 45px; */
+    display: flex;
+    padding: 15px;
+    justify-content: space-around;	
+}
+.info-panel .pay .btn{
+    padding: 5px 25px;
+    border: 1px solid #7b7b7b;
+    border-radius: 40px;
+    color: #7b7b7b;
+    line-height: 20px;
+    font-size: 17px;	
+}
 </style>
   </head>
-
-  <body ontouchstart id="infoVue">
+<script src="../js/libs/vue/vue.js"></script>
+  <body ontouchstart >
 
 
     <header class=''>
       <h1 class="title">个人中心</h1>
     </header>
     
-    <div class="info-panel">
+    <div class="info-panel" id="infoVue">
     	<div class="base">
     		<div class="headshot">
-    			<img src="{{ info.value1 }}" alt="" />
+    			
+    			<!--<img src="{{info.value1}}"/>-->
+    			<img src="../images/demo/headpot.jpg" alt="" />
     		</div>
     		<div class="account">
     			{{ info.value2 }}
@@ -40,7 +116,7 @@
     	</div>
     	<div class="availables">
     		<span>生效日期：</span>
-    		<span>至{{ info.value3 }}</span>
+    		<span class="date">至{{ info.value3 }}</span>
     	</div>
     	<div class="pay">
     		 <a href="" class="btn">充值</a>
@@ -52,7 +128,7 @@
     <div class="weui_grids">
     				<a href="javascript:;" class="weui_grid js_grid">
                 <div class="weui_grid_icon">
-                    <img src="../images/icon_nav_button.png" alt="">
+                    <img src="../images/icon_nav_button.png" alt=""/>
                 </div>
                 <p class="weui_grid_label">
                    制作活动
@@ -193,7 +269,7 @@
     </div>-->
     <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <script src="../js/libs/weui/fastclick.js"></script>
-<script src="../js/vue/vue.js"></script>
+
 <script>
   $(function() {
     FastClick.attach(document.body);
@@ -207,11 +283,11 @@
     	var infoVue = new Vue({
 				el:'#infoVue',
 				data:{
-		      info:{
-		      	value1:'../images/demo/headshot.jpg',
-		      	value2:12343245,
-		      	value3:'2017年12月3日',
-		      },                             //概况数据					                                            //房屋分析选中我的分析
+			      info:{
+			      	value1:'../images/demo/headshot.jpg',
+			      	value2:12343245,
+			      	value3:'2017年12月3日',
+			      },                             //概况数据					                                            //房屋分析选中我的分析
 				},
 				methods:{
 				    refreshAgeChart:function(){
