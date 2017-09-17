@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
 <link rel="stylesheet" href="../css/layouts/common.css">
 
+<link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
+
 <style type="text/css">
 	.container{
 		background-color: antiquewhite;
@@ -75,19 +77,31 @@
 </style>
 
   </head>
-
+      <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<!-- 引用核心层插件 -->
+<script src="../js/plugins/jquery.zyUpload/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script src="../js/plugins/jquery.zyUpload/control/js/zyUpload.js"></script>
+<!-- 引用初始化JS -->
+<script src="../js/plugins/jquery.zyUpload/core/lanrenzhijia.js"></script>
+<!--<script src="../js/libs/vue/vue.js"></script>-->
   <body ontouchstart>
 
 
     <header class='demos-header'>
       <h1 class="demos-title"></h1>
     </header>
-    
+  <div id="" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    你的内容放在这里...
+  </div>
+</div>  
 <div class="container">
 	<div class="head-banner">
 		<div class="upload-panel">
-			<div class="image add">添加图片</div>
-			<div class="image edit hide">替换图片</div>
+			<a class="image add open-popup" data-target="#uploadImg">添加图片</a>
+			<div class="image edit hide open-popup">替换图片</div>
 		</div>
 	</div>
 	<!--奖品描述 1-1-->
@@ -97,8 +111,8 @@
 		</div>
 		<div class="content">
 			<div class="upload-panel">
-				<div class="image add">添加图片</div>
-				<div class="image edit">替换图片</div>
+				<div class="image add open-popup">添加图片</div>
+				<div class="image edit open-popup">替换图片</div>
 				
 				<div class="text add">添加描述</div>
 				<div class="text edit">修改描述</div>
@@ -258,9 +272,18 @@
 	
 </div>
 
-    <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+
+
+<div id="uploadImg" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    
+    <div id="uploadImgTool" class="demo"></div>
+  </div>
+</div>
+
 <script src="../js/libs/weui/fastclick.js"></script>
- <script src="../js/vue/vue.js"></script>
+
 <script>
   $(function() {
     FastClick.attach(document.body);
@@ -276,13 +299,7 @@
     	
     	
     	
-    	$("#home-city").cityPicker({
-        //title: "选择目的地",
-        showDistrict: false,
-        onChange: function (picker, values, displayValues) {
-          console.log(values, displayValues);
-        }
-      });
+
     	
     	
       $("#showTooltips").click(function() {
