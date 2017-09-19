@@ -16,6 +16,10 @@
 <link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
 
 <style type="text/css">
+	video,
+	img{
+		width: 100%;
+	}
 	.container{
 		background-color: antiquewhite;
 	}
@@ -74,9 +78,37 @@
 .module .upload-panel .image{
 	
 }
+
+.module .content .source{
+    padding: 4%;
+    border: 1px dashed #ccc;
+    margin: 3%;	
+}
+.source .hand-trigger{
+		position: absolute;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.6;
+    margin-left: 62%;
+    margin-top: -3%;
+    /* float: right; */
+    /* text-align: right; */
+    padding: 2% 5%;
+    /* border-radius: 0px 0px 0px 90px; */	
+}
+.source .img{
+	
+}
+.source .txt{
+	
+}
+.source .video{
+	
+}
 </style>
 
   </head>
+  <script src="../js/libs/vue/vue.js"></script>
 <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <!-- 引用核心层插件 -->
 <script src="../js/plugins/jquery.zyUpload/core/zyFile.js"></script>
@@ -95,7 +127,7 @@
 <div  id="activityVue" class="container">
 	<div class="head-banner">
 		<div class="">
-			<img :src="{{headImgUrl}}" alt="" />
+			<img :src="source.headImgUrl" alt="" />
 		</div>
 		<div class="upload-panel">
 			<a class="image add open-popup" data-target="#uploadImg">添加图片</a>
@@ -111,14 +143,18 @@
 			
 			
 			<div class="source" v-for="item in source.prizeList">
+				<div class="hand-trigger">
+				编辑
+			</div>
+				
 				<div class="img" v-show="item.type==1">
-					<img data-index-flag="item.flag" :src="{{item.imgUrl}}" alt="" />
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
 				</div>
 				<div class="txt" v-show="item.type==2">
-					<p data-index-flag="item.flag">{{item.txt}}</p>
+					<p data-index-id="item.id">{{item.txt}}</p>
 				</div>
 				<div class="video" v-show="item.type==3">
-					<video data-index-flag="item.flag" src="{{item.videoUrl}}"></video>
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
 				</div>
 			
 				
@@ -315,32 +351,36 @@ var activityVue = new Vue({
   el: '#activityVue',
   data: {
   	source:{
+  		headImgUrl:'../images/demo/44.jpg',
   		prizeList:[{
-  			id:'img_1'
+  			id:'img_1',
   			type:1,
-  			imgUrl:'../images/demo/11.jpg'
+  			imgUrl:'../images/demo/11.png'
   		},
   		{
-  			id:'img_2'
+  			id:'img_2',
   			type:1,
   			imgUrl:'../images/demo/22.jpg'
   		},  		
   		{
-  			id:'text_3'
-  			type:1,
+  			id:'text_3',
+  			type:2,
   			txt:'奖品规则：1沙发上发发发 \n 2发送方式大法师'
   		},
   		{
-  			id:'img_4'
+  			id:'img_4',
   			type:1,
   			imgUrl:'../images/demo/33.jpg'
   		},{
-  			id:'video_5'
-  			type:1,
-  			imgUrl:'../demo/source/1.mp4'
-  		}]
+  			id:'video_5',
+  			type:3,
+  			videoUrl:'../demo/source/1.mp4'
+  		}],
+  		
+  		userPhone:'',
+  		userName:''
   	}
-    activityList:testData 
+    
   },
  methods: {
     submit: function (event) {
