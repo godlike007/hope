@@ -224,10 +224,7 @@ section .progress-info div{
 <script src="../js/libs/weui/jquery-weui.js"></script>
 
 <script>
-var  progressVue = new Vue({
-  el: '#progressVue',
-  data: {
-    activityList: [{
+var testData = [{
     	type:1,
     	value1:'2017-03-03',
     	value2:'2017-06-12',
@@ -255,7 +252,14 @@ var  progressVue = new Vue({
     	value3:345,
     	value4:234,
     	themeImgUrl:'../images/demo/44.jpg'
-    }]
+    }]	
+	
+	
+	
+var  progressVue = new Vue({
+  el: '#progressVue',
+  data: {
+    activityList:testData 
   },
  methods: {
     submit: function (event) {

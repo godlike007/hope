@@ -77,13 +77,13 @@
 </style>
 
   </head>
-      <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <!-- 引用核心层插件 -->
 <script src="../js/plugins/jquery.zyUpload/core/zyFile.js"></script>
 <!-- 引用控制层插件 -->
 <script src="../js/plugins/jquery.zyUpload/control/js/zyUpload.js"></script>
 <!-- 引用初始化JS -->
-<script src="../js/plugins/jquery.zyUpload/core/lanrenzhijia.js"></script>
+<script src="../js/plugins/jquery.zyUpload/core/upload.js"></script>
 <!--<script src="../js/libs/vue/vue.js"></script>-->
   <body ontouchstart>
 
@@ -91,14 +91,12 @@
     <header class='demos-header'>
       <h1 class="demos-title"></h1>
     </header>
-  <div id="" class="weui-popup__container">
-  <div class="weui-popup__overlay"></div>
-  <div class="weui-popup__modal">
-    你的内容放在这里...
-  </div>
-</div>  
-<div class="container">
+
+<div  id="activityVue" class="container">
 	<div class="head-banner">
+		<div class="">
+			<img :src="{{headImgUrl}}" alt="" />
+		</div>
 		<div class="upload-panel">
 			<a class="image add open-popup" data-target="#uploadImg">添加图片</a>
 			<div class="image edit hide open-popup">替换图片</div>
@@ -110,6 +108,23 @@
 			奖品描述
 		</div>
 		<div class="content">
+			
+			
+			<div class="source" v-for="item in source.prizeList">
+				<div class="img" v-show="item.type==1">
+					<img data-index-flag="item.flag" :src="{{item.imgUrl}}" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-flag="item.flag">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-flag="item.flag" src="{{item.videoUrl}}"></video>
+				</div>
+			
+				
+			</div>
+			
+			
 			<div class="upload-panel">
 				<div class="image add open-popup">添加图片</div>
 				<div class="image edit open-popup">替换图片</div>
@@ -209,24 +224,24 @@
 		<div class="content">
 			<div id="template" class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称">
+	          <input class="weui-input" type="text" placeholder="手机号" v-model="userPhone">
 	        </div>
-	        <div class="weui-cell__ft">
+	        <!--<div class="weui-cell__ft">
 	        	<label>必填项</label>
 	          <input class="weui-switch" type="checkbox">
-	        </div>
+	        </div>-->
 	      </div>
 			
 			<div class="weui-cells">
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称">
+	          <input class="weui-input" type="text" placeholder="姓名" v-model="userName">
 	        </div>
-	        <div class="weui-cell__ft">
+	        <!--<div class="weui-cell__ft">
 	        	<label>必填项</label>
 	          <input class="weui-switch" type="checkbox">
-	        </div>
+	        </div>-->
 	      </div>
 	      
 	      <div class="weui-cell weui-cell_switch">
@@ -279,6 +294,9 @@
   <div class="weui-popup__modal">
     
     <div id="uploadImgTool" class="demo"></div>
+    
+    
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmit()">确认提交</a>
   </div>
 </div>
 
@@ -291,17 +309,62 @@
 </script>
 <script src="../js/libs/weui/jquery-weui.js"></script>
 
-    <script>
+<script>
+    	
+var activityVue = new Vue({
+  el: '#activityVue',
+  data: {
+  	source:{
+  		prizeList:[{
+  			id:'img_1'
+  			type:1,
+  			imgUrl:'../images/demo/11.jpg'
+  		},
+  		{
+  			id:'img_2'
+  			type:1,
+  			imgUrl:'../images/demo/22.jpg'
+  		},  		
+  		{
+  			id:'text_3'
+  			type:1,
+  			txt:'奖品规则：1沙发上发发发 \n 2发送方式大法师'
+  		},
+  		{
+  			id:'img_4'
+  			type:1,
+  			imgUrl:'../images/demo/33.jpg'
+  		},{
+  			id:'video_5'
+  			type:1,
+  			imgUrl:'../demo/source/1.mp4'
+  		}]
+  	}
+    activityList:testData 
+  },
+ methods: {
+    submit: function (event) {
+    	debugger
+    	this.info.province = $("#selectArea").val().split(" ")[0];
+    	this.info.city = $("#selectArea").val().split(" ")[1];
+				var data = this.info;
+    }
+  }
+})	 
+	    	
+    	
     	var activity = {
-    		
+    		sureSubmit:function () {
+    			debugger
+    		}
     		
     	}
     	
     	
     	
+    	
+    	
 
-    	
-    	
       $("#showTooltips").click(function() {
         var tel = $('#tel').val();
         var code = $('#code').val();
