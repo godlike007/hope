@@ -143,7 +143,7 @@
 			
 			
 			<div class="source" v-for="item in source.prizeList">
-				<div class="hand-trigger">
+				<div class="hand-trigger" @click="editSourceItem(item)">
 				编辑
 			</div>
 				
@@ -260,7 +260,7 @@
 		<div class="content">
 			<div id="template" class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="手机号" v-model="userPhone">
+	          <input class="weui-input" type="text" placeholder="手机号" v-model="source.userPhone">
 	        </div>
 	        <!--<div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -272,7 +272,7 @@
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="姓名" v-model="userName">
+	          <input class="weui-input" type="text" placeholder="姓名" v-model="source.userName">
 	        </div>
 	        <!--<div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -336,6 +336,78 @@
   </div>
 </div>
 
+
+<div class="weui-popup__modal">
+        <div class="toolbar">
+          <div class="toolbar-inner">
+            <a href="javascript:;" class="picker-button close-popup">关闭</a>
+            <h1 class="title">标题</h1>
+          </div>
+        </div>
+        <div class="modal-content">
+          <div class="weui-grids">
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+               替换图片
+              </p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                替换文字
+              </p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                替换视频
+              </p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                新增图片
+              </p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                新增文字
+              </p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                新增视频
+              </p>
+            </a>
+            
+            <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                删除内容
+              </p>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+
 <script src="../js/libs/weui/fastclick.js"></script>
 
 <script>
@@ -346,13 +418,17 @@
 <script src="../js/libs/weui/jquery-weui.js"></script>
 
 <script>
-    	
+
+
+				
+				
+				
+
 var activityVue = new Vue({
   el: '#activityVue',
   data: {
   	source:{
-  		headImgUrl:'
-  		,
+  		headImgUrl:'',
   		prizeList:[{
   			id:'img_1',
   			type:1,
@@ -380,8 +456,9 @@ var activityVue = new Vue({
   		
   		userPhone:'',
   		userName:''
-  	}
-    
+  	},
+  	curSourceIndex:'',
+    curSourceType:'',
   },
  methods: {
     submit: function (event) {
@@ -389,12 +466,20 @@ var activityVue = new Vue({
     	this.info.province = $("#selectArea").val().split(" ")[0];
     	this.info.city = $("#selectArea").val().split(" ")[1];
 				var data = this.info;
+    },
+    editSourceItem: function (sourceId) {
+    	this.curSourceIndex = sourceIndex;
+    	this.curSourceIndex = sourceIndex;
+
     }
   }
 })	 
 	    	
     	
     	var activity = {
+    		sourceTypeMap:{
+    			1:
+    		},
     		sureSubmit:function () {
     			debugger
     		}
