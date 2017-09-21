@@ -117,6 +117,9 @@
 <!-- 引用初始化JS -->
 <script src="../js/plugins/jquery.zyUpload/core/upload.js"></script>
 <!--<script src="../js/libs/vue/vue.js"></script>-->
+
+  <script src="../js/common.js"></script>
+    <script src="../js/config.js"></script>
   <body ontouchstart>
 
 
@@ -185,37 +188,75 @@
 				
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="开始时间" v-model="setting.value1">
+	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
+	          
+	          <input type="text" id='startTime' v-model="source.setting.value1"/>
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="结束时间" v-model="setting.value2">
+	         <!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
+	         	<input type="text" id='endTime' v-model="source.setting.value1"/>
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="原价" v-model="setting.value3">
+	          <input class="weui-input" type="tel" placeholder="原价" v-model="source.setting.value3" @change="refreshRelativeValues(source.setting.value3)">
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="底价" v-model="setting.value4">
+	          <!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
+	          
+	          <div class="weui-slider-box" id="bottomPrice">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="bottomPriceValue" class="weui-slider-box__value">{{source.setting.value4}}</div>
+						</div>
+	          
+	          
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="setting.value5">
+	          <!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
+	          	
+	          	<div class="weui-slider-box" id="perCutMax">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="perCutMaxValue" class="weui-slider-box__value">{{source.setting.value5}}</div>
+						</div>
+	          	
+	          	
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="setting.value6">
+	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
+	          	
+	          		<div class="weui-slider-box" id="perCutMin">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
+						</div>
+	          	
 	        </div>
 	      </div>
 	      
@@ -501,8 +542,8 @@ var activityVue = new Vue({
   		headImgUrl:'',
   		
   		setting:{
-  			value1:'2017-09-21',
-  			value2:'2017-09-30',
+  			value1:'2017-09-21 00:00',
+  			value2:'2017-09-30 00:00',
   			value3:100,
   			value4:66,
   			value5:10,
@@ -555,6 +596,11 @@ var activityVue = new Vue({
     	this.info.province = $("#selectArea").val().split(" ")[0];
     	this.info.city = $("#selectArea").val().split(" ")[1];
 				var data = this.info;
+    },
+    refreshRelativeValues function (value) {
+    	
+    	this.source.setting.value4 = value-1;
+    	this.source.setting.value5 = ((value-1)*0.5).toFixed(0);
     },
     editSourceItem: function (source) {
     	this.curSourceId = source.id;
@@ -609,6 +655,21 @@ var activityVue = new Vue({
 	    	
     	
     	var activity = {
+    		init:function(){
+    			 $("#startTime").datetimePicker();
+    			 $("#endTime").datetimePicker();
+    			 
+    			 $('#bottomPrice').slider(function (percent) {
+				     
+				  })
+    			 $('#perCutMax').slider(function (percent) {
+				     
+				  })
+    			 $('#perCutMin').slider(function (percent) {
+				     
+				  })
+    			 
+    		},
     		editSourceItem:function () {
     			$("#sourceHandle").popup();
     		},
@@ -619,7 +680,7 @@ var activityVue = new Vue({
     			
     			request.postData({
             url: urlConfig.registerUrl,
-            param: param
+            param: ''
 	        }).then(function(data) {
 	        	
 	        	
@@ -631,7 +692,7 @@ var activityVue = new Vue({
     		}
     		
     	}
-    	
+    	activity.init();
     	
     	
     	
