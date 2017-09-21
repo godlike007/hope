@@ -1,4 +1,4 @@
-var Request = {
+var request = {
     getData: function(ajaxParam) {
         var promise = new Promise(function(resolve, reject) {
             $.ajax({

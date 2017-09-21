@@ -124,6 +124,7 @@
       <h1 class="demos-title"></h1>
     </header>
 
+
 <div  id="activityVue" class="container">
 	<div class="head-banner">
 		<div v-if="source.headImgUrl" class="">
@@ -142,10 +143,10 @@
 		<div class="content">
 			
 			
-			<div class="source" v-for="item in source.prizeList">
-				<div class="hand-trigger" @click="editSourceItem(item)">
+			<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
-			</div>
+				</div>
 				
 				<div class="img" v-show="item.type==1">
 					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
@@ -170,6 +171,56 @@
 				
 				<div class="clear">清空内容</div>
 			</div>
+		</div>	
+	</div>
+	
+	
+  <!--设置信息   砍价1-1-->
+	<div class="module">
+		<div class="title">
+			设置信息
+		</div>
+		<div class="content">
+			<div class="weui-cells">
+				
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="开始时间" v-model="setting.value1">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="结束时间" v-model="setting.value2">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="原价" v-model="setting.value3">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="底价" v-model="setting.value4">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="setting.value5">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="setting.value6">
+	        </div>
+	      </div>
+	      
+	      
+	    </div>
 		</div>	
 	</div>
 	
@@ -258,7 +309,7 @@
 			信息收集设置
 		</div>
 		<div class="content">
-			<div id="template" class="weui-cell weui-cell_switch">
+			<div id="" class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
 	          <input class="weui-input" type="text" placeholder="手机号" v-model="source.userPhone">
 	        </div>
@@ -282,7 +333,7 @@
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="source.otherInfo1">
 	        </div>
 	        <div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -292,7 +343,7 @@
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="source.otherInfo2">
 	        </div>
 	        <div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -302,7 +353,7 @@
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="source.otherInfo3">
 	        </div>
 	        <div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -321,7 +372,82 @@
 	</div>
 	
 	
+	<div id="sourceHandle" class="weui-popup__container popup-bottom">
+		  <div class="weui-popup__overlay"></div>
+		  <div class="weui-popup__modal">
+		  	
+
+			   
+		  <div class="weui-grids">
+            <a v-show="curSourceType == 1" @click="popupSourceHandle(1)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+               替换图片
+              </p>
+            </a>
+            <a   v-show="curSourceType == 2" @click="popupSourceHandle(2)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                替换文字
+              </p>
+            </a>
+            <a  v-show="curSourceType == 3" @click="popupSourceHandle(3)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                替换视频
+              </p>
+            </a>
+            <a @click="popupSourceHandle(4)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                新增图片
+              </p>
+            </a>
+            <a @click="popupSourceHandle(5)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                新增文字
+              </p>
+            </a>
+            <a @click="popupSourceHandle(6)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                新增视频
+              </p>
+            </a>
+            
+            <a @click="popupSourceHandle(7)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                删除内容
+              </p>
+            </a>
+            
+          </div>
+		   
+		   
+		  </div>
+		</div>
+		
+	
 </div>
+
+
+		
 
 
 
@@ -336,77 +462,21 @@
   </div>
 </div>
 
+<div id="addTxt" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    
+    <div id="txtEditTool" class="demo">
+    	
+    </div>
+    
+    
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmit()">确认提交</a>
+  </div>
+</div>
 
-<div class="weui-popup__modal">
-        <div class="toolbar">
-          <div class="toolbar-inner">
-            <a href="javascript:;" class="picker-button close-popup">关闭</a>
-            <h1 class="title">标题</h1>
-          </div>
-        </div>
-        <div class="modal-content">
-          <div class="weui-grids">
-            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_dialog.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-               替换图片
-              </p>
-            </a>
-            <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_progress.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-                替换文字
-              </p>
-            </a>
-            <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_msg.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-                替换视频
-              </p>
-            </a>
-            <a href="javascript:;" class="weui-grid js_grid" data-id="dialog">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_dialog.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-                新增图片
-              </p>
-            </a>
-            <a href="javascript:;" class="weui-grid js_grid" data-id="progress">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_progress.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-                新增文字
-              </p>
-            </a>
-            <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_msg.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-                新增视频
-              </p>
-            </a>
-            
-            <a href="javascript:;" class="weui-grid js_grid" data-id="msg">
-              <div class="weui-grid__icon">
-                <img src="images/icon_nav_msg.png" alt="">
-              </div>
-              <p class="weui-grid__label">
-                删除内容
-              </p>
-            </a>
-            
-          </div>
-        </div>
-      </div>
+<input type="hidden" id="curSourceId" value="" />
+<input type="hidden" id="handleType" value="" />
 
 <script src="../js/libs/weui/fastclick.js"></script>
 
@@ -429,36 +499,55 @@ var activityVue = new Vue({
   data: {
   	source:{
   		headImgUrl:'',
+  		
+  		setting:{
+  			value1:'2017-09-21',
+  			value2:'2017-09-30',
+  			value3:100,
+  			value4:66,
+  			value5:10,
+  			value6:2,
+  		},
   		prizeList:[{
   			id:'img_1',
+  			index:1,
   			type:1,
   			imgUrl:'../images/demo/11.png'
   		},
   		{
   			id:'img_2',
+  			index:1,
   			type:1,
   			imgUrl:'../images/demo/22.jpg'
   		},  		
   		{
   			id:'text_3',
+  			index:2,
   			type:2,
   			txt:'奖品规则：1沙发上发发发 \n 2发送方式大法师'
   		},
   		{
   			id:'img_4',
+  			index:1,
   			type:1,
   			imgUrl:'../images/demo/33.jpg'
   		},{
   			id:'video_5',
+  			index:3,
   			type:3,
   			videoUrl:'../demo/source/1.mp4'
   		}],
   		
   		userPhone:'',
-  		userName:''
+  		userName:'',
+  		otherInfo1:'',
+  		otherInfo2:'',
+  		otherInfo3:'',
   	},
+  	curSourceId:'',
   	curSourceIndex:'',
     curSourceType:'',
+    handleType:'',
   },
  methods: {
     submit: function (event) {
@@ -467,20 +556,77 @@ var activityVue = new Vue({
     	this.info.city = $("#selectArea").val().split(" ")[1];
 				var data = this.info;
     },
-    editSourceItem: function (sourceId) {
-    	this.curSourceIndex = sourceIndex;
-    	this.curSourceIndex = sourceIndex;
+    editSourceItem: function (source) {
+    	this.curSourceId = source.id;
+    	this.curSourceIndex = source.index;
+    	this.curSourceType = source.type;
+    	 $("#curSourceId").val(this.curSourceId);
+    },
+    popupSourceHandle: function (handleType) {
+    	debugger
+    	this.handleType = handleType;
+    	this.$nextTick(function(){
+    		$.closePopup();
+    		
+    		    		
+    		
+    		if($.inArray(handleType, [1,2,3])!=-1){
+    			$("#handleType").val('instead');
+    		}
+    		if($.inArray(handleType, [4,5,6])!=-1){
+    			$("#handleType").val('add');
+    		}
 
+    		if($.inArray(handleType, [1,3,4,6])!=-1){
+    			$("#uploadImg").popup();
+    			
+    		}
+				if($.inArray(handleType, [2,5])!=-1){
+    			$("#addTxt").popup();
+    		}
+				if(handleType == 7){
+					$("#"+this.curSourceId).remove();
+					
+					$("#handleType").val('clear');
+					
+					request.postData({
+            url: urlConfig.registerUrl,
+            param: ''
+	        }).then(function(data) {
+	        	
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });
+				}
+				
+			})
+    	
     }
   }
 })	 
 	    	
     	
     	var activity = {
+    		editSourceItem:function () {
+    			$("#sourceHandle").popup();
+    		},
     		sourceTypeMap:{
-    			1:
+    			
     		},
     		sureSubmit:function () {
+    			
+    			request.postData({
+            url: urlConfig.registerUrl,
+            param: param
+	        }).then(function(data) {
+	        	
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });
     			debugger
     		}
     		

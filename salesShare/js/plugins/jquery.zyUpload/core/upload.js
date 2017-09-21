@@ -6,7 +6,7 @@ $(function(){
 		//height           :   "700px",                 // 宽度
 		//itemWidth        :   "1200px",                 // 文件项的宽度
 		//itemHeight       :   "100px",                 // 文件项的高度
-		url              :   "/upload/UploadAction",  // 上传文件的路径
+		url              :   "/upload/UploadAction?id="+$("#curSourceId").val()+"&handleType="+$("#handleType").val(),  // 上传文件的路径
 		multiple         :   false,                    // 是否可以多个文件上传
 		dragDrop         :   false,                    // 是否可以拖动上传文件
 		del              :   true,                    // 是否可以删除文件
@@ -40,6 +40,10 @@ $(function(){
 			console.info("文件上传完成");
 			console.info(responseInfo);
 			debugger
+			
+			//instead
+			
+			
 		}
 	});
 });

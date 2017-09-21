@@ -16,5 +16,19 @@ var urlConfig = {
 
     DataUrl: "http://172.21.52.29:8887/",*/
    
-    uploadImgUrl:"http://172.21.52.29:8887/"
+   
+    
+    /*register*/
+    //注册
+    registerUrl:"http://172.21.52.29:8887/login",
+    
+    /*personalInfo*/
+    //
+    centerInfoUrl:"http://172.21.52.29:8887/login",
+    
+    /*add activity*/
+    //
+    getEditedSourceUrl:"http://172.21.52.29:8887/getActivityCompleteDetail",
+    //上传图片
+    uploadImgUrl:"http://172.21.52.29:8887/",
 };

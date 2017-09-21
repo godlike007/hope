@@ -115,18 +115,45 @@
     	debugger
     	this.info.province = $("#selectArea").val().split(" ")[0];
     	this.info.city = $("#selectArea").val().split(" ")[1];
-				var data = this.info;
+				
+			register.sumbit(this.info);
+				
     }
   }
 })	
-    	
-    	$("#selectArea").cityPicker({
+
+var register = {
+		init:function () {
+			 //初始化城市选择
+			$("#selectArea").cityPicker({
         //title: "选择目的地",
         showDistrict: false,
         onChange: function (picker, values, displayValues) {
           console.log(values, displayValues);
         }
       });
+       //
+    	
+    },
+    sumbit:function (param) {
+    	
+    	
+
+			 request.postData({
+            url: urlConfig.registerUrl,
+            param: param
+        }).then(function(data) {
+
+        }, function(err) {
+            console.log(err);
+        });
+			
+    },
+}
+
+
+    	
+    	
     	
     	
       /*$("#showTooltips").click(function() {
