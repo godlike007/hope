@@ -20,7 +20,6 @@
 #tab4,
 #tab5{
 	padding-bottom: 10px;
-	
 	background-color: #ffebe4;
 }
 section{
@@ -65,7 +64,7 @@ section .progress-info div{
 
   <body ontouchstart >
   	
-  	<div id="progressVue">
+  	<div id="classificationVue">
   		
   	
     <div class="weui-tab">
@@ -74,16 +73,16 @@ section .progress-info div{
           全部
         </a>
         <a class="weui-navbar__item" href="#tab2">
-          未开始
+          免费
         </a>
         <a class="weui-navbar__item" href="#tab3">
-          进行中
+          推荐
         </a>
         <a class="weui-navbar__item" href="#tab4">
-          已结束
+          热销
         </a>
         <a class="weui-navbar__item" href="#tab5">
-          已下载
+          订制
         </a>
       </div>
       <div class="weui-tab__bd">
@@ -215,7 +214,85 @@ section .progress-info div{
       </div>
     </div>
 </div>
-    <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+
+
+<div id="viewAll">
+	<h5  class="hand-trigger open-popup" data-target="#selectSort">全部分类</h5>
+</div>
+
+
+	<div id="selectSort" class="weui-popup__container popup-bottom">
+		  <div class="weui-popup__overlay"></div>
+		  <div class="weui-popup__modal">
+		  	
+
+			   
+		  <div class="weui-grids">
+            <a @click="showActivity(1)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+               砍价
+              </p>
+            </a>
+            <a  @click="showActivity(2)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                集赞
+              </p>
+            </a>
+            <a  @click="showActivity(3)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                投票
+              </p>
+            </a>
+            <a @click="showActivity(4)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                抽奖
+              </p>
+            </a>
+            <a @click="showActivity(5)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                支付
+              </p>
+            </a>
+            <a @click="showActivity(6)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                互动
+              </p>
+            </a>
+            
+            <a @click="showActivity(7)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                全部
+              </p>
+            </a>
+            
+          </div>
+		   
+		   
+		  </div>
+		</div>
+
+<script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <script src="../js/libs/weui/fastclick.js"></script>
 
 <script>
@@ -258,26 +335,64 @@ var testData = [{
 	
 	
 	
-var  progressVue = new Vue({
-  el: '#progressVue',
+var  classificationVue = new Vue({
+  el: '#classificationVue',
   data: {
     activityList:testData 
   },
  methods: {
     submit: function (event) {
     	debugger
-    	this.info.province = $("#selectArea").val().split(" ")[0];
-    	this.info.city = $("#selectArea").val().split(" ")[1];
-				var data = this.info;
+    	
+    },
+    showActivity: function (type) {
+    	debugger
+    	this.handleType = handleType;
+    	
+    	
+    	this.$nextTick(function(){
+    		$.closePopup();
+    		
+    		    		
+
+				
+			})
+    	
     }
   }
 })	  	
-    	
-    	
-      $("#a").select({
-        title: "选择职业",
-        items: ["法官", "医生", "猎人", "学生", "记者", "其他"]
-      });
+
+
+var activity = {
+		init:function(){
+			 
+			 
+		},
+		editSourceItem:function () {
+			$("#sourceHandle").popup();
+		},
+		sourceTypeMap:{
+			
+		},
+		sureSubmit:function () {
+			
+			request.postData({
+        url: urlConfig.registerUrl,
+        param: ''
+        }).then(function(data) {
+        	
+        	
+
+        }, function(err) {
+            console.log(err);
+        });
+			debugger
+		}
+		
+	}
+	activity.init();
+	
+
     </script>
   </body>
 </html>

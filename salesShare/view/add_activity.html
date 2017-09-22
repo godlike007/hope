@@ -120,6 +120,12 @@
 
   <script src="../js/common.js"></script>
     <script src="../js/config.js"></script>
+    
+    
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+    
   <body ontouchstart>
 
 
@@ -507,7 +513,7 @@
   <div class="weui-popup__overlay"></div>
   <div class="weui-popup__modal">
     
-    <div id="txtEditTool" class="demo">
+    <div id="txtEditTool" class="">
     	
     </div>
     
@@ -597,10 +603,10 @@ var activityVue = new Vue({
     	this.info.city = $("#selectArea").val().split(" ")[1];
 				var data = this.info;
     },
-    refreshRelativeValues function (value) {
+    refreshRelativeValues: function (value) {
     	
-    	this.source.setting.value4 = value-1;
-    	this.source.setting.value5 = ((value-1)*0.5).toFixed(0);
+    	//this.$set(this.source.setting.value4,value-1);
+    	//this.$set(this.source.setting.value5,((value-1)*0.5).toFixed(0));
     },
     editSourceItem: function (source) {
     	this.curSourceId = source.id;
@@ -629,6 +635,8 @@ var activityVue = new Vue({
     		}
 				if($.inArray(handleType, [2,5])!=-1){
     			$("#addTxt").popup();
+    			$("#txtEditTool").load("textEditer.html");
+    			
     		}
 				if(handleType == 7){
 					$("#"+this.curSourceId).remove();
