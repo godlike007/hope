@@ -140,16 +140,16 @@
 			<img :src="source.headImgUrl" alt="" />
 		</div>
 		<div v-else class="upload-panel">
-			<a class="image add open-popup" data-target="#uploadImg">添加图片</a>
-			<div class="image edit hide open-popup">替换图片</div>
+			<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img')">添加图片</a>
+			<div class="image edit hide open-popup"  data-target="#uploadImg" @click="markHandle('instead','img')">替换图片</div>
 		</div>
 	</div>
 	<!--奖品描述 1-1-->
-	<div class="module">
+	<div id="prize" class="module">
 		<div class="title">
 			奖品描述
 		</div>
-		<div class="content">
+		<div  class="content">
 			
 			
 			<div :id="item.id" class="source" v-for="item in source.prizeList">
@@ -172,13 +172,13 @@
 			
 			
 			<div class="upload-panel">
-				<div class="image add open-popup">添加图片</div>
-				<div class="image edit open-popup">替换图片</div>
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','prize')">添加图片</div>
+				<div class="image edit open-popup" data-target="#uploadImg" @click="markHandle('instead','img')">替换图片</div>
 				
-				<div class="text add">添加描述</div>
-				<div class="text edit">修改描述</div>
+				<div class="text add"  @click="markHandle('add','txt','prize')">添加描述</div>
+				<div class="text edit"  @click="markHandle('instead','txt')">修改描述</div>
 				
-				<div class="clear">清空内容</div>
+				<div class="clear"   @click="markHandle('clear')">清空内容</div>
 			</div>
 		</div>	
 	</div>
@@ -505,7 +505,7 @@
     <div id="uploadImgTool" class="demo"></div>
     
     
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmit()">确认提交</a>
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认提交</a>
   </div>
 </div>
 
@@ -518,12 +518,28 @@
     </div>
     
     
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmit()">确认提交</a>
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitTxt()">确认提交</a>
   </div>
 </div>
 
 <input type="hidden" id="curSourceId" value="" />
 <input type="hidden" id="handleType" value="" />
+<!--单次资源操作状态-->
+<input type="hidden" id="handleType" value="" />
+<!--资源类别-->
+<input type="hidden" id="sourceType" value="" />
+
+
+<div id="new_img" class="img" >
+		<img data-index-id="" src="" alt="" />
+	</div>
+	<div id="new_txt" class="txt">
+		<p data-index-id=""></p>
+	</div>
+	<div id="new_video" class="video">
+		<video data-index-id="" src=""></video>
+	</div>
+
 
 <script src="../js/libs/weui/fastclick.js"></script>
 
@@ -612,7 +628,7 @@ var activityVue = new Vue({
     	this.curSourceId = source.id;
     	this.curSourceIndex = source.index;
     	this.curSourceType = source.type;
-    	 $("#curSourceId").val(this.curSourceId);
+    	 $("#curSourceId").val(source.id);
     },
     popupSourceHandle: function (handleType) {
     	debugger
@@ -657,7 +673,16 @@ var activityVue = new Vue({
 				
 			})
     	
-    }
+    },
+    markHandle: function (handleType,sourceType) {
+    	 $("#handleType").val(handleType);
+    	 $("#sourceType").val(sourceType);
+    	 
+    	 if(handleType=="add"){
+    	 		$("#curSourceId").val('');
+    	 }
+    	 
+    },
   }
 })	 
 	    	
@@ -684,7 +709,7 @@ var activityVue = new Vue({
     		sourceTypeMap:{
     			
     		},
-    		sureSubmit:function () {
+    		sureSubmitImg:function () {
     			
     			/*request.postData({
             url: urlConfig.registerUrl,

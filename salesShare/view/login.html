@@ -26,7 +26,7 @@
     <div class="weui-cells">
       <div class="weui-cell">
         <div class="weui-cell__bd">
-          <input class="weui-input" type="text" placeholder="请输入账号" v-model="admin">
+          <input class="weui-input" type="text" placeholder="请输入账号" v-model="phoneNumber">
         </div>
       </div>
     </div>
@@ -51,6 +51,8 @@
     <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <script src="../js/libs/weui/fastclick.js"></script>
 <script src="../js/libs/weui/jquery-weui.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/config.js"></script>
 <script>
   $(function() {
     FastClick.attach(document.body);
@@ -59,13 +61,13 @@
  var  loginVue = new Vue({
   el: '#loginVue',
   data: {
-    admin:'',
+    phoneNumber:'',
     password:''
   },
  methods: {
     submit: function (event) {
     	debugger	
-			login.sumbit(this);
+			login.sumbit(this.$data);
 				
     }
   }

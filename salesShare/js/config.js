@@ -20,7 +20,7 @@ var urlConfig = {
     
     /*register*/
     //注册
-    registerUrl:"http://172.21.52.29:8887/login",
+    registerUrl:"http://g1u8257706.iask.in/shopUser/login",
     
     /*personalInfo*/
     //
@@ -32,3 +32,4 @@ var urlConfig = {
     //上传图片
     uploadImgUrl:"http://172.21.52.29:8887/",
 };
+

@@ -1,5 +1,13 @@
  /* 代码整理：懒人之家 www.lanrenzhijia.com */
 $(function(){
+	//页面资源DOM模板
+	var tem = {
+		img:"<div id=\"#id\" src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div>",
+		txt:"<div id=\"#id\" class=\"txt\"><p>#content</p></div>",
+		video:"<div id=\"#id\" class=\"video\"><video src=\"#content\"></video></div>",
+	}
+	
+	
 	// 初始化插件
 	$("#uploadImgTool").zyUpload({
 		width            :   "100%",                 // 宽度
@@ -36,13 +44,42 @@ $(function(){
 			console.info(file);
 			debugger
 		},
-		onComplete: function(responseInfo){           // 上传完成的回调方法
+		onComplete: function(data){           // 上传完成的回调方法
+			
+			
+			data.list = [{
+				id:'pic1',
+				url:'../images/demo/upload_success_1.jpg'
+			},
+			{
+				id:'pic2',
+				url:'../images/demo/upload_success_2.jpg'
+			}]
 			console.info("文件上传完成");
 			console.info(responseInfo);
 			debugger
 			
+			
+			var ht = $("#handleType").val();
+			var st = ("#sourceType").val();
+			
+			//add
+			if(ht == 'add'){
+				var addDom = '';
+				data.list.forEach(function(o){
+					var dom = tem[st];
+					dom.replace("#id",o.id)
+					dom.replace("#content",o.url)
+					addDom += dom;
+				})
+				
+			}
+			
+			//insert
+			
 			//instead
 			
+			//clear
 			
 		}
 	});
