@@ -22,6 +22,8 @@
 	}
 	.container{
 		background-color: antiquewhite;
+		margin-bottom: 110px;
+    padding-bottom: 20px;
 	}
 .head-banner{
 	    background-color: #fff;
@@ -56,6 +58,10 @@
     justify-content: space-around;
     color: #8e8e8e;
 }
+.upload-panel.preview{
+    display: none;
+}
+
 .upload-panel .clear,
 .upload-panel .video,
 .upload-panel .image,
@@ -84,6 +90,11 @@
     border: 1px dashed #ccc;
     margin: 3%;	
 }
+.module .content .source.preview{
+    padding: 0%;
+    border: none;
+    margin: 3%;	
+}
 .source .hand-trigger{
 		position: absolute;
     background-color: #000;
@@ -96,6 +107,11 @@
     padding: 2% 5%;
     /* border-radius: 0px 0px 0px 90px; */	
 }
+.source .hand-trigger.preview{
+		display: none;
+}
+
+
 .source .img{
 	
 }
@@ -104,6 +120,49 @@
 }
 .source .video{
 	
+}
+.form-handle{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    /* background-color: #3d4145; */
+    text-align: center;
+    /* opacity: .8; */
+    color: #fff;	
+}
+.form-handle .mode{
+    /* position: absolute; */
+    /* color: #fff; */
+    opacity: .85;
+    background-color: #3d4145;	
+}
+.form-handle .mode .weui-cell_switch{
+    padding-top: 12px;
+}
+.form-handle .mode .weui-cell__ft{
+ 		text-align: center;
+    margin: auto;
+    /* width: 100%; */
+    line-height: 32px;
+}
+.form-handle .mode .weui-cell__ft label{
+ 		color: #fff;
+    vertical-align: top;
+    /* width: 202px; */
+    margin:auto 20px;
+    font-size: 20px;
+}
+
+
+
+.form-handle .save{
+    background-color: orange;
+    height: 55px;	
+}
+.form-handle a{
+    color: #fff;
+    font-size: 30px;
+    letter-spacing: 6px;	
 }
 </style>
 
@@ -139,9 +198,23 @@
 		<div v-if="source.headImgUrl" class="">
 			<img :src="source.headImgUrl" alt="" />
 		</div>
+		
+		<div :id="item.id" class="source">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				
+			
+				
+			</div>
+		
+		
 		<div v-else class="upload-panel">
 			<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img')">添加图片</a>
-			<div class="image edit hide open-popup"  data-target="#uploadImg" @click="markHandle('instead','img')">替换图片</div>
 		</div>
 	</div>
 	<!--奖品描述 1-1-->
@@ -163,9 +236,7 @@
 				<div class="txt" v-show="item.type==2">
 					<p data-index-id="item.id">{{item.txt}}</p>
 				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="item.id" :src="item.videoUrl"></video>
-				</div>
+				
 			
 				
 			</div>
@@ -173,19 +244,15 @@
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#prize')">添加图片</div>
-				<div class="image edit open-popup" data-target="#uploadImg" @click="markHandle('instead','img')">替换图片</div>
-				
 				<div class="text add"  @click="markHandle('add','txt','#prize')">添加描述</div>
-				<div class="text edit"  @click="markHandle('instead','txt')">修改描述</div>
-				
-				<div class="clear"   @click="markHandle('clear')">清空内容</div>
+
 			</div>
 		</div>	
 	</div>
 	
 	
   <!--设置信息   砍价1-1-->
-	<div class="module">
+	<div id="setting" class="module">
 		<div class="title">
 			设置信息
 		</div>
@@ -272,41 +339,71 @@
 	</div>
 	
 	<!--活动规则 1-1-->
-	<div class="module">
+	<div id="rule" class="module">
 		<div class="title">
 			活动规则
 		</div>
 		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
+				</div>
+			
+				
+			</div>
+			
 			<div class="upload-panel">
-				<div class="image add">添加图片</div>
-				<div class="image edit">替换图片</div>
-				
-				<div class="text add">添加描述</div>
-				<div class="text edit">修改描述</div>
-				
-				<div class="video add">添加视频</div>
-				<div class="video edit">修改视频</div>
-				
-				<div class="clear">清空内容</div>
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#prize')">添加图片</div>
+				<div class="text add"  @click="markHandle('add','txt','#prize')">添加描述</div>
+	
+				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#prize')">添加图片</div>
+		
 			</div>
 		</div>	
 	</div>
 	
 	<!--领奖信息 1-1-->
-	<div class="module">
+	<div id="award" class="module">
 		<div class="title">
 			<input class="weui-input" type="tel"  value="领奖信息">
 		</div>
 		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
+				</div>
+			
+				
+			</div>
+			
 			<div class="upload-panel">
-				<div class="image add"></div>
-				<div class="image edit"></div>
-				
-				<div class="text add"></div>
-				<div class="text edit"></div>
-				
-				<div class="video add"></div>
-				<div class="video edit"></div>
+				<div class="image add">添加图片</div>
+		
+				<div class="text add">添加描述</div>
+	
+				<div class="video add">添加视频</div>
 				
 				<div class="clear"></div>
 			</div>
@@ -315,27 +412,43 @@
 	
 	
 	<!--机构介绍 1-1-->
-	<div class="module">
+	<div id="introduction" class="module">
 		<div class="title">
 			<input class="weui-input" type="tel"  value="机构介绍">
 		</div>
 		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
+				</div>
+			
+				
+			</div>
+			
 			<div class="upload-panel">
-				<div class="image add"></div>
-				<div class="image edit"></div>
-				
-				<div class="text add"></div>
-				<div class="text edit"></div>
-				
-				<div class="video add"></div>
-				<div class="video edit"></div>
+				<div class="image add">添加图片</div>
+		
+				<div class="text add">添加描述</div>
+	
+				<div class="video add">添加视频</div>
 				
 				<div class="clear"></div>
 			</div>
 		</div>	
 	</div>
 	
-	<div class="module">
+	<div id="helpline" class="module">
 		<div class="title">
 			咨询热线
 		</div>
@@ -351,7 +464,7 @@
 		</div>	
 	</div>
 	
-	<div class="module info-item">
+	<div id="infoGathering" class="module info-item">
 		<div class="title">
 			信息收集设置
 		</div>
@@ -416,6 +529,23 @@
 	      </div>
 			
 		</div>	
+	</div>
+	
+	
+	<div class="form-handle">
+		<div class="mode">
+			<div class="weui-cell weui-cell_switch">
+        	
+	        <div class="weui-cell__ft">
+	        	<label>编辑模式</label>
+	          <input class="weui-switch" type="checkbox" @change="switchMode">
+	          <label>预览模式</label>
+	        </div>
+	      </div>
+		</div>
+		<div class="save" @click="publishActivity">
+			<a href="">发布活动 </a>
+		</div>
 	</div>
 	
 	
@@ -501,7 +631,12 @@
   <div class="weui-popup__overlay"></div>
   <div class="weui-popup__modal">
     
-    <div id="uploadImgTool" class="demo"></div>
+    <!--<div id="uploadImgTool" class="demo"></div>-->
+    
+    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
+    图片<input onclick="activity.uploadImg()" type="file" name="file"/>
+    <input type="submit" value="上传"/ >
+</form>
     
     
     <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认提交</a>
@@ -530,7 +665,7 @@
 <!--当前section id-->
 <input type="hidden" id="sectionType" value="" />
 
-<div id="new_img" class="img" >
+<!--<div id="new_img" class="img" >
 		<img data-index-id="" src="" alt="" />
 	</div>
 	<div id="new_txt" class="txt">
@@ -538,7 +673,7 @@
 	</div>
 	<div id="new_video" class="video">
 		<video data-index-id="" src=""></video>
-	</div>
+	</div>-->
 
 
 <script src="../js/libs/weui/fastclick.js"></script>
@@ -615,6 +750,50 @@ var activityVue = new Vue({
     	this.info.province = $("#selectArea").val().split(" ")[0];
     	this.info.city = $("#selectArea").val().split(" ")[1];
 				var data = this.info;
+    },
+    publishActivity:function(){
+    	var data = {
+    		activityStartTime:'',
+    		activityEndTime:'',
+    		activityTypeId:'',
+    		
+    		cutOriginPrice:'',
+    		cutLeastPrice:'',
+    		cutLeastPerPerson:'',
+    		cutMostPerPerson:'',
+    		redoHours:'',
+    		
+    		
+    		infoCollectOneName:'',
+    		infoCollectOneIsRequired:'',
+    		infoCollectTwoName:'',
+    		infoCollectTwoIsRequired:'',
+    		infoCollectThreeName:'',
+    		infoCollectThreeIsRequired:'',
+    		infoCollectFourName:'',
+    		infoCollectFourIsRequired:'',
+    		infoCollectFiveName:'',
+    		infoCollectFiveIsRequired:'',
+    		
+    		prizeNumber:'',
+    		
+    		sectionOneName:'',
+    		sectionTwoName:'',
+    		sectionThreeName:'',
+    		sectionFourName:'',
+    		
+    		consultPhoneNumber:'',
+    		
+    		sectionOneArrayIndex:'',
+    		sectionTwoArrayIndex:'',
+    		sectionThreeArrayIndex:'',
+    		sectionFourArrayIndex :'',
+    	}
+    },
+    switchMode:function(){
+    	$(".module .content .source").toggleClass("preview");
+    	$(".module .content .source .hand-trigger").toggleClass("preview");
+    	$(".upload-panel").toggleClass("preview");
     },
     refreshRelativeValues: function (value) {
     	
@@ -695,6 +874,9 @@ var activityVue = new Vue({
 						txt:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p>#content</p></div></div>",
 						video:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"video\"><video src=\"#content\"></video></div></div>",
 					},
+				VARIABLE_NAME_MAP:{
+					
+				},
     		init:function(){
     			 $("#startTime").datetimePicker();
     			 $("#endTime").datetimePicker();
@@ -709,6 +891,15 @@ var activityVue = new Vue({
 				     
 				  })
     			 
+    		},
+    		uploadImg:function(){
+    			debugger;
+    			var urlParam = "?"+'unique=pic1';
+					urlParam +=  "&"+'shopUserId=15';
+					urlParam +=  "&"+'section=1';
+					urlParam +=  "&"+'activityTypeId=2';
+					
+					$('form').attr('action',$('form').attr('action')+urlParam);
     		},
     		editSourceItem:function () {
     			$("#sourceHandle").popup();
