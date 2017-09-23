@@ -26,7 +26,10 @@ var urlConfig = {
     registerUrl:"http://g1u8257706.iask.in/shopUser/register",
     
     
-    
+    /*progress*/
+    viewProcessUrl: "http://g1u8257706.iask.in//shopCenter/viewProgress",
+   
+   
     /*personalInfo*/
     toCenterUrl: "http://g1u8257706.iask.in/shopCenter/gotoPersonCenter",
     centerInfoUrl:"http://g1u8257706.iask.in/shopCenter/getCenterInfo",

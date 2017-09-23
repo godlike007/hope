@@ -89,17 +89,17 @@ section .progress-info div{
       <div class="weui-tab__bd">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
         
-        	 	<section  class=""  v-for="item in activityList">
+        	 	<section :data-id="item.shopUserId" :data-a_id="item.shopUserActivityId"   class=""  v-for="item in activityList">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
         	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<div>{{ item.startTime }}</div>
         	 				
         	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
+        	 				<div>{{ item.endTime }}</div>
         	 				
         	 				<label>原价</label>
         	 				<div>{{ item.value3}}</div>
@@ -114,23 +114,19 @@ section .progress-info div{
      
         <div id="tab2" class="weui-tab__bd-item">
  
-        	 	<section v-for="item in activityList" v-show="item.type == 1" class="">
+        	 	<section  :data-id="item.shopUserId" :data-a_id="item.shopUserActivityId" v-for="item in activityList" v-show="item.type == 1" class="">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
         	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<div>{{ item.startTime }}</div>
         	 				
         	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
+        	 				<div>{{ item.endTime }}</div>
         	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+
         
         	 		</div>
         	 	</section>
@@ -138,23 +134,19 @@ section .progress-info div{
         </div>
         <div id="tab3" class="weui-tab__bd-item">
         	
-        	 	<section  v-for="item in activityList" v-show="item.type == 2" class="">
+        	 	<section :data-id="item.shopUserId" :data-a_id="item.shopUserActivityId"   v-for="item in activityList" v-show="item.type == 2" class="">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
         	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<div>{{ item.startTime }}</div>
         	 				
         	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
+        	 				<div>{{ item.endTime }}</div>
         	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+
         
         	 		</div>
         	 	</section>
@@ -163,23 +155,19 @@ section .progress-info div{
         </div>
         <div id="tab4" class="weui-tab__bd-item">
         
-        	 	<section v-for="item in activityList"  v-show="item.type == 3" class="">
+        	 	<section :data-id="item.shopUserId" :data-a_id="item.shopUserActivityId"  v-for="item in activityList"  v-show="item.type == 3" class="">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
         	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<div>{{ item.startTime }}</div>
         	 				
         	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
+        	 				<div>{{ item.endTime }}</div>
         	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+
         
         	 		</div>
         	 	</section>
@@ -188,23 +176,19 @@ section .progress-info div{
         </div>
         <div id="tab5" class="weui-tab__bd-item">
         	
-        	 	<section v-for="item in activityList"  v-show="item.type == 4" class="">
+        	 	<section :data-id="item.shopUserId" :data-a_id="item.shopUserActivityId" v-for="item in activityList"  v-show="item.type == 4" class="">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
         	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<div>{{ item.startTime }}</div>
         	 				
         	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
+        	 				<div>{{ item.endTime }}</div>
         	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+
         
         	 		</div>
         	 	</section>
@@ -217,7 +201,8 @@ section .progress-info div{
 </div>
     <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
 <script src="../js/libs/weui/fastclick.js"></script>
-
+<script src="../js/common.js"></script>
+<script src="../js/config.js"></script>
 <script>
   $(function() {
     FastClick.attach(document.body);
@@ -228,29 +213,29 @@ section .progress-info div{
 <script>
 var testData = [{
     	type:1,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
+    	startTime:'2017-03-03',
+    	endTime:'2017-06-12',
     	value3:345,
     	value4:234,
     	themeImgUrl:'../images/demo/11.png'
     },{
     	type:1,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
+    	startTime:'2017-03-03',
+    	endTime:'2017-06-12',
     	value3:345,
     	value4:234,
     	themeImgUrl:'../images/demo/22.jpg'
     },{
     	type:2,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
+    	startTime:'2017-03-03',
+    	endTime:'2017-06-12',
     	value3:345,
     	value4:234,
     	themeImgUrl:'../images/demo/33.jpg'
     },{
     	type:3,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
+    	startTime:'2017-03-03',
+    	endTime:'2017-06-12',
     	value3:345,
     	value4:234,
     	themeImgUrl:'../images/demo/44.jpg'
@@ -261,7 +246,7 @@ var testData = [{
 var  progressVue = new Vue({
   el: '#progressVue',
   data: {
-    activityList:testData 
+    activityList:[] 
   },
  methods: {
     submit: function (event) {
@@ -273,11 +258,43 @@ var  progressVue = new Vue({
   }
 })	  	
     	
+ var progress = {
+		init:function () {
+			 this.getList({
+			 	shopUserId:'15'
+			 });
     	
-      $("#a").select({
-        title: "选择职业",
-        items: ["法官", "医生", "猎人", "学生", "记者", "其他"]
-      });
+    },
+    getList:function (param) {
+
+			 request.postData({
+            url: urlConfig.viewProcessUrl,
+            param: param
+        }).then(function(data) {
+        	progressVue.activityList = data.entities;
+						debugger;
+						
+        }, function(err) {
+            console.log(err);
+        });
+			
+    },
+    getVcd:function (param) {
+    	debugger;
+			 request.postData({
+            url: urlConfig.vcdUrl,
+            progressVue: param
+        }).then(function(data) {
+
+        }, function(err) {
+            console.log(err);
+        });
+			
+    },
+}
+progress.init();
+    	   	
+
     </script>
   </body>
 </html>
