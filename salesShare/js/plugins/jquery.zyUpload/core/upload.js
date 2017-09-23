@@ -60,7 +60,7 @@ $(function(){
 			debugger
 			
 			
-			var ht = $("#handleType").val();
+			var ht = $("#handleName").val();
 			var st = $("#sourceType").val();
 			var stJqId = $("#sectionType").val();
 			var csId = $("#curSourceId");

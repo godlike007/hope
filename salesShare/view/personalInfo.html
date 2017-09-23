@@ -111,12 +111,12 @@ background-color: #fff;
     			<img src="../images/demo/headpot.jpg" alt="" />
     		</div>
     		<div class="account">
-    			{{ info.value2 }}
+    			{{ info.phoneNumber }}
     		</div>
     	</div>
     	<div class="availables">
     		<span>生效日期：</span>
-    		<span class="date">至{{ info.value3 }}</span>
+    		<span class="date">至{{ info.endTime }}</span>
     	</div>
     	<div class="pay">
     		 <a href="" class="btn">充值</a>
@@ -285,9 +285,9 @@ background-color: #fff;
 				el:'#infoVue',
 				data:{
 			      info:{
-			      	value1:'../images/demo/headshot.jpg',
-			      	value2:12343245,
-			      	value3:'2017年12月3日',
+			      	//value1:'../images/demo/headshot.jpg',
+			      	//value2:12343245,
+			      	//value3:'2017年12月3日',
 			      },                             //概况数据					                                            //房屋分析选中我的分析
 				},
 				methods:{
@@ -311,6 +311,7 @@ var info = {
             url: urlConfig.centerInfoUrl,
             param: param
         }).then(function(data) {
+        	infoVue.info = data
 						debugger;
 						
         }, function(err) {

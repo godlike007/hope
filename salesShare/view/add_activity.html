@@ -522,7 +522,7 @@
 </div>
 
 <input type="hidden" id="curSourceId" value="" />
-<input type="hidden" id="handleType" value="" />
+<input type="hidden" id="handleName" value="" />
 <!--单次资源操作状态-->
 <input type="hidden" id="handleType" value="" />
 <!--资源类别-->
@@ -631,8 +631,9 @@ var activityVue = new Vue({
     	 $("#curSourceId").val("#"+source.id);
     },
     popupSourceHandle: function (handleType,handleName,sourceType,sectionType) {
-    	this.markHandle(handleName,sourceType,sectionType);
     	debugger
+    	this.markHandle(handleName,sourceType,sectionType);
+    	
     	this.handleType = handleType;
     	this.$nextTick(function(){
     		$.closePopup();
@@ -675,8 +676,9 @@ var activityVue = new Vue({
 			})
     	
     },
-    markHandle: function (handleType,sourceType,sectionType) {
-    	 $("#handleType").val(handleType);
+    markHandle: function (handleName,sourceType,sectionType) {
+    	debugger
+    	 $("#handleName").val(handleName);
     	 $("#sourceType").val(sourceType);
     	 $("#sectionType").val(sectionType);
     	 
@@ -731,7 +733,7 @@ var activityVue = new Vue({
 			}]
 
 			
-			var ht = $("#handleType").val();
+			var ht = $("#handleName").val();
 			var st = $("#sourceType").val();
 			var stJqId = $("#sectionType").val();
 			var csId = $("#curSourceId").val();
