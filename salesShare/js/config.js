@@ -38,6 +38,6 @@ var urlConfig = {
     //获取当前模块
     getEditedSourceUrl:"http://172.21.52.29:8887/getActivityCompleteDetail",
     //上传图片
-    uploadImgUrl:"http://172.21.52.29:8887/",
+    uploadImgUrl:"http://g1u8257706.iask.in/shopCut/uploadImage",
 };
 

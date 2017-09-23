@@ -544,18 +544,15 @@
 <script src="../js/libs/weui/fastclick.js"></script>
 
 <script>
-  $(function() {
+/*  $(function() {
     FastClick.attach(document.body);
-  });
+  });*/
 </script>
 <script src="../js/libs/weui/jquery-weui.js"></script>
 
-<script>
-
 
 				
-				
-				
+<script>	
 
 var activityVue = new Vue({
   el: '#activityVue',
@@ -655,6 +652,7 @@ var activityVue = new Vue({
     			$("#addTxt").popup();
     			$("#txtEditTool").load("textEditer.html");
     			
+
     		}
 				if(handleType == 7){
 					$("#"+this.curSourceId).remove();

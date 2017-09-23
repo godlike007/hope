@@ -7,14 +7,17 @@ $(function(){
 		video:"<div id=\"#id\" class=\"video\"><video src=\"#content\"></video></div>",
 	}
 	
-	
+	var urlParam = "?"+'unique=pic1';
+	urlParam +=  "&"+'shopUserId=15';
+	urlParam +=  "&"+'section=1';
+	urlParam +=  "&"+'activityTypeId=2';
 	// 初始化插件
 	$("#uploadImgTool").zyUpload({
 		width            :   "100%",                 // 宽度
 		//height           :   "700px",                 // 宽度
 		//itemWidth        :   "1200px",                 // 文件项的宽度
 		//itemHeight       :   "100px",                 // 文件项的高度
-		url              :   "/upload/UploadAction?id="+$("#curSourceId").val()+"&handleType="+$("#handleType").val(),  // 上传文件的路径
+		url              :   urlConfig.uploadImgUrl+urlParam,  // 上传文件的路径
 		multiple         :   false,                    // 是否可以多个文件上传
 		dragDrop         :   false,                    // 是否可以拖动上传文件
 		del              :   true,                    // 是否可以删除文件
@@ -47,7 +50,7 @@ $(function(){
 		onComplete: function(data){           // 上传完成的回调方法
 			
 			
-			data.list = [{
+	/*		data.list = [{
 				id:'pic1',
 				url:'../images/demo/upload_success_1.jpg'
 			},
@@ -88,7 +91,7 @@ $(function(){
 				$(csId).replaceWith(dom);
 			}
 			//clear
-			
+			*/
 		}
 	});
 });
