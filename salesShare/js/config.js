@@ -23,7 +23,7 @@ var urlConfig = {
     /*register*/
     //注册
     vcdUrl:"http://g1u8257706.iask.in/shopUser/sendVerification",
-    registerUrl:"http://g1u8257706.iask.in/shopUser/login",
+    registerUrl:"http://g1u8257706.iask.in/shopUser/register",
     
     /*personalInfo*/
     //
