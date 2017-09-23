@@ -424,9 +424,8 @@
 		  <div class="weui-popup__modal">
 		  	
 
-			    @click="markHandle('add','img','#prize')"
 		  <div class="weui-grids">
-            <a v-show="curSourceType == 1" @click="popupSourceHandle(1,)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+            <a v-show="curSourceType == 1" @click="popupSourceHandle(1,'instead','img')" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_dialog.png" alt="">
               </div>
@@ -434,7 +433,7 @@
                替换图片
               </p>
             </a>
-            <a   v-show="curSourceType == 2" @click="popupSourceHandle(2)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+            <a   v-show="curSourceType == 2" @click="popupSourceHandle(2,'instead','txt')" href="javascript:;" class="weui-grid js_grid" data-id="progress">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_progress.png" alt="">
               </div>
@@ -442,7 +441,7 @@
                 替换文字
               </p>
             </a>
-            <a  v-show="curSourceType == 3" @click="popupSourceHandle(3)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+            <a  v-show="curSourceType == 3" @click="popupSourceHandle(3,'instead','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_msg.png" alt="">
               </div>
@@ -450,7 +449,7 @@
                 替换视频
               </p>
             </a>
-            <a @click="popupSourceHandle(4)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+            <a @click="popupSourceHandle(4,'insert','img')" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_dialog.png" alt="">
               </div>
@@ -458,7 +457,7 @@
                 新增图片
               </p>
             </a>
-            <a @click="popupSourceHandle(5)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+            <a @click="popupSourceHandle(5,'insert','txt')" href="javascript:;" class="weui-grid js_grid" data-id="progress">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_progress.png" alt="">
               </div>
@@ -466,7 +465,7 @@
                 新增文字
               </p>
             </a>
-            <a @click="popupSourceHandle(6)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+            <a @click="popupSourceHandle(6,'insert','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_msg.png" alt="">
               </div>
@@ -475,7 +474,7 @@
               </p>
             </a>
             
-            <a @click="popupSourceHandle(7)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+            <a @click="popupSourceHandle(7,'clear')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_msg.png" alt="">
               </div>
@@ -629,9 +628,10 @@ var activityVue = new Vue({
     	this.curSourceId = source.id;
     	this.curSourceIndex = source.index;
     	this.curSourceType = source.type;
-    	 $("#curSourceId").val(source.id);
+    	 $("#curSourceId").val("#"+source.id);
     },
-    popupSourceHandle: function (handleType) {
+    popupSourceHandle: function (handleType,handleName,sourceType,sectionType) {
+    	this.markHandle(handleName,sourceType,sectionType);
     	debugger
     	this.handleType = handleType;
     	this.$nextTick(function(){
@@ -714,7 +714,7 @@ var activityVue = new Vue({
     		sureSubmitImg:function () {
     			
     			var tem = {
-		img:"<div id=\"#id\" src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div>",
+		img:"<div id=\"#id\" src=\"#content\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div></div>",
 		txt:"<div id=\"#id\" class=\"txt\"><p>#content</p></div>",
 		video:"<div id=\"#id\" class=\"video\"><video src=\"#content\"></video></div>",
 	}
@@ -734,7 +734,7 @@ var activityVue = new Vue({
 			var ht = $("#handleType").val();
 			var st = $("#sourceType").val();
 			var stJqId = $("#sectionType").val();
-			var csId = $("#curSourceId");
+			var csId = $("#curSourceId").val();
 			
 			var dom = '';
 				data.list.forEach(function(o){
