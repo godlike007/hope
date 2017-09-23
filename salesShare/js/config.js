@@ -16,10 +16,13 @@ var urlConfig = {
 
     DataUrl: "http://172.21.52.29:8887/",*/
    
+   //登录   
+    loginUrl:"http://g1u8257706.iask.in/shopUser/login",
    
     
     /*register*/
     //注册
+    vcdUrl:"http://g1u8257706.iask.in/shopUser/sendVerification",
     registerUrl:"http://g1u8257706.iask.in/shopUser/login",
     
     /*personalInfo*/

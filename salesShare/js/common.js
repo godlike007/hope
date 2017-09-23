@@ -3,11 +3,11 @@ var request = {
         var promise = new Promise(function(resolve, reject) {
             $.ajax({
                 url: ajaxParam.url + ajaxParam.param,
-                contentType: 'application/json',
-                dataType: 'json',
+                //contentType: 'application/json',
+                //dataType: 'json',
                 type: 'get',
                 async:ajaxParam.async||true,
-                //data: JSON.stringify(ajaxParam.param),
+                data: ajaxParam.param,
                 success: function(data) {
                     resolve(data);
                 },
@@ -22,11 +22,12 @@ var request = {
         var promise = new Promise(function(resolve, reject) {
             $.ajax({
                 url: ajaxParam.url,
-                contentType: 'application/json',
-                dataType: 'json',
+                //contentType: 'application/json',
+               // dataType: 'json',
                 type: 'post',
                 async:ajaxParam.async||true,
-                data: JSON.stringify(ajaxParam.param),
+                //data: JSON.stringify(ajaxParam.param),
+                data:ajaxParam.param,
                 success: function(data) {
                     resolve(data);
                 },

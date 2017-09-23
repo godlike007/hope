@@ -59,7 +59,7 @@
           <input class="weui-input" type="tel" placeholder="请输入手机号"  v-model="info.phoneNumber">
         </div>
         <div class="weui-cell__ft">
-          <button class="weui-vcode-btn">获取验证码</button>
+          <button class="weui-vcode-btn" @click="getVcd">获取验证码</button>
         </div>
       </div>
 
@@ -120,7 +120,17 @@
 				
 			register.sumbit(this.info);
 				
-    }
+    },
+    getVcd: function () {
+    	debugger
+    	this.info.province = $("#selectArea").val().split(" ")[0];
+    	this.info.city = $("#selectArea").val().split(" ")[1];
+				
+			register.getVcd({
+				phoneNumber:this.info.phoneNumber
+			});
+				
+    },
   }
 })	
 
@@ -142,7 +152,19 @@ var register = {
     	
 
 			 request.postData({
-            url: urlConfig.registerUrl,
+            url: urlConfig.vcdUrl,
+            param: param
+        }).then(function(data) {
+
+        }, function(err) {
+            console.log(err);
+        });
+			
+    },
+    getVcd:function (param) {
+    	debugger;
+			 request.postData({
+            url: urlConfig.vcdUrl,
             param: param
         }).then(function(data) {
 
