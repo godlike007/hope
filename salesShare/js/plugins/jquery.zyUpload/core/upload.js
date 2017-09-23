@@ -61,24 +61,32 @@ $(function(){
 			
 			
 			var ht = $("#handleType").val();
-			var st = ("#sourceType").val();
+			var st = $("#sourceType").val();
+			var stJqId = $("#sectionType").val();
+			var csId = $("#curSourceId");
+			
+			var dom = '';
+				data.list.forEach(function(o){
+					var d = tem[st];
+					d.replace(/#id/,o.id)
+					d.replace(/#content/,o.url)
+					dom += d;
+				})
 			
 			//add
 			if(ht == 'add'){
-				var addDom = '';
-				data.list.forEach(function(o){
-					var dom = tem[st];
-					dom.replace("#id",o.id)
-					dom.replace("#content",o.url)
-					addDom += dom;
-				})
 				
+				$(stJqId).append(dom);
 			}
 			
 			//insert
-			
+			if(ht == 'insert'){				
+				$(csId).after(dom);
+			}
 			//instead
-			
+			if(ht == 'instead'){				
+				$(csId).replaceWith(dom);
+			}
 			//clear
 			
 		}

@@ -25,10 +25,12 @@ var urlConfig = {
     vcdUrl:"http://g1u8257706.iask.in/shopUser/sendVerification",
     registerUrl:"http://g1u8257706.iask.in/shopUser/register",
     
-    /*personalInfo*/
-    //
-    centerInfoUrl:"http://172.21.52.29:8887/login",
     
+    
+    /*personalInfo*/
+    toCenterUrl: "http://g1u8257706.iask.in/shopCenter/gotoPersonCenter",
+    centerInfoUrl:"http://g1u8257706.iask.in/shopCenter/getCenterInfo",
+
     /*add activity*/
     //获取当前模块
     getEditedSourceUrl:"http://172.21.52.29:8887/getActivityCompleteDetail",

@@ -290,23 +290,47 @@ background-color: #fff;
 			      },                             //概况数据					                                            //房屋分析选中我的分析
 				},
 				methods:{
-				    refreshAgeChart:function(){
-		                uerPortraitTotal.getAgeAnalzyeChart();      //签约客户年龄分布图
-		                uerPortraitTotal.getOutputValueChart();   //合同产值比例图
-		                uerPortraitTotal.getCustomerSquareChart();  //签约客户面积分布图
+				    getCenterInfo:function(){
+		               
 					}
 				}
 			});
-    	/*$("#tab_tab1").click(function(){
-				 $("#tab1").load("bargain_personalInfo.html");
-			});*/
-    	$("#home-city").cityPicker({
-        //title: "选择目的地",
-        showDistrict: false,
-        onChange: function (picker, values, displayValues) {
-          console.log(values, displayValues);
-        }
-      });
+			
+			
+var info = {
+		init:function () {
+			 this.getCenterInfo({
+			 	id:'15'
+			 });
+    	
+    },
+    getCenterInfo:function (param) {
+
+			 request.postData({
+            url: urlConfig.centerInfoUrl,
+            param: param
+        }).then(function(data) {
+						debugger;
+						
+        }, function(err) {
+            console.log(err);
+        });
+			
+    },
+    getVcd:function (param) {
+    	debugger;
+			 request.postData({
+            url: urlConfig.vcdUrl,
+            param: param
+        }).then(function(data) {
+
+        }, function(err) {
+            console.log(err);
+        });
+			
+    },
+}
+info.init();
     	
     	
       $("#showTooltips").click(function() {

@@ -172,10 +172,10 @@
 			
 			
 			<div class="upload-panel">
-				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','prize')">添加图片</div>
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#prize')">添加图片</div>
 				<div class="image edit open-popup" data-target="#uploadImg" @click="markHandle('instead','img')">替换图片</div>
 				
-				<div class="text add"  @click="markHandle('add','txt','prize')">添加描述</div>
+				<div class="text add"  @click="markHandle('add','txt','#prize')">添加描述</div>
 				<div class="text edit"  @click="markHandle('instead','txt')">修改描述</div>
 				
 				<div class="clear"   @click="markHandle('clear')">清空内容</div>
@@ -424,9 +424,9 @@
 		  <div class="weui-popup__modal">
 		  	
 
-			   
+			    @click="markHandle('add','img','#prize')"
 		  <div class="weui-grids">
-            <a v-show="curSourceType == 1" @click="popupSourceHandle(1)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+            <a v-show="curSourceType == 1" @click="popupSourceHandle(1,)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_dialog.png" alt="">
               </div>
@@ -528,7 +528,8 @@
 <input type="hidden" id="handleType" value="" />
 <!--资源类别-->
 <input type="hidden" id="sourceType" value="" />
-
+<!--当前section id-->
+<input type="hidden" id="sectionType" value="" />
 
 <div id="new_img" class="img" >
 		<img data-index-id="" src="" alt="" />
@@ -674,9 +675,10 @@ var activityVue = new Vue({
 			})
     	
     },
-    markHandle: function (handleType,sourceType) {
+    markHandle: function (handleType,sourceType,sectionType) {
     	 $("#handleType").val(handleType);
     	 $("#sourceType").val(sourceType);
+    	 $("#sectionType").val(sectionType);
     	 
     	 if(handleType=="add"){
     	 		$("#curSourceId").val('');
@@ -710,6 +712,53 @@ var activityVue = new Vue({
     			
     		},
     		sureSubmitImg:function () {
+    			
+    			var tem = {
+		img:"<div id=\"#id\" src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div>",
+		txt:"<div id=\"#id\" class=\"txt\"><p>#content</p></div>",
+		video:"<div id=\"#id\" class=\"video\"><video src=\"#content\"></video></div>",
+	}
+    			
+    			
+    			var data = {}
+    						data.list = [{
+				id:'pic1',
+				url:'../images/demo/upload_success_1.jpg'
+			},
+			{
+				id:'pic2',
+				url:'../images/demo/upload_success_2.jpg'
+			}]
+
+			
+			var ht = $("#handleType").val();
+			var st = $("#sourceType").val();
+			var stJqId = $("#sectionType").val();
+			var csId = $("#curSourceId");
+			
+			var dom = '';
+				data.list.forEach(function(o){
+					var d = tem[st];
+					debugger
+					d=d.replace(/#id/g,o.id)
+					d=d.replace(/#content/g,o.url)
+					dom += d;
+				})
+			
+			//add
+			if(ht == 'add'){
+				
+				$(stJqId).append(dom);
+			}
+			
+			//insert
+			if(ht == 'insert'){				
+				$(csId).after(dom);
+			}
+			//instead
+			if(ht == 'instead'){				
+				$(csId).replaceWith(dom);
+			}
     			
     			/*request.postData({
             url: urlConfig.registerUrl,
