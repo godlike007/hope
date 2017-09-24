@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<link rel="stylesheet" href="../css/framework/weui/weui.css">
+<link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
+<link rel="stylesheet" href="../css/layouts/common.css">
+
+<link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
+
+<style type="text/css">
+	video,
+	img{
+		width: 100%;
+	}
+	.container{
+		background-color: antiquewhite;
+		margin-bottom: 110px;
+    padding-bottom: 20px;
+	}
+.head-banner{
+	    background-color: #fff;
+    padding: 10px;
+}	
+.module{
+	
+}
+.module .title{
+	  text-align: center;
+    height: 30px;
+    margin: 10px auto;
+    background-color: #26d624;
+    width: 30%;
+    color: #fff;
+    line-height: 30px;
+}
+.module .content{
+    width: 90%;
+    margin: auto;
+    background: #fff;
+    padding: 5px;
+}
+.upload-panel{
+    width: 90%;
+    height: 70px;
+    border: 2px dashed #ddd;
+    margin: 4% auto;
+    text-align: center;
+    line-height: 70px;
+    display: flex;
+    justify-content: space-around;
+    color: #8e8e8e;
+}
+.upload-panel.preview{
+    display: none;
+}
+
+.upload-panel .clear,
+.upload-panel .video,
+.upload-panel .image,
+.upload-panel .text{
+		display: inline-block;
+    /* margin-right: 1%; */
+    border: 1px solid #ddd;
+    height: 40px;
+    margin: auto;
+    line-height: 40px;
+    padding: 0px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.upload-panel .clear,
+.upload-panel .edit{
+    display: none;
+}
+
+.module .upload-panel .image{
+	
+}
+
+.module .content .source{
+    padding: 4%;
+    border: 1px dashed #ccc;
+    margin: 3%;	
+}
+.module .content .source.preview{
+    padding: 0%;
+    border: none;
+    margin: 3%;	
+}
+.source .hand-trigger{
+		position: absolute;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.6;
+    margin-left: 62%;
+    margin-top: -3%;
+    /* float: right; */
+    /* text-align: right; */
+    padding: 2% 5%;
+    /* border-radius: 0px 0px 0px 90px; */	
+}
+.source .hand-trigger.preview{
+		display: none;
+}
+
+
+.source .img{
+	
+}
+.source .txt{
+	
+}
+.source .video{
+	
+}
+.form-handle{
+    position: fixed;
+    bottom: -1px;
+    width: 100%;
+    /* background-color: #3d4145; */
+    text-align: center;
+    /* opacity: .8; */
+    color: #fff;	
+}
+.form-handle .mode{
+    /* position: absolute; */
+    /* color: #fff; */
+    opacity: .85;
+    background-color: #3d4145;	
+}
+.form-handle .mode .weui-cell_switch{
+    padding-top: 12px;
+}
+.form-handle .mode .weui-cell__ft{
+ 		text-align: center;
+    margin: auto;
+    /* width: 100%; */
+    line-height: 32px;
+}
+.form-handle .mode .weui-cell__ft label{
+ 		color: #fff;
+    vertical-align: top;
+    /* width: 202px; */
+    margin:auto 20px;
+    font-size: 20px;
+}
+
+
+
+.form-handle .save{
+    background-color: orange;
+    height: 55px;	
+        line-height: 55px;
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+.form-handle a{
+    color: #fff;
+    font-size: 30px;
+    letter-spacing: 6px;	
+}
+
+
+#section_1.preview{
+	display: none;
+}
+#section_top{
+    margin-top: 20px;	
+
+}
+#section_top.preview{
+    display: block;
+}
+#section_top .price{
+	    margin: 20px;
+	  display: flex;
+    justify-content: space-around;
+}
+#section_top .join{
+    width: 40%;
+    text-align: center;
+    margin: auto;
+    background-color: orange;
+    color: #fff;
+    margin-bottom: 20px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 31px;
+}
+#section_top .join a{
+    color: #fff;
+}
+</style>
+
+  </head>
+  <script src="../js/libs/vue/vue.js"></script>
+<script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<!-- 引用核心层插件 -->
+<script src="../js/libs/vue/vue.js"></script>
+
+  <script src="../js/common.js"></script>
+    <script src="../js/config.js"></script>
+    
+    
+
+    <script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
+  <body ontouchstart>
+
+
+    <header class='demos-header'>
+      <h1 class="demos-title"></h1>
+    </header>
+
+
+<div  id="activityVue" class="container">
+	<div id="head_banner" class="head-banner">
+		<div class="content">
+		<img src="" alt="" />
+			
+					<!--<div id="" class="source">
+				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img">
+					<img  :src="source.banner.headImgUrl" alt="" />
+				</div>
+				
+			
+				
+			</div>-->
+			
+			<div class="title">
+				{{info.title}}
+			</div>
+		</div>
+		
+
+		
+		
+		
+	</div>
+	
+		<div id="section_top" class="module">
+<div class="countdown">
+				    <!--<ul class="countdown">
+        <li> <span class="days">00</span>
+            <p class="days_ref">天</p>
+        </li>
+        <li class="seperator">.</li>
+        <li> <span class="hours">00</span>
+            <p class="hours_ref">小时</p>
+        </li>
+        <li class="seperator">:</li>
+        <li> <span class="minutes">00</span>
+            <p class="minutes_ref">分钟</p>
+        </li>
+        <li class="seperator">:</li>
+        <li> <span class="seconds">00</span>
+            <p class="seconds_ref">秒</p>
+        </li>
+    </ul>-->
+    {{info.activityStartTime}} - {{info.activityEndTime}}
+
+			</div>
+			<div class="content">
+				<div class="price">
+					<span>原价：{{info.cutOriginPrice}}</span>
+					<span>底价：{{info.cutLeastPrice}}</span>
+				</div>
+
+				<div class="join" @click="join">
+				我要参加
+				</div>
+				
+			</div>
+		</div>
+	
+	
+	<!--奖品描述 1-1-->
+	<div id="section_2" class="module">
+		<div class="title">
+			{{info.sectionOneName}}
+		</div>
+		<div  class="content">
+			 <div class="weui-cell">
+	        <div class="weui-cell__bd">
+
+	          	<label for="">本期奖品份数</label>
+								{{info.prizeNumber}}
+	          	
+	        </div>
+	      </div>
+			
+			<div :id="item.id" class="source" v-for="item in section1">
+
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="">{{item.value}}</p>
+				</div>
+				
+			
+				
+			</div>
+			
+
+		</div>	
+	</div>
+	
+	
+
+	
+	<!--活动规则 1-1-->
+	<div id="section_3" class="module">
+		<div class="title">
+			{{info.sectionTwoName}}
+		</div>
+		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in section2">
+
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="">{{item.value}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="" :src="item.value"></video>
+				</div>
+			
+				
+			</div>
+			
+
+		</div>	
+	</div>
+	
+	<!--领奖信息 1-1-->
+	<div id="section_4" class="module">
+		<div class="title">
+			{{info.sectionThreeName}}
+		</div>
+		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in section3">
+
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="">{{item.value}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="" :src="item.value"></video>
+				</div>
+			
+				
+			</div>
+			
+
+		</div>	
+	</div>
+	
+	
+	<!--机构介绍 1-1-->
+	<div id="section_5" class="module">
+		<div class="title">
+			{{info.sectionFourName}}
+		</div>
+		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in section4">
+
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="">{{item.value}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="" :src="item.value"></video>
+				</div>
+			
+				
+			</div>
+			
+
+		</div>	
+	</div>
+	
+<!--机构介绍 1-1-->
+	<div id="section_6" class="module">
+		<div class="title">
+			排行榜
+		</div>
+		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in rankList">
+
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="">{{item.value}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="" :src="item.value"></video>
+				</div>
+			
+				
+			</div>
+			
+
+		</div>	
+	</div>
+	
+<!--	<div class="customer-info">
+		 <input class="weui-input" type="text" placeholder="{{info.infoCollectFiveName}}" v-model="name">
+		 <br>
+		 <input class="weui-input" type="text" placeholder="请输入手机号" v-model="phone">',
+					  
+	</div>
+-->
+
+</div>
+
+
+
+		<a id="call" href="tel://222">拨打电话</a>
+
+
+
+<script src="../js/libs/weui/fastclick.js"></script>
+
+<script>
+/*  $(function() {
+    FastClick.attach(document.body);
+  });*/
+</script>
+<script src="../js/libs/weui/jquery-weui.js"></script>
+
+
+				
+<script>	
+
+var activityVue = new Vue({
+  el: '#activityVue',
+  data: {
+  	
+
+		activityTypeId:2,
+		//
+		info:{
+			title:'',
+		
+			cutOriginPrice:'',
+			cutLeastPrice:'',
+			cutLeastPerPerson:'',
+			cutMostPerPerson:'',   		
+			redoHours:'',
+			
+			
+			infoCollectOneName:'',
+			infoCollectOneIsRequired:'',
+			infoCollectTwoName:'',
+			infoCollectTwoIsRequired:'',
+			infoCollectThreeName:'',
+			infoCollectThreeIsRequired:'',
+			infoCollectFourName:'',
+			infoCollectFourIsRequired:'',
+			infoCollectFiveName:'',
+			infoCollectFiveIsRequired:'',
+			
+			prizeNumber:'',
+			
+			sectionOneName:'',
+			sectionTwoName:'',
+			sectionThreeName:'',
+			sectionFourName:'',
+			
+			consultPhoneNumber:'',
+		},
+		
+		
+		section1:[],
+		section2:[],
+		section3:[],
+		section4:[],
+		rankList:[]
+
+  },
+ methods: {
+    join: function (event) {
+    	activity.join();
+    },
+  }
+})	 
+	    	
+    	
+    	var activity = {
+    		init:function(){
+    				this.getInfo({
+    			   vueName:'info',
+    			  
+    			   param:{
+    			   	shopUserActivityId:30,
+    			   }
+					 });
+    			
+    			  this.request({
+    			  	vueName:'section1',
+    			  	 dataName:'content',
+    			 url:urlConfig.getSectionContentyUrl,
+    			   param:{
+    			   	shopUserActivityId:30,
+	    			  activityTypeId:2,
+						 	shopUserId:'15',
+						 	section:1
+    			   }
+    			  	
+    			  
+					 });
+					 
+					 this.request({
+    			  vueName:'section2',
+    			  dataName:'content',
+    			 url:urlConfig.getSectionContentyUrl,
+    			   param:{
+    			   	shopUserActivityId:30,
+	    			  activityTypeId:2,
+						 	shopUserId:'15',
+						 	section:3
+    			   }
+					 });
+					 
+					 this.request({
+    			  vueName:'section3',
+    			  dataName:'content',
+    			 url:urlConfig.getSectionContentyUrl,
+    			   param:{
+    			   	shopUserActivityId:30,
+	    			  activityTypeId:2,
+						 	shopUserId:'15',
+						 	section:3
+    			   }
+					 });
+					 
+					 this.request({
+    			  vueName:'section4',
+    			  dataName:'content',
+    			 url:urlConfig.getSectionContentyUrl,
+    			   param:{
+    			   	shopUserActivityId:30,
+	    			  activityTypeId:2,
+						 	shopUserId:'15',
+						 	section:4
+    			   }
+					 });
+
+    	
+    		},
+    		getInfo:function (o) { 
+    			request.postData({
+	            url: urlConfig.viewShopActivityUrl,
+	            param: o.param,
+	            async:false,
+	        }).then(function(data) {
+	        	debugger;
+	        	if(!!o.dataName){
+	        		activityVue[o.vueName] = data[o.dataName]
+	        	}
+	        	else{
+	        		activityVue[o.vueName] = data;
+	        	}
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });
+		    },
+    		request:function (o) { 
+    			request.postData({
+	            url: o.url,
+	            param: o.param
+	        }).then(function(data) {
+	        	debugger;
+	        	if(!!o.dataName){
+	        		activityVue[o.vueName] = data[o.dataName]
+	        	}
+	        	else{
+	        		activityVue[o.vueName] = data;
+	        	}
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });
+		    },
+		    join:function(){
+		    	$.modal({
+					  title: "",
+					  text: '<input class="weui-input" type="text" placeholder="请输入账号" v-model="name"><br><input class="weui-input" type="text" placeholder="请输入手机号" v-model="phone">',
+					  buttons: [
+					    { text: "提交", onClick: function(){ 
+					    		alert()
+					    	} },
+
+					    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
+					  ]
+					});
+		    },
+		    call:function(phone){
+		    	$.actions({
+					  actions: [{
+					    text: phone,
+					    onClick: function() {
+					      $("#call").click();
+					    }
+					  }]
+					});
+		    }
+	
+    	}
+    	activity.init();
+    	
+
+    </script>
+  </body>
+</html>

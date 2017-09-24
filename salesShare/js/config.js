@@ -37,6 +37,13 @@ var urlConfig = {
     /*add activity*/
     //获取当前模块
     getEditedSourceUrl:"http://172.21.52.29:8887/getActivityCompleteDetail",
+    
+    
+     /*view activity*/
+    //当前模块
+    viewShopActivityUrl:"http://g1u8257706.iask.in/shopCut/viewShopActivity",
+    getSectionContentyUrl:"http://g1u8257706.iask.in/shopCut/getSectionContent",
+    
     //上传图片
     uploadImgUrl:"http://g1u8257706.iask.in/shopCut/uploadImage",
     submitActivityUrl:"http://g1u8257706.iask.in/shopCut/submitActivity"

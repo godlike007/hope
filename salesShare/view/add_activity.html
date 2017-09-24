@@ -823,8 +823,14 @@
     
     <!--<div id="uploadImgTool" class="demo"></div>-->
     
-    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
-    图片<input onclick="activity.uploadImg()" type="file" name="file"/>
+<form id='add'>
+	111
+		<input type="text" name='book'/>
+		<input type="file" name='source' value="上传33"/>
+		<input type="submit"/>
+</form>
+ <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage?unique=pic1&shopUserId=15&section=1&activityTypeId=2">
+    图片<input  type="file" name="file"/>
     <input type="submit" value="上传"/ >
 </form>
     
@@ -839,10 +845,12 @@
     
     <!--<div id="uploadVideoTool" class="demo"></div>-->
     
-    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
+<!--    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
     图片<input onclick="activity.uploadImg()" type="file" name="file"/>
     <input type="submit" value="上传"/ >
-</form>
+</form>-->
+
+
     
     
     <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitVideo()">确认提交</a>
@@ -1469,7 +1477,26 @@ debugger;
     	}
     	activity.init();
     	
-    	
+    	$('#add').submit(function(){
+        var data = new FormData($('#add')[0]);  
+        console.log(data);
+        $.ajax({  
+            url: 'http://g1u8257706.iask.in/shopCut/uploadImage?unique=pic1&shopUserId=15&section=1&activityTypeId=2',  
+            type: 'POST',  
+            data: data,  
+            dataType: 'JSON',  
+            cache: false,  
+            processData: false,  
+            contentType: fase, 
+            success:function(data){  
+            	debugger;
+                //alert(data);
+                alert("UploadFile Success");
+            }   
+        });  
+
+        return false;   
+    });
     	
     	
 
