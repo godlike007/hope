@@ -430,13 +430,19 @@
 		</div>	
 	</div>
 	
-<!--	<div class="customer-info">
-		 <input class="weui-input" type="text" placeholder="{{info.infoCollectFiveName}}" v-model="name">
+	<div id="userInfo" class="customer-info">
+		 <input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectOneName}}" v-model="name">
 		 <br>
-		 <input class="weui-input" type="text" placeholder="请输入手机号" v-model="phone">',
-					  
+		 <input v-show="info.infoCollectTwoName!=''" class="weui-input {{info.infoCollectTwoIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectTwoName}}" v-model="phone">
+		 <br>
+		 <input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectThreeIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectThreeName}}" v-model="name">
+		 <br>
+		 <input v-show="info.infoCollectFourName!=''" class="weui-input {{info.infoCollectFourIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectFourName}}" v-model="phone">
+		 <br>
+		 <input v-show="info.infoCollectFiveName!=''" class="weui-input {{info.infoCollectFiveIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectFiveName}}" v-model="phone">
+		<br>		  
 	</div>
--->
+
 
 </div>
 
@@ -615,10 +621,35 @@ var activityVue = new Vue({
 		    join:function(){
 		    	$.modal({
 					  title: "",
-					  text: '<input class="weui-input" type="text" placeholder="请输入账号" v-model="name"><br><input class="weui-input" type="text" placeholder="请输入手机号" v-model="phone">',
+					  text:$("#userInfo").prop("ourterHTML"),
 					  buttons: [
 					    { text: "提交", onClick: function(){ 
-					    		alert()
+					    	
+					    	var test = {
+					    		 infoAttributeOne:'dasfdas',
+					    		 infoAttributeTwo:'dasfdas',
+					    		 infoAttributeThree:'dasfdas',
+					    		 infoAttributeFour:'dasfdas',
+					    		 shopUserActivityId:30,
+					    	}
+					    		
+					    		request.postData({
+					            url: urlConfig.registerUrl,
+					            param:test
+					        }).then(function(data) {
+					        	debugger;
+					        	if(!!o.dataName){
+					        		activityVue[o.vueName] = data[o.dataName]
+					        	}
+					        	else{
+					        		activityVue[o.vueName] = data;
+					        	}
+					        	
+					
+					        }, function(err) {
+					            console.log(err);
+					        });
+									    		
 					    	} },
 
 					    { text: "取消", className: "default", onClick: function(){ console.log(3)} },

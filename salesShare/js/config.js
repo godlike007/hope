@@ -43,6 +43,7 @@ var urlConfig = {
     //当前模块
     viewShopActivityUrl:"http://g1u8257706.iask.in/shopCut/viewShopActivity",
     getSectionContentyUrl:"http://g1u8257706.iask.in/shopCut/getSectionContent",
+    registerUrl:"http://g1u8257706.iask.in/clientCut/register",
     
     //上传图片
     uploadImgUrl:"http://g1u8257706.iask.in/shopCut/uploadImage",
