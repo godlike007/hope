@@ -123,7 +123,7 @@
 }
 .form-handle{
     position: fixed;
-    bottom: 0px;
+    bottom: -1px;
     width: 100%;
     /* background-color: #3d4145; */
     text-align: center;
@@ -164,6 +164,119 @@
     font-size: 30px;
     letter-spacing: 6px;	
 }
+
+
+
+/*countdown*/
+/*  @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+        body {
+            background: #363f48;
+            color: white;
+            font: normal 12px 'Open Sans', sans-serif;
+            margin-top: 20px;
+        }
+        
+        ul.countdown {
+            list-style: none;
+            margin: 75px 0;
+            padding: 0;
+            display: block;
+            text-align: center;
+        }
+        
+        ul.countdown li {
+            display: inline-block;
+        }
+        
+        ul.countdown li span {
+            font-size: 80px;
+            font-weight: 300;
+            line-height: 80px;
+        }
+        
+        ul.countdown li.seperator {
+            font-size: 80px;
+            line-height: 70px;
+            vertical-align: top;
+        }
+        
+        ul.countdown li p {
+            color: #a7abb1;
+            font-size: 14px;
+        }
+        
+        a {
+            color: #76949F;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .source {
+            width: 405px;
+            margin: 0 auto;
+            background: #4f5861;
+            color: #a7abb1;
+            font-weight: bold;
+            display: block;
+            white-space: pre;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+        
+        .btn {
+            background: #f56c4c;
+            margin: 40px auto;
+            padding: 12px;
+            display: block;
+            width: 100px;
+            color: white;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-decoration: none;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+        }
+        
+        .btn:hover {
+            text-decoration: none;
+            opacity: .7;
+        }*/
+
+#section_1.preview{
+	display: none;
+}
+#section_top{
+    margin-top: 20px;	
+    display: none;
+}
+#section_top.preview{
+    display: block;
+}
+#section_top .price{
+	    margin: 20px;
+	  display: flex;
+    justify-content: space-around;
+}
+#section_top .join{
+    width: 40%;
+    text-align: center;
+    margin: auto;
+    background-color: orange;
+    color: #fff;
+    margin-bottom: 20px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 31px;
+}
+#section_top .join a{
+    color: #fff;
+}
 </style>
 
   </head>
@@ -184,7 +297,9 @@
   <script type="text/javascript" src="../js/plugins/froala-editor/codemirror.min.js"></script>
    <script type="text/javascript" src="../js/plugins/froala-editor/froala_editor.pkgd.min.js"></script>
     <script type="text/javascript" src="../js/plugins/froala-editor/xml.min.js"></script>
-    
+   
+   
+    <script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
   <body ontouchstart>
 
 
@@ -194,65 +309,67 @@
 
 
 <div  id="activityVue" class="container">
-	<div class="head-banner">
-		<div v-if="source.headImgUrl" class="">
-			<img :src="source.headImgUrl" alt="" />
-		</div>
-		
-		<div :id="item.id" class="source">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+	<div id="head_banner" class="head-banner">
+		<div v-if="source.banner.headImgUrl" class="">
+			<img :src="source.banner.headImgUrl" alt="" />
+			
+					<div :id="source.banner.headId" class="source">
+				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
 				</div>
 				
 				<div class="img">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+					<img  :src="source.banner.headImgUrl" alt="" />
 				</div>
 				
 			
 				
 			</div>
+		</div>
+		
+
 		
 		
 		<div v-else class="upload-panel">
-			<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img')">添加图片</a>
+			<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
 		</div>
 	</div>
-	<!--奖品描述 1-1-->
-	<div id="prize" class="module">
-		<div class="title">
-			奖品描述
-		</div>
-		<div  class="content">
-			
-			
-			<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				
-			
-				
-			</div>
-			
-			
-			<div class="upload-panel">
-				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#prize')">添加图片</div>
-				<div class="text add"  @click="markHandle('add','txt','#prize')">添加描述</div>
+	
+		<div id="section_top" class="module">
+<!--			<div class="countdown">
+				    <ul class="countdown">
+        <li> <span class="days">00</span>
+            <p class="days_ref">天</p>
+        </li>
+        <li class="seperator">.</li>
+        <li> <span class="hours">00</span>
+            <p class="hours_ref">小时</p>
+        </li>
+        <li class="seperator">:</li>
+        <li> <span class="minutes">00</span>
+            <p class="minutes_ref">分钟</p>
+        </li>
+        <li class="seperator">:</li>
+        <li> <span class="seconds">00</span>
+            <p class="seconds_ref">秒</p>
+        </li>
+    </ul>
 
+			</div>-->
+			<div class="content">
+				<div class="price">
+					<span>原价：{{preview_init_price}}</span>
+					<span>底价：{{preview_new_price}}</span>
+				</div>
+
+				<div class="join">
+					<a href="">我要参加</a>
+				</div>
+				
 			</div>
-		</div>	
-	</div>
-	
-	
-  <!--设置信息   砍价1-1-->
-	<div id="setting" class="module">
+		</div>
+	  <!--设置信息   砍价1-1-->
+	<div id="section_1" class="module">
 		<div class="title">
 			设置信息
 		</div>
@@ -262,29 +379,31 @@
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
-	          
-	          <input type="text" id='startTime' v-model="source.setting.value1"/>
+	          <label for="">开始时间</label>
+	          <input type="text" id='startTime' v-model="activityStartTime"  @change="initCountDown(activityStartTime)"/>
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	         <!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
-	         	<input type="text" id='endTime' v-model="source.setting.value1"/>
+	         	<label for="">结束时间</label>
+	         	<input type="text" id='endTime' v-model="activityEndTime"/>
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	          <input class="weui-input" type="tel" placeholder="原价" v-model="source.setting.value3" @change="refreshRelativeValues(source.setting.value3)">
+	        	<label for="">原价</label>
+	          <input class="weui-input" type="tel" placeholder="原价" v-model="cutOriginPrice" @change="refreshRelativeValues('preview_init_price',cutOriginPrice)">
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
-	          
-	          <div class="weui-slider-box" id="bottomPrice">
+	          <label for="">底价</label>
+	         <!-- <div class="weui-slider-box" id="bottomPrice">
 						  <div class="weui-slider">
 						    <div id="sliderInner" class="weui-slider__inner">
 						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
@@ -292,7 +411,8 @@
 						    </div>
 						  </div>
 						  <div id="bottomPriceValue" class="weui-slider-box__value">{{source.setting.value4}}</div>
-						</div>
+						</div>-->
+						 <input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
 	          
 	          
 	        </div>
@@ -301,8 +421,8 @@
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
-	          	
-	          	<div class="weui-slider-box" id="perCutMax">
+	          	<label for="">单次砍价最大值</label>
+	          	<!--<div class="weui-slider-box" id="perCutMax">
 						  <div class="weui-slider">
 						    <div id="sliderInner" class="weui-slider__inner">
 						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
@@ -310,8 +430,9 @@
 						    </div>
 						  </div>
 						  <div id="perCutMaxValue" class="weui-slider-box__value">{{source.setting.value5}}</div>
-						</div>
-	          	
+						</div>-->
+	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPerPerson">
+	          
 	          	
 	        </div>
 	      </div>
@@ -319,8 +440,8 @@
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
-	          	
-	          		<div class="weui-slider-box" id="perCutMin">
+	          	<label for="">单次砍价最小值</label>
+	          		<!--<div class="weui-slider-box" id="perCutMin">
 						  <div class="weui-slider">
 						    <div id="sliderInner" class="weui-slider__inner">
 						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
@@ -328,8 +449,25 @@
 						    </div>
 						  </div>
 						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
-						</div>
-	          	
+						</div>-->
+	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutMostPerPerson">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
+	          	<label for="">报名者可再次给自己减价小时间隔</label>
+	          		<!--<div class="weui-slider-box" id="perCutMin">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
+						</div>-->
+	          	<input class="weui-input" type="tel" placeholder="小时间隔" v-model="redoHours">
 	        </div>
 	      </div>
 	      
@@ -338,10 +476,55 @@
 		</div>	
 	</div>
 	
-	<!--活动规则 1-1-->
-	<div id="rule" class="module">
+	
+	
+	<!--奖品描述 1-1-->
+	<div id="section_2" class="module">
 		<div class="title">
-			活动规则
+			<input class="weui-input" type="tel" value="奖品描述" v-model="sectionOneName">
+		</div>
+		<div  class="content">
+			 <div class="weui-cell">
+	        <div class="weui-cell__bd">
+
+	          	<label for="">本期奖品份数</label>
+
+	          	<input class="weui-input" type="tel" placeholder="奖品份数" v-model="prizeNumber">
+	        </div>
+	      </div>
+			
+			<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				
+			
+				
+			</div>
+			
+			
+			<div class="upload-panel">
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_2')">添加图片</div>
+				<div class="text add"  @click="markHandle('add','txt','#section_2')">添加描述</div>
+
+			</div>
+		</div>	
+	</div>
+	
+	
+
+	
+	<!--活动规则 1-1-->
+	<div id="section_3" class="module">
+		<div class="title">
+			<input class="weui-input" type="tel" value="活动规则" v-model="sectionTwoName">
 		</div>
 		<div class="content">
 			
@@ -364,19 +547,19 @@
 			</div>
 			
 			<div class="upload-panel">
-				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#prize')">添加图片</div>
-				<div class="text add"  @click="markHandle('add','txt','#prize')">添加描述</div>
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
+				<div class="text add"  @click="markHandle('add','txt','#section_3')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#prize')">添加图片</div>
+				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#section_3')">添加视频</div>
 		
 			</div>
 		</div>	
 	</div>
 	
 	<!--领奖信息 1-1-->
-	<div id="award" class="module">
+	<div id="section_4" class="module">
 		<div class="title">
-			<input class="weui-input" type="tel"  value="领奖信息">
+			<input class="weui-input" type="tel"  value="领奖信息" v-model="sectionThreeName">
 		</div>
 		<div class="content">
 			
@@ -399,22 +582,19 @@
 			</div>
 			
 			<div class="upload-panel">
-				<div class="image add">添加图片</div>
-		
-				<div class="text add">添加描述</div>
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
+				<div class="text add"  @click="markHandle('add','txt','#section_4')">添加描述</div>
 	
-				<div class="video add">添加视频</div>
-				
-				<div class="clear"></div>
+				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#section_4')">添加视频</div>
 			</div>
 		</div>	
 	</div>
 	
 	
 	<!--机构介绍 1-1-->
-	<div id="introduction" class="module">
+	<div id="section_5" class="module">
 		<div class="title">
-			<input class="weui-input" type="tel"  value="机构介绍">
+			<input class="weui-input" type="tel"  value="机构介绍" v-model="sectionFourName">
 		</div>
 		<div class="content">
 			
@@ -437,13 +617,10 @@
 			</div>
 			
 			<div class="upload-panel">
-				<div class="image add">添加图片</div>
-		
-				<div class="text add">添加描述</div>
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_5')">添加图片</div>
+				<div class="text add"  @click="markHandle('add','txt','#section_5')">添加描述</div>
 	
-				<div class="video add">添加视频</div>
-				
-				<div class="clear"></div>
+				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#section_5')">添加视频</div>
 			</div>
 		</div>	
 	</div>
@@ -455,7 +632,7 @@
 		<div class="content">
 		
 			<div class="weui-cell__bd">
-	      <input class="weui-input" type="tel" placeholder="请输入手机号">
+	      <input class="weui-input" type="tel" placeholder="请输入电话"  v-model="consultPhoneNumber">
 	    </div>
 	    <div class="weui-cell__bd">
 	      <div id="locationAddress"></div>
@@ -471,7 +648,7 @@
 		<div class="content">
 			<div id="" class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="手机号" v-model="source.userPhone">
+	          <input class="weui-input" type="text" placeholder="手机号" v-model="infoCollectOneName">
 	        </div>
 	        <!--<div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -483,7 +660,7 @@
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="姓名" v-model="source.userName">
+	          <input class="weui-input" type="text" placeholder="姓名" v-model="infoCollectTwoName">
 	        </div>
 	        <!--<div class="weui-cell__ft">
 	        	<label>必填项</label>
@@ -493,31 +670,31 @@
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="source.otherInfo1">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectThreeName">
 	        </div>
 	        <div class="weui-cell__ft">
 	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
+	          <input class="weui-switch" type="checkbox"  v-model="infoCollectThreeIsRequired">
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="source.otherInfo2">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectFourName">
 	        </div>
 	        <div class="weui-cell__ft">
 	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
+	          <input class="weui-switch" type="checkbox"  v-model="infoCollectFourIsRequired">
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="source.otherInfo3">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectFiveName">
 	        </div>
 	        <div class="weui-cell__ft">
 	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
+	          <input class="weui-switch" type="checkbox" v-model="infoCollectFiveIsRequired">
 	        </div>
 	      </div>
 	      
@@ -692,8 +869,56 @@
 var activityVue = new Vue({
   el: '#activityVue',
   data: {
+  	imgSourceLength:0,  
+  	preview_init_price:'',
+  	preview_new_price:'',
+  	
+  	//提交表单’
+  	activityStartTime:'',
+		activityEndTime:'',
+		
+		activityTypeId:'',
+		
+		cutOriginPrice:'',
+		cutLeastPrice:'',
+		cutLeastPerPerson:'',
+		cutMostPerPerson:'',   		
+		redoHours:'',
+		
+		
+		infoCollectOneName:'',
+		infoCollectOneIsRequired:'',
+		infoCollectTwoName:'',
+		infoCollectTwoIsRequired:'',
+		infoCollectThreeName:'',
+		infoCollectThreeIsRequired:'',
+		infoCollectFourName:'',
+		infoCollectFourIsRequired:'',
+		infoCollectFiveName:'',
+		infoCollectFiveIsRequired:'',
+		
+		prizeNumber:'',
+		
+		sectionOneName:'',
+		sectionTwoName:'',
+		sectionThreeName:'',
+		sectionFourName:'',
+		
+		consultPhoneNumber:'',
+  	
   	source:{
-  		headImgUrl:'',
+  		banner:{
+  			headId:'',
+  			headImgUrl:'',
+  		},
+  		prizeList:[]
+  	},
+  	/*source:{
+  		banner:{
+  			headId:'',
+  			headImgUrl:'',
+  		},
+  		
   		
   		setting:{
   			value1:'2017-09-21 00:00',
@@ -738,7 +963,7 @@ var activityVue = new Vue({
   		otherInfo1:'',
   		otherInfo2:'',
   		otherInfo3:'',
-  	},
+  	},*/
   	curSourceId:'',
   	curSourceIndex:'',
     curSourceType:'',
@@ -752,15 +977,23 @@ var activityVue = new Vue({
 				var data = this.info;
     },
     publishActivity:function(){
-    	var data = {
+    	var data = this.$data;
+    	data.sectionOneArrayIndex=sectionSourceIndex.section_2;
+			data.sectionTwoArrayIndex=sectionSourceIndex.section_3;
+			data.sectionThreeArrayIndex=sectionSourceIndex.section_4;
+			data.sectionFourArrayIndex =sectionSourceIndex.section_5;
+			debugger;
+			activity.sumbit(data)
+/*    	var data = {
     		activityStartTime:'',
     		activityEndTime:'',
+    		
     		activityTypeId:'',
     		
     		cutOriginPrice:'',
     		cutLeastPrice:'',
     		cutLeastPerPerson:'',
-    		cutMostPerPerson:'',
+    		cutMostPerPerson:'',   		
     		redoHours:'',
     		
     		
@@ -788,22 +1021,32 @@ var activityVue = new Vue({
     		sectionTwoArrayIndex:'',
     		sectionThreeArrayIndex:'',
     		sectionFourArrayIndex :'',
-    	}
+    	}*/
     },
     switchMode:function(){
+    	
+    	$("#section_top").toggleClass("preview");
+    	
+    	$("#section_1").toggleClass("preview");
+    	
     	$(".module .content .source").toggleClass("preview");
     	$(".module .content .source .hand-trigger").toggleClass("preview");
     	$(".upload-panel").toggleClass("preview");
     },
-    refreshRelativeValues: function (value) {
-    	
+    refreshRelativeValues: function (name,value) {
+    	this[name] = value;
     	//this.$set(this.source.setting.value4,value-1);
     	//this.$set(this.source.setting.value5,((value-1)*0.5).toFixed(0));
     },
+    initCountDown: function (value) {
+    	this.$nextTick(function(){
+    		activity.renderCountDown(value)
+			})
+    },
     editSourceItem: function (source) {
     	this.curSourceId = source.id;
-    	this.curSourceIndex = source.index;
-    	this.curSourceType = source.type;
+    	//this.curSourceIndex = source.index;
+    	//this.curSourceType = source.type;
     	 $("#curSourceId").val("#"+source.id);
     },
     popupSourceHandle: function (handleType,handleName,sourceType,sectionType) {
@@ -816,12 +1059,15 @@ var activityVue = new Vue({
     		
     		    		
     		
-    		if($.inArray(handleType, [1,2,3])!=-1){
-    			$("#handleType").val('instead');
+    		/*if($.inArray(handleType, [1,2,3])!=-1){
+    			$("#handleType").val('instead');   			
     		}
+    		
     		if($.inArray(handleType, [4,5,6])!=-1){
     			$("#handleType").val('add');
-    		}
+    		}*/
+				//$("#handleType").val(handleName);
+
 
     		if($.inArray(handleType, [1,3,4,6])!=-1){
     			$("#uploadImg").popup();
@@ -836,18 +1082,21 @@ var activityVue = new Vue({
 				if(handleType == 7){
 					$("#"+this.curSourceId).remove();
 					
-					$("#handleType").val('clear');
+					$("#curSourceId").val('');
 					
-					request.postData({
-            url: urlConfig.registerUrl,
-            param: ''
-	        }).then(function(data) {
-	        	
-	        	
-	
-	        }, function(err) {
-	            console.log(err);
-	        });
+					if(sourceType=="img"){
+	    	 		activity.sectionSourceIndex[sectionType].splice(activity.sectionSourceIndex[sectionType].indexOf(curSourceId),1);
+	    	 		
+	    	 	}
+					if(sourceType=="txt"){
+						activity.sectionTxtLength[sectionType]--;
+	    	 		activity.sectionTxtLength[sectionType].splice(activity.sectionTxtLength[sectionType].indexOf(curSourceId),1);
+	    	 		
+	    	 		activity.refreshAllTxtId(sectionType);
+	    	 	}
+					
+					alert(activity.sectionSourceIndex[sectionType]);
+
 				}
 				
 			})
@@ -857,11 +1106,17 @@ var activityVue = new Vue({
     	debugger
     	 $("#handleName").val(handleName);
     	 $("#sourceType").val(sourceType);
-    	 $("#sectionType").val(sectionType);
+    	 $("#sectionType").val(sectionType||$("#sectionType").val());
     	 
     	 if(handleType=="add"){
     	 		$("#curSourceId").val('');
     	 }
+    	 
+    	 
+			/*if($.inArray(sectionType, activity.hasSourceSection)!=-1){
+				
+			}*/
+    	 
     	 
     },
   }
@@ -869,6 +1124,20 @@ var activityVue = new Vue({
 	    	
     	
     	var activity = {
+    		sectionTxtLength:{
+    			section_2:1,
+	    		section_3:1,
+	    		section_4:1,
+	    		section_5:1,
+    		},
+    		hasSourceSection:['#section_2','#section_3','#section_4','#section_5'],
+    		sectionSourceIndex:{
+    			section_2:[],
+	    		section_3:[],
+	    		section_4:[],
+	    		section_5:[],
+    		},
+
     		tem:{
 						img:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div></div>",
 						txt:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p>#content</p></div></div>",
@@ -877,21 +1146,65 @@ var activityVue = new Vue({
 				VARIABLE_NAME_MAP:{
 					
 				},
+				sourceTypeMap:{
+    			
+    		},
+    		renderCountDown:function(value){
+    			var time = value.split(" ")[1];
+	    	  var dateTime = value.split(" ")[0];
+		    	dateTimes = dateTime.split("-");
+		    	dateTime = dateTimes[1]+"/"+dateTimes[2]+"/"+dateTimes[0]+" "+time + ":00";
+				  $('.countdown').downCount({
+	            date: dateTime,
+	            offset: +10
+	        }, function () {
+	            alert('倒计时结束!');
+	        });
+    		},
+    		refreshAllTxtId:function(sectionType){
+    			 	var  indexs = this.sectionSourceIndex[sectionType];
+    			 	var newIndexs = [];
+    			 	indexs.forEach(function(o,index){
+    			 		var obj = '';
+    			 		index++;
+    			 		 if(o.split("_")[1].substr(0,3) == 'txt'){
+    			 		 	     obj = sectionType+"_txt"+index;
+    			 		 }
+    			 		 $("#").attr("id",obj);
+    			 		 newIndexs.push(obj);
+    			 	})
+    		},
     		init:function(){
     			 $("#startTime").datetimePicker();
     			 $("#endTime").datetimePicker();
     			 
-    			 $('#bottomPrice').slider(function (percent) {
-				     
+         //activityVue.initCountDown();
+    			 
+    			 /*$('#bottomPrice').slider(function (percent) {
+				     	activityVue.preview_new_price = percent
 				  })
     			 $('#perCutMax').slider(function (percent) {
 				     
 				  })
     			 $('#perCutMin').slider(function (percent) {
 				     
-				  })
+				  })*/
     			 
     		},
+    		sumbit:function (param) {    	  	
+
+					 request.postData({
+		            url: urlConfig.loginUrl,
+		            param: param
+		        }).then(function(data) {
+		        	
+		        	location.href = urlConfig.toCenterUrl;
+		
+		        }, function(err) {
+		            console.log(err);
+		        });
+					
+		    },
     		uploadImg:function(){
     			debugger;
     			var urlParam = "?"+'unique=pic1';
@@ -904,8 +1217,34 @@ var activityVue = new Vue({
     		editSourceItem:function () {
     			$("#sourceHandle").popup();
     		},
-    		sourceTypeMap:{
+    		
+    		handleImgSourceIndex:function(addSourceIds,curSourceId,handleName,sectionType){
+    			debugger;
+    			var indexs = this.sectionSourceIndex[sectionType];
+    			 if(handleName=='add'){
+    			  	indexs.push.apply(indexs,addSourceIds);
+    			 }
+    			 if(handleName=='instead'){
+    			  	indexs.splice(indexs.indexOf(curSourceId),1,addSourceIds);
+    			 }
+					this.sectionSourceIndex[sectionType] = indexs;
+					//alert(this.sectionSourceIndex[sectionType]);
+					
+    		},
+    		handleTxtSourceIndex:function(curSourceId,handleName,sectionType){
+    			var txtId = '';
+    			var len = this.sectionTxtLength[sectionType];
+    			var indexs = this.sectionSourceIndex[sectionType];
     			
+    			 if(handleName=='add'){
+    			 		txtId = sectionType+"_txt"+len;
+    			  	indexs.push.apply(len,txtId);
+    			  	len++
+    			 }
+    			this.sectionTxtLength[sectionType] = len;
+					this.sectionSourceIndex[sectionType] = indexs;
+					return txtId;
+					
     		},
     		sureSubmitTxt:function () {
 debugger
@@ -917,6 +1256,7 @@ debugger
     			var html = $("#froalaEditorWrap .fr-element").html();
     			var dom = this.tem[st];
 					debugger;
+					d=d.replace(/#id/g,this.handleTxtSourceIndex(csId,'ht',stJqId))
 					dom=dom.replace(/#content/g,html);
 					//add
 					if(ht == 'add'){
@@ -932,6 +1272,8 @@ debugger
 					if(ht == 'instead'){				
 						$(csId).replaceWith(dom);
 					}
+					
+				
 
     		},
     		
@@ -942,44 +1284,51 @@ debugger
     			
     			var data = {}
     						data.list = [{
-				id:'pic1',
-				url:'../images/demo/upload_success_1.jpg'
-			},
-			{
-				id:'pic2',
-				url:'../images/demo/upload_success_2.jpg'
-			}]
-
-			
-			var ht = $("#handleName").val();
-			var st = $("#sourceType").val();
-			var stJqId = $("#sectionType").val();
-			var csId = $("#curSourceId").val();
-			
-			var dom = '';
-				data.list.forEach(function(o){
-					var d = _this.tem[st];
-					debugger
-					d=d.replace(/#id/g,o.id)
-					d=d.replace(/#content/g,o.url)
-					dom += d;
-				})
-			
-			//add
-			if(ht == 'add'){
-				
-				$(stJqId).append(dom);
-			}
-			
-			//insert
-			if(ht == 'insert'){				
-				$(csId).after(dom);
-			}
-			//instead
-			if(ht == 'instead'){				
-				$(csId).replaceWith(dom);
-			}
-    			
+									id:'pic1',
+									url:'../images/demo/upload_success_1.jpg'
+								}/*,
+								{
+									id:'pic2',
+									url:'../images/demo/upload_success_2.jpg'
+								}*/]
+					
+								
+								var ht = $("#handleName").val();
+								var st = $("#sourceType").val();
+								var stJqId = $("#sectionType").val();
+								var csId = $("#curSourceId").val();
+								
+								var addSourceIds = [];
+								
+								var dom = '';
+									data.list.forEach(function(o){
+										var d = _this.tem[st];
+										debugger
+										d=d.replace(/#id/g,"img"+activity.imgSourceLength)
+										d=d.replace(/#content/g,o.url)
+										dom += d;
+										addSourceIds.push(o.id);
+										activity.imgSourceLength++;
+										
+									})
+								
+								//add
+								if(ht == 'add'){
+									
+									$(stJqId).append(dom);
+									
+									
+								}
+								
+								//insert
+								if(ht == 'insert'){				
+									$(csId).after(dom);
+								}
+								//instead
+								if(ht == 'instead'){				
+									$(csId).replaceWith(dom);
+								}
+    						_this.handleImgSourceIndex(addSourceIds,csId,ht,stJqId);
     			/*request.postData({
             url: urlConfig.registerUrl,
             param: ''
@@ -990,7 +1339,8 @@ debugger
 	        }, function(err) {
 	            console.log(err);
 	        });*/
-    			debugger
+	       
+ 
     		}
     		
     	}
