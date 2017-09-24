@@ -380,8 +380,14 @@
 		</div>
 		<div class="content">
 			<div class="weui-cells">
-				<input class="weui-input" type="tel" value="活动标题" v-model="title">
 				
+				<div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
+	          <label for="">活动标题</label>
+	          <input class="weui-input" type="tel" value="活动标题" v-model="title">
+	        </div>
+	      </div>
 				
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
@@ -590,7 +596,7 @@
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
-				<div class="text add"  @click="markHandle('add','txt','#section_4')">添加描述</div>
+				<div class="text add"  data-target="#addTxt" @click="markHandle('add','txt','#section_4')">添加描述</div>
 	
 				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_4')">添加视频</div>
 			</div>
@@ -625,7 +631,7 @@
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_5')">添加图片</div>
-				<div class="text add open-popup"  @click="markHandle('add','txt','#section_5')">添加描述</div>
+				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_5')">添加描述</div>
 	
 				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_5')">添加视频</div>
 			</div>
