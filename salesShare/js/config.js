@@ -39,5 +39,6 @@ var urlConfig = {
     getEditedSourceUrl:"http://172.21.52.29:8887/getActivityCompleteDetail",
     //上传图片
     uploadImgUrl:"http://g1u8257706.iask.in/shopCut/uploadImage",
+    submitActivityUrl:"http://g1u8257706.iask.in/shopCut/submitActivity"
 };
 

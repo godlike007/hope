@@ -158,6 +158,9 @@
 .form-handle .save{
     background-color: orange;
     height: 55px;	
+        line-height: 55px;
+    font-size: 24px;
+    letter-spacing: 4px;
 }
 .form-handle a{
     color: #fff;
@@ -310,10 +313,10 @@
 
 <div  id="activityVue" class="container">
 	<div id="head_banner" class="head-banner">
-		<div v-if="source.banner.headImgUrl" class="">
-			<img :src="source.banner.headImgUrl" alt="" />
+		<div class="content">
+			<!--<img src="" alt="" />-->
 			
-					<div :id="source.banner.headId" class="source">
+					<!--<div id="" class="source">
 				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
 				</div>
@@ -324,15 +327,17 @@
 				
 			
 				
+			</div>-->
+			
+			<div class="upload-panel">
+				<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
 			</div>
 		</div>
 		
 
 		
 		
-		<div v-else class="upload-panel">
-			<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
-		</div>
+		
 	</div>
 	
 		<div id="section_top" class="module">
@@ -375,12 +380,14 @@
 		</div>
 		<div class="content">
 			<div class="weui-cells">
+				<input class="weui-input" type="tel" value="活动标题" v-model="title">
+				
 				
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
 	          <label for="">开始时间</label>
-	          <input type="text" id='startTime' v-model="activityStartTime"  @change="initCountDown(activityStartTime)"/>
+	          <input type="text" id='startTime'   @change="initCountDown(activityStartTime)"/>
 	        </div>
 	      </div>
 	      
@@ -388,7 +395,7 @@
 	        <div class="weui-cell__bd">
 	         <!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
 	         	<label for="">结束时间</label>
-	         	<input type="text" id='endTime' v-model="activityEndTime"/>
+	         	<input type="text" id='endTime'/>
 	        </div>
 	      </div>
 	      
@@ -493,7 +500,7 @@
 	        </div>
 	      </div>
 			
-			<div :id="item.id" class="source" v-for="item in source.prizeList">
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
 				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
 				</div>
@@ -507,12 +514,12 @@
 				
 			
 				
-			</div>
+			</div>-->
 			
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_2')">添加图片</div>
-				<div class="text add"  @click="markHandle('add','txt','#section_2')">添加描述</div>
+				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_2')">添加描述</div>
 
 			</div>
 		</div>	
@@ -528,7 +535,7 @@
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in source.prizeList">
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
 				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
 				</div>
@@ -544,13 +551,13 @@
 				</div>
 			
 				
-			</div>
+			</div>-->
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
-				<div class="text add"  @click="markHandle('add','txt','#section_3')">添加描述</div>
+				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_3')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#section_3')">添加视频</div>
+				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_3')">添加视频</div>
 		
 			</div>
 		</div>	
@@ -563,7 +570,7 @@
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in source.prizeList">
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
 				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
 				</div>
@@ -579,13 +586,13 @@
 				</div>
 			
 				
-			</div>
+			</div>-->
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
 				<div class="text add"  @click="markHandle('add','txt','#section_4')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#section_4')">添加视频</div>
+				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_4')">添加视频</div>
 			</div>
 		</div>	
 	</div>
@@ -598,7 +605,7 @@
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in source.prizeList">
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
 				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
 				编辑
 				</div>
@@ -614,13 +621,13 @@
 				</div>
 			
 				
-			</div>
+			</div>-->
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_5')">添加图片</div>
-				<div class="text add"  @click="markHandle('add','txt','#section_5')">添加描述</div>
+				<div class="text add open-popup"  @click="markHandle('add','txt','#section_5')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadImg" @click="markHandle('add','video','#section_5')">添加视频</div>
+				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_5')">添加视频</div>
 			</div>
 		</div>	
 	</div>
@@ -721,7 +728,7 @@
 	      </div>
 		</div>
 		<div class="save" @click="publishActivity">
-			<a href="">发布活动 </a>
+			发布活动 
 		</div>
 	</div>
 	
@@ -820,6 +827,23 @@
   </div>
 </div>
 
+<div id="uploadVideo" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    
+    <!--<div id="uploadVideoTool" class="demo"></div>-->
+    
+    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
+    图片<input onclick="activity.uploadImg()" type="file" name="file"/>
+    <input type="submit" value="上传"/ >
+</form>
+    
+    
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitVideo()">确认提交</a>
+  </div>
+</div>
+
+
 <div id="addTxt" class="weui-popup__container">
   <div class="weui-popup__overlay"></div>
   <div class="weui-popup__modal">
@@ -869,15 +893,17 @@
 var activityVue = new Vue({
   el: '#activityVue',
   data: {
-  	imgSourceLength:0,  
+  	
   	preview_init_price:'',
   	preview_new_price:'',
   	
   	//提交表单’
-  	activityStartTime:'',
-		activityEndTime:'',
+  	//activityStartTime:'',
+		//activityEndTime:'',
+		shopUserId:15,
+		activityTypeId:2,
 		
-		activityTypeId:'',
+		title:'',
 		
 		cutOriginPrice:'',
 		cutLeastPrice:'',
@@ -906,13 +932,13 @@ var activityVue = new Vue({
 		
 		consultPhoneNumber:'',
   	
-  	source:{
+  	/*source:{
   		banner:{
   			headId:'',
   			headImgUrl:'',
   		},
   		prizeList:[]
-  	},
+  	},*/
   	/*source:{
   		banner:{
   			headId:'',
@@ -967,6 +993,7 @@ var activityVue = new Vue({
   	curSourceId:'',
   	curSourceIndex:'',
     curSourceType:'',
+    curSectionType:'',
     handleType:'',
   },
  methods: {
@@ -977,13 +1004,20 @@ var activityVue = new Vue({
 				var data = this.info;
     },
     publishActivity:function(){
+    	debugger;
     	var data = this.$data;
-    	data.sectionOneArrayIndex=sectionSourceIndex.section_2;
-			data.sectionTwoArrayIndex=sectionSourceIndex.section_3;
-			data.sectionThreeArrayIndex=sectionSourceIndex.section_4;
-			data.sectionFourArrayIndex =sectionSourceIndex.section_5;
-			debugger;
-			activity.sumbit(data)
+    	//data.headId = $("#head_banner .source").attr("id");
+    	data.headId = 1;
+    	data.activityStartTime =  $("#startTime").val();
+    	data.activityEndTime = $("#endTime").val();
+    	data.sectionOneArrayIndex=activity.sectionSourceIndex['#section_2'];
+			data.sectionTwoArrayIndex=activity.sectionSourceIndex['#section_3'];
+			data.sectionThreeArrayIndex=activity.sectionSourceIndex['#section_4'];
+			data.sectionFourArrayIndex =activity.sectionSourceIndex['#section_5'];
+			
+			this.$nextTick(function(){
+    		activity.sumbit(data);
+			})
 /*    	var data = {
     		activityStartTime:'',
     		activityEndTime:'',
@@ -1043,12 +1077,7 @@ var activityVue = new Vue({
     		activity.renderCountDown(value)
 			})
     },
-    editSourceItem: function (source) {
-    	this.curSourceId = source.id;
-    	//this.curSourceIndex = source.index;
-    	//this.curSourceType = source.type;
-    	 $("#curSourceId").val("#"+source.id);
-    },
+    
     popupSourceHandle: function (handleType,handleName,sourceType,sectionType) {
     	debugger
     	this.markHandle(handleName,sourceType,sectionType);
@@ -1080,22 +1109,28 @@ var activityVue = new Vue({
 
     		}
 				if(handleType == 7){
-					$("#"+this.curSourceId).remove();
+					debugger;
+					var id = $("#curSourceId").val();
+					$("#"+$("#curSourceId").val()).remove();
 					
 					$("#curSourceId").val('');
-					
-					if(sourceType=="img"){
-	    	 		activity.sectionSourceIndex[sectionType].splice(activity.sectionSourceIndex[sectionType].indexOf(curSourceId),1);
+					var st = this.curSourceType;
+					var sty =this.curSectionType;
+					if(st=="img"){
+	    	 		activity.sectionSourceIndex[sty].splice(activity.sectionSourceIndex[sty].indexOf(id),1);
 	    	 		
 	    	 	}
-					if(sourceType=="txt"){
-						activity.sectionTxtLength[sectionType]--;
-	    	 		activity.sectionTxtLength[sectionType].splice(activity.sectionTxtLength[sectionType].indexOf(curSourceId),1);
+					if(st=="txt"){
+						activity.sectionTxtLength[sty]--;
+	    	 		activity.sectionTxtLength[sty].splice(activity.sectionTxtLength[sty].indexOf(id),1);
 	    	 		
 	    	 		activity.refreshAllTxtId(sectionType);
 	    	 	}
-					
-					alert(activity.sectionSourceIndex[sectionType]);
+					if(st=="video"){
+	    	 		activity.sectionSourceIndex[sty].splice(activity.sectionSourceIndex[sty].indexOf(id),1);
+	    	 		
+	    	 	}
+					alert(activity.sectionSourceIndex[sty]);
 
 				}
 				
@@ -1104,15 +1139,19 @@ var activityVue = new Vue({
     },
     markHandle: function (handleName,sourceType,sectionType) {
     	debugger
+    	this.curSourceType = $("#sourceType").val();
+    	this.curSectionType =  $("#sectionType").val();
     	 $("#handleName").val(handleName);
     	 $("#sourceType").val(sourceType);
     	 $("#sectionType").val(sectionType||$("#sectionType").val());
     	 
-    	 if(handleType=="add"){
+    	 if(handleName=="add"){
     	 		$("#curSourceId").val('');
     	 }
     	 
-    	 
+    	 if(sourceType=="txt"){
+    	 		$("#txtEditTool").load("textEditer.html");
+    	 }
 			/*if($.inArray(sectionType, activity.hasSourceSection)!=-1){
 				
 			}*/
@@ -1124,24 +1163,26 @@ var activityVue = new Vue({
 	    	
     	
     	var activity = {
+    		imgSourceLength:0,  
+    		videoSourceLength:0,
     		sectionTxtLength:{
-    			section_2:1,
-	    		section_3:1,
-	    		section_4:1,
-	    		section_5:1,
+    			'#section_2':1,
+	    		'#section_3':1,
+	    		'#section_4':1,
+	    		'#section_5':1,
     		},
     		hasSourceSection:['#section_2','#section_3','#section_4','#section_5'],
     		sectionSourceIndex:{
-    			section_2:[],
-	    		section_3:[],
-	    		section_4:[],
-	    		section_5:[],
+    			'#section_2':[],
+	    		'#section_3':[],
+	    		'#section_4':[],
+	    		'#section_5':[],
     		},
 
     		tem:{
-						img:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div></div>",
-						txt:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p>#content</p></div></div>",
-						video:"<div id=\"#id\" class=\"source\"><div @click=\"editSourceItem(item)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"video\"><video src=\"#content\"></video></div></div>",
+						img:"<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div></div>",
+						txt:"<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p>#content</p></div></div>",
+						video:"<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"video\"><video src=\"#content\"></video></div></div>",
 					},
 				VARIABLE_NAME_MAP:{
 					
@@ -1149,6 +1190,13 @@ var activityVue = new Vue({
 				sourceTypeMap:{
     			
     		},
+    		editSourceItem: function (o) {
+
+		    	//this.curSourceIndex = source.index;
+		    	//this.curSourceType = source.type;
+		    	debugger
+		    	 $("#curSourceId").val($(o).attr("id"));
+		    },
     		renderCountDown:function(value){
     			var time = value.split(" ")[1];
 	    	  var dateTime = value.split(" ")[0];
@@ -1192,13 +1240,13 @@ var activityVue = new Vue({
     			 
     		},
     		sumbit:function (param) {    	  	
-
+debugger;
 					 request.postData({
-		            url: urlConfig.loginUrl,
+		            url: urlConfig.submitActivityUrl,
 		            param: param
 		        }).then(function(data) {
-		        	
-		        	location.href = urlConfig.toCenterUrl;
+		        	debugger;
+		        	//location.href = urlConfig.toCenterUrl;
 		
 		        }, function(err) {
 		            console.log(err);
@@ -1214,13 +1262,13 @@ var activityVue = new Vue({
 					
 					$('form').attr('action',$('form').attr('action')+urlParam);
     		},
-    		editSourceItem:function () {
+    		/*editSourceItem:function () {
     			$("#sourceHandle").popup();
-    		},
+    		},*/
     		
     		handleImgSourceIndex:function(addSourceIds,curSourceId,handleName,sectionType){
-    			debugger;
-    			var indexs = this.sectionSourceIndex[sectionType];
+    			
+    			var indexs = this.sectionSourceIndex[sectionType]||[];
     			 if(handleName=='add'){
     			  	indexs.push.apply(indexs,addSourceIds);
     			 }
@@ -1231,15 +1279,17 @@ var activityVue = new Vue({
 					//alert(this.sectionSourceIndex[sectionType]);
 					
     		},
+
     		handleTxtSourceIndex:function(curSourceId,handleName,sectionType){
+    			
     			var txtId = '';
     			var len = this.sectionTxtLength[sectionType];
-    			var indexs = this.sectionSourceIndex[sectionType];
+    			var indexs = this.sectionSourceIndex[sectionType]||[];
     			
-    			 if(handleName=='add'){
+    			 if(handleName=='add'||curSourceId.substr(0,7)!='section'){
     			 		txtId = sectionType+"_txt"+len;
-    			  	indexs.push.apply(len,txtId);
-    			  	len++
+    			  	indexs.push(txtId);
+    			  	len++;
     			 }
     			this.sectionTxtLength[sectionType] = len;
 					this.sectionSourceIndex[sectionType] = indexs;
@@ -1247,7 +1297,7 @@ var activityVue = new Vue({
 					
     		},
     		sureSubmitTxt:function () {
-debugger
+					debugger;
     			var ht = $("#handleName").val();
 					var st = $("#sourceType").val();
 					var stJqId = $("#sectionType").val();
@@ -1255,22 +1305,23 @@ debugger
 					
     			var html = $("#froalaEditorWrap .fr-element").html();
     			var dom = this.tem[st];
-					debugger;
-					d=d.replace(/#id/g,this.handleTxtSourceIndex(csId,'ht',stJqId))
+
+					dom=dom.replace(/#id/g,this.handleTxtSourceIndex(csId,ht,stJqId))
 					dom=dom.replace(/#content/g,html);
 					//add
+
 					if(ht == 'add'){
 						
-						$(stJqId).append(dom);
+						$(stJqId).find(".content").append(dom);
 					}
 					
 					//insert
 					if(ht == 'insert'){				
-						$(csId).after(dom);
+						$("#"+csId).after(dom);
 					}
 					//instead
 					if(ht == 'instead'){				
-						$(csId).replaceWith(dom);
+						$("#"+csId).replaceWith(dom);
 					}
 					
 				
@@ -1278,7 +1329,72 @@ debugger
     		},
     		
     		
-    		sureSubmitImg:function () {
+    		sureSubmitVideo:function () {
+    			var _this = this;
+	
+    			
+    			var data = {}
+    						data.list = [{
+									id:'pic1',
+									url:'../demo/source/1.mp4'
+								}/*,
+								{
+									id:'pic2',
+									url:'../images/demo/upload_success_2.jpg'
+								}*/]
+					
+								
+								var ht = $("#handleName").val();
+								var st = $("#sourceType").val();
+								var stJqId = $("#sectionType").val();
+								var csId = $("#curSourceId").val();
+								
+								var addSourceIds = [];
+								
+								var dom = '';
+									data.list.forEach(function(o){
+										var d = _this.tem[st];
+										debugger
+										var newId = "video"+activity.videoSourceLength;
+										d=d.replace(/#id/g,newId)
+										d=d.replace(/#content/g,o.url)
+										dom += d;
+										addSourceIds.push(newId);
+										activity.videoSourceLength++;
+										
+									})
+								
+								//add
+								if(ht == 'add'){
+									
+									$(stJqId).find(".content").append(dom);
+									
+									
+								}
+								
+								//insert
+								if(ht == 'insert'){				
+									$("#"+csId).after(dom);
+								}
+								//instead
+								if(ht == 'instead'){				
+									$("#"+csId).replaceWith(dom);
+								}
+    						_this.handleImgSourceIndex(addSourceIds,csId,ht,stJqId);
+    			/*request.postData({
+            url: urlConfig.registerUrl,
+            param: ''
+	        }).then(function(data) {
+	        	
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });*/
+	       
+ 
+    		},
+    	sureSubmitImg:function () {
     			var _this = this;
 	
     			
@@ -1304,10 +1420,11 @@ debugger
 									data.list.forEach(function(o){
 										var d = _this.tem[st];
 										debugger
-										d=d.replace(/#id/g,"img"+activity.imgSourceLength)
+										var newId = "img"+activity.imgSourceLength;
+										d=d.replace(/#id/g,newId)
 										d=d.replace(/#content/g,o.url)
 										dom += d;
-										addSourceIds.push(o.id);
+										addSourceIds.push(newId);
 										activity.imgSourceLength++;
 										
 									})
@@ -1315,18 +1432,18 @@ debugger
 								//add
 								if(ht == 'add'){
 									
-									$(stJqId).append(dom);
+									$(stJqId).find(".content").append(dom);
 									
 									
 								}
 								
 								//insert
 								if(ht == 'insert'){				
-									$(csId).after(dom);
+									$("#"+csId).after(dom);
 								}
 								//instead
 								if(ht == 'instead'){				
-									$(csId).replaceWith(dom);
+									$("#"+csId).replaceWith(dom);
 								}
     						_this.handleImgSourceIndex(addSourceIds,csId,ht,stJqId);
     			/*request.postData({
