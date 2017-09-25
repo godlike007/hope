@@ -126,7 +126,7 @@ background-color: #fff;
     </div>
     
     <div class="weui_grids">
-    				<a href="javascript:;" class="weui_grid js_grid">
+    				<a href="add_activity.html" class="weui_grid js_grid">
                 <div class="weui_grid_icon">
                     <img src="../images/icon_nav_button.png" alt=""/>
                 </div>
@@ -151,7 +151,7 @@ background-color: #fff;
                 </p>
             </a>
     	
-            <a href="javascript:;" class="weui_grid js_grid">
+            <a href="progress.html" class="weui_grid js_grid">
                 <div class="weui_grid_icon">
                     <img src="../images/icon_nav_button.png" alt="">
                 </div>
@@ -159,7 +159,7 @@ background-color: #fff;
                     我的活动
                 </p>
             </a>
-            <a href="javascript:;" class="weui_grid js_grid">
+            <a href="progress.html" class="weui_grid js_grid">
                 <div class="weui_grid_icon">
                     <img src="../images/icon_nav_cell.png" alt="">
                 </div>
@@ -167,7 +167,7 @@ background-color: #fff;
                       我的传单       
                 </p>
             </a>
-            <a href="javascript:;" class="weui_grid js_grid">
+            <a href="progress.html" class="weui_grid js_grid">
                 <div class="weui_grid_icon">
                     <img src="../images/icon_nav_toast.png" alt="">
                 </div>
@@ -284,11 +284,7 @@ background-color: #fff;
     	var infoVue = new Vue({
 				el:'#infoVue',
 				data:{
-			      info:{
-			      	//value1:'../images/demo/headshot.jpg',
-			      	//value2:12343245,
-			      	//value3:'2017年12月3日',
-			      },                             //概况数据					                                            //房屋分析选中我的分析
+			      info:{},                             //概况数据					                                            //房屋分析选中我的分析
 				},
 				methods:{
 				    getCenterInfo:function(){
@@ -313,6 +309,7 @@ var info = {
         }).then(function(data) {
         	infoVue.info = data
 						debugger;
+						
 						
         }, function(err) {
             console.log(err);

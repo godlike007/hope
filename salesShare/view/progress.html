@@ -257,6 +257,9 @@ var  progressVue = new Vue({
     }
   }
 })	  	
+
+
+
     	
  var progress = {
 		init:function () {
@@ -273,6 +276,12 @@ var  progressVue = new Vue({
         }).then(function(data) {
         	progressVue.activityList = data.entities;
 						debugger;
+						progressVue.$nextTick(function(){
+							$("section").click(function(){
+								location.href = 'view_activity.html';
+							})
+						})
+						
 						
         }, function(err) {
             console.log(err);

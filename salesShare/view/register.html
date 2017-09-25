@@ -90,7 +90,7 @@
     </label>
 
     <div class="weui-btn-area">
-      <a class="weui-btn weui-btn_primary" href="javascript:" id="showTooltips" @click="submit">提交注册</a>
+      <a class="weui-btn weui-btn_primary" href="personalInfo.html" id="showTooltips" @click="submit">提交注册</a>
     </div>
 </div>
 
@@ -148,13 +148,13 @@ var register = {
     	
     },
     sumbit:function (param) {
-    	
-    	
-
+    	location.href = urlConfig.toCenterUrl;
 			 request.postData({
             url: urlConfig.registerUrl,
             param: param
         }).then(function(data) {
+        	
+        	
 
         }, function(err) {
             console.log(err);

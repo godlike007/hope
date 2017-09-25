@@ -211,7 +211,7 @@
     
     
 
-    <script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
+<script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
   <body ontouchstart>
 
 
@@ -286,7 +286,7 @@
 	
 	
 	<!--奖品描述 1-1-->
-	<div id="section_2" class="module">
+	<div id="section_2" class="module" v-show="section2.length>0">
 		<div class="title">
 			{{info.sectionOneName}}
 		</div>
@@ -300,7 +300,7 @@
 	        </div>
 	      </div>
 			
-			<div :id="item.id" class="source" v-for="item in section1">
+			<div :id="item.id" class="source" v-for="item in section2">
 
 				
 				<div class="img" v-show="item.type==1">
@@ -322,36 +322,9 @@
 
 	
 	<!--活动规则 1-1-->
-	<div id="section_3" class="module">
+	<div id="section_3" class="module" v-show="section3.length>0">
 		<div class="title">
 			{{info.sectionTwoName}}
-		</div>
-		<div class="content">
-			
-			<div :id="item.id" class="source" v-for="item in section2">
-
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="" :src="item.value" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="" :src="item.value"></video>
-				</div>
-			
-				
-			</div>
-			
-
-		</div>	
-	</div>
-	
-	<!--领奖信息 1-1-->
-	<div id="section_4" class="module">
-		<div class="title">
-			{{info.sectionThreeName}}
 		</div>
 		<div class="content">
 			
@@ -375,15 +348,42 @@
 		</div>	
 	</div>
 	
+	<!--领奖信息 1-1-->
+	<div id="section_4" class="module" v-show="section4.length>0">
+		<div class="title">
+			{{info.sectionThreeName}}
+		</div>
+		<div class="content">
+			
+			<div :id="item.id" class="source" v-for="item in section4">
+
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="">{{item.value}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="" :src="item.value"></video>
+				</div>
+			
+				
+			</div>
+			
+
+		</div>	
+	</div>
+	
 	
 	<!--机构介绍 1-1-->
-	<div id="section_5" class="module">
+	<div id="section_5" class="module" v-show="section5.length>0">
 		<div class="title">
 			{{info.sectionFourName}}
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section4">
+			<div :id="item.id" class="source" v-for="item in section5">
 
 				
 				<div class="img" v-show="item.type==1">
@@ -430,17 +430,54 @@
 		</div>	
 	</div>
 	
-	<div id="userInfo" class="customer-info">
-		 <input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectOneName}}" v-model="name">
+	<div id="userInfo" class="customer-info hide">
+		
+		<div class="weui-cells">
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeOne">
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeTwo">
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeThree">
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeFour">
+				</div>
+			</div>
+
+			<div class="weui-cell">
+				<div class="weui-cell__bd">
+					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeFive">
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		 <!--<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="infoAttributeOne">
 		 <br>
-		 <input v-show="info.infoCollectTwoName!=''" class="weui-input {{info.infoCollectTwoIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectTwoName}}" v-model="phone">
+		 <input v-show="info.infoCollectTwoName!=''" class="weui-input {{info.infoCollectTwoIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectTwoName">
 		 <br>
-		 <input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectThreeIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectThreeName}}" v-model="name">
+		 <input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectThreeIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectThreeName">
 		 <br>
-		 <input v-show="info.infoCollectFourName!=''" class="weui-input {{info.infoCollectFourIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectFourName}}" v-model="phone">
+		 <input v-show="info.infoCollectFourName!=''" class="weui-input {{info.infoCollectFourIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectFourName">
 		 <br>
-		 <input v-show="info.infoCollectFiveName!=''" class="weui-input {{info.infoCollectFiveIsRequired==2?'must-fill':''}}" type="text" placeholder="{{info.infoCollectFiveName}}" v-model="phone">
-		<br>		  
+		 <input v-show="info.infoCollectFiveName!=''" class="weui-input {{info.infoCollectFiveIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectFiveName">
+		<br>		  -->
 	</div>
 
 
@@ -502,12 +539,18 @@ var activityVue = new Vue({
 			
 			consultPhoneNumber:'',
 		},
+		userInfo:{
+			infoAttributeOne:'',
+			infoAttributeTwo:'',
+			infoAttributeThree:'',
+			infoAttributeFour:'',
+			infoAttributeFive:'',
+		},
 		
-		
-		section1:[],
 		section2:[],
 		section3:[],
 		section4:[],
+		section5:[],
 		rankList:[]
 
   },
@@ -530,7 +573,7 @@ var activityVue = new Vue({
 					 });
     			
     			  this.request({
-    			  	vueName:'section1',
+    			  	vueName:'section2',
     			  	 dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
@@ -541,18 +584,6 @@ var activityVue = new Vue({
     			   }
     			  	
     			  
-					 });
-					 
-					 this.request({
-    			  vueName:'section2',
-    			  dataName:'content',
-    			 url:urlConfig.getSectionContentyUrl,
-    			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
-						 	section:3
-    			   }
 					 });
 					 
 					 this.request({
@@ -569,6 +600,18 @@ var activityVue = new Vue({
 					 
 					 this.request({
     			  vueName:'section4',
+    			  dataName:'content',
+    			 url:urlConfig.getSectionContentyUrl,
+    			   param:{
+    			   	shopUserActivityId:30,
+	    			  activityTypeId:2,
+						 	shopUserId:'15',
+						 	section:3
+    			   }
+					 });
+					 
+					 this.request({
+    			  vueName:'section5',
     			  dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
@@ -619,17 +662,19 @@ var activityVue = new Vue({
 	        });
 		    },
 		    join:function(){
+		    	debugger;
+		    	$("#userInfo").removeClass("hide");
 		    	$.modal({
-					  title: "",
-					  text:$("#userInfo").prop("ourterHTML"),
+					  title: "用户注册",
+					  text:$("#userInfo").prop("outerHTML"),
 					  buttons: [
 					    { text: "提交", onClick: function(){ 
 					    	
 					    	var test = {
-					    		 infoAttributeOne:'dasfdas',
-					    		 infoAttributeTwo:'dasfdas',
-					    		 infoAttributeThree:'dasfdas',
-					    		 infoAttributeFour:'dasfdas',
+					    		 infoAttributeOne:'王黎明',
+					    		 infoAttributeTwo:'13776064372',
+					    		 //infoAttributeThree:'dasfdas',
+					    		 //infoAttributeFour:'dasfdas',
 					    		 shopUserActivityId:30,
 					    	}
 					    		
