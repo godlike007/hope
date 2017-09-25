@@ -21,28 +21,31 @@
 		width: 100%;
 	}
 	.container{
-		background-color: antiquewhite;
+    background-color: #70b92c;
 		margin-bottom: 110px;
     padding-bottom: 20px;
 	}
 .head-banner{
-	    background-color: #fff;
-    padding: 10px;
+    background-color: #70b92c;
 }	
+.head-banner .title{
+	text-align: center;
+	color: #fff;
+}
 .module{
 	
 }
 .module .title{
-	  text-align: center;
+    text-align: center;
     height: 30px;
     margin: 10px auto;
-    background-color: #26d624;
+    background-color: #f3d899;
     width: 30%;
-    color: #fff;
+    color: #e13f5e;
     line-height: 30px;
 }
 .module .content{
-    width: 90%;
+		width: 90%;
     margin: auto;
     background: #fff;
     padding: 5px;
@@ -184,6 +187,12 @@
 	  display: flex;
     justify-content: space-around;
 }
+#section_top .countdown{
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
 #section_top .join{
     width: 40%;
     text-align: center;
@@ -223,7 +232,7 @@
 <div  id="activityVue" class="container">
 	<div id="head_banner" class="head-banner">
 		<div class="content">
-		<img src="" alt="" />
+		<img :src="head_pic" alt="" />
 			
 					<!--<div id="" class="source">
 				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
@@ -286,7 +295,7 @@
 	
 	
 	<!--奖品描述 1-1-->
-	<div id="section_2" class="module" v-show="section2.length>0">
+	<div id="section_2" class="module" >
 		<div class="title">
 			{{info.sectionOneName}}
 		</div>
@@ -322,7 +331,7 @@
 
 	
 	<!--活动规则 1-1-->
-	<div id="section_3" class="module" v-show="section3.length>0">
+	<div id="section_3" class="module" >
 		<div class="title">
 			{{info.sectionTwoName}}
 		</div>
@@ -349,7 +358,7 @@
 	</div>
 	
 	<!--领奖信息 1-1-->
-	<div id="section_4" class="module" v-show="section4.length>0">
+	<div id="section_4" class="module" >
 		<div class="title">
 			{{info.sectionThreeName}}
 		</div>
@@ -377,7 +386,7 @@
 	
 	
 	<!--机构介绍 1-1-->
-	<div id="section_5" class="module" v-show="section5.length>0">
+	<div id="section_5" class="module" >
 		<div class="title">
 			{{info.sectionFourName}}
 		</div>
@@ -505,7 +514,7 @@
 var activityVue = new Vue({
   el: '#activityVue',
   data: {
-  	
+  	head_pic:'../images/demo/view_head.jpg',
 
 		activityTypeId:2,
 		//
@@ -663,12 +672,13 @@ var activityVue = new Vue({
 		    },
 		    join:function(){
 		    	debugger;
-		    	$("#userInfo").removeClass("hide");
+		    	
 		    	$.modal({
 					  title: "用户注册",
 					  text:$("#userInfo").prop("outerHTML"),
 					  buttons: [
 					    { text: "提交", onClick: function(){ 
+					    	
 					    	
 					    	var test = {
 					    		 infoAttributeOne:'王黎明',
@@ -700,6 +710,8 @@ var activityVue = new Vue({
 					    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
 					  ]
 					});
+					
+					$(".customer-info").eq(1).removeClass("hide");
 		    },
 		    call:function(phone){
 		    	$.actions({
