@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<link rel="stylesheet" href="../css/framework/weui/weui.css">
+<link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
+<link rel="stylesheet" href="../css/layouts/common.css">
+
+<link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
+
+<style type="text/css">
+	video,
+	img{
+		width: 100%;
+	}
+	.container{
+		background-color: antiquewhite;
+		margin-bottom: 110px;
+    padding-bottom: 20px;
+	}
+.head-banner{
+	    background-color: #fff;
+    padding: 10px;
+}	
+.module{
+	
+}
+.module .title{
+	  text-align: center;
+    height: 30px;
+    margin: 10px auto;
+    background-color: #26d624;
+    width: 30%;
+    color: #fff;
+    line-height: 30px;
+}
+.module .content{
+    width: 90%;
+    margin: auto;
+    background: #fff;
+    padding: 5px;
+}
+.upload-panel{
+    width: 90%;
+    height: 70px;
+    border: 2px dashed #ddd;
+    margin: 4% auto;
+    text-align: center;
+    line-height: 70px;
+    display: flex;
+    justify-content: space-around;
+    color: #8e8e8e;
+}
+.upload-panel.preview{
+    display: none;
+}
+
+.upload-panel .clear,
+.upload-panel .video,
+.upload-panel .image,
+.upload-panel .text{
+		display: inline-block;
+    /* margin-right: 1%; */
+    border: 1px solid #ddd;
+    height: 40px;
+    margin: auto;
+    line-height: 40px;
+    padding: 0px 6px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.upload-panel .clear,
+.upload-panel .edit{
+    display: none;
+}
+
+.module .upload-panel .image{
+	
+}
+
+.module .content .source{
+    padding: 4%;
+    border: 1px dashed #ccc;
+    margin: 3%;	
+}
+.module .content .source.preview{
+    padding: 0%;
+    border: none;
+    margin: 3%;	
+}
+.source .hand-trigger{
+		position: absolute;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.6;
+    margin-left: 62%;
+    margin-top: -3%;
+    /* float: right; */
+    /* text-align: right; */
+    padding: 2% 5%;
+    /* border-radius: 0px 0px 0px 90px; */	
+}
+.source .hand-trigger.preview{
+		display: none;
+}
+
+
+.source .img{
+	
+}
+.source .txt{
+	
+}
+.source .video{
+	
+}
+.form-handle{
+    position: fixed;
+    bottom: -1px;
+    width: 100%;
+    /* background-color: #3d4145; */
+    text-align: center;
+    /* opacity: .8; */
+    color: #fff;	
+}
+.form-handle .mode{
+    /* position: absolute; */
+    /* color: #fff; */
+    opacity: .85;
+    background-color: #3d4145;	
+}
+.form-handle .mode .weui-cell_switch{
+    padding-top: 12px;
+}
+.form-handle .mode .weui-cell__ft{
+ 		text-align: center;
+    margin: auto;
+    /* width: 100%; */
+    line-height: 32px;
+}
+.form-handle .mode .weui-cell__ft label{
+ 		color: #fff;
+    vertical-align: top;
+    /* width: 202px; */
+    margin:auto 20px;
+    font-size: 20px;
+}
+
+
+
+.form-handle .save{
+    background-color: orange;
+    height: 55px;	
+        line-height: 55px;
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+.form-handle a{
+    color: #fff;
+    font-size: 30px;
+    letter-spacing: 6px;	
+}
+
+
+#section_1.preview{
+	display: none;
+}
+#section_top{
+    margin-top: 20px;	
+    display: none;
+}
+#section_top.preview{
+    display: block;
+}
+#section_top .price{
+	    margin: 20px;
+	  display: flex;
+    justify-content: space-around;
+}
+#section_top .join{
+    width: 40%;
+    text-align: center;
+    margin: auto;
+    background-color: orange;
+    color: #fff;
+    margin-bottom: 20px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 31px;
+}
+#section_top .join a{
+    color: #fff;
+}
+</style>
+
+  </head>
+  <script src="../js/libs/vue/vue.js"></script>
+<script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<!-- 引用核心层插件 -->
+<script src="../js/plugins/jquery.zyUpload/core/zyFile.js"></script>
+<!-- 引用控制层插件 -->
+<script src="../js/plugins/jquery.zyUpload/control/js/zyUpload.js"></script>
+<!-- 引用初始化JS -->
+<script src="../js/plugins/jquery.zyUpload/core/upload.js"></script>
+<!--<script src="../js/libs/vue/vue.js"></script>-->
+
+  <script src="../js/common.js"></script>
+    <script src="../js/config.js"></script>
+    
+    
+  <script type="text/javascript" src="../js/plugins/froala-editor/codemirror.min.js"></script>
+   <script type="text/javascript" src="../js/plugins/froala-editor/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/froala-editor/xml.min.js"></script>
+   
+   
+    <script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
+  <body ontouchstart>
+
+
+    <header class='demos-header'>
+      <h1 class="demos-title"></h1>
+    </header>
+
+
+<div  id="graphicVue" class="container">
+	<div id="head_banner" class="head-banner">
+		<div class="content">
+			<!--<img src="" alt="" />-->
+			
+					<!--<div id="" class="source">
+				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img">
+					<img  :src="source.banner.headImgUrl" alt="" />
+				</div>
+				
+			
+				
+			</div>-->
+			
+			<div class="upload-panel">
+				<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
+			</div>
+		</div>
+		
+
+		
+		
+		
+	</div>
+	
+		<div id="section_top" class="module">
+<!--			<div class="countdown">
+				    <ul class="countdown">
+        <li> <span class="days">00</span>
+            <p class="days_ref">天</p>
+        </li>
+        <li class="seperator">.</li>
+        <li> <span class="hours">00</span>
+            <p class="hours_ref">小时</p>
+        </li>
+        <li class="seperator">:</li>
+        <li> <span class="minutes">00</span>
+            <p class="minutes_ref">分钟</p>
+        </li>
+        <li class="seperator">:</li>
+        <li> <span class="seconds">00</span>
+            <p class="seconds_ref">秒</p>
+        </li>
+    </ul>
+
+			</div>-->
+			<div class="content">
+				<div class="price">
+					<span>原价：{{preview_init_price}}</span>
+					<span>底价：{{preview_new_price}}</span>
+				</div>
+
+				<div class="join">
+					<a href="">我要参加</a>
+				</div>
+				
+			</div>
+		</div>
+	  <!--设置信息   砍价1-1-->
+	<div id="section_1" class="module">
+		<div class="title">
+			设置信息
+		</div>
+		<div class="content">
+			<div class="weui-cells">
+				
+				<div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
+	          <label for="">活动标题</label>
+	          <input class="weui-input" type="tel" value="活动标题" v-model="title">
+	        </div>
+	      </div>
+				
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
+	          <label for="">开始时间</label>
+	          <input type="text" id='startTime'   @change="initCountDown(activityStartTime)"/>
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	         <!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
+	         	<label for="">结束时间</label>
+	         	<input type="text" id='endTime'/>
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	        	<label for="">原价</label>
+	          <input class="weui-input" type="tel" placeholder="原价" v-model="cutOriginPrice" @change="refreshRelativeValues('preview_init_price',cutOriginPrice)">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
+	          <label for="">底价</label>
+	         <!-- <div class="weui-slider-box" id="bottomPrice">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="bottomPriceValue" class="weui-slider-box__value">{{source.setting.value4}}</div>
+						</div>-->
+						 <input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
+	          
+	          
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
+	          	<label for="">单次砍价最大值</label>
+	          	<!--<div class="weui-slider-box" id="perCutMax">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="perCutMaxValue" class="weui-slider-box__value">{{source.setting.value5}}</div>
+						</div>-->
+	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPerPerson">
+	          
+	          	
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
+	          	<label for="">单次砍价最小值</label>
+	          		<!--<div class="weui-slider-box" id="perCutMin">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
+						</div>-->
+	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutMostPerPerson">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell">
+	        <div class="weui-cell__bd">
+	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
+	          	<label for="">报名者可再次给自己减价小时间隔</label>
+	          		<!--<div class="weui-slider-box" id="perCutMin">
+						  <div class="weui-slider">
+						    <div id="sliderInner" class="weui-slider__inner">
+						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
+						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
+						    </div>
+						  </div>
+						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
+						</div>-->
+	          	<input class="weui-input" type="tel" placeholder="小时间隔" v-model="redoHours">
+	        </div>
+	      </div>
+	      
+	      
+	    </div>
+		</div>	
+	</div>
+	
+	
+	
+	<!--奖品描述 1-1-->
+	<div id="section_2" class="module">
+		<div class="title">
+			<input class="weui-input" type="tel" value="奖品描述" v-model="sectionOneName">
+		</div>
+		<div  class="content">
+			 <div class="weui-cell">
+	        <div class="weui-cell__bd">
+
+	          	<label for="">本期奖品份数</label>
+
+	          	<input class="weui-input" type="tel" placeholder="奖品份数" v-model="prizeNumber">
+	        </div>
+	      </div>
+			
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				
+			
+				
+			</div>-->
+			
+			
+			<div class="upload-panel">
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_2')">添加图片</div>
+				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_2')">添加描述</div>
+
+			</div>
+		</div>	
+	</div>
+	
+	
+
+	
+	<!--活动规则 1-1-->
+	<div id="section_3" class="module">
+		<div class="title">
+			<input class="weui-input" type="tel" value="活动规则" v-model="sectionTwoName">
+		</div>
+		<div class="content">
+			
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
+				</div>
+			
+				
+			</div>-->
+			
+			<div class="upload-panel">
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
+				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_3')">添加描述</div>
+	
+				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_3')">添加视频</div>
+		
+			</div>
+		</div>	
+	</div>
+	
+	<!--领奖信息 1-1-->
+	<div id="section_4" class="module">
+		<div class="title">
+			<input class="weui-input" type="tel"  value="领奖信息" v-model="sectionThreeName">
+		</div>
+		<div class="content">
+			
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
+				</div>
+			
+				
+			</div>-->
+			
+			<div class="upload-panel">
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
+				<div class="text add"  data-target="#addTxt" @click="markHandle('add','txt','#section_4')">添加描述</div>
+	
+				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_4')">添加视频</div>
+			</div>
+		</div>	
+	</div>
+	
+	
+	<!--机构介绍 1-1-->
+	<div id="section_5" class="module">
+		<div class="title">
+			<input class="weui-input" type="tel"  value="机构介绍" v-model="sectionFourName">
+		</div>
+		<div class="content">
+			
+			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
+				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
+				编辑
+				</div>
+				
+				<div class="img" v-show="item.type==1">
+					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
+				</div>
+				<div class="txt" v-show="item.type==2">
+					<p data-index-id="item.id">{{item.txt}}</p>
+				</div>
+				<div class="video" v-show="item.type==3">
+					<video data-index-id="item.id" :src="item.videoUrl"></video>
+				</div>
+			
+				
+			</div>-->
+			
+			<div class="upload-panel">
+				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_5')">添加图片</div>
+				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_5')">添加描述</div>
+	
+				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_5')">添加视频</div>
+			</div>
+		</div>	
+	</div>
+	
+	<div id="helpline" class="module">
+		<div class="title">
+			咨询热线
+		</div>
+		<div class="content">
+		
+			<div class="weui-cell__bd">
+	      <input class="weui-input" type="tel" placeholder="请输入电话"  v-model="consultPhoneNumber">
+	    </div>
+	    <div class="weui-cell__bd">
+	      <div id="locationAddress"></div>
+	    </div>
+		
+		</div>	
+	</div>
+	
+	<div id="infoGathering" class="module info-item">
+		<div class="title">
+			信息收集设置
+		</div>
+		<div class="content">
+			<div id="" class="weui-cell weui-cell_switch">
+        	<div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="手机号" v-model="infoCollectOneName">
+	        </div>
+	        <!--<div class="weui-cell__ft">
+	        	<label>必填项</label>
+	          <input class="weui-switch" type="checkbox">
+	        </div>-->
+	      </div>
+			
+			<div class="weui-cells">
+	      
+	      <div class="weui-cell weui-cell_switch">
+        	<div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="姓名" v-model="infoCollectTwoName">
+	        </div>
+	        <!--<div class="weui-cell__ft">
+	        	<label>必填项</label>
+	          <input class="weui-switch" type="checkbox">
+	        </div>-->
+	      </div>
+	      
+	      <div class="weui-cell weui-cell_switch">
+        	<div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectThreeName">
+	        </div>
+	        <div class="weui-cell__ft">
+	        	<label>必填项</label>
+	          <input class="weui-switch" type="checkbox"  v-model="infoCollectThreeIsRequired">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell weui-cell_switch">
+        	<div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectFourName">
+	        </div>
+	        <div class="weui-cell__ft">
+	        	<label>必填项</label>
+	          <input class="weui-switch" type="checkbox"  v-model="infoCollectFourIsRequired">
+	        </div>
+	      </div>
+	      
+	      <div class="weui-cell weui-cell_switch">
+        	<div class="weui-cell__bd">
+	          <input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectFiveName">
+	        </div>
+	        <div class="weui-cell__ft">
+	        	<label>必填项</label>
+	          <input class="weui-switch" type="checkbox" v-model="infoCollectFiveIsRequired">
+	        </div>
+	      </div>
+	      
+	      
+	       
+	    </div>
+			<div id="addInfoItem" class="add-info-item">
+	      	
+	      </div>
+			
+		</div>	
+	</div>
+	
+	
+	<div class="form-handle">
+		<div class="mode">
+			<div class="weui-cell weui-cell_switch">
+        	
+	        <div class="weui-cell__ft">
+	        	<label>编辑模式</label>
+	          <input class="weui-switch" type="checkbox" @change="switchMode">
+	          <label>预览模式</label>
+	        </div>
+	      </div>
+		</div>
+		<div class="save" @click="publishActivity">
+			发布活动 
+		</div>
+	</div>
+	
+	
+	<div id="sourceHandle" class="weui-popup__container popup-bottom">
+		  <div class="weui-popup__overlay"></div>
+		  <div class="weui-popup__modal">
+		  	
+
+		  <div class="weui-grids">
+            <a @click="popupSourceHandle(1,'instead','img')" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+               替换图片
+              </p>
+            </a>
+            <a  @click="popupSourceHandle(2,'instead','txt')" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                替换文字
+              </p>
+            </a>
+            <a @click="popupSourceHandle(3,'instead','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                替换视频
+              </p>
+            </a>
+            <a @click="popupSourceHandle(4,'insert','img')" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                插入图片
+              </p>
+            </a>
+            <a @click="popupSourceHandle(5,'insert','txt')" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                插入文字
+              </p>
+            </a>
+            <a @click="popupSourceHandle(6,'insert','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                插入视频
+              </p>
+            </a>
+            
+            <a @click="popupSourceHandle(7,'clear')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                删除内容
+              </p>
+            </a>
+            
+          </div>
+		   
+		   
+		  </div>
+		</div>
+		
+	
+</div>
+
+
+		
+
+
+
+<div id="uploadImg" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    
+    <!--<div id="uploadImgTool" class="demo"></div>-->
+    
+<form id='add'>
+	111
+		<input type="text" name='book'/>
+		<input type="file" name='source' value="上传33"/>
+		<input type="submit"/>
+</form>
+ <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage?unique=pic1&shopUserId=15&section=1&activityTypeId=2">
+    图片<input  type="file" name="file"/>
+    <input type="submit" value="上传"/ >
+</form>
+    
+    
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="graphic.sureSubmitImg()">确认提交</a>
+  </div>
+</div>
+
+<div id="uploadVideo" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    
+    <!--<div id="uploadVideoTool" class="demo"></div>-->
+    
+<!--    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
+    图片<input onclick="graphic.uploadImg()" type="file" name="file"/>
+    <input type="submit" value="上传"/ >
+</form>-->
+
+
+    
+    
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="graphic.sureSubmitVideo()">确认提交</a>
+  </div>
+</div>
+
+
+<div id="addTxt" class="weui-popup__container">
+  <div class="weui-popup__overlay"></div>
+  <div class="weui-popup__modal">
+    
+    <div id="txtEditTool" class="">
+    	
+    </div>
+    
+    
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="graphic.sureSubmitTxt()">确认提交</a>
+  </div>
+</div>
+
+<input type="hidden" id="curSourceId" value="" />
+<input type="hidden" id="handleName" value="" />
+<!--单次资源操作状态-->
+<input type="hidden" id="handleType" value="" />
+<!--资源类别-->
+<input type="hidden" id="sourceType" value="" />
+<!--当前section id-->
+<input type="hidden" id="sectionType" value="" />
+
+<!--<div id="new_img" class="img" >
+		<img data-index-id="" src="" alt="" />
+	</div>
+	<div id="new_txt" class="txt">
+		<p data-index-id=""></p>
+	</div>
+	<div id="new_video" class="video">
+		<video data-index-id="" src=""></video>
+	</div>-->
+
+
+<script src="../js/libs/weui/fastclick.js"></script>
+
+<script>
+/*  $(function() {
+    FastClick.attach(document.body);
+  });*/
+</script>
+<script src="../js/libs/weui/jquery-weui.js"></script>
+
+
+				
+<script>	
+
+var graphicVue = new Vue({
+  el: '#graphicVue',
+  data: {
+  	
+  	preview_init_price:'',
+  	preview_new_price:'',
+  	
+
+		shopUserId:15,
+		activityTypeId:2,
+		
+		title:'',
+		
+		cutOriginPrice:'',
+		cutLeastPrice:'',
+		cutLeastPerPerson:'',
+		cutMostPerPerson:'',   		
+		redoHours:'',
+		
+		
+		infoCollectOneName:'',
+		infoCollectOneIsRequired:'',
+		infoCollectTwoName:'',
+		infoCollectTwoIsRequired:'',
+		infoCollectThreeName:'',
+		infoCollectThreeIsRequired:'',
+		infoCollectFourName:'',
+		infoCollectFourIsRequired:'',
+		infoCollectFiveName:'',
+		infoCollectFiveIsRequired:'',
+		
+		prizeNumber:'',
+		
+		sectionOneName:'',
+		sectionTwoName:'',
+		sectionThreeName:'',
+		sectionFourName:'',
+		
+		consultPhoneNumber:'',
+  	
+
+  	curSourceId:'',
+  	curSourceIndex:'',
+    curSourceType:'',
+    curSectionType:'',
+    handleType:'',
+  },
+ methods: {
+    submit: function (event) {
+    	debugger
+    	this.info.province = $("#selectArea").val().split(" ")[0];
+    	this.info.city = $("#selectArea").val().split(" ")[1];
+				var data = this.info;
+    },
+    publishActivity:function(){
+    	debugger;
+    	var data = this.$data;
+    	//data.headId = $("#head_banner .source").attr("id");
+    	data.headId = 1;
+    	data.activityStartTime =  $("#startTime").val();
+    	data.activityEndTime = $("#endTime").val();
+    	data.sectionOneArrayIndex=graphic.sectionSourceIndex['#section_2'];
+			data.sectionTwoArrayIndex=graphic.sectionSourceIndex['#section_3'];
+			data.sectionThreeArrayIndex=graphic.sectionSourceIndex['#section_4'];
+			data.sectionFourArrayIndex =graphic.sectionSourceIndex['#section_5'];
+			
+			this.$nextTick(function(){
+    		graphic.sumbit(data);
+			})
+
+    },
+    switchMode:function(){
+    	
+    	$("#section_top").toggleClass("preview");
+    	
+    	$("#section_1").toggleClass("preview");
+    	
+    	$(".module .content .source").toggleClass("preview");
+    	$(".module .content .source .hand-trigger").toggleClass("preview");
+    	$(".upload-panel").toggleClass("preview");
+    },
+    refreshRelativeValues: function (name,value) {
+    	this[name] = value;
+    	//this.$set(this.source.setting.value4,value-1);
+    	//this.$set(this.source.setting.value5,((value-1)*0.5).toFixed(0));
+    },
+    initCountDown: function (value) {
+    	this.$nextTick(function(){
+    		graphic.renderCountDown(value)
+			})
+    },
+    
+    popupSourceHandle: function (handleType,handleName,sourceType,sectionType) {
+    	debugger
+    	this.markHandle(handleName,sourceType,sectionType);
+    	
+    	this.handleType = handleType;
+    	this.$nextTick(function(){
+    		$.closePopup();
+    		
+
+
+    		if($.inArray(handleType, [1,3,4,6])!=-1){
+    			$("#uploadImg").popup();
+    			
+    		}
+				if($.inArray(handleType, [2,5])!=-1){
+    			$("#addTxt").popup();
+    			$("#txtEditTool").load("textEditer.html");
+    			
+
+    		}
+				if(handleType == 7){
+					debugger;
+					var id = $("#curSourceId").val();
+					$("#"+$("#curSourceId").val()).remove();
+					
+					$("#curSourceId").val('');
+					var st = this.curSourceType;
+					var sty =this.curSectionType;
+					if(st=="img"){
+	    	 		graphic.sectionSourceIndex[sty].splice(graphic.sectionSourceIndex[sty].indexOf(id),1);
+	    	 		
+	    	 	}
+					if(st=="txt"){
+						graphic.sectionTxtLength[sty]--;
+	    	 		graphic.sectionTxtLength[sty].splice(graphic.sectionTxtLength[sty].indexOf(id),1);
+	    	 		
+	    	 		graphic.refreshAllTxtId(sectionType);
+	    	 	}
+					if(st=="video"){
+	    	 		graphic.sectionSourceIndex[sty].splice(graphic.sectionSourceIndex[sty].indexOf(id),1);
+	    	 		
+	    	 	}
+					alert(graphic.sectionSourceIndex[sty]);
+
+				}
+				
+			})
+    	
+    },
+    markHandle: function (handleName,sourceType,sectionType) {
+    	debugger
+    	this.curSourceType = $("#sourceType").val();
+    	this.curSectionType =  $("#sectionType").val();
+    	 $("#handleName").val(handleName);
+    	 $("#sourceType").val(sourceType);
+    	 $("#sectionType").val(sectionType||$("#sectionType").val());
+    	 
+    	 if(handleName=="add"){
+    	 		$("#curSourceId").val('');
+    	 }
+    	 
+    	 if(sourceType=="txt"){
+    	 		$("#txtEditTool").load("textEditer.html");
+    	 }
+			/*if($.inArray(sectionType, graphic.hasSourceSection)!=-1){
+				
+			}*/
+    	 
+    	 
+    },
+  }
+})	 
+	    	
+    	
+    	var graphic = {
+    		imgSourceLength:0,  
+    		videoSourceLength:0,
+    		sectionTxtLength:{
+    			'#section_2':1,
+	    		'#section_3':1,
+	    		'#section_4':1,
+	    		'#section_5':1,
+    		},
+    		hasSourceSection:['#section_2','#section_3','#section_4','#section_5'],
+    		sectionSourceIndex:{
+    			'#section_2':[],
+	    		'#section_3':[],
+	    		'#section_4':[],
+	    		'#section_5':[],
+    		},
+
+    		tem:{
+						img:"<div id=\"#id\" class=\"source\"><div onclick=\"graphic.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div src=\"#content\" class=\"img\"><img src=\"#content\"alt=\"\"/></div></div>",
+						txt:"<div id=\"#id\" class=\"source\"><div onclick=\"graphic.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p>#content</p></div></div>",
+						video:"<div id=\"#id\" class=\"source\"><div onclick=\"graphic.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"video\"><video src=\"#content\"></video></div></div>",
+					},
+				VARIABLE_NAME_MAP:{
+					
+				},
+				sourceTypeMap:{
+    			
+    		},
+    		editSourceItem: function (o) {
+
+		    	//this.curSourceIndex = source.index;
+		    	//this.curSourceType = source.type;
+		    	debugger
+		    	 $("#curSourceId").val($(o).attr("id"));
+		    },
+    		renderCountDown:function(value){
+    			var time = value.split(" ")[1];
+	    	  var dateTime = value.split(" ")[0];
+		    	dateTimes = dateTime.split("-");
+		    	dateTime = dateTimes[1]+"/"+dateTimes[2]+"/"+dateTimes[0]+" "+time + ":00";
+				  $('.countdown').downCount({
+	            date: dateTime,
+	            offset: +10
+	        }, function () {
+	            alert('倒计时结束!');
+	        });
+    		},
+    		refreshAllTxtId:function(sectionType){
+    			 	var  indexs = this.sectionSourceIndex[sectionType];
+    			 	var newIndexs = [];
+    			 	indexs.forEach(function(o,index){
+    			 		var obj = '';
+    			 		index++;
+    			 		 if(o.split("_")[1].substr(0,3) == 'txt'){
+    			 		 	     obj = sectionType+"_txt"+index;
+    			 		 }
+    			 		 $("#").attr("id",obj);
+    			 		 newIndexs.push(obj);
+    			 	})
+    		},
+    		init:function(){
+    			 $("#startTime").datetimePicker();
+    			 $("#endTime").datetimePicker();
+    			 
+         //graphicVue.initCountDown();
+    			 
+    			 /*$('#bottomPrice').slider(function (percent) {
+				     	graphicVue.preview_new_price = percent
+				  })
+    			 $('#perCutMax').slider(function (percent) {
+				     
+				  })
+    			 $('#perCutMin').slider(function (percent) {
+				     
+				  })*/
+    			 
+    		},
+    		sumbit:function (param) {    	  	
+debugger;
+					 request.postData({
+		            url: urlConfig.submitActivityUrl,
+		            param: param
+		        }).then(function(data) {
+		        	debugger;
+		        	//location.href = urlConfig.toCenterUrl;
+		
+		        }, function(err) {
+		            console.log(err);
+		        });
+					
+		    },
+    		uploadImg:function(){
+    			debugger;
+    			var urlParam = "?"+'unique=pic1';
+					urlParam +=  "&"+'shopUserId=15';
+					urlParam +=  "&"+'section=1';
+					urlParam +=  "&"+'activityTypeId=2';
+					
+					$('form').attr('action',$('form').attr('action')+urlParam);
+    		},
+    		/*editSourceItem:function () {
+    			$("#sourceHandle").popup();
+    		},*/
+    		
+    		handleImgSourceIndex:function(addSourceIds,curSourceId,handleName,sectionType){
+    			
+    			var indexs = this.sectionSourceIndex[sectionType]||[];
+    			 if(handleName=='add'){
+    			  	indexs.push.apply(indexs,addSourceIds);
+    			 }
+    			 if(handleName=='instead'){
+    			  	indexs.splice(indexs.indexOf(curSourceId),1,addSourceIds);
+    			 }
+					this.sectionSourceIndex[sectionType] = indexs;
+					//alert(this.sectionSourceIndex[sectionType]);
+					
+    		},
+
+    		handleTxtSourceIndex:function(curSourceId,handleName,sectionType){
+    			
+    			var txtId = '';
+    			var len = this.sectionTxtLength[sectionType];
+    			var indexs = this.sectionSourceIndex[sectionType]||[];
+    			
+    			 if(handleName=='add'||curSourceId.substr(0,7)!='section'){
+    			 		txtId = sectionType+"_txt"+len;
+    			  	indexs.push(txtId);
+    			  	len++;
+    			 }
+    			this.sectionTxtLength[sectionType] = len;
+					this.sectionSourceIndex[sectionType] = indexs;
+					return txtId;
+					
+    		},
+    		sureSubmitTxt:function () {
+					debugger;
+    			var ht = $("#handleName").val();
+					var st = $("#sourceType").val();
+					var stJqId = $("#sectionType").val();
+					var csId = $("#curSourceId").val();
+					
+    			var html = $("#froalaEditorWrap .fr-element").html();
+    			var dom = this.tem[st];
+
+					dom=dom.replace(/#id/g,this.handleTxtSourceIndex(csId,ht,stJqId))
+					dom=dom.replace(/#content/g,html);
+					//add
+
+					if(ht == 'add'){
+						
+						$(stJqId).find(".content").append(dom);
+					}
+					
+					//insert
+					if(ht == 'insert'){				
+						$("#"+csId).after(dom);
+					}
+					//instead
+					if(ht == 'instead'){				
+						$("#"+csId).replaceWith(dom);
+					}
+					
+				
+
+    		},
+    		
+    		
+    		sureSubmitVideo:function () {
+    			var _this = this;
+	
+    			
+    			var data = {}
+    						data.list = [{
+									id:'pic1',
+									url:'../demo/source/1.mp4'
+								}/*,
+								{
+									id:'pic2',
+									url:'../images/demo/upload_success_2.jpg'
+								}*/]
+					
+								
+								var ht = $("#handleName").val();
+								var st = $("#sourceType").val();
+								var stJqId = $("#sectionType").val();
+								var csId = $("#curSourceId").val();
+								
+								var addSourceIds = [];
+								
+								var dom = '';
+									data.list.forEach(function(o){
+										var d = _this.tem[st];
+										debugger
+										var newId = "video"+graphic.videoSourceLength;
+										d=d.replace(/#id/g,newId)
+										d=d.replace(/#content/g,o.url)
+										dom += d;
+										addSourceIds.push(newId);
+										graphic.videoSourceLength++;
+										
+									})
+								
+								//add
+								if(ht == 'add'){
+									
+									$(stJqId).find(".content").append(dom);
+									
+									
+								}
+								
+								//insert
+								if(ht == 'insert'){				
+									$("#"+csId).after(dom);
+								}
+								//instead
+								if(ht == 'instead'){				
+									$("#"+csId).replaceWith(dom);
+								}
+    						_this.handleImgSourceIndex(addSourceIds,csId,ht,stJqId);
+    			/*request.postData({
+            url: urlConfig.registerUrl,
+            param: ''
+	        }).then(function(data) {
+	        	
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });*/
+	       
+ 
+    		},
+    	sureSubmitImg:function () {
+    			var _this = this;
+	
+    			
+    			var data = {}
+    						data.list = [{
+									id:'pic1',
+									url:'../images/demo/upload_success_1.jpg'
+								}/*,
+								{
+									id:'pic2',
+									url:'../images/demo/upload_success_2.jpg'
+								}*/]
+					
+								
+								var ht = $("#handleName").val();
+								var st = $("#sourceType").val();
+								var stJqId = $("#sectionType").val();
+								var csId = $("#curSourceId").val();
+								
+								var addSourceIds = [];
+								
+								var dom = '';
+									data.list.forEach(function(o){
+										var d = _this.tem[st];
+										debugger
+										var newId = "img"+graphic.imgSourceLength;
+										d=d.replace(/#id/g,newId)
+										d=d.replace(/#content/g,o.url)
+										dom += d;
+										addSourceIds.push(newId);
+										graphic.imgSourceLength++;
+										
+									})
+								
+								//add
+								if(ht == 'add'){
+									
+									$(stJqId).find(".content").append(dom);
+									
+									
+								}
+								
+								//insert
+								if(ht == 'insert'){				
+									$("#"+csId).after(dom);
+								}
+								//instead
+								if(ht == 'instead'){				
+									$("#"+csId).replaceWith(dom);
+								}
+    						_this.handleImgSourceIndex(addSourceIds,csId,ht,stJqId);
+    			/*request.postData({
+            url: urlConfig.registerUrl,
+            param: ''
+	        }).then(function(data) {
+	        	
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });*/
+	       
+ 
+    		}
+    		
+    	}
+    	graphic.init();
+    	
+    	$('#add').submit(function(){
+        var data = new FormData($('#add')[0]);  
+        console.log(data);
+        $.ajax({  
+            url: 'http://g1u8257706.iask.in/shopCut/uploadImage?unique=pic1&shopUserId=15&section=1&activityTypeId=2',  
+            type: 'POST',  
+            data: data,  
+            dataType: 'JSON',  
+            cache: false,  
+            processData: false,  
+            contentType: fase, 
+            success:function(data){  
+            	debugger;
+                //alert(data);
+                alert("UploadFile Success");
+            }   
+        });  
+
+        return false;   
+    });
+    	
+    	
+
+      $("#showTooltips").click(function() {
+        var tel = $('#tel').val();
+        var code = $('#code').val();
+        if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入手机号');
+        else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
+        else $.toptip('提交成功', 'success');
+      });
+    </script>
+  </body>
+</html>
