@@ -273,7 +273,24 @@
 			</div>
 			
 			<div class="remark">
-				
+				<div class="list">
+					<div class="head">
+						
+					</div>
+					<div class="speak">
+						<div class="user">
+							<div class="name">							
+							
+							</div>
+							<div class="voice">							
+							
+							</div>
+						</div>
+						<div class="shops">						
+						
+						</div>
+					</div>
+				</div>
 				
 			</div>
 			
@@ -287,7 +304,9 @@
 
 </div>
 
-
+<div style="font-family: '微软雅黑';font-size: 20px;color: #00A2D4;">
+	文字发链接按时发的送福利
+</div>
 
 		<a id="call" href="tel://222">拨打电话</a>
 
@@ -343,7 +362,20 @@ var graphicVue = new Vue({
 			consultPhoneNumber:'',
 		},
 
-		section1:[],
+		section1:[{
+				type:'3',
+				value:'../demo/source/1.mp4'
+			},
+			{
+				type:'1',
+				value:'../images/demo/upload_success_2.jpg'
+			},{
+				type:'1',
+				value:'../images/demo/upload_success_1.jpg'
+			},{
+				type:'2',
+				value:'../images/demo/upload_success_1.jpg'
+			}],
 
 
   },
@@ -366,7 +398,7 @@ var graphicVue = new Vue({
 					 });
     			
     			  this.request({
-    			  	vueName:'section2',
+    			  	vueName:'section1',
     			  	 dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
@@ -379,41 +411,6 @@ var graphicVue = new Vue({
     			  
 					 });
 					 
-					 this.request({
-    			  vueName:'section3',
-    			  dataName:'content',
-    			 url:urlConfig.getSectionContentyUrl,
-    			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
-						 	section:3
-    			   }
-					 });
-					 
-					 this.request({
-    			  vueName:'section4',
-    			  dataName:'content',
-    			 url:urlConfig.getSectionContentyUrl,
-    			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
-						 	section:3
-    			   }
-					 });
-					 
-					 this.request({
-    			  vueName:'section5',
-    			  dataName:'content',
-    			 url:urlConfig.getSectionContentyUrl,
-    			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
-						 	section:4
-    			   }
-					 });
 
     	
     		},
