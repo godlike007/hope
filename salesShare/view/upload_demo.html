@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<form enctype="multipart/form-data" method="post" name="fileinfo">
+ <label>Custom file label:</label>
+  <input type="text" name="unique" value="movie1"/><br />
+  <input type="text" name="activityTypeId" value="2"/><br />
+  <input type="text" name="shopUserId" value="15"/><br />
+  <input type="text" name="section" value="1"/><br />
+  <label>File to stash:</label>
+  <input type="file" name="file" required />
+  <input type="submit" value="Stash the file!" />
+</form>
+<div></div>
+	</body>
+</html>
+<script type="text/javascript">
+	var form = document.forms.namedItem("fileinfo");
+form.addEventListener('submit', function(ev) {
+
+  var oOutput = document.querySelector("div"),
+      oData = new FormData(form);
+
+  //oData.append("unique", "pic1");
+  //oData.append("activityTypeId", 2);
+   // oData.append("section", 1);
+     // oData.append("shopUserId", 15);
+  var oReq = new XMLHttpRequest();
+  oReq.open("POST", "http://g1u8257706.iask.in/shopCut/uploadImage", true);
+  oReq.onload = function(oEvent) {
+    if (oReq.status == 200) {
+    	debugger;
+      oOutput.innerHTML = "Uploaded!";
+    } else {
+      oOutput.innerHTML = "Error " + oReq.status + " occurred when trying to upload your file.<br \/>";
+    }
+  };
+
+  oReq.send(oData);
+  ev.preventDefault();
+}, false);
+</script>
