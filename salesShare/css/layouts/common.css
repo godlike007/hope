@@ -11,3 +11,7 @@ header .title{
  height: 60px;
  line-height: 60px;
 }
+/*opacity*/
+.opa050{
+	opacity: .5;
+}

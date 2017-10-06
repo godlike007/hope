@@ -55,6 +55,27 @@ section .progress-info div{
     float: right;
     width: 50%;	
 }
+
+.view-all{
+		position: fixed;
+    bottom: -1px;
+    width: 100%;
+    /* background-color: #3d4145; */
+    text-align: center;
+    /* opacity: .8; */
+    color: #fff;	
+}
+.view-all h5{
+    opacity: .85;
+    background-color: #3d4145;
+    height: 50px;
+    width: 30%;
+    margin: auto;
+    line-height: 50px;
+    font-size: 20px;
+    letter-spacing: 3px;
+    border-radius: 8px 8px 0px 0px;
+}
 </style>
   </head>
 <script src="../js/libs/vue/vue.js"></script>
@@ -88,7 +109,7 @@ section .progress-info div{
       <div class="weui-tab__bd">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
         
-        	 	<section  class=""  v-for="item in activityList">
+        	 	<section  class=""  v-for="item in activityList"  @click="goto(item)">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
@@ -187,7 +208,7 @@ section .progress-info div{
         </div>
         <div id="tab5" class="weui-tab__bd-item">
         	
-        	 	<section v-for="item in activityList"  v-show="item.type == 4" class="">
+        	 	<section v-for="item in activityList"  v-show="item.type == 4" class="" @click="goto(item)">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
@@ -216,8 +237,11 @@ section .progress-info div{
 </div>
 
 
-<div id="viewAll">
+
+<div id="viewAll" class="view-all">
 	<h5  class="hand-trigger open-popup" data-target="#selectSort">全部分类</h5>
+	
+	
 </div>
 
 
@@ -309,28 +333,40 @@ var testData = [{
     	value2:'2017-06-12',
     	value3:345,
     	value4:234,
-    	themeImgUrl:'../images/demo/11.png'
+    	themeImgUrl:'../images/demo/11.png',
+    	shopUserId:15,
+			activityTypeId:2,
+			activityType:'bargain',
     },{
     	type:1,
     	value1:'2017-03-03',
     	value2:'2017-06-12',
     	value3:345,
     	value4:234,
-    	themeImgUrl:'../images/demo/22.jpg'
+    	themeImgUrl:'../images/demo/22.jpg',
+    	shopUserId:15,
+			activityTypeId:2,
+			activityType:'bargain',
     },{
     	type:2,
     	value1:'2017-03-03',
     	value2:'2017-06-12',
     	value3:345,
     	value4:234,
-    	themeImgUrl:'../images/demo/33.jpg'
+    	themeImgUrl:'../images/demo/33.jpg',
+    	shopUserId:15,
+			activityTypeId:2,
+			activityType:'bargain',
     },{
     	type:3,
     	value1:'2017-03-03',
     	value2:'2017-06-12',
     	value3:345,
     	value4:234,
-    	themeImgUrl:'../images/demo/44.jpg'
+    	themeImgUrl:'../images/demo/44.jpg',
+    	shopUserId:15,
+			activityTypeId:2,
+			activityType:'bargain',
     }]	
 	
 	
@@ -341,21 +377,16 @@ var  classificationVue = new Vue({
     activityList:testData 
   },
  methods: {
-    submit: function (event) {
-    	debugger
-    	
+    goto: function (item) {
+    		location.href="add_activity.html?shopUserId="+item.shopUserId+"&activityTypeId=" + item.activityTypeId+"&activityType=" + item.activityType
     },
     showActivity: function (type) {
-    	debugger
-    	this.handleType = handleType;
-    	
+    	debugger    	
+    	activity.get_one_type_activity(type);
     	
     	this.$nextTick(function(){
     		$.closePopup();
-    		
-    		    		
-
-				
+    				
 			})
     	
     }
@@ -365,28 +396,23 @@ var  classificationVue = new Vue({
 
 var activity = {
 		init:function(){
+			// this.get_one_type_activity(1)
 			 
-			 
 		},
-		editSourceItem:function () {
-			$("#sourceHandle").popup();
-		},
-		sourceTypeMap:{
-			
-		},
-		sureSubmit:function () {
+
+		get_one_type_activity:function (type) {
 			
 			request.postData({
         url: urlConfig.registerUrl,
-        param: ''
+        param: type
         }).then(function(data) {
         	
-        	
+        	classificationVue.activityList = data.list;
 
         }, function(err) {
             console.log(err);
         });
-			debugger
+			debugger;
 		}
 		
 	}

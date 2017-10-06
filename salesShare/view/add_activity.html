@@ -107,6 +107,10 @@
     padding: 2% 5%;
     /* border-radius: 0px 0px 0px 90px; */	
 }
+.head-banner .hand-trigger{
+    margin-left: 75%;
+    margin-top: 0%;
+}
 .source .hand-trigger.preview{
 		display: none;
 }
@@ -280,6 +284,15 @@
 #section_top .join a{
     color: #fff;
 }
+
+
+#uploadBannerForm{
+	position: absolute;
+    top: 0px;
+    text-align: center;
+    width: 100%;
+
+}
 </style>
 
   </head>
@@ -314,6 +327,24 @@
 <div  id="activityVue" class="container">
 	<div id="head_banner" class="head-banner">
 		<div class="content">
+<div id="head" class="source">
+	<div onclick="activity.change_banner()" class="hand-trigger">替换</div>
+	<div :src="headUrl" class="img">
+		<img id="defaultBanner" :src="headUrl" alt="">
+		<img id="previewBanner" class="hide" alt="">
+		<form class="hide" id="uploadBannerForm" enctype="multipart/form-data" method="post">
+		 
+		  <input type="hidden" name="unique" :value="headId"><br />
+		  <input type="hidden" name="activityTypeId" /><br />
+		  <input type="hidden" name="shopUserId"/><br />
+	
+		  <input class="hide" id="uploadBanner" type="file" name="file" onchange="uploadUtil.img_preview(this)" required />
+		  <input type="submit" value="确认上传" />
+		  <input type="button" value="取消上传" />
+		</form>
+		
+	</div>
+</div>
 			<!--<img src="" alt="" />-->
 			
 					<!--<div id="" class="source">
@@ -329,9 +360,9 @@
 				
 			</div>-->
 			
-			<div class="upload-panel">
+			<!--<div class="upload-panel">
 				<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
-			</div>
+			</div>-->
 		</div>
 		
 
@@ -823,7 +854,7 @@
     
     <!--<div id="uploadImgTool" class="demo"></div>-->
     
-<form id='add' enctype="multipart/form-data" >
+<!--<form id='add' enctype="multipart/form-data" >
 	111
 		<input type="text" name='book'/>
 		<input id="avatar" type="file" name='source' value="上传33"/>
@@ -832,7 +863,21 @@
  <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage?unique=pic1&shopUserId=15&section=1&activityTypeId=2">
     图片<input  type="file" name="file"/>
     <input type="submit" value="上传"/ >
+</form>-->
+
+<form id="uploadFileForm" enctype="multipart/form-data" method="post" name="fileinfo">
+ 
+  <input type="text" name="unique"/><br />
+  <input type="text" name="activityTypeId" /><br />
+  <input type="text" name="shopUserId"/><br />
+  <input type="text" name="section"/><br />
+
+  <img id="preview" />
+    <br />
+  <input id="uploadFile" type="file" name="file" onchange="imgPreview(this)" required />
+  <input type="submit" value="确认上传" />
 </form>
+
     
     
     <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认提交</a>
@@ -914,8 +959,11 @@ var activityVue = new Vue({
   	//提交表单’
   	//activityStartTime:'',
 		//activityEndTime:'',
-		shopUserId:15,
-		activityTypeId:2,
+		headId:BASE_UTIL.ger_url_param('activityType')+BASE_UTIL.ger_url_param('activityTypeId'),
+		headUrl:'../images/activity/'+BASE_UTIL.ger_url_param('activityType')+"/"+BASE_UTIL.ger_url_param('activityType')+BASE_UTIL.ger_url_param('activityTypeId')+".jpg",
+		
+		shopUserId:BASE_UTIL.ger_url_param('shopUserId'),
+		activityTypeId:BASE_UTIL.ger_url_param('activityTypeId'),
 		
 		title:'',
 		
@@ -951,6 +999,9 @@ var activityVue = new Vue({
     curSourceType:'',
     curSectionType:'',
     handleType:'',
+    
+    
+    upload_response_data:''
   },
  methods: {
     submit: function (event) {
@@ -1008,6 +1059,9 @@ var activityVue = new Vue({
     		if($.inArray(handleType, [1,3,4,6])!=-1){
     			$("#uploadImg").popup();
     			
+  
+    			var obj = document.getElementById('uploadFile') ; 
+					obj.outerHTML=obj.outerHTML; 
     		}
 				if($.inArray(handleType, [2,5])!=-1){
     			$("#addTxt").popup();
@@ -1091,12 +1145,22 @@ var activityVue = new Vue({
 						txt:"<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p>#content</p></div></div>",
 						video:"<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"video\"><video src=\"#content\"></video></div></div>",
 					},
-				VARIABLE_NAME_MAP:{
-					
-				},
+
 				sourceTypeMap:{
     			
     		},
+    		/*get_head_banner: function () {
+
+						request.postData({
+		            url: urlConfig.submitActivityUrl,
+		            param: param
+		        }).then(function(data) {
+		        	debugger;
+		        	
+		        }, function(err) {
+		            console.log(err);
+		        });
+		    },*/
     		editSourceItem: function (o) {
 
 		    	//this.curSourceIndex = source.index;
@@ -1133,6 +1197,13 @@ var activityVue = new Vue({
     			 $("#startTime").datetimePicker();
     			 $("#endTime").datetimePicker();
     			 
+    			 
+    			 //上传表单初始化值
+    			 $("form input[name='shopUserId']").val(BASE_UTIL.ger_url_param('shopUserId'));
+    			 $("form input[name='activityTypeId']").val(BASE_UTIL.ger_url_param('activityTypeId'));
+    			 
+    			 
+
          //activityVue.initCountDown();
     			 
     			 /*$('#bottomPrice').slider(function (percent) {
@@ -1147,7 +1218,6 @@ var activityVue = new Vue({
     			 
     		},
     		sumbit:function (param) {    	  	
-debugger;
 					 request.postData({
 		            url: urlConfig.submitActivityUrl,
 		            param: param
@@ -1160,19 +1230,12 @@ debugger;
 		        });
 					
 		    },
-    		uploadImg:function(){
-    			debugger;
-    			var urlParam = "?"+'unique=pic1';
-					urlParam +=  "&"+'shopUserId=15';
-					urlParam +=  "&"+'section=1';
-					urlParam +=  "&"+'activityTypeId=2';
+				change_banner:function (param) {    	 
+					$("#uploadBanner").click();
 					
-					$('form').attr('action',$('form').attr('action')+urlParam);
-    		},
-    		/*editSourceItem:function () {
-    			$("#sourceHandle").popup();
-    		},*/
-    		
+					$("#previewBanner").add("#uploadBannerForm").removeClass("hide");
+					$("#defaultBanner").addClass("hide")
+		    },
     		handleImgSourceIndex:function(addSourceIds,curSourceId,handleName,sectionType){
     			
     			var indexs = this.sectionSourceIndex[sectionType]||[];
@@ -1262,11 +1325,11 @@ debugger;
 									data.list.forEach(function(o){
 										var d = _this.tem[st];
 										debugger
-										var newId = "video"+activity.videoSourceLength;
-										d=d.replace(/#id/g,newId)
+										//var newId = "video"+activity.videoSourceLength;
+										d=d.replace(/#id/g,o.id)
 										d=d.replace(/#content/g,o.url)
 										dom += d;
-										addSourceIds.push(newId);
+										addSourceIds.push(o.id);
 										activity.videoSourceLength++;
 										
 									})
@@ -1274,7 +1337,7 @@ debugger;
 								//add
 								if(ht == 'add'){
 									
-									$(stJqId).find(".content").append(dom);
+									$(stJqId).find(".upload-panel").before(dom);
 									
 									
 								}
@@ -1301,7 +1364,7 @@ debugger;
 	       
  
     		},
-    	sureSubmitImg:function () {
+    	  sureSubmitImg:function () {
     			var _this = this;
 	
     			
@@ -1309,11 +1372,12 @@ debugger;
     						data.list = [{
 									id:'pic1',
 									url:'../images/demo/upload_success_1.jpg'
-								},
+								}/*,
 								{
 									id:'pic2',
 									url:'../images/demo/upload_success_2.jpg'
-								}]
+								}*/]
+					
 					
 								
 								var ht = $("#handleName").val();
@@ -1327,11 +1391,11 @@ debugger;
 									data.list.forEach(function(o){
 										var d = _this.tem[st];
 										debugger
-										var newId = "img"+activity.imgSourceLength;
-										d=d.replace(/#id/g,newId)
+										//var newId = "img"+activity.imgSourceLength;
+										d=d.replace(/#id/g,o.id)
 										d=d.replace(/#content/g,o.url)
 										dom += d;
-										addSourceIds.push(newId);
+										addSourceIds.push(o.id);
 										activity.imgSourceLength++;
 										
 									})
@@ -1339,7 +1403,7 @@ debugger;
 								//add
 								if(ht == 'add'){
 									
-									$(stJqId).find(".content").append(dom);
+									$(stJqId).find(".upload-panel").before(dom);
 									
 									
 								}
@@ -1370,53 +1434,66 @@ debugger;
     	}
     	activity.init();
     	
-    	$('#ee').click(function(){
-    		debugger
- var files = $('#avatar').prop('files');
- 
- var data = new FormData();
- data.append('avatar', files[0]);
- 
- $.ajax({
-  url: 'http://g1u8257706.iask.in/shopCut/uploadImage?unique=pic1&shopUserId=15&section=1&activityTypeId=2',  
-  type: 'POST',
-  data: data,
-  cache: false,
-  processData: false,
-  contentType: false
- });
-});
-    	
-    	$('#add').submit(function(){
-        var data = new FormData($('#add')[0]);  
-        console.log(data);
-        $.ajax({  
-            url: 'http://g1u8257706.iask.in/shopCut/uploadImage?unique=movie1&shopUserId=15&section=1&activityTypeId=2',  
-            type: 'POST',  
-            data: data,  
-            //dataType: 'JSON',  
-            cache: false,  
-            processData: false,  
-            contentType: fase, 
-            success:function(data){  
-            	debugger;
-                //alert(data);
-                alert("UploadFile Success");
-            }   
-        });  
+var form = document.forms.namedItem("fileinfo");
+form.addEventListener('submit', function(ev) {
+	
+	
+			var ht = $("#handleName").val();
+			var st = $("#sourceType").val();
+			var stJqId = $("#sectionType").val();
+			var csId = $("#curSourceId").val();
 
-        return false;   
-    });
-    	
-    	
+			var newId = st+activity.imgSourceLength;
+			
+			$("form input[name='unique']").val(newId);
+			$("form input[name='section']").val(stJqId.split("_")[1]);
 
-      $("#showTooltips").click(function() {
-        var tel = $('#tel').val();
-        var code = $('#code').val();
-        if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入手机号');
-        else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
-        else $.toptip('提交成功', 'success');
-      });
+      oData = new FormData(form);
+
+  //oData.append("unique", "pic1");
+  //oData.append("activityTypeId", 2);
+   // oData.append("section", 1);
+     // oData.append("shopUserId", 15);
+  var oReq = new XMLHttpRequest();
+  oReq.open("POST", "http://g1u8257706.iask.in/shopCut/uploadImage", true);
+  oReq.onload = function(oEvent) {
+    if (oReq.status == 200) {
+    	debugger;
+    	activityVue.upload_response_data = oReq.responseText;
+     alert("上传成功");
+    } else {
+      alert("上传失败："+oReq.status);
+    }
+  };
+
+  oReq.send(oData);
+  ev.preventDefault();
+}, false);
+
+ function imgPreview(fileDom){
+		//判断是否支持FileReader
+		if (window.FileReader) {
+		    var reader = new FileReader();
+		} else {
+		    alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+		}
+		
+		//获取文件
+		var file = fileDom.files[0];
+		var imageType = /^image\//;
+		//是否是图片
+		if (!imageType.test(file.type)) {
+		    alert("请选择图片！");
+		    return;
+		}
+		//读取完成
+		reader.onload = function(e) {
+		    $(fileDom).parent().prev().attr("src",e.target.result);
+		};
+		reader.readAsDataURL(file);
+}
+uploadUtil.init_event_render("#uploadBannerForm");
+
     </script>
   </body>
 </html>

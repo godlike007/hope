@@ -24,52 +24,6 @@
     background-color: #70b92c;
 
 	}
-.form-handle{
-    position: fixed;
-    bottom: -1px;
-    width: 100%;
-    /* background-color: #3d4145; */
-    text-align: center;
-    /* opacity: .8; */
-    color: #fff;	
-}
-.form-handle .mode{
-    /* position: absolute; */
-    /* color: #fff; */
-    opacity: .85;
-    background-color: #3d4145;	
-}
-.form-handle .mode .weui-cell_switch{
-    padding-top: 12px;
-}
-.form-handle .mode .weui-cell__ft{
- 		text-align: center;
-    margin: auto;
-    /* width: 100%; */
-    line-height: 32px;
-}
-.form-handle .mode .weui-cell__ft label{
- 		color: #fff;
-    vertical-align: top;
-    /* width: 202px; */
-    margin:auto 20px;
-    font-size: 20px;
-}
-
-
-
-.form-handle .save{
-    background-color: orange;
-    height: 55px;	
-        line-height: 55px;
-    font-size: 24px;
-    letter-spacing: 4px;
-}
-.form-handle a{
-    color: #fff;
-    font-size: 30px;
-    letter-spacing: 6px;	
-}
 
 </style>
 
@@ -93,75 +47,32 @@
     </header>
 
 
-<div  id="graphicVue" class="container">
+<div  id="bargainVue" class="container">
 
 	
 	<!--传单自定义内容循环-->
-	<div id="" class="poster-wrap" :style="poster_bg">
-		<div :id="item.id" class="source" v-for="item in customList">
-
-				
-				<div class="img" v-show="item.type=='img'">
-					<img :style="item.class"  alt="" />
-					<form class="upload-img" enctype="multipart/form-data" method="post" name="upload_form">
-					 
-					  <input type="hidden" name="unique" value="movie1"/><br />
-					  <input type="hidden" name="activityTypeId" value="2"/><br />
-					  <input type="hidden" name="shopUserId" value="15"/><br />
-					  <input type="hidden" name="section" value="1"/><br />
-					 
-					 <!-- <img id="upload_preview{{$index+1}}" />-->
-			
-					  <input type="file" name="file" onchange="uploadUtil.img_preview(this)" required />
-					  <input type="submit" value="提交" />
-					</form>
-					<!--<div id="upload_status{{$index+1}}"></div>-->
-				</div>
-				<div class="txt" v-show="item.type=='txt'">
-					<p :style="item.class"><input type="text" v-model="item.value"/></p>
-				</div>
-				<div class="vcd" v-show="item.type=='vcd'">
-					<img :style="item.class" :src="item.value" alt="" />
-					<form class="upload-img" enctype="multipart/form-data" method="post" name="upload_form">
-					 
-					  <input type="hidden" name="unique" value="movie1"/><br />
-					  <input type="hidden" name="activityTypeId" value="2"/><br />
-					  <input type="hidden" name="shopUserId" value="15"/><br />
-					  <input type="hidden" name="section" value="1"/><br />
-					 
-					 <!-- <img id="upload_preview{{$index+1}}" />-->
-			
-					  <input type="file" name="file" onchange="uploadUtil.img_preview(this)" required />
-					  <input type="submit" value="提交" />
-					</form>
-				</div>
-			</div>	
+	<div id="" class="theme-banner">
+		<img :src="banner" alt="" />
 	</div>
 	
-	<div class="form-handle">
-		<div class="mode">
-			<div class="weui-cell weui-cell_switch">
-        	
-	        <div class="weui-cell__ft">
-	        	<label>编辑模式</label>
-	          <input class="weui-switch" type="checkbox">
-	          <label>预览模式</label>
-	        </div>
-	      </div>
+	<div class="content">
+		<div class="price">
+			<span>原价：{{cutOriginPrice}}</span>
+			<span>底价：{{cutLeastPrice}}</span>
 		</div>
-		<div class="save" @click="publishGraphic">
-			发布活动 
+
+		<div class="cut-price" @click="cut_price">
+		帮砍价
 		</div>
-	</div>	
-
-
-
-</div>
-
-
-<div style="font-size:20px;position: absolute;left: 20%;width: 200px;height: 50px;background: transparent;">
+		
+	</div>
 	
+
+
+
 </div>
+
+
 
 
 
@@ -178,8 +89,8 @@
 				
 <script>	
 
-var graphicVue = new Vue({
-  el: '#graphicVue',
+var bargainVue = new Vue({
+  el: '#bargainVue',
   data: {
 
 		activityTypeId:2,
@@ -190,42 +101,35 @@ var graphicVue = new Vue({
 		customList:[{
 				type:'img',
 				class:'position: absolute;left: 50%;top: 1%;width: 20%;background: transparent;',
-				value:''
+				value:'../images/demo/poster_logo.jpg'
 			},
 			{
 				type:'txt',
 				class:'font-size:30px;position: absolute;left: 45%;top: 18%;width: 50%;background: transparent;',
-				value:''
+				value:'疯狂大促销'
 			},{
 				type:'vcd',
 				class:'position: absolute;left: 35%;top: 46%;width: 21%;background: transparent;',
-				value:''
+				value:'../images/demo/poster_vcd.jpg'
 			},{
 				type:'txt',
 				class:'position: absolute;left: 35%;top: 69%;width: 40%;background: transparent;',
-				value:''
+				value:'9月16日晚10点发布'
 			}],
 
 
   },
  methods: {
-    publishGraphic: function (event) {
-    	var data = this.$data;
-    	debugger
-    	this.$nextTick(function(){
-    		graphic.sumbit(data);
-			})
-
+    cut_price: function (event) {
+    	activity.join();
     },
   }
 })	 
-	  graphicVue.$nextTick(function(){
-    		uploadUtil.init_event_render(".upload-img");
-			})  	
+	    	
     	
-    	var graphic = {
+    	var activity = {
     		init:function(){
-    				/*this.getInfo({
+    				this.getInfo({
     			   vueName:'info',
     			  
     			   param:{
@@ -246,7 +150,7 @@ var graphicVue = new Vue({
     			  	
     			  
 					 });
-					 */
+					 
 
     	
     		},
@@ -258,10 +162,10 @@ var graphicVue = new Vue({
 	        }).then(function(data) {
 	        	debugger;
 	        	if(!!o.dataName){
-	        		graphicVue[o.vueName] = data[o.dataName]
+	        		bargainVue[o.vueName] = data[o.dataName]
 	        	}
 	        	else{
-	        		graphicVue[o.vueName] = data;
+	        		bargainVue[o.vueName] = data;
 	        	}
 	        	
 	
@@ -276,10 +180,10 @@ var graphicVue = new Vue({
 	        }).then(function(data) {
 	        	debugger;
 	        	if(!!o.dataName){
-	        		graphicVue[o.vueName] = data[o.dataName]
+	        		bargainVue[o.vueName] = data[o.dataName]
 	        	}
 	        	else{
-	        		graphicVue[o.vueName] = data;
+	        		bargainVue[o.vueName] = data;
 	        	}
 	        	
 	
@@ -311,10 +215,10 @@ var graphicVue = new Vue({
 					        }).then(function(data) {
 					        	debugger;
 					        	if(!!o.dataName){
-					        		graphicVue[o.vueName] = data[o.dataName]
+					        		bargainVue[o.vueName] = data[o.dataName]
 					        	}
 					        	else{
-					        		graphicVue[o.vueName] = data;
+					        		bargainVue[o.vueName] = data;
 					        	}
 					        	
 					
@@ -342,7 +246,7 @@ var graphicVue = new Vue({
 		    }
 	
     	}
-    	graphic.init();
+    	activity.init();
     	
 
     </script>
