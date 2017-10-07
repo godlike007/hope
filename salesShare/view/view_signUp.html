@@ -255,61 +255,14 @@
 		</div>
 		
 
-		
+		  报名截止倒计时：
+    已报名 :159人/不限名额 
+    费用：免费
 		
 		
 	</div>
 	
-		<div id="section_top" class="module">
-<div class="countdown">
-				    <!--<ul class="countdown">
-        <li> <span class="days">00</span>
-            <p class="days_ref">天</p>
-        </li>
-        <li class="seperator">.</li>
-        <li> <span class="hours">00</span>
-            <p class="hours_ref">小时</p>
-        </li>
-        <li class="seperator">:</li>
-        <li> <span class="minutes">00</span>
-            <p class="minutes_ref">分钟</p>
-        </li>
-        <li class="seperator">:</li>
-        <li> <span class="seconds">00</span>
-            <p class="seconds_ref">秒</p>
-        </li>
-    </ul>-->
-    {{info.activityStartTime}} - {{info.activityEndTime}}
 
-			</div>
-			<div class="content">
-				<div class="sponsor hide">
-					发起者：{{sponsor}}
-				</div>
-				
-				<div class="price">
-					<span>原价：{{info.cutOriginPrice}}</span>
-					<span>底价：{{info.cutLeastPrice}}</span>
-				</div>
-				
-				<div class="present-price hide">
-					现价：{{presentPrice }}
-				</div>
-
-				<div class="join show" @click="join">
-				我要参加
-				</div>
-				
-				<div class="bargain hide" @click="bargain">
-				我要砍价
-				</div>
-				
-				<div class="share hide" @click="share">
-				找人帮忙
-				</div>
-				<input type="hidden" name="" id="" :value="lastBargainTime" />
-			</div>
-		</div>
 	
 	
 	<!--奖品描述 1-1-->
@@ -318,15 +271,7 @@
 			{{info.sectionOneName}}
 		</div>
 		<div  class="content">
-			 <div class="weui-cell">
-	        <div class="weui-cell__bd">
 
-	          	<label for="">本期奖品份数</label>
-								{{info.prizeNumber}}
-	          	
-	        </div>
-	      </div>
-			
 			<div :id="item.id" class="source" v-for="item in section2">
 
 				
@@ -430,33 +375,20 @@
 		</div>	
 	</div>
 	
-<!--机构介绍 1-1-->
+<!--排行榜 1-1-->
 	<div id="section_6" class="module">
 		<div class="title">
-			排行榜
+			报名进行时
 		</div>
 		<div class="content">
 			
+			<div :id="item.id" class="source" v-for="item in rankList">
 
-			<table class="table table-striped table-bordered">
-            <thead>
-            <tr>
-                <th>排名</th>
-                <th>姓名</th>
-                <th>价格</th>
-
-            </tr>
-            </thead>
-            <tbody>
-
-                <tr :id="item.id" class="source" v-for="item in rankList">
-                	  <td></td>
-                	  <td>{{name}}</td>
-                	  <td>{{price}}</td>
-                </tr>
-            </tbody>
-        </table>
-
+				
+				
+			
+				
+			</div>
 			
 
 		</div>	

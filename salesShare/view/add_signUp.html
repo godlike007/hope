@@ -304,8 +304,6 @@
 <script src="../js/plugins/jquery.zyUpload/control/js/zyUpload.js"></script>
 <!-- 引用初始化JS -->
 <script src="../js/plugins/jquery.zyUpload/core/upload.js"></script>
-
-<script src="../js/plugins/json/json2.js"></script>
 <!--<script src="../js/libs/vue/vue.js"></script>-->
 
   <script src="../js/common.js"></script>
@@ -329,191 +327,54 @@
 <div  id="activityVue" class="container">
 	<div id="head_banner" class="head-banner">
 		<div class="content">
-<div id="head" class="source">
-	<div onclick="activity.change_banner()" class="hand-trigger">替换</div>
-	<div :src="headUrl" class="img">
-		<img id="defaultBanner" :src="headUrl" alt="">
-		<img id="previewBanner" class="hide" alt="">
-		<form class="hide" id="uploadBannerForm" enctype="multipart/form-data" method="post">
-		 
-		  <input type="hidden" name="unique" :value="headId"><br />
-		  <input type="hidden" name="activityTypeId" /><br />
-		  <input type="hidden" name="shopUserId"/><br />
-	
-		  <input class="hide" id="uploadBanner" type="file" name="file" onchange="uploadUtil.img_preview(this)" required />
-		  <input type="submit" value="确认上传" />
-		  <input type="button" value="取消上传" />
-		</form>
-		
-	</div>
-</div>
-			<!--<img src="" alt="" />-->
-			
-					<!--<div id="" class="source">
-				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
+			<div id="head" class="source">
+				<div onclick="activity.change_banner()" class="hand-trigger">替换</div>
+				<div :src="headUrl" class="img">
+					<img id="defaultBanner" :src="headUrl" alt="">
+					<img id="previewBanner" class="hide" alt="">
+					<form class="hide" id="uploadBannerForm" enctype="multipart/form-data" method="post">
+					 
+					  <input type="hidden" name="unique" :value="headId"><br />
+					  <input type="hidden" name="activityTypeId" /><br />
+					  <input type="hidden" name="shopUserId"/><br />
 				
-				<div class="img">
-					<img  :src="source.banner.headImgUrl" alt="" />
+					  <input class="hide" id="uploadBanner" type="file" name="file" onchange="uploadUtil.img_preview(this)" required />
+					  <input type="submit" value="确认上传" />
+					  <input type="button" value="取消上传" />
+					</form>
+					
 				</div>
-				
-			
-				
-			</div>-->
-			
-			<!--<div class="upload-panel">
-				<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
-			</div>-->
-		</div>
-		
-
-		
-		
-		
-	</div>
-	
-		<div id="section_top" class="module">
-<!--			<div class="countdown">
-				    <ul class="countdown">
-        <li> <span class="days">00</span>
-            <p class="days_ref">天</p>
-        </li>
-        <li class="seperator">.</li>
-        <li> <span class="hours">00</span>
-            <p class="hours_ref">小时</p>
-        </li>
-        <li class="seperator">:</li>
-        <li> <span class="minutes">00</span>
-            <p class="minutes_ref">分钟</p>
-        </li>
-        <li class="seperator">:</li>
-        <li> <span class="seconds">00</span>
-            <p class="seconds_ref">秒</p>
-        </li>
-    </ul>
-
-			</div>-->
-			<div class="content">
-				<div class="price">
-					<span>原价：{{preview_init_price}}</span>
-					<span>底价：{{preview_new_price}}</span>
-				</div>
-
-				<div class="join">
-					<a href="">我要参加</a>
-				</div>
-				
 			</div>
+
 		</div>
+		
+
+		<input class="weui-input" type="tel" placeholder="活动标题" v-model="title">
+		<label for="">结束时间</label>
+	   	<input type="text" id='endTime'/>
+		
+	</div>
+	
+
 	  <!--设置信息   砍价1-1-->
 	<div id="section_1" class="module">
 		<div class="title">
-			设置信息
+			规则设置
 		</div>
 		<div class="content">
 			<div class="weui-cells">
 				
-				<div class="weui-cell">
-	        <div class="weui-cell__bd">
-	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
-	          <label for="">活动标题</label>
-	          <input class="weui-input" type="tel" value="活动标题" v-model="title">
-	        </div>
-	      </div>
-				
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
-	          <label for="">开始时间</label>
-	          <input type="text" id='startTime'   @change="initCountDown(activityStartTime)"/>
+				<div class="weui-cell weui-cell_switch">
+	        <div class="weui-cell__ft">
+	        	<label>限制报名人数（是/否）：</label>
+	          <input class="weui-switch" type="checkbox" v-model="infoCollectFiveIsRequired">
 	        </div>
 	      </div>
 	      
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	         <!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
-	         	<label for="">结束时间</label>
-	         	<input type="text" id='endTime'/>
-	        </div>
-	      </div>
-	      
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	        	<label for="">原价</label>
-	          <input class="weui-input" type="tel" placeholder="原价" v-model="cutOriginPrice" @change="refreshRelativeValues('preview_init_price',cutOriginPrice)">
-	        </div>
-	      </div>
-	      
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	          <!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
-	          <label for="">底价</label>
-	         <!-- <div class="weui-slider-box" id="bottomPrice">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="bottomPriceValue" class="weui-slider-box__value">{{source.setting.value4}}</div>
-						</div>-->
-						 <input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
-	          
-	          
-	        </div>
-	      </div>
-	      
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	          <!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
-	          	<label for="">单次砍价最大值</label>
-	          	<!--<div class="weui-slider-box" id="perCutMax">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="perCutMaxValue" class="weui-slider-box__value">{{source.setting.value5}}</div>
-						</div>-->
-	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPerPerson">
-	          
-	          	
-	        </div>
-	      </div>
-	      
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
-	          	<label for="">单次砍价最小值</label>
-	          		<!--<div class="weui-slider-box" id="perCutMin">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
-						</div>-->
-	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutMostPerPerson">
-	        </div>
-	      </div>
-	      
-	      <div class="weui-cell">
-	        <div class="weui-cell__bd">
-	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
-	          	<label for="">报名者可再次给自己减价小时间隔</label>
-	          		<!--<div class="weui-slider-box" id="perCutMin">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
-						</div>-->
-	          	<input class="weui-input" type="tel" placeholder="小时间隔" v-model="redoHours">
+	      <div class="weui-cell weui-cell_switch">
+	        <div class="weui-cell__ft">
+	        	<label>是否需要费用（是/否）：</label>
+	          <input class="weui-switch" type="checkbox">
 	        </div>
 	      </div>
 	      
@@ -527,35 +388,10 @@
 	<!--奖品描述 1-1-->
 	<div id="section_2" class="module">
 		<div class="title">
-			<input class="weui-input" type="tel" value="奖品描述" v-model="sectionOneName">
+			<input class="weui-input" type="tel" value="报名须知" v-model="sectionOneName">
 		</div>
 		<div  class="content">
-			 <div class="weui-cell">
-	        <div class="weui-cell__bd">
-
-	          	<label for="">本期奖品份数</label>
-
-	          	<input class="weui-input" type="tel" placeholder="奖品份数" v-model="prizeNumber">
-	        </div>
-	      </div>
-			
-			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				
-			
-				
-			</div>-->
-			
-			
+	
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_2')">添加图片</div>
 				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_2')">添加描述</div>
@@ -570,28 +406,10 @@
 	<!--活动规则 1-1-->
 	<div id="section_3" class="module">
 		<div class="title">
-			<input class="weui-input" type="tel" value="活动规则" v-model="sectionTwoName">
+			<input class="weui-input" type="tel" value="活动内容" v-model="sectionTwoName">
 		</div>
 		<div class="content">
-			
-			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="item.id" :src="item.videoUrl"></video>
-				</div>
-			
-				
-			</div>-->
-			
+
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
 				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_3')">添加描述</div>
@@ -605,27 +423,10 @@
 	<!--领奖信息 1-1-->
 	<div id="section_4" class="module">
 		<div class="title">
-			<input class="weui-input" type="tel"  value="领奖信息" v-model="sectionThreeName">
+			<input class="weui-input" type="tel"  value="关于我们" v-model="sectionThreeName">
 		</div>
 		<div class="content">
-			
-			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="item.id" :src="item.videoUrl"></video>
-				</div>
-			
-				
-			</div>-->
+
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
@@ -643,24 +444,6 @@
 			<input class="weui-input" type="tel"  value="机构介绍" v-model="sectionFourName">
 		</div>
 		<div class="content">
-			
-			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="item.id" :src="item.videoUrl"></video>
-				</div>
-			
-				
-			</div>-->
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_5')">添加图片</div>
@@ -696,10 +479,7 @@
         	<div class="weui-cell__bd">
 	          <input class="weui-input" type="text" placeholder="手机号" v-model="infoCollectOneName">
 	        </div>
-	        <!--<div class="weui-cell__ft">
-	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
-	        </div>-->
+
 	      </div>
 			
 			<div class="weui-cells">
@@ -708,10 +488,7 @@
         	<div class="weui-cell__bd">
 	          <input class="weui-input" type="text" placeholder="姓名" v-model="infoCollectTwoName">
 	        </div>
-	        <!--<div class="weui-cell__ft">
-	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
-	        </div>-->
+
 	      </div>
 	      
 	      <div class="weui-cell weui-cell_switch">
@@ -866,13 +643,13 @@
     图片<input  type="file" name="file"/>
     <input type="submit" value="上传"/ >
 </form>-->
-<img src="" alt="" />
+
 <form id="uploadFileForm" enctype="multipart/form-data" method="post" name="fileinfo">
  
-  <input type="hidden" name="unique"/><br />
-  <input type="hidden" name="activityTypeId" /><br />
-  <input type="hidden" name="shopUserId"/><br />
-  <input type="hidden" name="section"/><br />
+  <input type="text" name="unique"/><br />
+  <input type="text" name="activityTypeId" /><br />
+  <input type="text" name="shopUserId"/><br />
+  <input type="text" name="section"/><br />
 
   <img id="preview" />
     <br />
@@ -889,19 +666,16 @@
 <div id="uploadVideo" class="weui-popup__container">
   <div class="weui-popup__overlay"></div>
   <div class="weui-popup__modal">
- <img src="" alt="" />   
-<form id="uploadVideoForm" enctype="multipart/form-data" method="post" name="fileinfo">
- 
-  <input type="hidden" name="unique"/><br />
-  <input type="hidden" name="activityTypeId" /><br />
-  <input type="hidden" name="shopUserId"/><br />
-  <input type="hidden" name="section"/><br />
+    
+    <!--<div id="uploadVideoTool" class="demo"></div>-->
+    
+<!--    <form enctype="multipart/form-data" method="post" action="http://g1u8257706.iask.in/shopCut/uploadImage">
+    图片<input onclick="activity.uploadImg()" type="file" name="file"/>
+    <input type="submit" value="上传"/ >
+</form>-->
 
 
-  <input id="uploadFile" type="file" name="file" onchange="imgPreview(this)" required />
-  <input type="submit" value="确认上传" />
-</form>
-
+    
     
     <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitVideo()">确认提交</a>
   </div>
@@ -1309,11 +1083,14 @@ var activityVue = new Vue({
 	
     			
     			var data = {}
-    						/*data.list = [{
+    						data.list = [{
 									id:'pic1',
 									url:'../demo/source/1.mp4'
-								}]*/
-								data.list = activityVue.upload_response_data.src;
+								}/*,
+								{
+									id:'pic2',
+									url:'../images/demo/upload_success_2.jpg'
+								}*/]
 					
 								
 								var ht = $("#handleName").val();
@@ -1371,15 +1148,14 @@ var activityVue = new Vue({
 	
     			
     			var data = {}
-    						/*data.list = [{
+    						data.list = [{
 									id:'pic1',
 									url:'../images/demo/upload_success_1.jpg'
-								},
+								}/*,
 								{
 									id:'pic2',
 									url:'../images/demo/upload_success_2.jpg'
-								}]*/
-								data.list = activityVue.upload_response_data.src;
+								}*/]
 					
 					
 								
@@ -1462,7 +1238,7 @@ form.addEventListener('submit', function(ev) {
   oReq.onload = function(oEvent) {
     if (oReq.status == 200) {
     	debugger;
-    	activityVue.upload_response_data = JSON.parse(oReq.responseText);
+    	activityVue.upload_response_data = oReq.responseText;
      alert("上传成功");
     } else {
       alert("上传失败："+oReq.status);
