@@ -171,3 +171,17 @@ var DATE_UTIL = {
         return obj;
 	}
 }
+
+
+var LAYOUT = {
+	render_css:function(activityTypeId,type){
+		$("body").removeAttr("class");
+		var css_root = MAP.activtiy_template[activityTypeId].style_root;
+		if(!!type){
+			$("body").addClass(css_root+"_"+type);
+		}
+		else{
+			$("body").addClass(css_root);
+		}
+	},
+}

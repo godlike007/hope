@@ -50,3 +50,16 @@ var urlConfig = {
     submitActivityUrl:"http://g1u8257706.iask.in/shopCut/submitActivity"
 };
 
+var MAP = {
+	activityTypeId:{
+		2:'bargain'
+	},
+	activtiy_template:{
+		2:{//activityTypeId
+			banner_name:'',
+			style_root:'bargain2'
+		},
+
+	}
+}
+

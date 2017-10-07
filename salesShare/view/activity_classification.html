@@ -45,6 +45,7 @@ section .progress-info{
     padding: 5px 10px 5px;
     font-size: 14px;
     color: #737272;
+    width: 92%;
 }
 section .progress-info label{
     float: left;
@@ -55,6 +56,22 @@ section .progress-info div{
     float: right;
     width: 50%;	
 }
+section .progress-info h5{
+    text-align: center;
+    font-size: 20px;
+}
+section .progress-info .btns{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    width: 100%;	
+}
+section .progress-info .btns span{
+    line-height: 30px;
+    width: 40%;
+    height: 30px;
+}
+
 
 .view-all{
 		position: fixed;
@@ -109,23 +126,20 @@ section .progress-info div{
       <div class="weui-tab__bd">
         <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
         
-        	 	<section  class=""  v-for="item in activityList"  @click="goto(item)">
+        	 	<section  class=""  v-for="item in activityList">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
-        	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+        	 				<h5>{{ item.title }}</h5>
+        	 				<div class="btns">
+        	 					<span class="btn btn-small edit"  @click="goto_edit(item)">制作</span>
+        	 				  <span class="btn btn-small search"  @click="goto_search(item)">示例</span>
+        	 				</div>
+        	 				 
+     
         
         	 		</div>
         	 	</section>
@@ -140,17 +154,10 @@ section .progress-info div{
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<h5>{{ item.title }}</h5>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
-        	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+        	 				<span class="btn btn-small edit">制作</span>
+        	 				  <span class="btn btn-small search">示例</span>
         
         	 		</div>
         	 	</section>
@@ -164,17 +171,10 @@ section .progress-info div{
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<h5>{{ item.title }}</h5>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
-        	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+        	 				<span class="btn btn-small edit">制作</span>
+        	 				  <span class="btn btn-small search">示例</span>
         
         	 		</div>
         	 	</section>
@@ -189,17 +189,10 @@ section .progress-info div{
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<h5>{{ item.title }}</h5>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
-        	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+        	 				<span class="btn btn-small edit">制作</span>
+        	 				  <span class="btn btn-small search">示例</span>
         
         	 		</div>
         	 	</section>
@@ -208,23 +201,16 @@ section .progress-info div{
         </div>
         <div id="tab5" class="weui-tab__bd-item">
         	
-        	 	<section v-for="item in activityList"  v-show="item.type == 4" class="" @click="goto(item)">
+        	 	<section v-for="item in activityList"  v-show="item.type == 4" class="">
         	 		<div class="banner">
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.value1 }}</div>
+        	 				<h5>{{ item.title }}</h5>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.value2 }}</div>
-        	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+        	 				<span class="btn btn-small edit"  @click="goto(item)">制作</span>
+        	 				  <span class="btn btn-small search">示例</span>
         
         	 		</div>
         	 	</section>
@@ -329,44 +315,32 @@ section .progress-info div{
 <script>
 var testData = [{
     	type:1,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
-    	value3:345,
-    	value4:234,
-    	themeImgUrl:'../images/demo/11.png',
+    	title:'国庆大砍价',
     	shopUserId:15,
 			activityTypeId:2,
 			activityType:'bargain',
+			themeImgUrl:'../images/demo/11.png',
     },{
     	type:1,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
-    	value3:345,
-    	value4:234,
-    	themeImgUrl:'../images/demo/22.jpg',
+    	title:'呼朋唤友来砍价',
     	shopUserId:15,
 			activityTypeId:2,
 			activityType:'bargain',
+			themeImgUrl:'../images/demo/22.jpg',
     },{
     	type:2,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
-    	value3:345,
-    	value4:234,
-    	themeImgUrl:'../images/demo/33.jpg',
+    	title:'砍价',
     	shopUserId:15,
 			activityTypeId:2,
 			activityType:'bargain',
+			themeImgUrl:'../images/demo/33.jpg',
     },{
     	type:3,
-    	value1:'2017-03-03',
-    	value2:'2017-06-12',
-    	value3:345,
-    	value4:234,
-    	themeImgUrl:'../images/demo/44.jpg',
+    	title:'砍价吧兄弟',
     	shopUserId:15,
 			activityTypeId:2,
 			activityType:'bargain',
+			themeImgUrl:'../images/demo/44.jpg',
     }]	
 	
 	
@@ -377,8 +351,15 @@ var  classificationVue = new Vue({
     activityList:testData 
   },
  methods: {
-    goto: function (item) {
-    		location.href="add_activity.html?shopUserId="+item.shopUserId+"&activityTypeId=" + item.activityTypeId+"&activityType=" + item.activityType
+    goto_edit: function (item) {
+    	setTimeout(function(){
+    			location.href="add_activity.html?shopUserId="+item.shopUserId+"&activityTypeId=" + item.activityTypeId+"&activityType=" + item.activityType
+    	},500)
+    },
+    goto_search: function (item) {
+    	setTimeout(function(){
+    			location.href="demo_activity.html?shopUserId="+item.shopUserId+"&activityTypeId=" + item.activityTypeId+"&activityType=" + item.activityType
+    	},500)
     },
     showActivity: function (type) {
     	debugger    	

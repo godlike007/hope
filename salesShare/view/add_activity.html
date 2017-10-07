@@ -172,89 +172,6 @@
     letter-spacing: 6px;	
 }
 
-
-
-/*countdown*/
-/*  @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
-        body {
-            background: #363f48;
-            color: white;
-            font: normal 12px 'Open Sans', sans-serif;
-            margin-top: 20px;
-        }
-        
-        ul.countdown {
-            list-style: none;
-            margin: 75px 0;
-            padding: 0;
-            display: block;
-            text-align: center;
-        }
-        
-        ul.countdown li {
-            display: inline-block;
-        }
-        
-        ul.countdown li span {
-            font-size: 80px;
-            font-weight: 300;
-            line-height: 80px;
-        }
-        
-        ul.countdown li.seperator {
-            font-size: 80px;
-            line-height: 70px;
-            vertical-align: top;
-        }
-        
-        ul.countdown li p {
-            color: #a7abb1;
-            font-size: 14px;
-        }
-        
-        a {
-            color: #76949F;
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        .source {
-            width: 405px;
-            margin: 0 auto;
-            background: #4f5861;
-            color: #a7abb1;
-            font-weight: bold;
-            display: block;
-            white-space: pre;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-        }
-        
-        .btn {
-            background: #f56c4c;
-            margin: 40px auto;
-            padding: 12px;
-            display: block;
-            width: 100px;
-            color: white;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: bold;
-            text-decoration: none;
-            -webkit-border-radius: 2px;
-            -moz-border-radius: 2px;
-            border-radius: 2px;
-        }
-        
-        .btn:hover {
-            text-decoration: none;
-            opacity: .7;
-        }*/
-
 #section_1.preview{
 	display: none;
 }
@@ -293,8 +210,14 @@
     width: 100%;
 
 }
-</style>
 
+.edit-title{
+	    border: 2px dashed #adadad;
+    background-color: #ffffff;
+    color: #5a5e61;
+}
+</style>
+<link rel="stylesheet" href="../css/layouts/template.css">
   </head>
   <script src="../js/libs/vue/vue.js"></script>
 <script src="../js/libs/jquery/jquery-2.1.4.js"></script>
@@ -330,10 +253,10 @@
 	<div id="head_banner" class="head-banner">
 		<div class="content">
 <div id="head" class="source">
-	<div onclick="activity.change_banner()" class="hand-trigger">替换</div>
+	<div class="hand-trigger open-popup" data-target="#select_banner">替换</div>
 	<div :src="headUrl" class="img">
 		<img id="defaultBanner" :src="headUrl" alt="">
-		<img id="previewBanner" class="hide" alt="">
+		<!--<img id="previewBanner" class="hide" alt="">
 		<form class="hide" id="uploadBannerForm" enctype="multipart/form-data" method="post">
 		 
 		  <input type="hidden" name="unique" :value="headId"><br />
@@ -343,28 +266,11 @@
 		  <input class="hide" id="uploadBanner" type="file" name="file" onchange="uploadUtil.img_preview(this)" required />
 		  <input type="submit" value="确认上传" />
 		  <input type="button" value="取消上传" />
-		</form>
+		</form>-->
 		
 	</div>
 </div>
-			<!--<img src="" alt="" />-->
-			
-					<!--<div id="" class="source">
-				<div @click="editSourceItem(source.banner)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img">
-					<img  :src="source.banner.headImgUrl" alt="" />
-				</div>
-				
-			
-				
-			</div>-->
-			
-			<!--<div class="upload-panel">
-				<a class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#head_banner')">添加图片</a>
-			</div>-->
+
 		</div>
 		
 
@@ -374,26 +280,7 @@
 	</div>
 	
 		<div id="section_top" class="module">
-<!--			<div class="countdown">
-				    <ul class="countdown">
-        <li> <span class="days">00</span>
-            <p class="days_ref">天</p>
-        </li>
-        <li class="seperator">.</li>
-        <li> <span class="hours">00</span>
-            <p class="hours_ref">小时</p>
-        </li>
-        <li class="seperator">:</li>
-        <li> <span class="minutes">00</span>
-            <p class="minutes_ref">分钟</p>
-        </li>
-        <li class="seperator">:</li>
-        <li> <span class="seconds">00</span>
-            <p class="seconds_ref">秒</p>
-        </li>
-    </ul>
 
-			</div>-->
 			<div class="content">
 				<div class="price">
 					<span>原价：{{preview_init_price}}</span>
@@ -449,15 +336,7 @@
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
 	          <label for="">底价</label>
-	         <!-- <div class="weui-slider-box" id="bottomPrice">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="bottomPriceValue" class="weui-slider-box__value">{{source.setting.value4}}</div>
-						</div>-->
+
 						 <input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
 	          
 	          
@@ -468,15 +347,7 @@
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
 	          	<label for="">单次砍价最大值</label>
-	          	<!--<div class="weui-slider-box" id="perCutMax">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="perCutMaxValue" class="weui-slider-box__value">{{source.setting.value5}}</div>
-						</div>-->
+
 	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPerPerson">
 	          
 	          	
@@ -487,15 +358,7 @@
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
 	          	<label for="">单次砍价最小值</label>
-	          		<!--<div class="weui-slider-box" id="perCutMin">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
-						</div>-->
+
 	          	<input class="weui-input" type="tel" placeholder="底价" v-model="cutMostPerPerson">
 	        </div>
 	      </div>
@@ -504,15 +367,7 @@
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
 	          	<label for="">报名者可再次给自己减价小时间隔</label>
-	          		<!--<div class="weui-slider-box" id="perCutMin">
-						  <div class="weui-slider">
-						    <div id="sliderInner" class="weui-slider__inner">
-						      <div id="sliderTrack" style="width: 75%;" class="weui-slider__track"></div>
-						      <div id="sliderHandler" style="left: 75%;" class="weui-slider__handler"></div>
-						    </div>
-						  </div>
-						  <div id="perCutMinValue" class="weui-slider-box__value">{{source.setting.value6}}</div>
-						</div>-->
+
 	          	<input class="weui-input" type="tel" placeholder="小时间隔" v-model="redoHours">
 	        </div>
 	      </div>
@@ -526,7 +381,7 @@
 	
 	<!--奖品描述 1-1-->
 	<div id="section_2" class="module">
-		<div class="title">
+		<div class="title edit-title">
 			<input class="weui-input" type="tel" value="奖品描述" v-model="sectionOneName">
 		</div>
 		<div  class="content">
@@ -539,21 +394,6 @@
 	        </div>
 	      </div>
 			
-			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				
-			
-				
-			</div>-->
 			
 			
 			<div class="upload-panel">
@@ -569,28 +409,12 @@
 	
 	<!--活动规则 1-1-->
 	<div id="section_3" class="module">
-		<div class="title">
+		<div class="title edit-title">
 			<input class="weui-input" type="tel" value="活动规则" v-model="sectionTwoName">
 		</div>
 		<div class="content">
 			
-			<!--<div :id="item.id" class="source" v-for="item in source.prizeList">
-				<div @click="editSourceItem(item)" class="hand-trigger open-popup" data-target="#sourceHandle">
-				编辑
-				</div>
-				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="item.id" :src="item.imgUrl" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="item.id">{{item.txt}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="item.id" :src="item.videoUrl"></video>
-				</div>
-			
-				
-			</div>-->
+
 			
 			<div class="upload-panel">
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
@@ -604,7 +428,7 @@
 	
 	<!--领奖信息 1-1-->
 	<div id="section_4" class="module">
-		<div class="title">
+		<div class="title edit-title">
 			<input class="weui-input" type="tel"  value="领奖信息" v-model="sectionThreeName">
 		</div>
 		<div class="content">
@@ -639,7 +463,7 @@
 	
 	<!--机构介绍 1-1-->
 	<div id="section_5" class="module">
-		<div class="title">
+		<div class="title edit-title">
 			<input class="weui-input" type="tel"  value="机构介绍" v-model="sectionFourName">
 		</div>
 		<div class="content">
@@ -836,13 +660,59 @@
               </p>
             </a>
             
+          </div> 
+		  </div>
+		</div>
+		
+<!--替换banner-->
+<div id="select_banner" class="weui-popup__container popup-bottom">
+		  <div class="weui-popup__overlay"></div>
+		  <div class="weui-popup__modal">
+		  	
+
+		  <div class="weui-grids">
+            <a @click="use_style()" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+               默认风格
+              </p>
+            </a>
+            <a  @click="use_style(1)" href="javascript:;" class="weui-grid js_grid" data-id="progress">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_progress.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                风格一
+              </p>
+            </a>
+            <a @click="use_style(2)" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_msg.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                风格二
+              </p>
+            </a>
+            <a @click="use_style(3)" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
+              <div class="weui-grid__icon">
+                <img src="images/icon_nav_dialog.png" alt="">
+              </div>
+              <p class="weui-grid__label">
+                风格三
+              </p>
+            </a>
+
+
+            
           </div>
 		   
 		   
 		  </div>
 		</div>
-		
-	
+
+
 </div>
 
 
@@ -969,7 +839,7 @@ var activityVue = new Vue({
 		
 		shopUserId:BASE_UTIL.get_url_param('shopUserId'),
 		activityTypeId:BASE_UTIL.get_url_param('activityTypeId'),
-		
+		activityType:BASE_UTIL.get_url_param('activityType'),
 		title:'',
 		
 		cutOriginPrice:'',
@@ -992,10 +862,10 @@ var activityVue = new Vue({
 		
 		prizeNumber:'',
 		
-		sectionOneName:'',
-		sectionTwoName:'',
-		sectionThreeName:'',
-		sectionFourName:'',
+		sectionOneName:'奖品描述',
+		sectionTwoName:'活动规则',
+		sectionThreeName:'领奖信息',
+		sectionFourName:'机构介绍',
 		
 		consultPhoneNumber:'',
   	
@@ -1009,6 +879,12 @@ var activityVue = new Vue({
     upload_response_data:''
   },
  methods: {
+ 		use_style: function (type) {
+    	debugger
+
+    	this.headUrl='../images/activity/'+BASE_UTIL.get_url_param('activityType')+"/"+BASE_UTIL.get_url_param('activityType')+BASE_UTIL.get_url_param('activityTypeId')+(!!type?"_"+type:'')+".jpg",
+			LAYOUT.render_css(BASE_UTIL.get_url_param('activityTypeId'),type);
+    },
     submit: function (event) {
     	debugger
     	this.info.province = $("#selectArea").val().split(" ")[0];
@@ -1199,6 +1075,9 @@ var activityVue = new Vue({
     			 	})
     		},
     		init:function(){
+    			
+    			 LAYOUT.render_css(BASE_UTIL.get_url_param('activityTypeId'));
+    			
     			 $("#startTime").datetimePicker();
     			 $("#endTime").datetimePicker();
     			 
@@ -1228,19 +1107,20 @@ var activityVue = new Vue({
 		            param: param
 		        }).then(function(data) {
 		        	debugger;
-		        	//location.href = urlConfig.toCenterUrl;
-		
+		        	$.toast("发布成功");
+		        	location.href =	location.href="add_activity.html?shopUserId="+activityVue.shopUserId+"&activityTypeId=" + data.activityTypeId+"&activityType=" + item.activityType
+    	
 		        }, function(err) {
 		            console.log(err);
 		        });
 					
 		    },
-				change_banner:function (param) {    	 
+				/*change_banner:function (param) {    	 
 					$("#uploadBanner").click();
 					
 					$("#previewBanner").add("#uploadBannerForm").removeClass("hide");
 					$("#defaultBanner").addClass("hide")
-		    },
+		    },*/
     		handleImgSourceIndex:function(addSourceIds,curSourceId,handleName,sectionType){
     			
     			var indexs = this.sectionSourceIndex[sectionType]||[];
@@ -1287,7 +1167,7 @@ var activityVue = new Vue({
 
 					if(ht == 'add'){
 						
-						$(stJqId).find(".content").append(dom);
+						$(stJqId).find(".upload-panel").before(dom);
 					}
 					
 					//insert
@@ -1495,7 +1375,7 @@ form.addEventListener('submit', function(ev) {
 		};
 		reader.readAsDataURL(file);
 }
-uploadUtil.init_event_render("#uploadBannerForm");
+//uploadUtil.init_event_render("#uploadBannerForm");
 
     </script>
   </body>

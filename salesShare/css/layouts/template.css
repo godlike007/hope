@@ -1,0 +1,58 @@
+
+/*活动模版样式*/
+/*default*/
+.bargain2 .container {
+	background-color: #fd463e;
+}
+.bargain2 .container .main-title{
+    color: #fff;
+    font-size: 20px;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+}
+/*倒计时*/
+.bargain2 #count_down{
+    text-align: center;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #76edf0;	
+}
+.bargain2 #count_down span{
+	  font-size: 20px;
+    color: #f5352c;
+}
+.bargain2 .module .title {
+    background-color: #ffd700;
+    color: #e13f5e;
+
+}
+/*style1*/
+.bargain2_1 .container {
+	background-color: #fff001;
+}
+.bargain2_1 .container .main-title{
+    color: #d40034;
+    font-size: 20px;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+}
+/*倒计时*/
+.bargain2_1 #count_down{
+    text-align: center;
+    width: 90%;
+    margin: 20px auto;
+    background-color: #76edf0;	
+}
+.bargain2_1 #count_down span{
+	  font-size: 20px;
+    color: #f5352c;
+}
+.bargain2_1 .module .title {
+    background-color: #bc5e2b;
+    color: #ffffff;
+
+}
