@@ -45,8 +45,9 @@ var urlConfig = {
     getSectionContentyUrl:"http://g1u8257706.iask.in/shopCut/getSectionContent",
     registerUrl:"http://g1u8257706.iask.in/clientCut/register",
     
-    //上传图片
+    //上传
     uploadImgUrl:"http://g1u8257706.iask.in/shopCut/uploadImage",
+    uploadMedia:"http://g1u8257706.iask.in/shopCut/uploadMedia",
     submitActivityUrl:"http://g1u8257706.iask.in/shopCut/submitActivity"
 };
 

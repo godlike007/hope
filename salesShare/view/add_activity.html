@@ -736,7 +736,7 @@
     图片<input  type="file" name="file"/>
     <input type="submit" value="上传"/ >
 </form>-->
-<img src="" alt="" />
+<img class="preview-upload-img" src="" alt="" />
 <form id="uploadFileForm" enctype="multipart/form-data" method="post" name="fileinfo">
  
   <input type="hidden" name="unique"/><br />
@@ -744,15 +744,24 @@
   <input type="hidden" name="shopUserId"/><br />
   <input type="hidden" name="section"/><br />
 
-  <img id="preview" />
-    <br />
-  <input id="uploadFile" type="file" name="file" onchange="imgPreview(this)" required />
-  <input type="submit" value="确认上传" />
+<!--  <input id="uploadFile" type="file" name="file" onchange="imgPreview(this)" required />
+  <input type="submit" value="确认上传" />-->
+  
+  
+  <div class="uploader blue">
+<input type="text" class="filename" readonly="readonly"/>
+<input type="button" name="file" class="select-upload-file" value="选择图片"/>
+<input id="uploadFile" type="file" name="file"  size="30" onchange="imgPreview(this)" />
+
+ <input type="submit" value="确认上传" />
+</div>
+  
 </form>
 
     
     
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认提交</a>
+<!--    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认</a>-->
+    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup bg_#bdbdbd">取消</a>
   </div>
 </div>
 
@@ -768,12 +777,21 @@
   <input type="hidden" name="section"/><br />
 
 
-  <input id="uploadFile" type="file" name="file" onchange="imgPreview(this)" required />
-  <input type="submit" value="确认上传" />
+  
+<div class="uploader blue">
+<input type="text" class="filename" readonly="readonly"/>
+<input type="button" name="file" class="select-upload-file" value="选择视频"/>
+<input id="uploadVideo" type="file" name="file"  size="30"/>
+
+ <input type="submit" value="确认上传" />
+</div>
 </form>
 
     
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitVideo()">确认提交</a>
+    <!--<a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitVideo()">确认提交</a>-->
+    
+     <a href="javascript:;" class="weui-btn weui-btn_primary close-popup bg_#bdbdbd">取消</a>
+    
   </div>
 </div>
 
@@ -1107,9 +1125,13 @@ var activityVue = new Vue({
 		            param: param
 		        }).then(function(data) {
 		        	debugger;
-		        	$.toast("发布成功");
-		        	location.href =	location.href="add_activity.html?shopUserId="+activityVue.shopUserId+"&activityTypeId=" + data.activityTypeId+"&activityType=" + item.activityType
-    	
+
+							$.toast("发布成功", function() {
+							  location.href =	location.href="view_activity.html?shopUserId="+activityVue.shopUserId+
+							  "&shopUserActivityId=" + data.shopUserActivityId+
+							  "&activityTypeId=" + activityVue.activityTypeId+
+							  "&activityType=" + activityVue.activityType;
+							});		
 		        }, function(err) {
 		            console.log(err);
 		        });
@@ -1343,7 +1365,9 @@ form.addEventListener('submit', function(ev) {
     if (oReq.status == 200) {
     	debugger;
     	activityVue.upload_response_data = JSON.parse(oReq.responseText);
-     alert("上传成功");
+
+     $.toptip('上传成功', 'success');
+     activity.sureSubmitImg();
     } else {
       alert("上传失败："+oReq.status);
     }
@@ -1371,12 +1395,23 @@ form.addEventListener('submit', function(ev) {
 		}
 		//读取完成
 		reader.onload = function(e) {
-		    $(fileDom).parent().prev().attr("src",e.target.result);
+		    $(fileDom).parent().parent().prev().attr("src",e.target.result);
 		};
 		reader.readAsDataURL(file);
 }
-//uploadUtil.init_event_render("#uploadBannerForm");
-
+uploadUtil.init_event_render("#uploadVideoForm",{
+	url:urlConfig.uploadMedia,
+	callback:function(){
+		$.toptip('上传成功', 'success');
+		activity.sureSubmitVideo();
+	}
+});
+$(function(){
+	$("input[type=file]").change(function(){$(this).parents(".uploader").find(".filename").val($(this).val());});
+	$("input[type=file]").each(function(){
+	if($(this).val()==""){$(this).parents(".uploader").find(".filename").val("尚未选择文件...");}
+	});
+});
     </script>
   </body>
 </html>

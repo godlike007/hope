@@ -81,20 +81,22 @@ var uploadUtil = {
         //读取完成
         reader.onload = function(e) {
             //获取图片dom
-            $(_this).parent().prev().attr("src",e.target.result);
-            $(_this).parent().prev().addClass("opa050");
+            $(_this).parent().parent().prev().attr("src",e.target.result);
+            $(_this).parent().parent().prev().addClass("opa050");
             //图片路径设置为读取的图片
             //img.src = e.target.result;
         };
         reader.readAsDataURL(file);
 	},
-	single_file:function(_this,callback){
+	single_file:function(_this,param){
+
+		
 		$(_this).submit(function(ev){
 		  	var oReq = new XMLHttpRequest();
-		    oReq.open("POST", urlConfig.uploadImgUrls, true);
+		    oReq.open("POST", param.url||urlConfig.uploadImgUrls, true);
 		    oReq.onload = function(oEvent) {
 			    if (oReq.status == 200) {
-			    	if(!!callback){
+			    	if(!!param.callback){
 				    	callback();
 			    	}
 		    		else{
@@ -113,9 +115,12 @@ var uploadUtil = {
 		  
 		  });
 	},
-	init_event_render:function(jq_selector){
+	init_event_render:function(jq_selector,param){
+		
+		
+		
 		$(jq_selector).each(function(o){
-			uploadUtil.single_file(o);
+			uploadUtil.single_file(o,param);
 		  
 		})
 	},
