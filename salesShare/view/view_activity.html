@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="../css/layouts/common.css">
 
 <link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
-
+<link rel="stylesheet" href="../css/layouts/alert.css">
 <style type="text/css">
 	video,
 	img{
@@ -26,7 +26,7 @@
     padding-bottom: 20px;
 	}
 .head-banner{
-    background-color: #70b92c;
+
 }	
 .head-banner .title{
 	text-align: center;
@@ -89,8 +89,7 @@
 }
 
 .module .content .source{
-    padding: 4%;
-    border: 1px dashed #ccc;
+
     margin: 3%;	
 }
 .module .content .source.preview{
@@ -208,6 +207,28 @@
 #section_top .join a{
     color: #fff;
 }
+
+
+.customer-info{
+	margin-top: 10px;
+}
+.customer-info input{
+	
+}
+
+/*发起人*/
+.self-not-join .sponsor{
+	display: none;
+}
+.self-not-join .sponsor{
+	display: none;
+}
+.self-not-join .sponsor{
+	display: none;
+}
+.self-not-join .sponsor{
+	display: none;
+}
 </style>
 <link rel="stylesheet" href="../css/layouts/template.css">
   </head>
@@ -223,6 +244,8 @@
 
 <script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
 <script src="../js/plugins/jquery.cookie/jquery.cookie.js"></script>
+<script src="../js/plugins/alert/alert.js"></script>
+<script src="../js/plugins/alert/alert-api.js"></script>
   <body ontouchstart>
 
 
@@ -241,20 +264,20 @@
 	<div class="main-title">
 		{{info.title}}
 	</div>
-	<div id="count_down"> 
-    	活动结束倒计时
-			<span class="days">00</span>天
-			<span class="hours">00</span>时
-			<span class="minutes">00</span>分
-			<span class="seconds">00</span>秒
-		</div>
-	
+<!--	<div id="count_down"> 
+	活动结束倒计时
+		<span class="days">00</span>天
+		<span class="hours">00</span>时
+		<span class="minutes">00</span>分
+		<span class="seconds">00</span>秒
+	</div>
+	-->
 	
 <div id="section_top" class="module">
 
 			<div class="content">
-				<div class="sponsor hide">
-					发起者：{{info.sponsor}}
+				<div class="sponsor">
+					发起者：{{cut_info.name}}
 				</div>
 				
 				<div class="price">
@@ -262,19 +285,23 @@
 					<span>底价：{{info.cutLeastPrice}}</span>
 				</div>
 				
-				<div class="present-price hide">
-					现价：{{info.presentPrice }}
+				<div class="present-price">
+					现价：{{cut_info.cutCurrentPrice }}
 				</div>
 
-				<div class="join show" @click="join">
+				<div class="join" @click="join">
 				我要参加
 				</div>
 				
-				<div class="bargain hide" @click="bargain">
+				<div class="bargain" @click="bargain">
 				我要砍价
 				</div>
 				
-				<div class="share hide" @click="share">
+				<div class="help-bargain" @click="help_bargain">
+				帮他砍价
+				</div>
+				
+				<div class="share" @click="share">
 				找人帮忙
 				</div>
 				<input type="hidden" name="" id="" :value="info.lastBargainTime" />
@@ -283,7 +310,7 @@
 	
 	
 	<!--奖品描述 1-1-->
-	<div id="section_2" class="module" >
+	<div id="section_1" class="module" >
 		<div class="title">
 			{{info.sectionOneName}}
 		</div>
@@ -297,18 +324,16 @@
 	        </div>
 	      </div>
 			
-			<div :id="item.id" class="source" v-for="item in section2">
-
-				
+			<div :id="item.id" class="source" v-for="item in section1">
+			
 				<div class="img" v-show="item.type==1">
 					<img data-index-id="" :src="item.value" alt="" />
 				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
+				<div class="txt" v-show="item.type==2" :val="item.value">
+					<input type="" name="" id="" value="" />
 				</div>
 				
-			
-				
+	
 			</div>
 			
 
@@ -319,20 +344,20 @@
 
 	
 	<!--活动规则 1-1-->
-	<div id="section_3" class="module" >
+	<div id="section_2" class="module" >
 		<div class="title">
 			{{info.sectionTwoName}}
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section3">
+			<div :id="item.id" class="source" v-for="item in section2">
 
 				
 				<div class="img" v-show="item.type==1">
 					<img data-index-id="" :src="item.value" alt="" />
 				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
+				<div class="txt" v-show="item.type==2" :val="item.value">
+					
 				</div>
 				<div class="video" v-show="item.type==3">
 					<video data-index-id="" :src="item.value"></video>
@@ -346,20 +371,20 @@
 	</div>
 	
 	<!--领奖信息 1-1-->
-	<div id="section_4" class="module" >
+	<div id="section_3" class="module" >
 		<div class="title">
 			{{info.sectionThreeName}}
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section4">
+			<div :id="item.id" class="source" v-for="item in section3">
 
 				
 				<div class="img" v-show="item.type==1">
 					<img data-index-id="" :src="item.value" alt="" />
 				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
+				<div class="txt" v-show="item.type==2" :val="item.value">
+					
 				</div>
 				<div class="video" v-show="item.type==3">
 					<video data-index-id="" :src="item.value"></video>
@@ -374,20 +399,20 @@
 	
 	
 	<!--机构介绍 1-1-->
-	<div id="section_5" class="module" >
+	<div id="section_4" class="module" >
 		<div class="title">
 			{{info.sectionFourName}}
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section5">
+			<div :id="item.id" class="source" v-for="item in section4">
 
 				
 				<div class="img" v-show="item.type==1">
 					<img data-index-id="" :src="item.value" alt="" />
 				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
+				<div class="txt" v-show="item.type==2" :val="item.value">
+					
 				</div>
 				<div class="video" v-show="item.type==3">
 					<video data-index-id="" :src="item.value"></video>
@@ -401,7 +426,7 @@
 	</div>
 	
 <!--机构介绍 1-1-->
-	<div id="section_6" class="module">
+	<div id="section_5" class="module">
 		<div class="title">
 			排行榜
 		</div>
@@ -433,53 +458,20 @@
 	</div>
 	
 	<div id="userInfo" class="customer-info hide">
-		
-		<div class="weui-cells">
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeOne">
-				</div>
-			</div>
-
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeTwo">
-				</div>
-			</div>
-
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeThree">
-				</div>
-			</div>
-
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeFour">
-				</div>
-			</div>
-
-			<div class="weui-cell">
-				<div class="weui-cell__bd">
-					<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName" v-model="userInfo.infoAttributeFive">
-				</div>
-			</div>
-		</div>
-		
-		
-		
-		
-		
-	<input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectOneIsRequireds==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectOneName">
+	<img :src="banner_url" alt="" />	
+<input v-show="info.infoCollectOneName!=''" :class="info.infoCollectOneIsRequireds==2?'must-fill':''" type="text" :placeholder="info.infoCollectOneName" v-model="info.infoCollectOneName">
 		 <br>
-		 <input v-show="info.infoCollectTwoName!=''" class="weui-input {{info.infoCollectTwoIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectTwoName">
+		 <input v-show="info.infoCollectTwoName!=''" :class="info.infoCollectTwoIsRequired==2?'must-fill':''" type="text" :placeholder="info.infoCollectTwoName" v-model="info.infoCollectTwoName">
 		 <br>
-		 <input v-show="info.infoCollectOneName!=''" class="weui-input {{info.infoCollectThreeIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectThreeName">
+		 <input v-show="info.infoCollectOneName!=''" :class="info.infoCollectThreeIsRequired==2?'must-fill':''" type="text" :placeholder="info.infoCollectThreeName" v-model="info.infoCollectThreeName">
 		 <br>
-		 <input v-show="info.infoCollectFourName!=''" class="weui-input {{info.infoCollectFourIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectFourName">
+		 <input v-show="info.infoCollectFourName!=''" :class="info.infoCollectFourIsRequired==2?'must-fill':''" type="text" :placeholder="info.infoCollectFourName" v-model="info.infoCollectFourName">
 		 <br>
-		 <input v-show="info.infoCollectFiveName!=''" class="weui-input {{info.infoCollectFiveIsRequired==2?'must-fill':''}}" type="text" :placeholder="info.infoCollectFiveName">
+		 <input v-show="info.infoCollectFiveName!=''" :class="info.infoCollectFiveIsRequired==2?'must-fill':''" type="text" :placeholder="info.infoCollectFiveName" v-model="info.infoCollectFiveName">
 		<br>		 
+		
+		
+	 
 	</div>
 
 
@@ -513,6 +505,17 @@ var activityVue = new Vue({
 		activityTypeId:BASE_UTIL.get_url_param('activityTypeId'),
 		activityType:BASE_UTIL.get_url_param('activityType'),
 		//
+		cut_info:{
+			clientUserActivityId:'',
+			clientUserActivityStatus:'',
+			completeTime:'',
+			cutCurrentPrice:'',
+			friendHelpNumber:'',
+			shopUserActivityId:'',
+			success:'',
+			totalCutNumber:'',
+			name:'',
+		},
 		info:{
 			title:'',
 		
@@ -544,9 +547,10 @@ var activityVue = new Vue({
 			consultPhoneNumber:'',
 			
 			//TODO
-			sponsor:'王明',
+			sponsor:'',
 			presentPrice:'',
-			lastBargainTime:'12/27/2025 00:00:00',
+			//lastBargainTime:'12/27/2025 00:00:00',
+			lastBargainTime:'',
 		},
 		
 			
@@ -559,10 +563,10 @@ var activityVue = new Vue({
 			infoAttributeFive:'',
 		},
 		
+		section1:[],
 		section2:[],
 		section3:[],
 		section4:[],
-		section5:[],
 		rankList:[]
 
   },
@@ -573,6 +577,9 @@ var activityVue = new Vue({
     bargain: function (event) {
     	activity.bargain();
     },
+    help_bargain: function (event) {
+    	activity.help_bargain();
+    },
     share: function (event) {
     	activity.bargain();
     },
@@ -582,34 +589,48 @@ var activityVue = new Vue({
     	
     	var activity = {
     		init:function(){
-    			   LAYOUT.render_css(BASE_UTIL.get_url_param('activityTypeId'));
+    			  LAYOUT.render_css(BASE_UTIL.get_url_param('activityTypeId'));
     			  
     			  this.check_join_status();
     			  
-    			  $('#count_down').downCount({
+    			  /*$('#count_down').downCount({
 			            date: activityVue.info.lastBargainTime,
 			            offset: +10
 			        }, function () {
 			            alert('倒计时结束!');
-			        });
+			        });*/
     			
     			
     				this.getInfo({
     			   vueName:'info',
     			  
     			   param:{
-    			   	shopUserActivityId:30,
+    			   	shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),
     			   }
 					 });
-    			
+					 
+					 
+					 if(BASE_UTIL.get_url_param('clientUserActivityId')!=null){
+					 	this.request({
+    			  	//vueName:'section2',
+    			  	 vueName:'cut_info',
+		    			 url:urlConfig.getCutInfo,
+		    			   param:{
+		    			  	  clientUserActivityId:BASE_UTIL.get_url_param('clientUserActivityId'),		
+										shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),							
+		    			   }
+							 });
+					 }
+    				
+					 
     			  this.request({
     			  	vueName:'section2',
-    			  	 dataName:'content',
+    			  	dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
+    			   	shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),
+	    			  activityTypeId:BASE_UTIL.get_url_param('activityTypeId'),
+						 	shopUserId:BASE_UTIL.get_url_param('shopUserId'),
 						 	section:1
     			   }
     			  	
@@ -621,10 +642,10 @@ var activityVue = new Vue({
     			  dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
-						 	section:3
+    			   	shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),
+	    			  activityTypeId:BASE_UTIL.get_url_param('activityTypeId'),
+						 	shopUserId:BASE_UTIL.get_url_param('shopUserId'),
+						 	section:2
     			   }
 					 });
 					 
@@ -633,9 +654,9 @@ var activityVue = new Vue({
     			  dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
+    			   	shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),
+	    			  activityTypeId:BASE_UTIL.get_url_param('activityTypeId'),
+						 	shopUserId:BASE_UTIL.get_url_param('shopUserId'),
 						 	section:3
     			   }
 					 });
@@ -645,16 +666,27 @@ var activityVue = new Vue({
     			  dataName:'content',
     			 url:urlConfig.getSectionContentyUrl,
     			   param:{
-    			   	shopUserActivityId:30,
-	    			  activityTypeId:2,
-						 	shopUserId:'15',
+    			   	shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),
+	    			  activityTypeId:BASE_UTIL.get_url_param('activityTypeId'),
+						 	shopUserId:BASE_UTIL.get_url_param('shopUserId'),
 						 	section:4
     			   }
 					 });
+					 
+					 activityVue.$nextTick(function(){
+						
+								$(".source .txt").each(function(index,item){
+									var html = $(item).attr("val");
+									$(item).append(html);
+
+								})
+		
+							})
 
     	
     		},
     		check_join_status:function () { 
+    			debugger;
     			//$.cookie('isJoin',1);
     			if(!!$.cookie('isJoin')){
     				$("#section_top .show").removeClass("show").addClass("hide");
@@ -662,10 +694,75 @@ var activityVue = new Vue({
     			}
 		    },
 		    bargain:function () { 
-    			BASE_UTIL.get_random_in_range(activityVue.info.cutLeastPerPerson,activityVue.info.cutMostPerPerson);
-		    	var time_remaining = DATE_UTIL.get_date_diff(activityVue.info.lastBargainTime);
-		    	var can_be_again = time_remaining.days*24+time_remaining.hours>activityVue.info.redoHours;
-		    	if(can_be_again){
+    			//BASE_UTIL.get_random_in_range(activityVue.info.cutLeastPerPerson,activityVue.info.cutMostPerPerson);
+		    	//var time_remaining = DATE_UTIL.get_date_diff(activityVue.info.lastBargainTime);
+		    	//var can_be_again = time_remaining.days*24+time_remaining.hours>activityVue.info.redoHours;
+		    	//if(can_be_again){
+		    		
+
+		    		request.postData({
+		            url: urlConfig.doCut,
+		            param:{			    		 
+									clientUserActivityId:BASE_UTIL.get_url_param('clientUserActivityId'),		
+									shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),							
+									isSelf:true					
+				    	}
+		        }).then(function(data) {
+		        	debugger;
+		        	if(data.success){
+		        		$.toast("砍价成功！");
+		        		//TODO倒计时
+		        	}
+		        	else{
+		        		$.alert("还剩"+DATE_UTIL.timestamp_to_date(data.leftTime)+"才能继续砍价");
+		        	}
+		        }, function(err) {
+		            console.log(err);
+		        });
+		    		
+		    		
+		    	//}
+		    	/*else{
+		    		var leftH = activityVue.info.redoHours-time_remaining.days*24-time_remaining.hours-1;
+		    		var leftM = 60-time_remaining.minutes;
+		    		
+		    		$.modal({
+						  title: "提示",
+						  text: "还剩"+leftH+"小时"+leftM+"分钟"+"才能继续哦，可以分享给朋友求帮忙哦！",
+						  buttons: [
+						    { text: "我知道了", className: "default", onClick: function(){
+						    	$.closeModal();	
+						    	}	
+						    },
+						  ]
+						});
+		    	}*/
+		    	
+		    },
+		    help_bargain:function () { 
+		    	
+		    	request.postData({
+		            url: urlConfig.doCut,
+		            param:{			    		 
+									clientUserActivityId:BASE_UTIL.get_url_param('clientUserActivityId'),		
+									shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),							
+									isSelf:false					
+				    	}
+		        }).then(function(data) {
+		        	debugger;
+		        	if(data.success){
+		        		$.toast("砍价成功！");
+		        		//TODO倒计时
+		        	}
+		        	else{
+		        		$.toast("砍价失败");
+		        	}
+		        }, function(err) {
+		            console.log(err);
+		        });
+		    	
+
+/*		    	if(can_be_again){
 		    		$.toast("砍价成功！");
 		    	}
 		    	else{
@@ -682,9 +779,10 @@ var activityVue = new Vue({
 						    },
 						  ]
 						});
-		    	}
+		    	}*/
 		    	
 		    },
+		    
     		getInfo:function (o) { 
     			request.postData({
 	            url: urlConfig.viewShopActivityUrl,
@@ -707,25 +805,96 @@ var activityVue = new Vue({
     		request:function (o) { 
     			request.postData({
 	            url: o.url,
-	            param: o.param
+	            param: o.param,
+	            async:false,
 	        }).then(function(data) {
 	        	debugger;
 	        	if(!!o.dataName){
-	        		activityVue[o.vueName] = data[o.dataName]
+	        		activityVue[o.vueName] = data[o.dataName];
+	        		
+	        		
+	        		
 	        	}
 	        	else{
 	        		activityVue[o.vueName] = data;
+	        		
+	        		
+	        		
 	        	}
 	        	
 	
 	        }, function(err) {
 	            console.log(err);
 	        });
+	        
+	        
+	        
+	        
 		    },
 		    join:function(){
 		    	debugger;
 		    	
-		    	$.modal({
+		    	
+		    	if(M.dialog5){
+					    return M.dialog5.show();
+					}
+					M.dialog5 = jqueryAlert({
+					  	'style'   : 'wap', 
+					    'content' : $("#userInfo").prop("outerHTML") ,
+					    'modal'   : true,
+					    'contentTextAlign' : 'center',
+					    'width'   : '80%',
+					    'animateType' : 'linear',
+					    'buttons' :{
+					        '提交' : function(){
+					        	debugger;
+					           var data = {
+								    		 
+													infoAttributeOne:activityVue.info.infoCollectOneName,
+						
+													infoAttributeTwo:activityVue.info.infoCollectTwoName,
+											
+													infoAttributeThree:activityVue.info.infoCollectThreeName,
+													
+													infoAttributeFour:activityVue.info.infoCollectFourName,
+												
+													infoAttributeFive:activityVue.info.infoCollectFiveName,
+											
+								    		 shopUserActivityId:BASE_UTIL.get_url_param('shopUserActivityId'),
+								    	}
+								    		
+								    		request.postData({
+								            url: urlConfig.registerUrl,
+								            param:data
+								        }).then(function(data) {
+								        	
+								        	if(data.success){
+								        		
+								        		$.cookie('isJoin', data.clientUserActivityId, { expires: 30 });
+								        		
+								        		location.href="view_activity.html?shopUserId="+ BASE_UTIL.get_url_param('shopUserId') +
+								        		"&shopUserActivityId=" + BASE_UTIL.get_url_param('shopUserActivityId') +
+								        		"&activityTypeId=" + BASE_UTIL.get_url_param('activityTypeId') +
+								        		"&activityType=" + BASE_UTIL.get_url_param('activityType') +
+			    									"&clientUserActivityId=" + data.clientUserActivityId;
+								        	}
+								        	else{
+								        		
+								        	}
+								        	
+								
+								        }, function(err) {
+								            console.log(err);
+								        });
+					        },
+					        '取消' : function(){
+					            M.dialog5.close()
+					        }
+					    }
+					})
+		    	
+		    	
+		/*    	$.modal({
 					  title: "用户注册",
 					  text:$("#userInfo").prop("outerHTML"),
 					  buttons: [
@@ -767,7 +936,7 @@ var activityVue = new Vue({
 
 					    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
 					  ]
-					});
+					});*/
 					
 					$(".customer-info").eq(1).removeClass("hide");
 		    },

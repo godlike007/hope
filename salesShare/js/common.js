@@ -89,7 +89,7 @@ var uploadUtil = {
         reader.readAsDataURL(file);
 	},
 	single_file:function(_this,param){
-
+		debugger;
 		
 		$(_this).submit(function(ev){
 		  	var oReq = new XMLHttpRequest();
@@ -145,6 +145,13 @@ var BASE_UTIL = {
 	
 }
 var DATE_UTIL = {
+	timestamp_to_date:function(timestamp) {
+	    var days = parseInt(timestamp / (1000 * 60 * 60 * 24));
+	    var hours = parseInt((timestamp % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	    var minutes = parseInt((timestamp % (1000 * 60 * 60)) / (1000 * 60));
+	    var seconds = (timestamp % (1000 * 60)) / 1000;
+	    return days + " 天 " + hours + " 小时 " + minutes + " 分钟 " + seconds + " 秒 ";
+	},
 	get_date_diff:function(history_date){
 		var date1= history_date;  //开始时间  
 	    var date2 = new Date();    //结束时间  

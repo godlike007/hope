@@ -48,7 +48,11 @@ var urlConfig = {
     //上传
     uploadImgUrl:"http://g1u8257706.iask.in/shopCut/uploadImage",
     uploadMedia:"http://g1u8257706.iask.in/shopCut/uploadMedia",
-    submitActivityUrl:"http://g1u8257706.iask.in/shopCut/submitActivity"
+    submitActivityUrl:"http://g1u8257706.iask.in/shopCut/submitActivity",
+    
+    //砍价
+    doCut:"http://g1u8257706.iask.in/clientCut/doCut",
+    getCutInfo:"http://g1u8257706.iask.in/clientCut/getCutInfo",
 };
 
 var MAP = {
