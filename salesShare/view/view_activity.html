@@ -688,7 +688,7 @@ var activityVue = new Vue({
     		check_join_status:function () { 
     			debugger;
     			//$.cookie('isJoin',1);
-    			if(!!$.cookie('isJoin')){
+    			if(!!$.cookie('isJoin_'+BASE_UTIL.get_url_param('clientUserActivityId'))){
     				$("#section_top .show").removeClass("show").addClass("hide");
     				$("#section_top .hide").removeClass("hide").addClass("show");
     			}
@@ -740,6 +740,14 @@ var activityVue = new Vue({
 		    	
 		    },
 		    help_bargain:function () { 
+		    	
+		    	if(!!$.cookie('other_is_join')){
+		    		$.alert("只能帮忙砍价一次哦");
+		    	}
+		    	else{
+		    		$.cookie('other_is_join', data.clientUserActivityId);
+		    	}
+		    	
 		    	
 		    	request.postData({
 		            url: urlConfig.doCut,
@@ -811,15 +819,11 @@ var activityVue = new Vue({
 	        	debugger;
 	        	if(!!o.dataName){
 	        		activityVue[o.vueName] = data[o.dataName];
-	        		
-	        		
-	        		
+	
 	        	}
 	        	else{
 	        		activityVue[o.vueName] = data;
-	        		
-	        		
-	        		
+	
 	        	}
 	        	
 	
@@ -870,7 +874,7 @@ var activityVue = new Vue({
 								        	
 								        	if(data.success){
 								        		
-								        		$.cookie('isJoin', data.clientUserActivityId, { expires: 30 });
+								        		$.cookie('isJoin_'+data.clientUserActivityId, data.clientUserActivityId, { expires: 30 });
 								        		
 								        		location.href="view_activity.html?shopUserId="+ BASE_UTIL.get_url_param('shopUserId') +
 								        		"&shopUserActivityId=" + BASE_UTIL.get_url_param('shopUserActivityId') +
