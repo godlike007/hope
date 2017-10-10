@@ -27,7 +27,7 @@
 	}
 .head-banner{
 	    background-color: #fff;
-    padding: 10px;
+
 }	
 .module{
 	
@@ -436,7 +436,7 @@
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_2')">添加图片</div>
 				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_2')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_2')">添加视频</div>
+				<!--<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_2')">添加视频</div>-->
 		
 			</div>
 		</div>	
@@ -471,7 +471,7 @@
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
 				<div class="text add"  data-target="#addTxt" @click="markHandle('add','txt','#section_3')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_3')">添加视频</div>
+				<!--<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_3')">添加视频</div>-->
 			</div>
 		</div>	
 	</div>
@@ -506,7 +506,7 @@
 				<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
 				<div class="text add open-popup"  data-target="#addTxt" @click="markHandle('add','txt','#section_4')">添加描述</div>
 	
-				<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_4')">添加视频</div>
+				<!--<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_4')">添加视频</div>-->
 			</div>
 		</div>	
 	</div>
@@ -534,25 +534,13 @@
 		<div class="content">
 			<div id="" class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="手机号" v-model="infoCollectOneName">
+	         提示：手机号和姓名自动包含，默认必填
 	        </div>
-	        <!--<div class="weui-cell__ft">
-	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
-	        </div>-->
 	      </div>
 			
 			<div class="weui-cells">
 	      
-	      <div class="weui-cell weui-cell_switch">
-        	<div class="weui-cell__bd">
-	          <input class="weui-input" type="text" placeholder="姓名" v-model="infoCollectTwoName">
-	        </div>
-	        <!--<div class="weui-cell__ft">
-	        	<label>必填项</label>
-	          <input class="weui-switch" type="checkbox">
-	        </div>-->
-	      </div>
+
 	      
 	      <div class="weui-cell weui-cell_switch">
         	<div class="weui-cell__bd">
@@ -634,14 +622,14 @@
                 替换文字
               </p>
             </a>
-            <a @click="popupSourceHandle(3,'instead','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+            <!--<a @click="popupSourceHandle(3,'instead','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_msg.png" alt="">
               </div>
               <p class="weui-grid__label">
                 替换视频
               </p>
-            </a>
+            </a>-->
             <a @click="popupSourceHandle(4,'insert','img')" href="javascript:;" class="weui-grid js_grid" data-id="dialog">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_dialog.png" alt="">
@@ -658,7 +646,7 @@
                 插入文字
               </p>
             </a>
-            <a @click="popupSourceHandle(6,'insert','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
+            <!--<a @click="popupSourceHandle(6,'insert','video')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_msg.png" alt="">
               </div>
@@ -666,7 +654,7 @@
                 插入视频
               </p>
             </a>
-            
+            -->
             <a @click="popupSourceHandle(7,'clear')" href="javascript:;" class="weui-grid js_grid" data-id="msg">
               <div class="weui-grid__icon">
                 <img src="images/icon_nav_msg.png" alt="">
