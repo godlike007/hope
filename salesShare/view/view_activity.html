@@ -191,6 +191,8 @@
     color: #fff;
     margin-bottom: 20px;
 }
+
+#section_top .help-bargain,
 #section_top .bargain,
 #section_top .share,
 #section_top .join{
@@ -216,18 +218,36 @@
 	
 }
 
+
+.sponsor,
+.present-price,
+.bargain,
+.help-bargain{
+	display: none;
+}
 /*发起人*/
-.self-not-join .sponsor{
+.other-joined .sponsor,
+.other-joined .present-price,
+.other-joined .bargain,
+
+.self-joined .sponsor,
+.self-joined .present-price,
+.self-joined .bargain{
+	display: block;
+}
+
+.other-joined .join,
+.self-joined .join{
+	display: none;	
+}
+.self-joined .bargain{
+	display: block;
+}
+.other-joined .bargain{
 	display: none;
 }
-.self-not-join .sponsor{
-	display: none;
-}
-.self-not-join .sponsor{
-	display: none;
-}
-.self-not-join .sponsor{
-	display: none;
+.other-joined .help-bargain{
+	display: block;
 }
 </style>
 <link rel="stylesheet" href="../css/layouts/template.css">
@@ -688,10 +708,15 @@ var activityVue = new Vue({
     		check_join_status:function () { 
     			debugger;
     			//$.cookie('isJoin',1);
-    			if(!!$.cookie('isJoin')){
-    				$("#section_top .show").removeClass("show").addClass("hide");
-    				$("#section_top .hide").removeClass("hide").addClass("show");
+    			if(!!$.cookie('isJoin_'+BASE_UTIL.get_url_param('clientUserActivityId'))){
+    				$("#activityVue").addClass("self-joined");    	
     			}
+    			else{
+    				if(BASE_UTIL.get_url_param('clientUserActivityId')!=null){
+    					$("#activityVue").addClass("other-joined");    	
+    				}
+    			}
+    			
 		    },
 		    bargain:function () { 
     			//BASE_UTIL.get_random_in_range(activityVue.info.cutLeastPerPerson,activityVue.info.cutMostPerPerson);
@@ -741,7 +766,12 @@ var activityVue = new Vue({
 		    },
 		    help_bargain:function () { 
 		    	
-		    	request.postData({
+		    	if(!!$.cookie('other_is_join')){
+		    		$.alert("只能帮忙砍价一次哦");
+		    	}
+		    	else{
+		    		$.cookie('other_is_join', BASE_UTIL.get_url_param('clientUserActivityId'));
+		    		request.postData({
 		            url: urlConfig.doCut,
 		            param:{			    		 
 									clientUserActivityId:BASE_UTIL.get_url_param('clientUserActivityId'),		
@@ -760,6 +790,10 @@ var activityVue = new Vue({
 		        }, function(err) {
 		            console.log(err);
 		        });
+		    	}
+		    	
+		    	
+		    	
 		    	
 
 /*		    	if(can_be_again){
@@ -811,15 +845,11 @@ var activityVue = new Vue({
 	        	debugger;
 	        	if(!!o.dataName){
 	        		activityVue[o.vueName] = data[o.dataName];
-	        		
-	        		
-	        		
+	
 	        	}
 	        	else{
 	        		activityVue[o.vueName] = data;
-	        		
-	        		
-	        		
+	
 	        	}
 	        	
 	
@@ -870,7 +900,9 @@ var activityVue = new Vue({
 								        	
 								        	if(data.success){
 								        		
-								        		$.cookie('isJoin', data.clientUserActivityId, { expires: 30 });
+								        		$.cookie('isJoin_'+data.clientUserActivityId, data.clientUserActivityId, { expires: 30 });
+								        		
+								        		
 								        		
 								        		location.href="view_activity.html?shopUserId="+ BASE_UTIL.get_url_param('shopUserId') +
 								        		"&shopUserActivityId=" + BASE_UTIL.get_url_param('shopUserActivityId') +

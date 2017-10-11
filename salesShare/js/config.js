@@ -27,7 +27,7 @@ var urlConfig = {
     
     
     /*progress*/
-    viewProcessUrl: "http://g1u8257706.iask.in//shopCenter/viewProgress",
+    viewProcessUrl: "http://g1u8257706.iask.in/shopCenter/viewProgress",
    
    
     /*personalInfo*/
