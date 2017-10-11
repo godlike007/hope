@@ -833,6 +833,107 @@
 	</div>-->
 
 
+
+
+
+<!--<style type="text/css">####################################################################
+			#txt_css_render a{
+				font-size: 12px;
+			}
+			#txt_css_render p{
+				
+			}
+			#txt_css_render p.item1{
+				
+			}
+			#txt_css_render p.item2{
+				
+			}
+			#txt_css_render p.item3{
+				
+			}
+			#txt_css_render p.item4{
+				
+			}
+		</style>
+		
+		<textarea name="" rows="" cols="">发的撒范德萨发斯蒂芬
+			
+		</textarea>	
+		<div id="txt_css_render" class="txt-css">
+			<p class="item1">
+				<a style="font-weight: bold;" >B（加粗）</a>
+				<a style="font-style: italic;">I（斜体）</a>
+				<a style="text-decoration: underline;" >U（下划线）</a>
+				<a style="text-decoration: line-through;" >L（删除线）</a>
+			</p>
+			<p class="item2">
+				
+				<label for="">文字大小</label>
+				<input type="range" min="12" max="50" step="1"   onchange="txt_css_render.BASE.get_txt_font_size_css(this.value)">
+							
+			</p>
+			<p class="item3">				
+				<label for="">字体</label>
+				<div class="font-warehouse">
+					<div><a style="font-family: '宋体';" >宋体</a></div>
+					<div><a style="font-family: '微软雅黑';" >微软雅黑</a></div>
+					<div><a style="font-family: '黑体';" >黑体</a></div>
+					<div><a style="font-family: '华文新魏';">华文新魏</a></div>
+					<div><a style="font-family: '华文行楷';" >华文行楷</a></div>
+					<div><a style="font-family: '幼圆';" >幼圆</a></div>
+				</div>	
+			</p>
+			<p class="item4">				
+				<label for="">颜色</label>
+				<div class="font-color">
+					<input type="text" id="hue-demo" class="demo" data-control="hue" value="#ff6161">
+					<div class="demo-color">
+						<div style="color:red;background-color: red;"><a style="color: red;" ></a></div>
+						<div style="color:blue;background-color: blue;"><a style="color: blue;" ></a></div>
+						<div style="color:green;background-color: green;"><a style="color: green;" ></a></div>
+						<div style="color:yellow;background-color: yellow;"><a style="color: yellow;" ></a></div>
+					</div>
+					
+				</div>	
+			</p>
+			
+		</div>
+		
+		<script type="text/javascript">
+			var txt_css_render = {
+				BASE:{
+					final_css:{
+						/*'font-size':'',
+						'font-weight':'',
+						'font-style':'',
+						'text-decoration':'',
+						'font-size':'',
+						'font-family':'',
+						'color':'',*/
+					},
+					init:function(){
+						this.bind_get_css_event();
+					},
+					get_txt_font_size_css:function(val){
+						this.BASE.final_css['font-size'] = val;
+					},
+					bind_get_css_event:function(){
+						$("#txt_css_render a").click(function(e){
+							debugger;
+							var css = $(this).attr("style");
+							css = css.split(";")[0];
+							txt_css_render.BASE.final_css[css.split(":")[0]] = css.split(":")[1];
+							console.log(txt_css_render.BASE.final_css)
+						})
+					}
+				}
+			}
+			
+			txt_css_render.BASE.init()
+		</script>-->
+
+
 <script src="../js/libs/weui/fastclick.js"></script>
 
 <script>
@@ -1013,6 +1114,7 @@ var activityVue = new Vue({
     	
     },
     markHandle: function (handleName,sourceType,sectionType) {
+    	//$
     	debugger
     	this.curSourceType = $("#sourceType").val();
     	this.curSectionType =  $("#sectionType").val();
@@ -1026,6 +1128,10 @@ var activityVue = new Vue({
     	 
     	 if(sourceType=="txt"){
     	 		$("#txtEditTool").load("textEditer.html");
+    	 		
+    	 		
+    	 		
+    	 		
     	 }
 			/*if($.inArray(sectionType, activity.hasSourceSection)!=-1){
 				
@@ -1190,6 +1296,7 @@ var activityVue = new Vue({
 					
     		},
     		sureSubmitTxt:function () {
+    			//$
 					debugger;
     			var ht = $("#handleName").val();
 					var st = $("#sourceType").val();
