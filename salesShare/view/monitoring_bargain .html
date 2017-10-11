@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jQuery WeUI</title>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
+">
+
+<link rel="stylesheet" href="../css/framework/weui/weui.css">
+<link rel="stylesheet" href="../css/framework/weui/jquery-weui.css">
+<link rel="stylesheet" href="../css/layouts/common.css">
+
+<link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
+
+<style type="text/css">
+	video,
+	img{
+		width: 100%;
+	}
+	.container{
+    background-color: #70b92c;
+
+	}
+
+</style>
+
+  </head>
+  <script src="../js/libs/vue/vue.js"></script>
+<script src="../js/libs/jquery/jquery-2.1.4.js"></script>
+<!-- 引用核心层插件 -->
+<script src="../js/libs/vue/vue.js"></script>
+
+  <script src="../js/common.js"></script>
+    <script src="../js/config.js"></script>
+    
+    
+
+<script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
+  <body ontouchstart>
+
+
+    <header class='demos-header'>
+      <h1 class="demos-title"></h1>
+    </header>
+
+
+<div  id="graphicVue" class="container">
+
+	
+	<!--传单自定义内容循环-->
+	<div id="" class="poster-wrap" :style="poster_bg">
+		<div :id="item.id" class="source" v-for="item in customList">
+
+				
+				<div class="img" v-show="item.type=='img'">
+					<img :style="item.class" :src="item.value" alt="" />
+				</div>
+				<div class="txt" v-show="item.type=='txt'">
+					<p :style="item.class">{{item.value}}</p>
+				</div>
+				<div class="vcd" v-show="item.type=='vcd'">
+					<img :style="item.class" :src="item.value" alt="" />
+				</div>
+			</div>	
+	</div>
+	
+	
+
+
+
+</div>
+
+
+<div style="font-size:20px;position: absolute;left: 20%;width: 200px;height: 50px;background: transparent;">
+	
+</div>
+
+
+
+<script src="../js/libs/weui/fastclick.js"></script>
+
+<script>
+/*  $(function() {
+    FastClick.attach(document.body);
+  });*/
+</script>
+<script src="../js/libs/weui/jquery-weui.js"></script>
+
+
+				
+<script>	
+
+var graphicVue = new Vue({
+  el: '#graphicVue',
+  data: {
+
+		activityTypeId:2,
+		shopUserId:15,
+		//
+		poster_bg:"background-image: url('../images/demo/graphic_template.jpg');height: 700px;",
+
+		customList:[{
+				type:'img',
+				class:'position: absolute;left: 50%;top: 1%;width: 20%;background: transparent;',
+				value:'../images/demo/poster_logo.jpg'
+			},
+			{
+				type:'txt',
+				class:'font-size:30px;position: absolute;left: 45%;top: 18%;width: 50%;background: transparent;',
+				value:'疯狂大促销'
+			},{
+				type:'vcd',
+				class:'position: absolute;left: 35%;top: 46%;width: 21%;background: transparent;',
+				value:'../images/demo/poster_vcd.jpg'
+			},{
+				type:'txt',
+				class:'position: absolute;left: 35%;top: 69%;width: 40%;background: transparent;',
+				value:'9月16日晚10点发布'
+			}],
+
+
+  },
+ methods: {
+    join: function (event) {
+    	activity.join();
+    },
+  }
+})	 
+	    	
+    	
+    	var activity = {
+    		init:function(){
+    				this.getInfo({
+    			   vueName:'info',
+    			  
+    			   param:{
+    			   	shopUserActivityId:30,
+    			   }
+					 });
+    			
+    			  this.request({
+    			  	vueName:'section1',
+    			  	 dataName:'content',
+    			 url:urlConfig.getSectionContentyUrl,
+    			   param:{
+    			   	shopUserActivityId:30,
+	    			  activityTypeId:2,
+						 	shopUserId:'15',
+						 	section:1
+    			   }
+    			  	
+    			  
+					 });
+					 
+
+    	
+    		},
+    		getInfo:function (o) { 
+    			request.postData({
+	            url: urlConfig.viewShopActivityUrl,
+	            param: o.param,
+	            async:false,
+	        }).then(function(data) {
+	        	debugger;
+	        	if(!!o.dataName){
+	        		graphicVue[o.vueName] = data[o.dataName]
+	        	}
+	        	else{
+	        		graphicVue[o.vueName] = data;
+	        	}
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });
+		    },
+    		request:function (o) { 
+    			request.postData({
+	            url: o.url,
+	            param: o.param
+	        }).then(function(data) {
+	        	debugger;
+	        	if(!!o.dataName){
+	        		graphicVue[o.vueName] = data[o.dataName]
+	        	}
+	        	else{
+	        		graphicVue[o.vueName] = data;
+	        	}
+	        	
+	
+	        }, function(err) {
+	            console.log(err);
+	        });
+		    },
+		    join:function(){
+		    	debugger;
+		    	
+		    	$.modal({
+					  title: "用户注册",
+					  text:$("#userInfo").prop("outerHTML"),
+					  buttons: [
+					    { text: "提交", onClick: function(){ 
+					    	
+					    	
+					    	var test = {
+					    		 infoAttributeOne:'王黎明',
+					    		 infoAttributeTwo:'13776064372',
+					    		 //infoAttributeThree:'dasfdas',
+					    		 //infoAttributeFour:'dasfdas',
+					    		 shopUserActivityId:30,
+					    	}
+					    		
+					    		request.postData({
+					            url: urlConfig.registerUrl,
+					            param:test
+					        }).then(function(data) {
+					        	debugger;
+					        	if(!!o.dataName){
+					        		graphicVue[o.vueName] = data[o.dataName]
+					        	}
+					        	else{
+					        		graphicVue[o.vueName] = data;
+					        	}
+					        	
+					
+					        }, function(err) {
+					            console.log(err);
+					        });
+									    		
+					    	} },
+
+					    { text: "取消", className: "default", onClick: function(){ console.log(3)} },
+					  ]
+					});
+					
+					$(".customer-info").eq(1).removeClass("hide");
+		    },
+		    call:function(phone){
+		    	$.actions({
+					  actions: [{
+					    text: phone,
+					    onClick: function() {
+					      $("#call").click();
+					    }
+					  }]
+					});
+		    }
+	
+    	}
+    	activity.init();
+    	
+
+    </script>
+  </body>
+</html>

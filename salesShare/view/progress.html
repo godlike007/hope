@@ -95,17 +95,15 @@ section .progress-info div{
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.startTime }}</div>
+        	 				<label>参加人数</label>
+        	 				<div>{{ item.takePartInNumber }}</div>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.endTime }}</div>
+        	 				<label>完成人数</label>
+        	 				<div>{{ item.completeNumber  }}</div>
         	 				
-        	 				<label>原价</label>
-        	 				<div>{{ item.value3}}</div>
-        	 				
-        	 				<label>报价</label>
-        	 				<div>{{ item.value4 }}</div>
+        	 				<div class="btns">
+        	 					<span class="btn btn-small search"  @click="view_detail(item)">查看</span>
+        	 				</div>
         
         	 		</div>
         	 	</section>
@@ -119,15 +117,13 @@ section .progress-info div{
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
-        	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.startTime }}</div>
+        	 		
+        	 				<label>参加人数</label>
+        	 				<div>{{ item.takePartInNumber }}</div>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.endTime }}</div>
+        	 				<label>完成人数</label>
+        	 				<div>{{ item.completeNumber  }}</div>
         	 				
-
-        
         	 		</div>
         	 	</section>
          
@@ -140,14 +136,12 @@ section .progress-info div{
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.startTime }}</div>
+        	 				<label>参加人数</label>
+        	 				<div>{{ item.takePartInNumber }}</div>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.endTime }}</div>
+        	 				<label>完成人数</label>
+        	 				<div>{{ item.completeNumber  }}</div>
         	 				
-
-        
         	 		</div>
         	 	</section>
             
@@ -161,13 +155,12 @@ section .progress-info div{
         	 		</div>
         	 		<div class="progress-info">
         	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.startTime }}</div>
+        	 				<label>参加人数</label>
+        	 				<div>{{ item.takePartInNumber }}</div>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.endTime }}</div>
+        	 				<label>完成人数</label>
+        	 				<div>{{ item.completeNumber  }}</div>
         	 				
-
         
         	 		</div>
         	 	</section>
@@ -181,14 +174,13 @@ section .progress-info div{
         	 			<img :src="item.themeImgUrl" alt="" />
         	 		</div>
         	 		<div class="progress-info">
-        	 			
-        	 				<label>开始时间</label>
-        	 				<div>{{ item.startTime }}</div>
+        	 		
+        	 				<label>参加人数</label>
+        	 				<div>{{ item.takePartInNumber }}</div>
         	 				
-        	 				<label>结束时间</label>
-        	 				<div>{{ item.endTime }}</div>
+        	 				<label>完成人数</label>
+        	 				<div>{{ item.completeNumber  }}</div>
         	 				
-
         
         	 		</div>
         	 	</section>
@@ -254,7 +246,21 @@ var  progressVue = new Vue({
     	this.info.province = $("#selectArea").val().split(" ")[0];
     	this.info.city = $("#selectArea").val().split(" ")[1];
 				var data = this.info;
-    }
+    },
+    view_detail: function (item) {
+    	setTimeout(function(){
+    			//location.href="monitoring_bargain.html?activityTypeId=" + item.activityTypeId
+    			
+    			$.alert({
+				  title: '详情',
+				  text: '内容文案',
+				  onOK: function () {
+				    //点击确认
+				  }
+});
+    			
+    	},500)
+    },
   }
 })	  	
 
