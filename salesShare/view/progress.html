@@ -203,7 +203,7 @@ section .progress-info div{
 <script src="../js/libs/weui/jquery-weui.js"></script>
 
 <script>
-var testData = [{
+/*var testData = [{
     	type:1,
     	startTime:'2017-03-03',
     	endTime:'2017-06-12',
@@ -233,7 +233,7 @@ var testData = [{
     	themeImgUrl:'../images/demo/44.jpg'
     }]	
 	
-	
+	*/
 	
 var  progressVue = new Vue({
   el: '#progressVue',
@@ -251,13 +251,7 @@ var  progressVue = new Vue({
     	setTimeout(function(){
     			//location.href="monitoring_bargain.html?activityTypeId=" + item.activityTypeId
     			
-    			$.alert({
-				  title: '详情',
-				  text: '内容文案',
-				  onOK: function () {
-				    //点击确认
-				  }
-});
+    		progress.getDetail(item.activityTypeId);
     			
     	},500)
     },
@@ -294,12 +288,31 @@ var  progressVue = new Vue({
         });
 			
     },
-    getVcd:function (param) {
+    getDetail:function (param) {
     	debugger;
 			 request.postData({
             url: urlConfig.vcdUrl,
-            progressVue: param
+            param: {
+            	activityTypeId:param
+            }
         }).then(function(data) {
+        	
+        		var txt = '浏览量';
+        	txt += data.allViewedNumber;
+        	txt += '参见人数';
+        	txt += data.takePartInNumber;
+        	txt += '完成人数';
+        	txt += data.completeNumber;
+
+					$.alert({
+					  title: '详情',
+					  text: txt,
+					  onOK: function () {
+					    //点击确认
+					  }
+					});
+	
+        	
 
         }, function(err) {
             console.log(err);
