@@ -20,7 +20,7 @@
 	
 
     <header class=''>
-      <h1 class="title">用户注册</h1>
+      <h1 class="title">用户登录</h1>
     </header>
     
     <div class="weui-cells">
@@ -78,13 +78,14 @@ var login = {
 
     },
     sumbit:function (param) {    	  	
-
+		debugger;
 			 request.postData({
             url: urlConfig.loginUrl,
             param: param
         }).then(function(data) {
-        	
-        	location.href = urlConfig.toCenterUrl;
+        
+        	debugger;
+        	//location.href = urlConfig.toCenterUrl;
 
         }, function(err) {
             console.log(err);

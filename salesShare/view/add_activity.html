@@ -224,6 +224,15 @@
 .main-title .preview{
 	display: true;
 }
+#uploadImg .btns{
+	display: flex;
+	justify-content: space-around;
+	    position: relative;
+}
+#uploadImg .btns a{
+	width: 40%;
+	    margin-top: 15px;
+}
 </style>
 <link rel="stylesheet" href="../css/layouts/template.css">
   </head>
@@ -320,30 +329,30 @@
 				<div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
-	          <label for="">活动标题</label>
-	          <input class="weui-input" type="tel" value="活动标题" v-model="title">
+	          <!--<label for="">活动标题</label>-->
+	          <input class="weui-input" type="tel" placeholder="活动标题" value="活动标题" v-model="title">
 	        </div>
 	      </div>
 				
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
-	          <label for="">开始时间</label>
-	          <input type="text" id='startTime'   @change="initCountDown(activityStartTime)"/>
+	          <!--<label for="">开始时间</label>-->
+	          <input type="text" id='startTime' placeholder="开始时间"  @change="initCountDown(activityStartTime)"/>
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	         <!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
-	         	<label for="">结束时间</label>
-	         	<input type="text" id='endTime'/>
+	         	<!--<label for="">结束时间</label>-->
+	         	<input type="text" id='endTime' placeholder="结束时间"/>
 	        </div>
 	      </div>
 	      
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
-	        	<label for="">原价</label>
+	        	<!--<label for="">原价</label>-->
 	          <input class="weui-input" type="tel" placeholder="原价" v-model="cutOriginPrice" @change="refreshRelativeValues('preview_init_price',cutOriginPrice)">
 	        </div>
 	      </div>
@@ -351,7 +360,7 @@
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
-	          <label for="">底价</label>
+	         <!-- <label for="">底价</label>-->
 
 						 <input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
 	          
@@ -362,7 +371,7 @@
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
-	          	<label for="">单次砍价最小值</label>
+	          	<!--<label for="">单次砍价最小值</label>-->
 
 	          	<input class="weui-input" type="tel" placeholder="单次砍价最小值" v-model="cutLeastPerPerson">
 	          
@@ -373,7 +382,7 @@
 	      <div class="weui-cell">
 	        <div class="weui-cell__bd">
 	          <!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
-	          	<label for="">单次砍价最大值</label>
+	          	<!--<label for="">单次砍价最大值</label>-->
 
 	          	<input class="weui-input" type="tel" placeholder="单次砍价最大值" v-model="cutMostPerPerson">
 	        </div>
@@ -743,10 +752,10 @@
 <img class="preview-upload-img" src="" alt="" />
 <form id="uploadFileForm" enctype="multipart/form-data" method="post" name="fileinfo">
  
-  <input type="text" name="unique"/><br />
-  <input type="text" name="activityTypeId" /><br />
-  <input type="text" name="shopUserId"/><br />
-  <input type="text" name="section"/><br />
+  <input type="hidden" name="unique"/><br />
+  <input type="hidden" name="activityTypeId" /><br />
+  <input type="hidden" name="shopUserId"/><br />
+  <input type="hidden" name="section"/><br />
 
 <!--  <input id="uploadFile" type="file" name="file" onchange="imgPreview(this)" required />
   <input type="submit" value="确认上传" />-->
@@ -763,9 +772,11 @@
 </form>
 
     
+    <div class="btns">
+    	<a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认</a>
+   		 <a href="javascript:;" class="weui-btn weui-btn_primary close-popup bg_#bdbdbd">取消</a>
+    </div>
     
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup" onclick="activity.sureSubmitImg()">确认</a>
-    <a href="javascript:;" class="weui-btn weui-btn_primary close-popup bg_#bdbdbd">取消</a>
   </div>
 </div>
 

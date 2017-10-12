@@ -28,7 +28,7 @@ var urlConfig = {
     
     /*progress*/
     viewProcessUrl: "http://g1u8257706.iask.in/shopCenter/viewProgress",
-    viewProcessUrl: "http://g1u8257706.iask.in/shopCenter/viewProgress",
+    getActivitySummaryUrl: "http://g1u8257706.iask.in/shopCut/getActivitySummary",
    
     /*personalInfo*/
     toCenterUrl: "http://g1u8257706.iask.in/shopCenter/gotoPersonCenter",
