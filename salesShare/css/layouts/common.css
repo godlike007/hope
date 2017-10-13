@@ -16,6 +16,12 @@ header .title{
 	opacity: .5;
 }
 
+/*table*/
+.wid100-center{
+	width: 100%;
+	text-align: center;
+}
+
 
 /*button*/
 
@@ -357,3 +363,5 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#222222', endCo
     color: #e13f5e;
 
 }
+
+

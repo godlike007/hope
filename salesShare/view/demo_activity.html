@@ -90,7 +90,6 @@
 
 .module .content .source{
     padding: 4%;
-    border: 1px dashed #ccc;
     margin: 3%;	
 }
 .module .content .source.preview{
@@ -210,7 +209,30 @@
 }
 
 
+.float-ball{
+	width: 70px;
+    height: 70px;
+    opacity: .85;
+    background-color: #3d4145;
+    /* color: #fff; */
+    position: fixed;
+    right: 3%;
+    top: 2%;
+    border-radius: 40px;
+    /* padding: 6px; */
+    line-height: 20px;
+}
 
+.float-ball a{
+	color: #fff;
+}
+
+.float-ball div{
+	width: 40px;
+  margin: 23%;
+  letter-spacing: 3px;
+}
+    
 </style>
 <link rel="stylesheet" href="../css/layouts/template.css">
   </head>
@@ -262,7 +284,7 @@
 				</div>
 				
 
-				<div class="join show" @click="join">
+				<div class="join show">
 				我要参加
 				</div>
 				
@@ -280,20 +302,29 @@
 			 <div class="weui-cell">
 	        <div class="weui-cell__bd">
 
-	          	<label for="">本期奖品份数</label>
-								{{info.prizeNumber}}
+	          	<label for="">本期奖品 100 份 剩余 100 份</label>
+								
 	          	
 	        </div>
 	      </div>
 			
-			<div :id="item.id" class="source" v-for="item in section2">
+			<div  class="source" >
 
 				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="" :src="item.value" alt="" />
+				<div class="img">
+					<img  src="../images/demo/jpgz.jpg" alt="" />
 				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
+				<div class="txt">
+					<p data-index-id="">
+						
+						小星星英语单词记忆爆破班，让你5小时就能熟背一学期单词
+原价699元，现价29元即可换购
+
+新老生均可参加次活动
+
+小星星感恩回馈，凡参与此次活动均可获赠定制小书包一个
+						
+					</p>
 				</div>
 				
 			
@@ -314,22 +345,22 @@
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section3">
+			<div  class="source" >
 
+
+				<div class="txt">
+					<p data-index-id="">
+				1.点击上方按钮“我要参加”参加活动。
+2.报名者自己每3小时可以点击【我要减减减】随机减少价格。
+3.别人可以帮忙砍价。
+4.奖品份数有限，达标就会减少一份，份数领完则无法继续报名，亲速度哦！
+5.完成后，马上联系商家兑奖吧。
+					</p>
+				</div>
 				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="" :src="item.value" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="" :src="item.value"></video>
-				</div>
 			
 				
 			</div>
-			
 
 		</div>	
 	</div>
@@ -341,19 +372,28 @@
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section4">
+			<div  class="source" >
 
+
+				<div class="txt">
+					<p data-index-id="">
+				机构介绍
+多年来小星星英语秉承“做世界教育领先企业，使人人皆可学习并从中受益”的宗旨，将个人潜能激发和个人发展规划相结合
+帮助学员以最有效、最便捷的方式突破英语听说读写的障碍，快速练就一口流利纯正的英语口语。
+小星星英语单词爆破班暑期开课啦！
+你知道吗？英语80%以上的单词符合拼读规律.
+你知道吗？英语单词无需死记硬背！
+你知道吗？10小时记忆300单词，20小时记忆1000单词根本不是梦！
+					</p>
+				</div>
 				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="" :src="item.value" alt="" />
+			<div class="img">
+					<img  src="../images/demo/jgjs1.jpg" alt="" />
 				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
+				
+				<div class="img">
+					<img  src="../images/demo/jgjs2.jpg" alt="" />
 				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="" :src="item.value"></video>
-				</div>
-			
 				
 			</div>
 			
@@ -369,18 +409,17 @@
 		</div>
 		<div class="content">
 			
-			<div :id="item.id" class="source" v-for="item in section5">
+			<div  class="source" >
 
+
+				<div class="txt">
+					<p data-index-id="">
+				兑奖时间：2017年9月10号~2017年10月10号
+机构地址：幸福大街222号
+领奖电话：89187167
+					</p>
+				</div>
 				
-				<div class="img" v-show="item.type==1">
-					<img data-index-id="" :src="item.value" alt="" />
-				</div>
-				<div class="txt" v-show="item.type==2">
-					<p data-index-id="">{{item.value}}</p>
-				</div>
-				<div class="video" v-show="item.type==3">
-					<video data-index-id="" :src="item.value"></video>
-				</div>
 			
 				
 			</div>
@@ -397,7 +436,7 @@
 		<div class="content">
 			
 
-			<table class="table table-striped table-bordered">
+			<table class="wid100-center">
             <thead>
             <tr>
                 <th>排名</th>
@@ -408,10 +447,10 @@
             </thead>
             <tbody>
 
-                <tr :id="item.id" class="source" v-for="item in rankList">
-                	  <td></td>
-                	  <td>{{name}}</td>
-                	  <td>{{price}}</td>
+                <tr :id="item.id" class="source" v-for="(item,index) in rankList">
+                	  <td>{{index+1}}</td>
+                	  <td>{{item.name}}</td>
+                	  <td>{{item.price}}</td>
                 </tr>
             </tbody>
         </table>
@@ -426,8 +465,15 @@
 </div>
 
 
-
-		<a id="call" href="tel://222">拨打电话</a>
+<div class="float-ball">
+	<a id="call" href="tel://222">
+		<div>
+			拨打电话
+		</div>
+	</a>
+	
+</div>
+		
 
 
 
@@ -454,38 +500,38 @@ var activityVue = new Vue({
 		info:{
 			title:'29元抢小星星英语单词记忆爆破班！5小时熟背一学期单词！',
 		
-			cutOriginPrice:'',
-			cutLeastPrice:'',
-			cutLeastPerPerson:'',
-			cutMostPerPerson:'',   		
+			cutOriginPrice:'234',
+			cutLeastPrice:'10',
+			cutLeastPerPerson:'3',
+			cutMostPerPerson:'30',   		
 			redoHours:5,
 			
 			
-			infoCollectOneName:'',
-			infoCollectOneIsRequired:'',
-			infoCollectTwoName:'',
-			infoCollectTwoIsRequired:'',
-			infoCollectThreeName:'',
+			infoCollectOneName:'姓名',
+			infoCollectOneIsRequired:'2',
+			infoCollectTwoName:'手机',
+			infoCollectTwoIsRequired:'2',
+			infoCollectThreeName:'自定义信息1',
 			infoCollectThreeIsRequired:'',
-			infoCollectFourName:'',
+			infoCollectFourName:'自定义信息2',
 			infoCollectFourIsRequired:'',
-			infoCollectFiveName:'',
+			infoCollectFiveName:'自定义信息3',
 			infoCollectFiveIsRequired:'',
 			
 			prizeNumber:'',
 			
-			sectionOneName:'',
-			sectionTwoName:'',
-			sectionThreeName:'',
-			sectionFourName:'',
+			sectionOneName:'奖品描述',
+			sectionTwoName:'活动规则',
+			sectionThreeName:'领奖信息',
+			sectionFourName:'机构介绍',
 			
-			consultPhoneNumber:'',
+			consultPhoneNumber:'13776064377',
 			
 			//TODO
 			
 		},
 		sponsor:'王明',
-			presentPrice:'',
+			presentPrice:'2323',
 			lastBargainTime:'2017/10/7 7:17:22',
 			
 			
@@ -501,7 +547,19 @@ var activityVue = new Vue({
 		section3:[],
 		section4:[],
 		section5:[],
-		rankList:[]
+		rankList:[{
+			name:'谢*目',
+			price:234
+		},{
+			name:'咔*咔',
+			price:563
+		},{
+			name:'陈*',
+			price:34
+		},{
+			name:'赵*',
+			price:65
+		}]
 
   },
  methods: {
