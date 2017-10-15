@@ -15,6 +15,8 @@
 		<link rel="stylesheet" href="../css/layouts/common.css">
 
 		<link rel="stylesheet" href="../js/plugins/jquery.zyUpload/control/css/zyUpload.css" type="text/css">
+		
+		<link rel="stylesheet" href="../js/plugins/jquery.minicolors/jquery.minicolors.css">
 
 		<style type="text/css">
 			video,
@@ -119,6 +121,16 @@
 				margin-top: 0%;
 			}
 			
+			
+			#startTime,
+			#endTime{
+				width: 44%;
+			}
+			.cut-fill{
+				width: 20%;
+				text-indent: 20%;
+			}
+			
 			.source .hand-trigger.preview {
 				display: none;
 			}
@@ -191,6 +203,12 @@
 			#section_top.preview {
 				display: block;
 			}
+			#section_0.preview {
+				display: none;
+			}
+			.edit-title.preview {
+				display: none;
+			}
 			
 			#section_top .price {
 				margin: 20px;
@@ -222,9 +240,10 @@
 			}
 			
 			.edit-title {
-				border: 2px dashed #adadad;
-				background-color: #ffffff;
-				color: #5a5e61;
+				border: 2px dashed #adadad !important;
+				background-color: #ffffff !important; 
+				color: #a9a9a9 !important;
+				text-indent: 7%;
 			}
 			
 			.count-down,
@@ -232,9 +251,10 @@
 				display: none;
 			}
 			
-			.count-down .preview,
-			.main-title .preview {
-				display: true;
+			
+			.count-down.preview,
+			.main-title.preview {
+				display: block;
 			}
 			
 			#addTxt .btns,
@@ -251,14 +271,19 @@
 			
 			/*text editor*/
 			#txt_css_render{
-				font-size: 14px;
-				position: fixed;
-				top: 10px;
-				right: 10px;
-				background-color: #fff;
+				width: 100%;
+			    font-size: 14px;
+			    position: fixed;
+			    top: 0px;
+			    right: 0px;
+				background-color: #3d4145;
+   			 	color: #fff;
+   			 	display: none;
+   			 	opacity: .85;
 			}
 			#txt_css_render a{
-
+    			text-decoration: none;
+    			color: #fff;
 			}
 			#txt_css_render p{
 				
@@ -274,6 +299,51 @@
 			}
 			#txt_css_render p.item4{
 				
+			}
+			#txt_css_render .color-slot a{
+				padding: 10px 12px;
+			}
+			
+			
+			#txt_css_render p.item{
+				width: 90%;
+				margin: 10px auto;
+				display: flex;
+    			justify-content: space-between;
+			}
+			.color-slots,
+			.font-warehouse{
+				 width: 90%;
+    			margin: 10px auto;
+			}
+			  
+			  .color-slot{
+			  	
+			  } 
+			.color-slots a>div,
+			.font-warehouse div{
+				display: inline-block;
+			}
+			.color-slots a>div{
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+			}
+			
+			.minicolors-theme-default .minicolors-input{
+				height: 26px;
+			}
+			#txt_css_render a.selected-item{
+			    color: #ffa500;
+   				 font-weight: bold;	
+			}
+			textarea{
+				width: 100%;
+				border: none;
+			}
+			.hide-panel{
+				text-align: center;
+    			margin: 10px;
 			}
 			
 		</style>
@@ -299,6 +369,8 @@
 	<script type="text/javascript" src="../js/plugins/froala-editor/xml.min.js"></script>
 
 	<script src="../js/plugins/jquery.downCount/jquery.downCount.js"></script>
+	
+	<script src="../js/plugins/jquery.minicolors/jquery.minicolors.js"></script>
 
 	<body ontouchstart>
 
@@ -348,8 +420,8 @@
 
 				<div class="content">
 					<div class="price">
-						<span>原价：{{preview_init_price}}</span>
-						<span>底价：{{preview_new_price}}</span>
+						<span>原价：{{cutOriginPrice}}</span>
+						<span>底价：{{cutLeastPrice}}</span>
 					</div>
 
 					<div class="join">
@@ -359,7 +431,7 @@
 				</div>
 			</div>
 			<!--设置信息   砍价1-1-->
-			<div id="section_1" class="module">
+			<div id="section_0" class="module">
 				<div class="title">
 					设置信息
 				</div>
@@ -379,41 +451,27 @@
 								<!--<input class="weui-input" type="text" placeholder="开始时间" v-model="source.setting.value1">-->
 								<!--<label for="">开始时间</label>-->
 								<input type="text" id='startTime' placeholder="开始时间" @change="initCountDown(activityStartTime)" />
-							</div>
-						</div>
-
-						<div class="weui-cell">
-							<div class="weui-cell__bd">
-								<!-- <input class="weui-input" type="text" placeholder="结束时间" v-model="source.setting.value2">-->
-								<!--<label for="">结束时间</label>-->
+								<span>到</span>
 								<input type="text" id='endTime' placeholder="结束时间" />
 							</div>
 						</div>
 
+
 						<div class="weui-cell">
 							<div class="weui-cell__bd">
 								<!--<label for="">原价</label>-->
-								<input class="weui-input" type="tel" placeholder="原价" v-model="cutOriginPrice" @change="refreshRelativeValues('preview_init_price',cutOriginPrice)">
+								<input class="weui-input cut-fill" type="number" placeholder="原价" v-model="cutOriginPrice" @change="refreshRelativeValues('preview_init_price',cutOriginPrice)">
+								<span>元</span>
+								<input class="weui-input cut-fill" type="number" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
+								<span>元</span>
 							</div>
 						</div>
-
 						<div class="weui-cell">
 							<div class="weui-cell__bd">
-								<!--<input class="weui-input" type="tel" placeholder="底价" v-model="source.setting.value4">-->
-								<!-- <label for="">底价</label>-->
-
-								<input class="weui-input" type="tel" placeholder="底价" v-model="cutLeastPrice" @change="refreshRelativeValues('preview_new_price',cutLeastPrice)">
-
-							</div>
-						</div>
-
-						<div class="weui-cell">
-							<div class="weui-cell__bd">
-								<!--<input class="weui-input" type="text" placeholder="单次砍价最大值" v-model="source.setting.value5">-->
-								<!--<label for="">单次砍价最小值</label>-->
-
-								<input class="weui-input" type="tel" placeholder="单次砍价最小值" v-model="cutLeastPerPerson">
-
+								<!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
+								<!--<label for="">单次砍价最大值</label>-->
+								<label for="">每次减价减少范围：</label>
+					
 							</div>
 						</div>
 
@@ -421,17 +479,21 @@
 							<div class="weui-cell__bd">
 								<!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
 								<!--<label for="">单次砍价最大值</label>-->
-
-								<input class="weui-input" type="tel" placeholder="单次砍价最大值" v-model="cutMostPerPerson">
+							
+								<input class="weui-input cut-fill" type="tel" placeholder="最大" v-model="cutMostPerPerson">
+								<span>元</span>
+								<input class="weui-input cut-fill" type="tel" placeholder="最小" v-model="cutLeastPerPerson">
+								<span>元</span>
 							</div>
 						</div>
 
 						<div class="weui-cell">
 							<div class="weui-cell__bd">
 								<!--<input class="weui-input" type="text" placeholder="单次砍价最小值" v-model="source.setting.value6">-->
-								<label for="">报名者可再次给自己减价小时间隔</label>
-
-								<input class="weui-input" type="tel" placeholder="小时间隔" v-model="redoHours">
+								
+								<span>报名者每隔</span>
+									<input class="weui-input cut-fill" type="tel" placeholder="小时" v-model="redoHours">
+								<span>可再次给自己减价</span>
 							</div>
 						</div>
 
@@ -441,22 +503,22 @@
 
 			<!--奖品描述 1-1-->
 			<div id="section_1" class="module">
-				<div class="title edit-title">
+				<div class="title edit-title t-i-007">
 					<input class="weui-input" type="tel" value="奖品描述" v-model="sectionOneName">
 				</div>
 				<div class="content">
 					<div class="weui-cell">
 						<div class="weui-cell__bd">
 
-							<label for="">本期奖品份数</label>
+							<span>本期奖品</span>
 
-							<input class="weui-input" type="tel" placeholder="奖品份数" v-model="prizeNumber">
+							<input class="weui-input cut-fill" type="tel" placeholder="份数" v-model="prizeNumber">
 						</div>
 					</div>
 
 					<div class="upload-panel">
 						<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_1')">添加图片</div>
-						<div class="text add open-popup" data-target="#addTxt" @click="markHandle('add','txt','#section_1')">添加描述</div>
+						<div class="text add open-popup"  @click="markHandle('add','txt','#section_1')">添加描述</div>
 
 					</div>
 				</div>
@@ -464,14 +526,14 @@
 
 			<!--活动规则 1-1-->
 			<div id="section_2" class="module">
-				<div class="title edit-title">
+				<div class="title edit-title t-i-007">
 					<input class="weui-input" type="tel" value="活动规则" v-model="sectionTwoName">
 				</div>
 				<div class="content">
 
 					<div class="upload-panel">
 						<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_2')">添加图片</div>
-						<div class="text add open-popup" data-target="#addTxt" @click="markHandle('add','txt','#section_2')">添加描述</div>
+						<div class="text add open-popup"  @click="markHandle('add','txt','#section_2')">添加描述</div>
 
 						<!--<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_2')">添加视频</div>-->
 
@@ -481,7 +543,7 @@
 
 			<!--领奖信息 1-1-->
 			<div id="section_3" class="module">
-				<div class="title edit-title">
+				<div class="title edit-title t-i-007">
 					<input class="weui-input" type="tel" value="领奖信息" v-model="sectionThreeName">
 				</div>
 				<div class="content">
@@ -506,7 +568,7 @@
 
 					<div class="upload-panel">
 						<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_3')">添加图片</div>
-						<div class="text add" data-target="#addTxt" @click="markHandle('add','txt','#section_3')">添加描述</div>
+						<div class="text add"  @click="markHandle('add','txt','#section_3')">添加描述</div>
 
 						<!--<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_3')">添加视频</div>-->
 					</div>
@@ -515,7 +577,7 @@
 
 			<!--机构介绍 1-1-->
 			<div id="section_4" class="module">
-				<div class="title edit-title">
+				<div class="title edit-title t-i-007">
 					<input class="weui-input" type="tel" value="机构介绍" v-model="sectionFourName">
 				</div>
 				<div class="content">
@@ -540,7 +602,7 @@
 
 					<div class="upload-panel">
 						<div class="image add open-popup" data-target="#uploadImg" @click="markHandle('add','img','#section_4')">添加图片</div>
-						<div class="text add open-popup" data-target="#addTxt" @click="markHandle('add','txt','#section_4')">添加描述</div>
+						<div class="text add open-popup"  @click="markHandle('add','txt','#section_4')">添加描述</div>
 
 						<!--<div class="video add open-popup" data-target="#uploadVideo" @click="markHandle('add','video','#section_4')">添加视频</div>-->
 					</div>
@@ -585,7 +647,7 @@
 								<input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectThreeName">
 							</div>
 							<div class="weui-cell__ft">
-								<label>必填项</label>
+								<label class="v-a-super">必填项</label>
 								<input class="weui-switch" type="checkbox" v-model="infoCollectThreeIsRequired">
 							</div>
 						</div>
@@ -595,7 +657,7 @@
 								<input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectFourName">
 							</div>
 							<div class="weui-cell__ft">
-								<label>必填项</label>
+								<label class="v-a-super">必填项</label>
 								<input class="weui-switch" type="checkbox" v-model="infoCollectFourIsRequired">
 							</div>
 						</div>
@@ -605,7 +667,7 @@
 								<input class="weui-input" type="text" placeholder="信息项名称" v-model="infoCollectFiveName">
 							</div>
 							<div class="weui-cell__ft">
-								<label>必填项</label>
+								<label class="v-a-super">必填项</label>
 								<input class="weui-switch" type="checkbox" v-model="infoCollectFiveIsRequired">
 							</div>
 						</div>
@@ -856,42 +918,59 @@
 
 
 		<div id="txt_css_render" class="txt-css">
-			<p class="item1">
+			<p class="item1 item">
 				<a style="font-weight: bold;" >B（加粗）</a>
 				<a style="font-style: italic;">I（斜体）</a>
 				<a style="text-decoration: underline;" >U（下划线）</a>
 				<a style="text-decoration: line-through;" >L（删除线）</a>
 			</p>
-			<p class="item2">
+			<p class="item2 item">
 				
 				<label for="">文字大小</label>
-				<input type="range" min="12" max="50" step="1"   onchange="txt_css_render.BASE.get_txt_font_size_css(this.value)">
-							
+				<span>-</span>
+				<input type="range" min="12" max="50" step="1" value="12"   onchange="txt_css_render.BASE.get_txt_font_size_css(this.value)">
+				<span>+</span>		
 			</p>
-			<p class="item3">				
+			<p class="item3 item">				
 				<label for="">字体</label>
-				<div class="font-warehouse">
+				<span><a style="font-family: '宋体';" >宋体</a></span>
+				<span><a style="font-family: '微软雅黑';" >微软雅黑</a></span>
+				<span><a style="font-family: '黑体';" >黑体</a></span>
+				<span><a style="font-family: '楷体';" >楷体</a></span>
+				<span id="more_font_famliy">更多</span>
+				<div class="font-warehouse hide">
 					<div><a style="font-family: '宋体';" >宋体</a></div>
 					<div><a style="font-family: '微软雅黑';" >微软雅黑</a></div>
 					<div><a style="font-family: '黑体';" >黑体</a></div>
-					<div><a style="font-family: '华文新魏';">华文新魏</a></div>
-					<div><a style="font-family: '华文行楷';" >华文行楷</a></div>
-					<div><a style="font-family: '幼圆';" >幼圆</a></div>
+					<div><a style="font-family: '细明体';">细明体</a></div>
+					<div><a style="font-family: '标楷体';" >标楷体</a></div>
+					<div><a style="font-family: '微软正黑体';" >微软正黑体</a></div>
 				</div>	
 			</p>
-			<p class="item4">				
+			<p class="item4 item">				
 				<label for="">颜色</label>
-				<div class="font-color">
-					<input type="text" id="hue-demo" class="demo" data-control="hue" value="#ff6161">
-					<div class="demo-color">
-						<div style="color:red;background-color: red;"><a style="color: red;" ></a></div>
-						<div style="color:blue;background-color: blue;"><a style="color: blue;" ></a></div>
-						<div style="color:green;background-color: green;"><a style="color: green;" ></a></div>
-						<div style="color:yellow;background-color: yellow;"><a style="color: yellow;" ></a></div>
+				<span class="color-slot" style="color:red;background-color: red;"><a style="color: red;" ></a></span>
+				<span class="color-slot"  style="color:blue;background-color: blue;"><a style="color: blue;" ></a></span>
+				<span class="color-slot"  style="color:green;background-color: green;"><a style="color: green;" ></a></span>
+				<span class="color-slot"  style="color:yellow;background-color: yellow;"><a style="color: yellow;" ></a></span>
+				<span id="more_color_slot">更多</span>
+				<div class="color-slots hide">
+						<a style="color: red;" ><div style="color:red;background-color: red;"></div></a>
+						<a style="color: blue;" ><div style="color:blue;background-color: blue;"></div></a>
+						<a style="color: green;" ><div style="color:green;background-color: green;"></div></a>
+						<a style="color: yellow;" ><div style="color:yellow;background-color: yellow;"></div></a>
+						<input type="text" id="pick_color" class="demo" data-control="hue" value="#000">
 					</div>
+			
+				</p>	
+				<p class="hide-panel">
+					<span>收起</span>
+				</p>
 					
-				</div>	
-			</p>
+			</div>	
+			
+			
+			
 			
 		</div>
 		
@@ -907,37 +986,111 @@
 						'font-size':'',
 						'font-family':'',
 						'color':'',
+						'width':'100%',
+						 'resize': 'none'
 					},
 					init:function(){
+						
+						
 						this.bind_get_css_event();
 						this.bind_textarea();
+						this.bind_more();
+						this.load_minicolors();
+						this.bind_other();
 					},
 					get_txt_font_size_css:function(val){
 						txt_css_render.BASE.final_css['font-size'] = (val+'px');
 						txt_css_render.BASE.refresh_css();
 					},
+					load_minicolors:function(){
+						$('#pick_color').minicolors({
+							 change: function(value, opacity) {
+							 	
+					            txt_css_render.BASE.final_css['color'] = value;
+					            txt_css_render.BASE.refresh_css();
+					          },
+						});
+					},
 					bind_get_css_event:function(){
+						$("#txt_css_render a").off();
+						
 						$("#txt_css_render a").click(function(e){
+							//$(this).parent().find(".selected-item").removeClass("selected-item");
 							debugger;
-							var css = $(this).attr("style");
-							css = css.split(";")[0];
-							txt_css_render.BASE.final_css[css.split(":")[0]] = css.split(":")[1];
+							if($(this).parent().hasClass("item1")){
+								if($(this).hasClass("selected-item")){
+									$(this).removeClass("selected-item");
+									
+									var css = $(this).attr("style");
+									css = css.split(";")[0];
+									txt_css_render.BASE.final_css[css.split(":")[0]] = "";
+									
+									txt_css_render.BASE.refresh_css();
+								}
+								else{
+									$(this).addClass("selected-item");
+									
+									var css = $(this).attr("style");
+									css = css.split(";")[0];
+									txt_css_render.BASE.final_css[css.split(":")[0]] = css.split(":")[1];
+									
+									txt_css_render.BASE.refresh_css();
+									
+								}
+							}
+							else{
+								  $(this).parent().siblings().children().removeClass("selected-item");
+								  $(this).addClass("selected-item");
+	
+									var css = $(this).attr("style");
+									css = css.split(";")[0];
+									txt_css_render.BASE.final_css[css.split(":")[0]] = css.split(":")[1];
+									
+									txt_css_render.BASE.refresh_css();
+							}
 							
-							txt_css_render.BASE.refresh_css()
+							
+							
+						
 						})
+					},
+					bind_other:function(){
+						$(".hide-panel").click(function(e){
+							$("#txt_css_render").slideUp();
+						})			
 					},
 					bind_textarea:function(){
 						$("textarea").focus(function(e){
 							txt_css_render.BASE.cur_textarea = $(this);
+							$("#txt_css_render").slideDown();
+						})
+
+						$('textarea').each(function () {
+						  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+						}).on('input', function () {
+						  this.style.height = 'auto';
+						  this.style.height = (this.scrollHeight) + 'px';
+						});
+						
+					},
+					bind_more:function(){
+						$("#more_font_famliy").off();
+						$("#more_color_slot").off();
+						
+						$("#more_font_famliy").click(function(e){
+							$(".font-warehouse").fadeToggle("hide")
+						})
+						$("#more_color_slot").click(function(e){
+							$(".color-slots").fadeToggle("hide")
 						})
 					},
 					refresh_css:function(){
 						var style_str = '';
-							for(var i in txt_css_render.BASE.final_css){
-								style_str += (i+":"+txt_css_render.BASE.final_css[i]+";");
-							}
-							
-							txt_css_render.BASE.cur_textarea.attr("style",style_str);
+						for(var i in txt_css_render.BASE.final_css){
+							style_str += (i+":"+txt_css_render.BASE.final_css[i]+";");
+						}
+						
+						txt_css_render.BASE.cur_textarea.attr("style",style_str);
 					},
 				}
 			}
@@ -1033,6 +1186,15 @@
 						data.sectionTwoArrayIndex = activity.sectionSourceIndex['#section_2'].join(",");
 						data.sectionThreeArrayIndex = activity.sectionSourceIndex['#section_3'].join(",");
 						data.sectionFourArrayIndex = activity.sectionSourceIndex['#section_4'].join(",");
+						
+						
+	
+		
+						data.infoCollectThreeIsRequired=data.infoCollectThreeIsRequired?2:1;
+		
+						data.infoCollectFourIsRequired=data.infoCollectFourIsRequired?2:1;
+				
+						data.infoCollectFiveIsRequired= data.infoCollectFiveIsRequired?2:1;
 
 						this.$nextTick(function() {
 							//拼接html描述文本
@@ -1049,12 +1211,27 @@
 					switchMode: function() {
 
 						$("#section_top").toggleClass("preview");
+						
+						$("#section_0").toggleClass("preview");
 
 						$("#section_1").toggleClass("preview");
+						
+						$(".t-i-007").toggleClass("edit-title");
 
 						$(".module .content .source").toggleClass("preview");
 						$(".module .content .source .hand-trigger").toggleClass("preview");
 						$(".upload-panel").toggleClass("preview");
+						
+						$(".count-down,.main-title").toggleClass("preview");
+						
+						$('#count_down').downCount({
+				            date: $("#endTime").val(),
+				            offset: +10
+				        }, function () {
+				            alert('倒计时结束!');
+				        });
+						
+						
 					},
 					refreshRelativeValues: function(name, value) {
 						this[name] = value;
@@ -1081,19 +1258,19 @@
 								var obj = document.getElementById('uploadFile');
 								obj.outerHTML = obj.outerHTML;
 							}
-							if($.inArray(handleType, [2, 5]) != -1) {
+							/*if($.inArray(handleType, [2, 5]) != -1) {
 								$("#addTxt").popup();
 								$("#txtEditTool").load("textEditer.html");
 
-							}
+							}*/
 							if(handleType == 7) {
 								debugger;
 								var id = $("#curSourceId").val();
 								$("#" + $("#curSourceId").val()).remove();
 
 								$("#curSourceId").val('');
-								var st = this.curSourceType;
-								var sty = this.curSectionType;
+								var st = activityVue.curSourceType;
+								var sty = activityVue.curSectionType;
 								if(st == "img") {
 									activity.sectionSourceIndex[sty].splice(activity.sectionSourceIndex[sty].indexOf(id), 1);
 
@@ -1131,16 +1308,33 @@
 						if(sourceType == "txt") {
 							//$("#txtEditTool").load("textEditer.html");
 							
-							var dom =  "<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p><textarea></textarea></p></div></div>";
+							var dom =  "<div id=\"#id\" class=\"source\"><div onclick=\"activity.editSourceItem(#id)\"class=\"hand-trigger open-popup\"data-target=\"#sourceHandle\">编辑</div><div class=\"txt\"><p><textarea value=\"请输入\">请输入</textarea></p></div></div>";
 
 							var stJqId = $("#sectionType").val();
+							
+							
+							var ht = $("#handleName").val();
+							var st = $("#sourceType").val();
+							var csId = $("#curSourceId").val();
+
+							
+							dom = dom.replace(/#id/g, activity.handleTxtSourceIndex(csId, ht, stJqId))
+							
 							$(stJqId).find(".upload-panel").before(dom);
 							
 							txt_css_render.BASE.init();
+							
+							
 						}
 						/*if($.inArray(sectionType, activity.hasSourceSection)!=-1){
 							
 						}*/
+
+					},
+					toggle_warhouse: function() {
+						//$
+						debugger
+						$(".font-warehouse").toggleClass("hide")
 
 					},
 				}
@@ -1545,6 +1739,8 @@
 				}
 			});*/
 			$(function() {
+				
+				
 				$("input[type=file]").change(function() {
 					$(this).parents(".uploader").find(".filename").val($(this).val());
 				});

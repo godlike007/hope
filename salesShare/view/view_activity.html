@@ -453,7 +453,7 @@
 		<div class="content">
 			
 
-			<table class="table table-striped table-bordered">
+			<table class="wid100-center">
             <thead>
             <tr>
                 <th>排名</th>
@@ -464,10 +464,10 @@
             </thead>
             <tbody>
 
-                <tr :id="item.id" class="source" v-for="item in rankList">
-                	  <td></td>
-                	  <td>{{name}}</td>
-                	  <td>{{price}}</td>
+                <tr :id="item.id" class="source" v-for="(item,index) in rankList">
+                	  <td>{{index+1}}</td>
+                	  <td>{{item.name}}</td>
+                	  <td>{{item.price}}</td>
                 </tr>
             </tbody>
         </table>
@@ -476,6 +476,11 @@
 
 		</div>	
 	</div>
+	
+	
+
+
+
 	
 	<div id="userInfo" class="customer-info hide">
 	<img :src="banner_url" alt="" />	
@@ -498,10 +503,13 @@
 </div>
 
 
-
-		<a id="call" href="tel://222">拨打电话</a>
-
-
+	<div class="float-ball">
+	<a id="call" href="tel://222">
+		<div>
+			拨打电话
+		</div>
+	</a>
+</div>
 
 <script src="../js/libs/weui/fastclick.js"></script>
 
@@ -587,7 +595,21 @@ var activityVue = new Vue({
 		section2:[],
 		section3:[],
 		section4:[],
-		rankList:[]
+		rankList:[],
+		
+		rankList:[{
+			name:'谢*目',
+			price:234
+		},{
+			name:'咔*咔',
+			price:563
+		},{
+			name:'陈*',
+			price:34
+		},{
+			name:'赵*',
+			price:65
+		}]
 
   },
  methods: {

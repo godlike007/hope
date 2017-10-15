@@ -22,6 +22,14 @@ header .title{
 	text-align: center;
 }
 
+/*pure attr*/
+.v-a-super{
+    vertical-align: super;
+}
+.t-i-007{
+	text-indent: 7%;
+}
+
 
 /*button*/
 
