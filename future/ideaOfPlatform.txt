@@ -1,0 +1,31 @@
+时间轴通用组件
+时间，条件通用搜索组件
+echart实时编辑器
+echart直方图通用封装传参调用
+echart直方图通用分页组件
+echart级联点击深度触发新图标通用组件，点直方图某横坐标进入扇形图再点击某一扇区进入。。。。
+时间控件在线编辑
+
+快速切换接口配置
+
+利用node.js等一系列自动化工具快速开发html，css包括前后处理器，vue，jQuery直接改变配置输出常规表单form，table，带模拟数据绑定
+
+bootstrap 样式class汇总研究，新常规样式类定义，包括margin，padding，font-size等，用来快速调用开发
+
+不同模块内所有echart共用熟悉集中配置，比如柱状图的宽度
+
+管理系统的快速开发模式，比如样式class编写不遵循传统模式，直接写样式属性
+
+统计图设计稿快速生成页面最终解决方案，包括chart样式及vue数据绑定，接口配置开发
+
+vue数据项目管道各种，保留，乘比，格式化管道快速调用
+
+echart 屏幕响应式图表展示，例如直方图宽度
+
+组件table分页可配置
+
+css自定义标签转换 <userDefined></userDefined>  ->  <div class='userDefined'></div>   #id userDefined ->#id .userDefined
+
+页面配置启动控件可视化编辑模式，例如引入chosen.js后配置当前页，启动实时可视化编辑生成控件
+
+在线编辑器集成插件配置提示，如datatable编写直接显示配置提示
