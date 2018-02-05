@@ -4,11 +4,13 @@ var Main = {
       select_chart_type(e,item){
       	this.chart_type = item.type;
       	
+      	init_chart('chart_'+ this.chart_type + this.cur_module_id);
+      	
       },
       select_chart_module(e,item){
       	this.cur_module_id = item.index;
       	
-      	init_chart();
+      	
       	
       	debugger;
       }
@@ -140,10 +142,11 @@ var Ctor = Vue.extend(Main)
 new Ctor().$mount('#app')
 
 
+var myChart = {}
 
 var init_chart = function(id){
  // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById(id));
+        myChart[id] = echarts.init(document.getElementById(id));
 
         // 指定图表的配置项和数据
         var option = {
