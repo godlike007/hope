@@ -2,13 +2,20 @@
 var Main = {
     methods: {
       select_chart_type(e,item){
-      	this.chart_type = item.type;
+      	this.cur_chart_data.chart_type = item.value;
       	
-      	init_chart('chart_'+ this.chart_type + this.cur_module_id);
+      	load_module_chart('chart_'+ item.value + this.cur_chart_data.module_index,item.value);
+      	
+      	load_data_model(item.value);
       	
       },
       select_chart_module(e,item){
-      	this.cur_module_id = item.index;
+      	var cur = e.currentTarget;
+      	
+      	$(".chart-module .active").addClass("active");
+      	$(this).addClass("active");
+      	
+      	this.cur_chart_data.module_index = item.index;
       	
       	
       	
@@ -17,6 +24,21 @@ var Main = {
     },
     data() {
       return {
+      	cur_chart_data:{
+      		//typesetting_type
+      		
+      		//chart type
+      		chart_type:1,
+      		//chart module
+      		module_index:'',
+      		//data model
+      		sql:'',
+      		model_title:'',
+      		x_axis:'',
+      		y_axis:'',
+
+      	},
+      	
       	//typesetting_type
       	typesetting_type_list:[{
       		type: 1,
@@ -34,18 +56,21 @@ var Main = {
       	//chart type
       	chart_type_list:[{
       		type: 1,
+      		value:'line',
           name: '折线图',
           label: 'HTML'
         }, {
         	type: 2,
+        	value:'bar',
           name: '直方图',
           label: 'CSS'
         }, {
         	type: 3,
+        	value:'pie',
           name: '饼状图',
           label: 'JavaScript'
         }],
-        chart_type:1,
+        
         //chart module
         chart_module_list:[{
         	index: 1,
@@ -60,81 +85,31 @@ var Main = {
           name: 'pie',
           label: 'JavaScript'
         }],
-        cur_module_id:'',
+        
       	//data model
       	x_axis_list: [{
-          value: 'HTML',
-          label: 'HTML'
+          value: '1月',
+          label: '1月'
         }, {
-          value: 'CSS',
-          label: 'CSS'
+          value: '2月',
+          label: '2月'
         }, {
-          value: 'JavaScript',
-          label: 'JavaScript'
+          value: '3月',
+          label: '3月'
         }],
-        x_axis: [],
+      
       	
       	y_axis_list: [{
-          value: 'HTML',
-          label: 'HTML'
+          value: 'a指标',
+          label: 'a指标'
         }, {
-          value: 'CSS',
-          label: 'CSS'
+          value: 'b指标',
+          label: 'b指标'
         }, {
-          value: 'JavaScript',
-          label: 'JavaScript'
+          value: 'c指标',
+          label: 'c指标'
         }],
-        y_axis: [],
-        tableData4: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          province: '上海',
-          city: '普陀区',
-          address: '上海市普陀区金沙江路 1518 弄',
-          zip: 200333
-        }]
+       
       }
     }
   }
@@ -144,30 +119,156 @@ new Ctor().$mount('#app')
 
 var myChart = {}
 
-var init_chart = function(id){
- // 基于准备好的dom，初始化echarts实例
+var load_module_chart = function(id,chart_type,data){
+debugger;
         myChart[id] = echarts.init(document.getElementById(id));
 
         // 指定图表的配置项和数据
+        
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart[id].setOption(chart_option_config[chart_type](data));	
+}
+
+var load_data_model = function(chart_type){
+
+}
+
+var chart_option_config = {
+   line:function(data){	  
+	  if(!!data){
+	  	data = {
+	  		title:'折现图示例',
+	  		legend:['销量'],
+	  		xAxis:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+	  		legend:'折现图示例',
+	  		series_name:'销量',
+	  		series_data:[5, 20, 36, 10, 10, 20],
+	  		
+	  	}
+	  }
+
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: data.title
             },
             tooltip: {},
             legend: {
-                data:['销量']
+                data:data.legend
             },
             xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                data:data.xAxis
             },
             yAxis: {},
             series: [{
-                name: '销量',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                name: data.series_name,
+                type: 'line',
+                data: data.series_data,
             }]
         };
+	
+	return option;
+},
 
-        // 使用刚指定的配置项和数据显示图表。
-        myChart[id].setOption(option);	
+   bar: function(data){
+	  
+	  if(!!data){
+	  	data = {
+	  		title:'直方图示例',
+	  		legend:['销量'],
+	  		xAxis:["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"],
+	  		series_name:'销量',
+	  		series_data:[5, 20, 36, 10, 10, 20],
+	  		
+	  	}
+	  }
+
+        var option = {
+            title: {
+                text: data.title
+            },
+            tooltip: {},
+            legend: {
+                data:data.legend
+            },
+            xAxis: {
+                data:data.xAxis
+            },
+            yAxis: {},
+            series: [{
+                name: data.series_name,
+                type: 'bar',
+                data: data.series_data,
+            }]
+        };
+	
+	return option;
+},
+
+
+ pie: function(data){
+	  
+	  if(!!data){
+	  	data = {
+	  		title:'饼状图示例',
+			legend:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],
+	  		series_name:'访问来源',
+	  		series_data:[
+		                {value:335, name:'直接访问'},
+		                {value:310, name:'邮件营销'},
+		                {value:234, name:'联盟广告'},
+		                {value:135, name:'视频广告'},
+		                {value:1548, name:'搜索引擎'}
+		            ]
+	  		
+	  	}
+	  }
+
+
+	var option = {
+			title: {
+                text: data.title
+            },
+		    tooltip: {
+		        trigger: 'item',
+		        formatter: "{a} <br/>{b}: {c} ({d}%)"
+		    },
+		    legend: {
+		        orient: 'vertical',
+		        x: 'left',
+		        data:data.legend
+		    },
+		    series: [
+		        {
+		            name:data.series_name,
+		            type:'pie',
+		            radius: ['50%', '70%'],
+		            avoidLabelOverlap: false,
+		            label: {
+		                normal: {
+		                    show: false,
+		                    position: 'center'
+		                },
+		                emphasis: {
+		                    show: true,
+		                    textStyle: {
+		                        fontSize: '30',
+		                        fontWeight: 'bold'
+		                    }
+		                }
+		            },
+		            labelLine: {
+		                normal: {
+		                    show: false
+		                }
+		            },
+		            data:data.series_data
+		        }
+		    ]
+		};
+
+	
+	return option;
+}
+
 }
