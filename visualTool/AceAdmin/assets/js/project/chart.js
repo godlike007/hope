@@ -2,20 +2,25 @@
 var Main = {
     methods: {
       select_chart_type(e,item){
-      	debugger;
+      
       	this.cur_chart_data.chart_type = item.value;
       	
-      	load_module_chart('chart_'+ item.value + this.cur_chart_data.module_index,item.value);
+      	var id = this.cur_chart_data.chart_id;
+      	load_module_chart(id,item.value);
       	
       	load_data_model(item.value);
       	
       },
       select_chart_module(e,item){
-      	debugger;
-      	var cur = e.currentTarget;
       	
-      	$(".chart-module .active").addClass("active");
-      	$(this).addClass("active");
+     
+      	var cur = e.currentTarget;
+      	this.cur_chart_data.chart_id = $(cur).children().attr("id");
+      	//check_module_status(cur);
+      	
+      	
+      	$(".chart-module .active").removeClass("active");
+      	$(cur).addClass("active");
       	
       	this.cur_chart_data.module_index = item.index;
       	
@@ -33,6 +38,7 @@ var Main = {
       		chart_type:1,
       		//chart module
       		module_index:'',
+      		chart_id:'',
       		//data model
       		sql:'',
       		model_title:'',
@@ -121,6 +127,17 @@ new Ctor().$mount('#app')
 
 var myChart = {}
 
+var check_module_status = function(cur){
+	
+	if(!!$(cur).children().attr("id")){
+		Main.cur_chart_data.chart_id = $(cur).children().attr("id");
+	}
+	else{
+		Main.cur_chart_data.chart_id = '';
+	}
+}
+
+
 var load_module_chart = function(id,chart_type,data){
 debugger;
         myChart[id] = echarts.init(document.getElementById(id));
@@ -139,6 +156,8 @@ var load_data_model = function(chart_type){
 var chart_option_config = {
    line:function(data){	  
 	  if(!!data){
+	  	}
+	  else{
 	  	data = {
 	  		title:'折现图示例',
 	  		legend:['销量'],
@@ -175,6 +194,8 @@ var chart_option_config = {
    bar: function(data){
 	  
 	  if(!!data){
+	  	}
+	  else{
 	  	data = {
 	  		title:'直方图示例',
 	  		legend:['销量'],
@@ -211,6 +232,9 @@ var chart_option_config = {
  pie: function(data){
 	  
 	  if(!!data){
+	  	
+	  }
+	  else{
 	  	data = {
 	  		title:'饼状图示例',
 			legend:['直接访问','邮件营销','联盟广告','视频广告','搜索引擎'],

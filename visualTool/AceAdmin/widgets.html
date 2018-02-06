@@ -454,9 +454,9 @@
 								    	
 								    	
 								    	<el-card class="chart-module col-lg-10">
-									  		<div class="active" v-for="item in chart_module_list" @click="select_chart_module($event,item)">
+									  		<div v-for="item in chart_module_list" @click="select_chart_module($event,item)">
 									  			选中并点击左侧图标类型
-									  			<div style="width: 300px;height: 300px;" val="{{'chart_'+ item.value + item.index}}"></div>
+									  			<div style="width: 300px;height: 300px;" :id="item.name+item.index"></div>
 									  		</div>
 									  	</el-card>
 									  	
@@ -471,39 +471,39 @@
 									  		
 									  		
 									  		<!--折线图-->
-									  		<div v-if="chart_type==1" class="param-config col-lg-12">
+									  		<div v-if="cur_chart_data.chart_type==1" class="param-config col-lg-12">
 									  			<template>
-												  <el-select v-model="x_axis" placeholder="x轴坐标值">
+												  <el-select v-model="cur_chart_data.x_axis" placeholder="x轴坐标值">
 												    <el-option v-for="item in x_axis_list" :key="item.value" :label="item.label" :value="item.value">
 												    </el-option>
 												  </el-select>
 												</template>
 									  
 									  			<template>
-												  <el-select v-model="y_axis" multiple filterable="" allow-create="" default-first-option placeholder="y轴坐标值">
+												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="y轴坐标值">
 												    <el-option v-for="item in y_axis_list" :key="item.value" :label="item.label" :value="item.value">
 												    </el-option>
 												  </el-select>
 												</template>
 									  		</div>
 									  		<!--直方图-->
-									  		<div v-if="chart_type==2" class="param-config col-lg-12">
+									  		<div v-if="cur_chart_data.chart_type==2" class="param-config col-lg-12">
 									  			<template>
-												  <el-select v-model="x_axis" placeholder="x轴坐标值">
+												  <el-select v-model="cur_chart_data.x_axis" placeholder="x轴坐标值">
 												    <el-option v-for="item in x_axis_list" :key="item.value" :label="item.label" :value="item.value">
 												    </el-option>
 												  </el-select>
 												</template>
 									  
 									  			<template>
-												  <el-select v-model="y_axis" multiple filterable="" allow-create="" default-first-option placeholder="y轴坐标值">
+												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="y轴坐标值">
 												    <el-option v-for="item in y_axis_list" :key="item.value" :label="item.label" :value="item.value">
 												    </el-option>
 												  </el-select>
 												</template>
 									  		</div>
 									  		<!--饼状图-->
-									  		<div v-if="chart_type==3" class="param-config col-lg-12">
+									  		<div v-if="cur_chart_data.chart_type==3" class="param-config col-lg-12">
 									  			<!--<template>
 												  <el-select v-model="x_axis" placeholder="标题">
 												    <el-option v-for="item in name" :key="item.value" :label="item.label" :value="item.value">
