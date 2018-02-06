@@ -2,6 +2,7 @@
 var Main = {
     methods: {
       select_chart_type(e,item){
+      	debugger;
       	this.cur_chart_data.chart_type = item.value;
       	
       	load_module_chart('chart_'+ item.value + this.cur_chart_data.module_index,item.value);
@@ -10,6 +11,7 @@ var Main = {
       	
       },
       select_chart_module(e,item){
+      	debugger;
       	var cur = e.currentTarget;
       	
       	$(".chart-module .active").addClass("active");
@@ -19,7 +21,7 @@ var Main = {
       	
       	
       	
-      	debugger;
+      	
       }
     },
     data() {

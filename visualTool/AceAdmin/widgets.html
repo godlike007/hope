@@ -456,7 +456,7 @@
 								    	<el-card class="chart-module col-lg-10">
 									  		<div class="active" v-for="item in chart_module_list" @click="select_chart_module($event,item)">
 									  			选中并点击左侧图标类型
-									  			<div style="width: 300px;height: 300px;" :id="'chart_'+ chart_type + item.index"></div>
+									  			<div style="width: 300px;height: 300px;" val="{{'chart_'+ item.value + item.index}}"></div>
 									  		</div>
 									  	</el-card>
 									  	
