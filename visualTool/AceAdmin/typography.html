@@ -70,8 +70,7 @@
 				<div class="navbar-header pull-left">
 					<a href="#" class="navbar-brand">
 						<small>
-							<i class="icon-leaf"></i>
-							Ace Admin
+							实体数据抽取与可视化工具
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -375,14 +374,14 @@
 <ul class="nav nav-list">
 					<li>
 							<a href="typography.html">
-								<i class="icon-text-width"></i>
+			
 								<span class="menu-text"> 数据模型配置 </span>
 							</a>
 						</li>
 						
 						<li>
 							<a href="widgets.html">
-								<i class="icon-list-alt"></i>
+							
 								<span class="menu-text"> 可视化图表配置 </span>
 							</a>
 						</li></ul><!-- /.nav-list -->
@@ -435,7 +434,7 @@
 								<el-button  @click="create_data_model">生成数据模型</el-button>
 							</div>
 								
-								<div class="col-lg-12">
+								<div class="col-lg-12 search-select">
 									<el-button  v-for="item in field_list"  type="primary" @click="selected_field($event,item)">{{item.name}}</el-button>
 								</div>
 								

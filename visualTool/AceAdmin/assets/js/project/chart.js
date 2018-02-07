@@ -3,7 +3,7 @@ var Main = {
     methods: {
       select_chart_type(e,item){
       
-      	this.cur_chart_data.chart_type = item.value;
+      	this.cur_chart_data.chart_type = item.type;
       	
       	var id = this.cur_chart_data.chart_id;
       	load_module_chart(id,item.value);
@@ -50,15 +50,15 @@ var Main = {
       	//typesetting_type
       	typesetting_type_list:[{
       		type: 1,
-          name: 'HTML',
+          name: '版型1',
           label: 'HTML'
         }, {
         	type: 2,
-          name: 'CSS',
+          name: '版型2',
           label: 'CSS'
         }, {
         	
-          name: 'JavaScript',
+          name: '版型3',
           label: 'JavaScript'
         }],
       	//chart type
@@ -66,32 +66,47 @@ var Main = {
       		type: 1,
       		value:'line',
           name: '折线图',
-          label: 'HTML'
+          label: 'HTML',
+          source:'assets/images/project/line.png'
         }, {
         	type: 2,
         	value:'bar',
           name: '直方图',
-          label: 'CSS'
+          label: 'CSS',
+          source:'assets/images/project/bar.png'
         }, {
         	type: 3,
         	value:'pie',
           name: '饼状图',
-          label: 'JavaScript'
+          label: 'JavaScript',
+          source:'assets/images/project/pie.png'
         }],
         
         //chart module
         chart_module_list:[{
         	index: 1,
           name: 'line',
-          label: 'HTML'
+          label: 'HTML',
+          layout:{
+          	width:'300px',
+          	height:'300px',
+          }
         }, {
         	index: 2,
           name: 'bar',
-          label: 'CSS'
+          label: 'CSS',
+          layout:{
+          	width:'300px',
+          	height:'300px',
+          }
         }, {
         	index: 3,
           name: 'pie',
-          label: 'JavaScript'
+          label: 'JavaScript',
+          layout:{
+          	width:'600px',
+          	height:'300px',
+          }
         }],
         
       	//data model

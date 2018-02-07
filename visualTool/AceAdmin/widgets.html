@@ -18,11 +18,7 @@
 
 		<!-- page specific plugin styles -->
 
-		<link rel="stylesheet" href="assets/css/prettify.css" />
 
-		<!-- fonts -->
-
-		<link rel="stylesheet" href="http://fonts.useso.com/css?family=Open+Sans:400,300" />
 
 		<!-- ace styles -->
 
@@ -73,7 +69,7 @@
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="icon-leaf"></i>
-							Ace Admin
+							实体数据抽取与可视化工具
 						</small>
 					</a><!-- /.brand -->
 				</div><!-- /.navbar-header -->
@@ -377,14 +373,14 @@
 <ul class="nav nav-chart">
 					<li>
 							<a href="typography.html">
-								<i class="icon-text-width"></i>
+						
 								<span class="menu-text"> 数据模型配置 </span>
 							</a>
 						</li>
 						
 						<li>
 							<a href="widgets.html">
-								<i class="icon-chart-alt"></i>
+							
 								<span class="menu-text"> 可视化图表配置 </span>
 							</a>
 						</li></ul>
@@ -434,9 +430,9 @@
 								<el-container>
 								  <el-header>
 								  	<el-card class="typesetting-type">
-								  		<div v-for="item in typesetting_type_list">
+								  		<el-tag v-for="item in typesetting_type_list">
 								  			{{item.name}}
-								  		</div>
+								  		</el-tag>
 								  	</el-card>
 								  	
 								  	
@@ -445,7 +441,9 @@
 								    <el-aside width="200px">
 								    	<el-card class="chart-type">
 									  		<div v-for="item in chart_type_list" @click="select_chart_type($event,item)">
-									  			{{item.name}}
+									  			<img :src="item.source" alt="" />
+									  			<div class="text-center">{{item.name}}</div>
+									  			
 									  		</div>
 									  	</el-card>
 								    	
@@ -453,25 +451,79 @@
 								    <el-main>
 								    	
 								    	
-								    	<el-card class="chart-module col-lg-10">
-									  		<div v-for="item in chart_module_list" @click="select_chart_module($event,item)">
+								    	<el-card class="chart-module col-lg-9">
+									  		<div style="width: 300px;height: 300px;float: left;" v-for="item in chart_module_list" @click="select_chart_module($event,item)">
 									  			选中并点击左侧图标类型
 									  			<div style="width: 300px;height: 300px;" :id="item.name+item.index"></div>
 									  		</div>
 									  	</el-card>
 									  	
-									  	<el-card class="data-model col-lg-2">
-									  		<div class="sql-panel col-lg-12">
+									  	<el-card class="data-model col-lg-3">
+									  		
+									  		
+									  		<el-form ref="form"  label-width="80px">
+											  <el-form-item label="输入sql">
+											   	<el-input type="textarea" v-model="cur_chart_data.sql"></el-input>
+											  </el-form-item>
+											  
+											  <el-form-item label="图例标题">
+											    <el-input v-model="cur_chart_data.model_title"></el-input>
+											  </el-form-item>
+											  
+											  <el-form-item  v-if="cur_chart_data.chart_type==1"  label="x轴">
+											    <template>
+												  <el-select v-model="cur_chart_data.x_axis" placeholder="x轴坐标值">
+												    <el-option v-for="item in x_axis_list" :key="item.value" :label="item.label" :value="item.value">
+												    </el-option>
+												  </el-select>
+												</template>
+											  </el-form-item>
+											  
+											  <el-form-item  v-if="cur_chart_data.chart_type==1" label="y轴">
+											    <template>
+												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="">
+												    <el-option v-for="item in y_axis_list" :key="item.value" :label="item.label" :value="item.value">
+												    </el-option>
+												  </el-select>
+												</template>
+											  </el-form-item>
+											  
+											  <el-form-item  v-if="cur_chart_data.chart_type==2"  label="x轴">
+											    <template>
+												  <el-select v-model="cur_chart_data.x_axis" placeholder="x轴坐标值">
+												    <el-option v-for="item in x_axis_list" :key="item.value" :label="item.label" :value="item.value">
+												    </el-option>
+												  </el-select>
+												</template>
+											  </el-form-item>
+											  
+											  <el-form-item  v-if="cur_chart_data.chart_type==2" label="y轴">
+											    <template>
+												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="">
+												    <el-option v-for="item in y_axis_list" :key="item.value" :label="item.label" :value="item.value">
+												    </el-option>
+												  </el-select>
+												</template>
+											  </el-form-item>
+											  
+											  
+											  
+											  
+											  
+											</el-form>
+									  		
+									  		
+									  		<!--<div class="sql-panel col-lg-12">
 									  			 <el-input type="textarea" v-model="cur_chart_data.sql"></el-input>
-									  		</div>
+									  		</div>-->
 									  		<!--共用配置-->
-									  		<div class="common-config">
+									  		<!--<div class="common-config">
 									  			<el-input v-model="cur_chart_data.model_title" placeholder="标题"></el-input>
-									  		</div>
+									  		</div>-->
 									  		
 									  		
 									  		<!--折线图-->
-									  		<div v-if="cur_chart_data.chart_type==1" class="param-config col-lg-12">
+									  		<!--<div v-if="cur_chart_data.chart_type==1" class="param-config col-lg-12">
 									  			<template>
 												  <el-select v-model="cur_chart_data.x_axis" placeholder="x轴坐标值">
 												    <el-option v-for="item in x_axis_list" :key="item.value" :label="item.label" :value="item.value">
@@ -480,14 +532,14 @@
 												</template>
 									  
 									  			<template>
-												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="y轴坐标值">
+												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="">
 												    <el-option v-for="item in y_axis_list" :key="item.value" :label="item.label" :value="item.value">
 												    </el-option>
 												  </el-select>
 												</template>
-									  		</div>
+									  		</div>-->
 									  		<!--直方图-->
-									  		<div v-if="cur_chart_data.chart_type==2" class="param-config col-lg-12">
+									  		<!--<div v-if="cur_chart_data.chart_type==2" class="param-config col-lg-12">
 									  			<template>
 												  <el-select v-model="cur_chart_data.x_axis" placeholder="x轴坐标值">
 												    <el-option v-for="item in x_axis_list" :key="item.value" :label="item.label" :value="item.value">
@@ -496,12 +548,12 @@
 												</template>
 									  
 									  			<template>
-												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="y轴坐标值">
+												  <el-select v-model="cur_chart_data.y_axis" multiple filterable="" allow-create="" default-first-option placeholder="">
 												    <el-option v-for="item in y_axis_list" :key="item.value" :label="item.label" :value="item.value">
 												    </el-option>
 												  </el-select>
 												</template>
-									  		</div>
+									  		</div>-->
 									  		<!--饼状图-->
 									  		<div v-if="cur_chart_data.chart_type==3" class="param-config col-lg-12">
 									  			<!--<template>
