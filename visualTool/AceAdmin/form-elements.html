@@ -1923,6 +1923,58 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
+		
+		
+		
+		
+		
+		
+<div id="chart_option_template" class="hide">
+	
+	
+		
+<div class="boolen">
+	<label>
+		<input name="switch-field-1" class="ace ace-switch ace-switch-4 btn-empty" type="checkbox">
+		<span class="lbl"></span>
+	</label>
+</div>
+
+
+<div class="string">
+	<label>
+		<input type="text"/>
+	</label>
+</div>
+
+<div class="radio">
+	<label>
+		<input name="form-field-radio" type="radio" class="ace">
+		<span class="lbl">#</span>
+	</label>
+</div>
+
+<div class="color">
+	<div class="bootstrap-colorpicker">
+		<input id="colorpicker_" type="text" class="input-small" />
+	</div>
+</div>
+
+<div class="font-family">
+	<div></div>
+</div>
+
+<div class="font-weight">
+	<div></div>
+</div>
+
+<div class="int-range">
+	<div class="slider-bar">
+		<span class="ui-slider-simple ui-slider-dark">#</span>
+	</div>
+</div>
+
+</div>	
 
 		<script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 
@@ -1981,6 +2033,95 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+			
+			  
+	  /*echart */
+	  
+	
+	/*1   true,false
+	2   '字符串'
+	3   'self','blanks'
+	4   #333
+	5   12-99
+	6   auto  10/10%
+	7'normal'
+'bold'
+'bolder'
+'lighter'
+100 | 200 | 300 | 400...
+
+8 'sans-serif'(字体)*/
+  
+	
+	
+	var chart_config = {
+		title:{
+			show:[1,true],
+			text:[2,''],
+			target:[3,'self',['self','blanks']],
+			color:[5,'#333'],
+			textStyle:{
+				color: [5,'#333'],
+				fontStyle: [3,'normal',['normal','italic','oblique']],
+				fontWeight: [3,'normal',['normal','bold','bolder','lighter']],
+				fontFamily: [3,'微软雅黑',['微软雅黑','宋体']],
+				fontSize:[5,12,[12,99]],
+			}	
+		}
+	}
+	
+
+var render_html = function(obj){
+	var type_map = {
+		1:'.boolen',
+		2:'.string',
+		3:'.radio',
+		4:'.color',
+		5:'.int-range',
+	}
+	var type = obj[0]];
+	var tem = $("#chart_option_template").find(type_map[type]).prop("outerHTML");
+	
+	
+	if(type == 1){//多个选项单选
+		var html = "";
+		obj[2].forEach(function(item){			
+			html += tem.replace("#",item);
+		})		
+	}
+	if(type == 2){//多个选项单选
+		var html = "";
+		obj[2].forEach(function(item){			
+			html += tem.replace("#",item);
+		})		
+	}
+}
+
+
+var render_option = function(config){
+	
+	
+	
+	for(var o in config){
+		 if (typeof (config[o]) == "object") {
+            render_option(config[o]); //递归遍历
+        }
+        else {
+            render_html(config[o]);
+        }
+	}
+}
+	 $(".slider-bar").empty().slider({
+		value: value,
+		range: "min",
+		animate: true	
+	}); 
+	  
+
+	  
+	  
+
+			
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);

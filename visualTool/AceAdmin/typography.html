@@ -98,7 +98,7 @@
 		<label>字段：</label>
 		
 		<div class="titles-container">
-			<div data-name="{{item.table_name+'_'+item.name}}" v-for="item in table_selected_fields_list"  class="item" >
+			<div :data-name="item.table_name+'_'+item.name" v-for="item in table_selected_fields_list"  class="item" >
 				<a class="grid-btn" @click="select_field($event,item)">
 					{{item.name}}
 				</a>
@@ -149,8 +149,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-page="{{Math.ceil(($index+1)/10)}}" class="stores-items" v-for="item in data_list">
-                	<td>{{$index}}</td>
+                <tr :data-page="Math.ceil((index+1)/10)" class="stores-items" v-for="(item,index) in data_list">
+                	<td>{{index}}</td>
                     <td v-for="obj in item">{{obj.value}}</td>
                 </tr>
                 </tbody>
