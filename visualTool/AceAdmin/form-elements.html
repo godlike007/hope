@@ -2083,18 +2083,26 @@ var render_html = function(obj){
 	var tem = $("#chart_option_template").find(type_map[type]).prop("outerHTML");
 	
 	
-	if(type == 1){//多个选项单选
+	if(type == 1){//
 		var html = "";
+		html = tem.replace("#",item);		
+	}
+	if(type == 2){//
+		var html = "";
+		
+		html = tem.replace("#",item);	
+	}
+	if(type == 3){//多个选项单选
+		var html = "";		
 		obj[2].forEach(function(item){			
 			html += tem.replace("#",item);
-		})		
+		})	
 	}
-	if(type == 2){//多个选项单选
-		var html = "";
-		obj[2].forEach(function(item){			
-			html += tem.replace("#",item);
-		})		
+	if(type == 4){//
+		var html = "";		
+		html = tem.replace("#",item);	
 	}
+	
 }
 
 
