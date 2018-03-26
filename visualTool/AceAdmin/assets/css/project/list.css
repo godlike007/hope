@@ -12,3 +12,92 @@
 .search-select{
 	margin-bottom: 20px;
 }
+
+
+
+
+
+
+
+.modal-dialog .grid-btn,
+.modal-dialog .view-btn,
+.modal-dialog .handle-btn,
+.grid-btn,
+.view-btn,
+.handle-btn{
+    display: inline-block;
+    color: #fff !important;
+    background-color: #B08444 !important;
+    border: 1px solid #B08444;
+    border-radius: 3px;
+    -webkit-transition: background-color 0.15s, border-color 0.15s, opacity 0.15s;
+    -o-transition: background-color 0.15s, border-color 0.15s, opacity 0.15s;
+    transition: background-color 0.15s, border-color 0.15s, opacity 0.15s;
+    cursor: pointer;
+    vertical-align: middle;
+        margin: 2px;
+    text-decoration: none;
+    padding: 1px 5px;
+    line-height: 2;
+    min-width: 110px;
+    text-align: center;
+}
+.modal-dialog .grid-btn:hover,
+.modal-dialog .view-btn:hover,
+.modal-dialog .handle-btn:hover,
+.grid-btn:hover,
+.view-btn:hover,
+.handle-btn:hover{
+	background-color: #B08444 !important;
+	/*letter-spacing: 2px;*/
+	/*animation-iteration-count:1;
+	animation:letterSpace 0.5s ease-in-out;
+	animation-play-state: running, paused;*/
+	 /*animation-duration: 1s;
+  animation-name: letterSpace;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;*/
+
+}
+.modal-dialog .handle-btn:active,
+.handle-btn:active{
+	background-color: #B08444 !important;
+	/*letter-spacing: 2px;*/
+	box-shadow: inset 3px 1px 5px #8E662B;
+}
+
+@keyframes letterSpace
+{
+	from {letter-spacing:0px;}
+	to {/*letter-spacing: 2px;*/}
+}
+.modal-dialog .grid-btn,
+.grid-btn,
+.view-btn{
+    color: #B08444 !important;
+    background-color: #fff !important;
+}
+.modal-dialog .grid-btn:hover,
+.grid-btn:hover,
+.view-btn:hover{
+	background-color: #B08444 !important;
+	color: #fff !important;
+	/*letter-spacing: 2px;*/
+}
+.modal-dialog .grid-btn:active,
+.grid-btn:active,
+.view-btn:active{
+	background-color: #B08444 !important;
+	/*letter-spacing: 2px;*/
+	box-shadow: inset 3px 1px 5px #8E662B;
+}
+
+
+.call-hangup{
+    background-color: #D15B47 !important;
+    border-color: #D15B47;	
+}
+.udesk-callcenter-component{
+    z-index: 3;	
+}
+
