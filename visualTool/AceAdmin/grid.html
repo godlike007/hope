@@ -75,6 +75,8 @@
 		</style>
 
 		<!-- ace settings handler -->
+		<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
 
 		<script src="assets/js/ace-extra.min.js"></script>
 
@@ -736,6 +738,252 @@
 					</div>
 
 					<div class="page-content">
+						<!--$$$-->
+						<link rel="stylesheet" href="assets/css/project/chart1.css" />
+						<script src="https://cdn.bootcss.com/echarts/4.0.2/echarts-en.common.min.js"></script>
+						<div id="project">
+							<div class="header">
+								
+							</div>
+							<div class="container">
+								<div class="col-lg-10">
+									<div class="col-lg-12">
+										<div class="location-map">
+											<div class="point" style="left: {{}};" v-for="item in point_list">
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-12">
+										<div class="col-lg-6">
+											<div id="gauge_option1" style="width: 600px;height:400px;"></div>
+
+										</div>
+										<div class="col-lg-6">
+											<div id="gauge_option2" style="width: 600px;height:400px;"></div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-2">
+									<div class="data-panel" v-for="item in index_list">
+										<div class="title">
+											{{name}}
+										</div>
+										<div class="data">
+											<span class="time">{{value}}</span>次
+										</div>
+									</div>
+								</div>
+							</div> 
+						</div>
+						
+						<script type="text/javascript">
+							project = new Vue({
+						        el: '#project',
+						        data: {
+						            index_list:[{
+						            	name:'水量异常数',
+						            	value:0;
+						            },{
+						            	name:'电压异常数',
+						            	value:0;
+						            },{
+						            	name:'电流异常数',
+						            	value:0;
+						            },{
+						            	name:'通电异常数',
+						            	value:0;
+						            },{
+						            	name:'邻边防护异常数',
+						            	value:0;
+						            },]
+						        },
+						        methods: {
+						            details: function() {
+						                return  this.site + " - 学的不仅是技术，更是梦想！";
+						            }
+						        }
+						    })
+							
+							
+						var gauge_option1 = {
+							    backgroundColor: '#1b1b1b',
+							    tooltip : {
+							        formatter: "{a} <br/>{c} {b}"
+							    },
+							    toolbox: {
+							        show : true,
+							        feature : {
+							            mark : {show: true},
+							            restore : {show: true},
+							            saveAsImage : {show: true}
+							        }
+							    },
+							    series : [
+							        {
+							            name:'今日总用电量',
+							            type:'gauge',
+							            min:0,
+							            max:220,
+							            splitNumber:11,
+							            radius: '50%',
+							            axisLine: {            // 坐标轴线
+							                lineStyle: {       // 属性lineStyle控制线条样式
+							                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+							                    width: 3,
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            axisLabel: {            // 坐标轴小标记
+							                textStyle: {       // 属性lineStyle控制线条样式
+							                    fontWeight: 'bolder',
+							                    color: '#fff',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            axisTick: {            // 坐标轴小标记
+							                length :15,        // 属性length控制线长
+							                lineStyle: {       // 属性lineStyle控制线条样式
+							                    color: 'auto',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            splitLine: {           // 分隔线
+							                length :25,         // 属性length控制线长
+							                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+							                    width:3,
+							                    color: '#fff',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            pointer: {           // 分隔线
+							                shadowColor : '#fff', //默认透明
+							                shadowBlur: 5
+							            },
+							            title : {
+							                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							                    fontWeight: 'bolder',
+							                    fontSize: 20,
+							                    fontStyle: 'italic',
+							                    color: '#fff',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            detail : {
+							                backgroundColor: 'rgba(30,144,255,0.8)',
+							                borderWidth: 1,
+							                borderColor: '#fff',
+							                shadowColor : '#fff', //默认透明
+							                shadowBlur: 5,
+							                offsetCenter: [0, '50%'],       // x, y，单位px
+							                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							                    fontWeight: 'bolder',
+							                    color: '#fff'
+							                }
+							            },
+							            data:[{value: '今日总用电量', name: '120kw'}]
+							        }]
+							};
+						
+						var gauge_option2 = {
+							    backgroundColor: '#1b1b1b',
+							    tooltip : {
+							        formatter: "{a} <br/>{c} {b}"
+							    },
+							    toolbox: {
+							        show : true,
+							        feature : {
+							            mark : {show: true},
+							            restore : {show: true},
+							            saveAsImage : {show: true}
+							        }
+							    },
+							    series : [
+							        {
+							            name:'今日总用水量',
+							            type:'gauge',
+							            min:0,
+							            max:220,
+							            splitNumber:11,
+							            radius: '50%',
+							            axisLine: {            // 坐标轴线
+							                lineStyle: {       // 属性lineStyle控制线条样式
+							                    color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+							                    width: 3,
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            axisLabel: {            // 坐标轴小标记
+							                textStyle: {       // 属性lineStyle控制线条样式
+							                    fontWeight: 'bolder',
+							                    color: '#fff',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            axisTick: {            // 坐标轴小标记
+							                length :15,        // 属性length控制线长
+							                lineStyle: {       // 属性lineStyle控制线条样式
+							                    color: 'auto',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            splitLine: {           // 分隔线
+							                length :25,         // 属性length控制线长
+							                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+							                    width:3,
+							                    color: '#fff',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            pointer: {           // 分隔线
+							                shadowColor : '#fff', //默认透明
+							                shadowBlur: 5
+							            },
+							            title : {
+							                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							                    fontWeight: 'bolder',
+							                    fontSize: 20,
+							                    fontStyle: 'italic',
+							                    color: '#fff',
+							                    shadowColor : '#fff', //默认透明
+							                    shadowBlur: 10
+							                }
+							            },
+							            detail : {
+							                backgroundColor: 'rgba(30,144,255,0.8)',
+							                borderWidth: 1,
+							                borderColor: '#fff',
+							                shadowColor : '#fff', //默认透明
+							                shadowBlur: 5,
+							                offsetCenter: [0, '50%'],       // x, y，单位px
+							                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+							                    fontWeight: 'bolder',
+							                    color: '#fff'
+							                }
+							            },
+							            data:[{value: '今日总用电量', name: '60t'}]
+							        }]
+							};
+						
+							var gauge1 = echarts.init(document.getElementById('gauge_option1'));
+							gauge1.setOption(gauge_option1);
+							
+							var gauge2 = echarts.init(document.getElementById('gauge_option2'));
+							gauge2.setOption(gauge_option2);
+
+						</script>
+						
+						
+						
 						<div class="page-header">
 							<h1>
 								Grid
