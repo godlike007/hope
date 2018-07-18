@@ -743,14 +743,28 @@
 						<script src="https://cdn.bootcss.com/echarts/4.0.2/echarts-en.common.min.js"></script>
 						<div id="project">
 							<div class="header">
-								
+								<div class="theme">
+									金融城二期西区建筑总承包项目
+								</div>
+								<div class="nav">
+									<div class="setting menu">
+										设置
+									</div>
+									<div class="login menu">
+										登录
+									</div>
+									<div class="register menu">
+										注册
+									</div>
+								</div>
 							</div>
 							<div class="container">
 								<div class="col-lg-10">
 									<div class="col-lg-12">
 										<div class="location-map">
-											<div class="point" style="left: {{}};" v-for="item in point_list">
-												
+											<div class="point" :style="{left: item.left+'px';right: item.right+'px';}" v-for="item in point_list">
+												<i v-show="item.type==1" class="ace-icon glyphicon glyphicon-map-marker"></i>
+												<i v-show="item.type==2" class="ace-icon glyphicon glyphicon-tint"></i>
 											</div>
 										</div>
 									</div>
@@ -781,21 +795,38 @@
 							project = new Vue({
 						        el: '#project',
 						        data: {
+						        	point_list:[{
+						            	left:20,
+						            	right:23,
+						            	type:1,
+						            },{
+						            	left:55,
+						            	right:34,
+						            	type:1,
+						            },{
+						            	left:64,
+						            	right:34,
+						            	type:2,
+						            },{
+						            	left:65,
+						            	right:34,
+						            	type:1,
+						            }],
 						            index_list:[{
 						            	name:'水量异常数',
-						            	value:0;
+						            	value:0,
 						            },{
 						            	name:'电压异常数',
-						            	value:0;
+						            	value:0,
 						            },{
 						            	name:'电流异常数',
-						            	value:0;
+						            	value:0,
 						            },{
 						            	name:'通电异常数',
-						            	value:0;
+						            	value:0,
 						            },{
 						            	name:'邻边防护异常数',
-						            	value:0;
+						            	value:0,
 						            },]
 						        },
 						        methods: {
