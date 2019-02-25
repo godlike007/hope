@@ -1,0 +1,62 @@
+<!-- detail.wxml -->
+<view class="container">
+	<view
+	 bindtap="go_third"
+	 wx:for="{{symptom_list}}"
+	 wx:for-index="id"
+	 class="symptom-list"
+	>
+		<view class="name">{{item.name}}</view>
+		<image src="/images/symptom_border.png" />
+	</view>
+	<view class="detal_items">
+		<view class="symptoms">
+			<view class="label">表 征（必选）</view>
+			<view class="list flex-wrp">
+				<view
+				 data-id="{{item.id}}"
+				 data-selected="{{item.selected}}"
+				 bindtap="select_symptoms"
+				 wx:for="{{symptom_items}}"
+				 wx:for-index="id"
+				 class="item flex-item {{item.selected ? 'item-seleted':'' }}"
+				>
+					{{item.name}}
+				</view>
+			</view>
+		</view>
+		<view class="sign">
+			<view class="label">体 征（必选）</view>
+			<view class="list">
+				<view
+				 data-id="{{item.id}}"
+				 data-selected="{{item.selected}}"
+				 bindtap="select_sign"
+				 wx:for="{{sign_items}}"
+				 wx:for-index="id"
+				 class="item flex-item {{item.selected ? 'item-seleted':'' }}"
+				>
+					{{item.name}}
+				</view>
+			</view>
+		</view>
+
+		<view class="certificate">
+			<view class="label">（选填）</view>
+			<view class="list">
+				<view
+				 data-id="{{item.id}}"
+				 data-selected="{{item.selected}}"
+				 bindtap="select_certificate"
+				 wx:for="{{certificate_items}}"
+				 wx:for-index="id"
+				 class="item flex-item {{item.selected ? 'item-seleted':'' }}"
+				>
+					{{item.name}}
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+

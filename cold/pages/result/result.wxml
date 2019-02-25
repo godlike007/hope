@@ -1,0 +1,14 @@
+<!--detail.wxml-->
+<view class="container">
+	<view wx:for="{{symptom_list}}" wx:for-index="id" class="symptom-list">
+		{{item.name}}
+	</view>
+
+	<view class="result-list">
+
+	{{result}}
+
+	</view>
+	<image src="/images/scroll.png" />
+</view>
+

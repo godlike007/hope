@@ -1,0 +1,76 @@
+.art-header{
+    position: relative;
+    width: 100%;
+    height: 219px;
+    color: #FFF;
+}
+
+.art-img{
+    width: 100%;
+    height: 219px;
+}
+
+.art-title{
+    position: absolute;
+    bottom: 36px;
+    left: 8px;
+    font-size: 16px;
+}
+
+.art-source {
+    position: absolute;
+    bottom: 8px;
+    font-size: 14px;
+    right: 8px;   
+}
+
+.art-content{
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-size: 14px;
+    color: #616466;
+    width: 100%;
+}
+
+.detal_items{
+    border:1px solid #d4a780;
+    width:80%;
+    font-size:14px;
+    padding:5%;
+    border-radius: 5px;
+    
+}
+.detal_items .symptoms,
+.detal_items .sign,
+.detal_items .certificate{  
+    width: 90%;
+    height:100rpx;
+}
+
+.detal_items .label{  
+    width:20%;
+    float:left;
+    
+}
+.detal_items .list{  
+    width:80%;
+    flex-direction:row;
+    float:left;
+    
+}
+
+.detal_items  .item{  
+    padding:0px 5%;
+    height:80rpx;
+    width:auto;
+    float:left;
+    background-color:#eee;
+    margin:3% 1%;
+    line-height:80rpx;
+    
+}
+
+.detal_items .item.item-seleted{
+    background-color: #ae775a;
+    color:#fff;
+}

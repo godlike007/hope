@@ -1,0 +1,7 @@
+<!-- detail.wxml -->
+<view class="container">
+    <view bindtap="go_third" wx:for="{{symptom_list}}" wx:for-index="id" class="symptom-list">
+        <view class="name">{{item.name}}</view>
+        <image src="/images/symptom_border.png" />
+    </view>
+</view>
