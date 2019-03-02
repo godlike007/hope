@@ -5,14 +5,13 @@
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  
-  background-image: url("http://i2.bvimg.com/678245/3b63889423af4d59s.png")
+
 } 
 .bg{
-  position: absolute;
+  position: fixed;
   z-index: -1;
   width: 100%;
-  top: 0px;
+  bottom: 0px;
   height: 1200rpx;
 }
 

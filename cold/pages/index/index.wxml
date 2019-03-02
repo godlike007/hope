@@ -33,10 +33,10 @@
     </view>
   </view>
   <view class="illness-list">
-    <image bindtap="go_sec" wx:for="{{illness_list}}" wx:for-index="id" src="{{item.src}}" />
+    <image data-id="{{item.id}}" bindtap="go_sec" wx:for="{{illness_list}}" wx:for-index="id" src="{{item.src}}" />
   </view>
 
   
 </view>
 
-<image class="bg" src="http://i2.bvimg.com/678245/3b63889423af4d59s.png" />
+<image class="bg" src="/images/bg.png" />

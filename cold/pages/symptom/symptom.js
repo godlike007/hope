@@ -1,50 +1,30 @@
 Page({
   data: {
     art: {},
-    symptom_list: [
-      {
-        id:1,
-        href: "../symptomDetail/symptomDetail",
-        name: "怕冷"
-      },
-      {
-        id:2,
-        href: "../symptomDetail/symptomDetail",
-        name: "一会儿冷一会儿热"
-      },
-      {
-        id:3,
-        href: "../symptomDetail/symptomDetail",
-        name: "怕热"
-      },
-      {
-        id:4,
-        href: "../symptomDetail/symptomDetail",
-        name: "不怕冷也不怕热"
-      },
-    ]
+    symptom_list: []
 
   },
   go_third: function(e) {
+    debugger;
     wx.navigateTo({
-      url: '../symptomDetail/symptomDetail?id='
+      url: '../symptomDetail/symptomDetail?id='+e.currentTarget.dataset.id+"&name="+e.currentTarget.dataset.name
     })
   },
   onReady: function () {
     wx.setNavigationBarTitle({
-      title: '详情页面1'
+      title: ''
     })
   },
   onLoad: function (options) {
-    var that = this
+    var that = this;
     wx.request({
-      url: 'http://news-at.zhihu.com/api/4/news/' + options.id,
+      url: 'https://www.chinabeishi.cn/HttpHandleGetSymps.ashx?sid=' + options.id,
       headers: {
         'Content-Type': 'application/json'
       },
       success: function (res) {
          that.setData({
-           art: res.data
+          symptom_list: res.data
          })
          console.log(res.data)
       }

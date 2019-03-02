@@ -15,7 +15,7 @@ Page({
 
     illness_list: [
       {
-        id:1,
+        id:0,
         href: ".../symptom/symptom",
         src: "/images/illness1.png"
       }
@@ -24,7 +24,7 @@ Page({
   //事件处理函数
   go_sec: function(e) {
     wx.navigateTo({
-      url: '../symptom/symptom?id='
+      url: '../symptom/symptom?id='+e.target.dataset.id
     })
   },
   bindViewTap: function(e) {

@@ -1,14 +1,27 @@
 <!--detail.wxml-->
 <view class="container">
-	<view wx:for="{{symptom_list}}" wx:for-index="id" class="symptom-list">
-		{{item.name}}
+	<view
+
+	 wx:for="{{symptom_list}}"
+	 wx:for-index="id"
+	 class="symptom-list"
+	>
+		<view class="name">{{item.name}}</view>
+		<image src="/images/symptom_border.png" />
 	</view>
 
-	<view class="result-list">
+	<view class="diagnosis">
+	
+<view class="content" >
 
+<view class="title">诊断结果</view>
 	{{result}}
+</view>
+  
+	<image src="/images/scroll.png" />
 
 	</view>
-	<image src="/images/scroll.png" />
+	
 </view>
 
+<image class="bg" src="/images/bg.png" />

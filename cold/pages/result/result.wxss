@@ -33,9 +33,25 @@
 }
 
 
-
-.symptom-list{
-    background-image: url("../../images/symptom_border.png");
-    width: 68.8%;
-    height: 50rpx;
+.diagnosis{
+    text-align:center;
 }
+.diagnosis .title{
+    text-align:center;
+    font-size:18px;
+    height:60rpx;
+    color:#000;
+    
+}
+.diagnosis .content{
+    position:absolute;
+    font-size:14px;
+    color:#852d00;
+    width:57%;
+    margin-left:15%;
+    margin-top:65rpx;
+    line-height:45rpx;
+    text-align:left
+}
+
+
