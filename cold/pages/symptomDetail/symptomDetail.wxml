@@ -1,7 +1,6 @@
 <!-- detail.wxml -->
 <view class="container">
 	<view
-	 bindtap="go_third"
 	 wx:for="{{symptom_list}}"
 	 wx:for-index="id"
 	 class="symptom-list"
@@ -11,24 +10,61 @@
 	</view>
 	<view class="detal_items">
 		<view class="symptoms">
-			<view class="label">表 征（必选）</view>
+			<view class="label">表 征</view>
 			<view class="list flex-wrp">
 				<view
-				 data-id="{{item.id}}"
-				 data-selected="{{item.selected}}"
-				 bindtap="select_symptoms"
+				 data-index="{{index1}}"
+				 wx:for-index="index1"
 				 wx:for="{{symptom_items}}"
-				 wx:for-index="id"
-				 class="item flex-item {{item.selected ? 'item-seleted':'' }}"
+				 wx:for-item="i"
 				>
-					{{item.name}}
+					<view wx:if="{{i.Must}}" class="red">{{index1+1}}.  必填项：</view><view wx:else class="normal">{{index1+1}}. 选填项：</view>
+					<view class="item-list">
+						<view
+						 data-index2="{{index2}}"
+						 data-index1="{{index1}}"
+						 wx:for-index="index2"
+						 wx:for="{{i.Symps}}"
+						 wx:for-item="j"
+						 data-id="{{j.Id}}"
+						 data-selected="{{j.selected}}"
+						 bindtap="select_symptoms"
+						 class="item flex-item {{j.selected ? 'item-seleted':'' }}"
+						>
+							{{j.Name}}
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
 		<view class="sign">
-			<view class="label">体 征（必选）</view>
+			<view class="label">里 征</view>
 			<view class="list">
 				<view
+				 data-index="{{index1}}"
+				 wx:for-index="index1"
+				 wx:for="{{sign_items}}"
+				 wx:for-item="i"
+				>
+					<view wx:if="{{i.Must}}" class="red">{{index1+1}}.  必填项：</view><view wx:else class="normal">{{index1+1}}. 选填项：</view>
+					<view class="item-list">
+						<view
+						 data-index2="{{index2}}"
+						 data-index1="{{index1}}"
+						 wx:for-index="index2"
+						 wx:for="{{i.Symps}}"
+						 wx:for-item="j"
+						 data-id="{{j.Id}}"
+						 data-selected="{{j.selected}}"
+						 bindtap="select_sign"
+						 class="item flex-item {{j.selected ? 'item-seleted':'' }}"
+						>
+							{{j.Name}}
+
+						</view>
+					</view>
+				</view>
+				<!-- <view
 				 data-id="{{item.id}}"
 				 data-selected="{{item.selected}}"
 				 bindtap="select_sign"
@@ -37,11 +73,38 @@
 				 class="item flex-item {{item.selected ? 'item-seleted':'' }}"
 				>
 					{{item.name}}
+				</view> -->
+			</view>
+		</view>
+		<view class="half">
+			<view class="label">半表半里</view>
+			<view class="list">
+				<view
+				 data-index="{{index1}}"
+				 wx:for-index="index1"
+				 wx:for="{{half_items}}"
+				 wx:for-item="i"
+				>
+					<view wx:if="{{i.Must}}" class="red">{{index1+1}}.  必填项：</view><view wx:else class="normal">{{index1+1}}. 选填项：</view>
+					<view class="item-list">
+						<view
+						 data-index2="{{index2}}"
+						 data-index1="{{index1}}"
+						 wx:for-index="index2"
+						 wx:for="{{i.Symps}}"
+						 wx:for-item="j"
+						 data-id="{{j.Id}}"
+						 data-selected="{{j.selected}}"
+						 bindtap="select_half"
+						 class="item flex-item {{j.selected ? 'item-seleted':'' }}"
+						>
+							{{j.Name}}
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
-
-		<view class="certificate">
+		<!-- <view class="certificate">
 			<view class="label">（选填）</view>
 			<view class="list">
 				<view
@@ -55,8 +118,9 @@
 					{{item.name}}
 				</view>
 			</view>
-		</view>
+		</view> -->
 	</view>
+	<button size="{{defaultSize}}" plain="{{plain}}" bindtap="submit">提交</button>
+	<image class="bg" src="/images/bg.png" />
 </view>
-
 
