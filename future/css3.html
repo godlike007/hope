@@ -1,0 +1,118 @@
+HTML Result
+EDIT ON
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="css3.css">
+
+</head>
+
+<body>
+  <div id="app">
+    <template v-for="item in materials.list">
+      <div :id="'materials_'+item" @click="select_material('materials_'+item)"></div>
+    </template>
+
+
+    <div id="canvas">
+
+
+
+    </div>
+
+    <div id="setting">
+
+    </div>
+
+    <div id="dom">
+      <el-button @click="add">add</el-button>
+      <el-button @click="add_child">add child</el-button>
+      <el-button @click="remove">remove</el-button>
+    </div>
+
+    <!-- <div id="materials" v-for="item in materials.list">
+      <div :id="'materials'+item"></div>
+    </div> -->
+    <div id="materials">
+      <div id="materials1"></div>
+      <div id="materials2"></div>
+      <div id="materials3"></div>
+      <div id="materials4"></div>
+      <div id="materials5"></div>
+    </div>
+
+
+  </div>
+
+
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      canvas: {
+        add_index: 0,
+        cur_id:"",
+
+        used_list: [],
+        left_list: []
+      },
+      materials: {
+        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        total_list: {},
+        used_list: {},
+        left_list: {}
+      }
+    },
+    methods: {
+      init() {
+        materials.forEach(item => {
+          total_list[item] = false;
+        });
+
+        console.log('submit!');
+      },
+      handle_enable_item_index() {
+        
+        for(var item in this.materials.total_list){
+            if(!this.materials.total_list[item]){
+              this.materials.total_list[item] = true;
+              this.cur_id = "#"+item;
+              
+              break;
+            }
+        }
+       
+      },
+      add() {
+        //this.canvas.add_index++;
+       // this.cur_id = "materials_" + this.canvas.add_index;
+        //$("#canvas").append(`<div id="${this.cur_id}"></div>`);
+        handle_enable_item_index();
+        $(this.cur_id).show();
+      },
+      add_child() {
+        this.canvas.add_index++;
+        this.cur_id = "materials_" + this.canvas.add_index;
+        $("#" + cur).append(`<div id="${this.cur_id}"></div>`);
+      },
+      select_material(cur) {
+        this.cur_id = cur;
+      },
+      remove() {
+        console.log('submit!');
+      },
+    }
+  })
+</script>
+
+</html>
