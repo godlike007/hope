@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>css</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<script id="frame" src="../../../../assets/js/common/frame.js"></script>
+
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+
+		.edit-mode select {}
+
+		.edit-mode input {}
+	</style>
+</head>
+
+
+<body>
+	<div id="template" v-cloak>
+		<div class="page-title">
+			页面标题
+		</div>
+
+		<div class="page-module">
+			<div class="page-panel">
+
+
+				<div id="container">
+					<div id="root">
+
+					</div>
+
+				</div>
+
+
+
+			</div>
+		</div>
+
+
+		<div id="handle">
+			<el-button type="primary" size="mini" @click="add_child">添加子元素</el-button>
+			<el-button type="primary" size="mini" @click="remove">删除</el-button>
+		</div>
+
+		<div id="visual_editor" class="visual-editor">
+				<div class="container-panel">
+
+					<h3> Input Attributes</h3>
+					<el-form :inline="true" :model="form" ref="form1" class="form-inline">
+						<template v-for="w in widget.list">
+
+							<el-form-item :label="w.param+'：'">
+								<template v-if="w.type==1">
+									<el-popover placement="right-end" title="info" width="200" trigger="hover"
+										:content="w.info">
+										<el-input slot="reference" v-model="w.value" :placeholder="w.info" clearable>
+										</el-input>
+										</el-button>
+
+									</el-popover>
+								</template>
+
+								<template v-if="w.type==2">
+									<el-popover placement="right-end" title="info" width="200" trigger="hover"
+										:content="w.info">
+										<el-switch slot="reference" v-model="w.value" active-text="true"
+											inactive-text="false">
+										</el-switch>
+
+
+									</el-popover>
+								</template>
+
+
+								<template v-if="w.type==3">
+									<el-popover placement="right-end" title="info" width="200" trigger="hover"
+										:content="w.info">
+										<el-radio-group v-model="w.value" slot="reference">
+											<template v-for="item in w.list">
+												<el-radio :label="item">{{item}}</el-radio>
+											</template>
+											</el-checkbox-group>
+
+									</el-popover>
+								</template>
+							</el-form-item>
+
+
+
+						</template>
+
+						<el-input type="textarea" :rows="20" v-model="code.config">
+						</el-input>
+
+
+						<el-button type="primary" size="mini" @click="create_config">生成文件</el-button>
+					</el-form>
+
+
+
+				</div>
+			</div>
+
+
+	</div>
+
+</body>
+
+</html>
+<script src="../../../../lib/element/element.js"></script>
+
+
+<script>
+	//init_js("../../assets/js/views/demo/template.js");
+
+	init_resource({
+		js_url: "../../../../assets/js/views/demo/layout/layout.js",
+		next_css: '../../../../assets/css/common/page.css',
+		//need_css: true //选加，无则默认不加载当前页css
+	});
+</script>
