@@ -14,7 +14,22 @@ EDIT ON
 <body>
   <div id="app">
     <template v-for="item in materials.list">
-      <div :id="'materials_'+item" @click="select_material('materials_'+item)"></div>
+      <div :id="'materials_'+item" @click="select_material(item)">
+
+        <template v-for="child1 in item.children">
+          <div :id="'materials_'+item" @click="select_material(item)">
+
+            <template v-for="child2 in child1.children">
+              <div :id="'materials_'+item" @click="select_material(item)">
+    
+                
+              </div>
+            </template>
+          </div>
+        </template>
+
+      </div>
+
     </template>
 
 
@@ -68,6 +83,18 @@ EDIT ON
       },
       materials: {
         list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        list:[{
+          index:1,
+          id:new Date().getTime(),
+          children:[{
+            index:1,
+            id:new Date().getTime(),
+            children:[{
+              index:1,
+              id:new Date().getTime(),
+            }]
+          }]
+        }]
         total_list: {},
         used_list: {},
         left_list: {}
@@ -97,13 +124,27 @@ EDIT ON
         //this.canvas.add_index++;
        // this.cur_id = "materials_" + this.canvas.add_index;
         //$("#canvas").append(`<div id="${this.cur_id}"></div>`);
-        handle_enable_item_index();
-        $(this.cur_id).show();
+        //handle_enable_item_index();
+        var o = {
+          index:this.list.length++,
+          id:new Date().getTime(),
+          children:[]
+        }
+        this.list.push(o);
+        this.cur_id = o.id;
+        //$(this.cur_id).show();
       },
-      add_child() {
-        this.canvas.add_index++;
-        this.cur_id = "materials_" + this.canvas.add_index;
-        $("#" + cur).append(`<div id="${this.cur_id}"></div>`);
+      add_child(cur) {
+        // this.canvas.add_index++;
+        // this.cur_id = "materials_" + this.canvas.add_index;
+        // $("#" + cur).append(`<div id="${this.cur_id}"></div>`);
+        var o = {
+          index:cur.children.length++,
+          id:new Date().getTime(), 
+          children:[]
+        }
+        cur.children.push(o)
+        this.cur_id = o.id;
       },
       select_material(cur) {
         this.cur_id = cur;
