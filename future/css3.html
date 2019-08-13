@@ -1,159 +1,215 @@
-HTML Result
-EDIT ON
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <!-- import CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <link rel="stylesheet" href="css3.css">
+	<meta charset="UTF-8">
+	<title>css</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
+	<script id="frame" src="../../../../assets/js/common/frame.js"></script>
+
+	<style>
+		[v-cloak] {
+			display: none;
+		}
+
+		#canvas {
+			width: 100%;
+			height: 100px;
+
+		}
+
+		#canvas>div {
+			width: 100px;
+			height: 100px;
+			border: 1px solid #333;
+			padding: 10px;
+	
+		}
+
+		#canvas>div>div {
+			width: 80px;
+			height: 80px;
+			border: 1px solid #333;
+			
+			padding: 10px;
+		}
+
+		#canvas>div>div>div {
+			width: 60px;
+			height: 60px;
+			border: 1px solid #333;
+			
+		}
+		div.current{
+			border: 2px solid #000 !important;
+		}
+	</style>
 </head>
 
+
 <body>
-  <div id="app">
-    <template v-for="item in materials.list">
-      <div :id="'materials_'+item" @click="select_material(item)">
-
-        <template v-for="child1 in item.children">
-          <div :id="'materials_'+item" @click="select_material(item)">
-
-            <template v-for="child2 in child1.children">
-              <div :id="'materials_'+item" @click="select_material(item)">
-    
-                
-              </div>
-            </template>
-          </div>
-        </template>
-
-      </div>
-
-    </template>
-
-
-    <div id="canvas">
+	<div id="app">
 
 
 
-    </div>
+		<div id="canvas">
 
-    <div id="setting">
+			<template v-for="item in materials.list">
+				<div :id="item.id" @click="select_material(item,$event)">
 
-    </div>
+					<template v-for="child1 in item.children">
+						<div :id="item.id" @click="select_material(item,$event)">
 
-    <div id="dom">
-      <el-button @click="add">add</el-button>
-      <el-button @click="add_child">add child</el-button>
-      <el-button @click="remove">remove</el-button>
-    </div>
-
-    <!-- <div id="materials" v-for="item in materials.list">
-      <div :id="'materials'+item"></div>
-    </div> -->
-    <div id="materials">
-      <div id="materials1"></div>
-      <div id="materials2"></div>
-      <div id="materials3"></div>
-      <div id="materials4"></div>
-      <div id="materials5"></div>
-    </div>
+							<template v-for="child2 in child1.children">
+								<div :id="item.id" @click="select_material(item,$event)">
 
 
-  </div>
+								</div>
+							</template>
+						</div>
+					</template>
+
+				</div>
+
+			</template>
+
+		</div>
+
+		<div id="setting">
+
+		</div>
+
+		<div id="dom">
+			<el-button @click="add">add</el-button>
+			<el-button @click="add_child_item">add child</el-button>
+			<el-button @click="remove">remove</el-button>
+		</div>
+
+		<!-- <div id="materials" v-for="item in materials.list">
+		  <div :id="'materials'+item"></div>
+		</div> -->
+		<div id="materials">
+			<div id="materials1"></div>
+			<div id="materials2"></div>
+			<div id="materials3"></div>
+			<div id="materials4"></div>
+			<div id="materials5"></div>
+		</div>
+
+
+	</div>
 
 
 </body>
-<!-- import Vue before Element -->
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<!-- import JavaScript -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script>
-  new Vue({
-    el: '#app',
-    data: {
-      canvas: {
-        add_index: 0,
-        cur_id:"",
-
-        used_list: [],
-        left_list: []
-      },
-      materials: {
-        list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
-        list:[{
-          index:1,
-          id:new Date().getTime(),
-          children:[{
-            index:1,
-            id:new Date().getTime(),
-            children:[{
-              index:1,
-              id:new Date().getTime(),
-            }]
-          }]
-        }]
-        total_list: {},
-        used_list: {},
-        left_list: {}
-      }
-    },
-    methods: {
-      init() {
-        materials.forEach(item => {
-          total_list[item] = false;
-        });
-
-        console.log('submit!');
-      },
-      handle_enable_item_index() {
-        
-        for(var item in this.materials.total_list){
-            if(!this.materials.total_list[item]){
-              this.materials.total_list[item] = true;
-              this.cur_id = "#"+item;
-              
-              break;
-            }
-        }
-       
-      },
-      add() {
-        //this.canvas.add_index++;
-       // this.cur_id = "materials_" + this.canvas.add_index;
-        //$("#canvas").append(`<div id="${this.cur_id}"></div>`);
-        //handle_enable_item_index();
-        var o = {
-          index:this.list.length++,
-          id:new Date().getTime(),
-          children:[]
-        }
-        this.list.push(o);
-        this.cur_id = o.id;
-        //$(this.cur_id).show();
-      },
-      add_child(cur) {
-        // this.canvas.add_index++;
-        // this.cur_id = "materials_" + this.canvas.add_index;
-        // $("#" + cur).append(`<div id="${this.cur_id}"></div>`);
-        var o = {
-          index:cur.children.length++,
-          id:new Date().getTime(), 
-          children:[]
-        }
-        cur.children.push(o)
-        this.cur_id = o.id;
-      },
-      select_material(cur) {
-        this.cur_id = cur;
-      },
-      remove() {
-        console.log('submit!');
-      },
-    }
-  })
-</script>
 
 </html>
+<script src="../../../../lib/element/element.js"></script>
+
+
+<script>
+	//init_js("../../assets/js/views/demo/template.js");
+
+	init_resource({
+		js_url: "../../../../assets/js/views/demo/layout/layout.js",
+		//next_css: '../../../../assets/css/common/page.css',
+		//need_css: true //选加，无则默认不加载当前页css
+	});
+</script>
+
+<script>
+	css3d = new Vue({
+		el: '#app',
+		data: {
+			canvas: {
+				add_index: 0,
+				cur_id: "",
+
+				used_list: [],
+				left_list: []
+			},
+			materials: {
+				//list: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+				list: [{
+					index: 1,
+					id: 'materials_'+new Date().getTime(),
+					children: [{
+						index: 1,
+						id: 'materials_'+new Date().getTime(),
+						children: [{
+							index: 1,
+							id: 'materials_'+new Date().getTime(),
+						}]
+					}]
+				}],
+				total_list: {},
+				used_list: {},
+				left_list: {}
+			}
+		},
+		methods: {
+			init() {
+				materials.forEach(item => {
+					total_list[item] = false;
+				});
+
+				console.log('submit!');
+			},
+			handle_enable_item_index() {
+
+				for (var item in this.materials.total_list) {
+					if (!this.materials.total_list[item]) {
+						this.materials.total_list[item] = true;
+						this.cur_id = "#" + item;
+
+						break;
+					}
+				}
+
+			},
+			add() {
+				//this.canvas.add_index++;
+				// this.cur_id = "materials_" + this.canvas.add_index;
+				//$("#canvas").append(`<div id="${this.cur_id}"></div>`);
+				//handle_enable_item_index();
+
+				debugger;
+				var o = {
+					index: this.materials.list.length++,
+					id: 'materials_'+new Date().getTime(),
+					children: []
+				}
+				this.materials.list.push(o);
+				this.canvas.cur_id = o.id;
+				//$(this.cur_id).show();
+			},
+			add_child_item() {
+				// this.canvas.add_index++;
+				// this.cur_id = "materials_" + this.canvas.add_index;
+				// $("#" + cur).append(`<div id="${this.cur_id}"></div>`);
+
+
+				//   var o = {
+				// 	index:cur.children.length++,
+				// 	id:new Date().getTime(), 
+				// 	children:[]
+				//   }
+				//   cur.children.push(o)
+				//   this.cur_id = o.id;
+			},
+			select_material(cur,e) {
+				debugger;
+				this.cur_id = cur.id;
+				$(".current").removeClass("current");
+
+				$(e.target).addClass("current")
+			},
+			remove() {
+				console.log('submit!');
+			},
+		}
+	})
+</script>
