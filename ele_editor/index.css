@@ -1,0 +1,35 @@
+#component{
+  position: absolute;
+  bottom: 10px;
+}
+#component div{
+  
+}
+#page .handler.switch{
+
+  height: 30px;
+  line-height: 30px;
+  /* border: 1px solid #ddd; */
+  border-radius: 10px;
+  padding: 3px;
+}
+#page .handler.select{
+  width: 240px;
+  height: 50px;
+  line-height: 50px;
+  /* border: 1px solid #ddd; */
+  border-radius: 10px;
+  padding: 3px;
+}
+#page .handler.cur{
+  border: 1px solid #f3eaea;
+}
+
+#page .handler i{
+  float: right;
+  cursor: pointer;
+}
+
+.el-color-picker {
+  position: absolute;
+}
