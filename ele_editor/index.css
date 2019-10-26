@@ -33,3 +33,51 @@
 .el-color-picker {
   position: absolute;
 }
+
+
+.visual-editor {
+  width: 500px;
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  background-color: rgba(234, 234, 234, 0.8);
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  height: 500px;
+  overflow: scroll;
+  border: 1px solid #ddd;
+}
+
+.visual-editor .el-form-item {
+  margin-bottom: 5px;
+}
+
+.visual-editor .el-form--inline .el-form-item__label {
+  width: 200px;
+  padding-right: 4px;
+  /* margin-bottom: 0px; */
+  line-height: 40px;
+}
+
+.container-panel {
+  width: 500px;
+}
+
+.el-form--inline .el-form-item__label {
+  color: #8b8ae8;
+  font-weight: 100;
+}
+
+.el-form--inline .el-form-item {
+  width: 100%;
+}
+
+.el-switch__label.is-active {
+  color: #858585 !important;
+  font-size: 16px !important;
+}
+
+h3 {
+  color: #333333;
+}
