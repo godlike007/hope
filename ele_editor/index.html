@@ -34,18 +34,14 @@
 
 <body>
 
-<div id="vue_test">
+	<div id="vue_test">
 		<template>
-				<el-select v-model="value" multiple="false"  placeholder="请选择">
-				  <el-option
-					v-for="item in options"
-					:key="item.value"
-					:label="item.label"
-					:value="item.value">
-				  </el-option>
-				</el-select>
-			  </template>
-</div>
+			<el-select v-model="value" multiple="" placeholder="请选择">
+				<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+				</el-option>
+			</el-select>
+		</template>
+	</div>
 	<div id="page">
 
 		<!-- <el-switch v-model="switch1">
@@ -84,12 +80,12 @@
 				:id="'select'+index" @mouseover="select_cur(item,index,'switch')">
 				<i class="el-icon-circle-close" @click="remove(item,index,'select')"></i>
 
-				<template1>
+				
 					<el-select v-model="item.value" placeholder="请选择">
 						<el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
-				</template1>
+			
 
 			</div>
 
@@ -366,7 +362,7 @@
 				<td>—</td>
 				<td>off</td>
 			</tr>
-			
+
 			<tr>
 				<td>placeholder</td>
 				<td>占位符</td>
@@ -444,7 +440,7 @@
 				<td>—</td>
 				<td>—</td>
 			</tr>
-			 <tr>
+			<tr>
 				<td>reserve-keyword</td>
 				<td>多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词</td>
 				<td>boolean</td>

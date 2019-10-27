@@ -36,7 +36,7 @@ var render_ele_widget_param = function (jqId, config) {
     config.forEach(function (o, index) {
 
         if(o.default == "fixed_value_attribute"){
-            $(jqId).get(0).outerHTML.replace(/\>/, o.param+">");
+            $(jqId).attr(o.param, `item.widget.list[${index}].value`);
         }
         else{
             $(jqId).attr(":" + o.param, `item.widget.list[${index}].value`);
