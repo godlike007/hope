@@ -1,3 +1,10 @@
+
+//  request.load({
+
+//     url: "./config/attributes.html",
+//     jq_selector: "#component_config",
+// });
+
 var get_config_data = function (config_jqId) {
     var config_data = [];
     $(config_jqId).find("tbody tr").each(function (item) {
@@ -25,13 +32,15 @@ var get_config_data = function (config_jqId) {
 
 var config = {
     switch: get_config_data("#switch_config"),
-    select: get_config_data("#select_config")
+    select: get_config_data("#select_config"),
+    inputNumber: get_config_data("#inputNumber_config"),
+    slider: get_config_data("#slider_config"),
 }
 //_config1 = get_config_data("#switch_config");
 //_config2 = get_config_data("#select_config");
 
 
-var render_ele_widget_param = function (jqId, config) {
+var render_ele_widget_param = function (jqId, config,template_type) {
 
     config.forEach(function (o, index) {
 
@@ -39,7 +48,15 @@ var render_ele_widget_param = function (jqId, config) {
             $(jqId).attr(o.param, `item.widget.list[${index}].value`);
         }
         else{
-            $(jqId).attr(":" + o.param, `item.widget.list[${index}].value`);
+            if(!!template_type){
+debugger;
+                let t = document.querySelector(`#${template_type}_template`);
+
+
+                $(t.content.querySelectorAll(jqId)).attr(":" + o.param, `item.widget.list[${index}].value`);
+            }
+
+           
         }
 
        
@@ -48,6 +65,8 @@ var render_ele_widget_param = function (jqId, config) {
 
 
 }
+render_ele_widget_param("el-slider", config.inputNumber,'slider');
+render_ele_widget_param("el-input-number", config.inputNumber,'inputNumber');
 render_ele_widget_param("#page el-switch", config.switch);
 render_ele_widget_param("#page el-select", config.select);
 
@@ -73,42 +92,22 @@ page = new Vue({
                 name: 'select'
             },
 
-            switch_list: [{
-                name: "switch",
-                value: true,
-                show: false,
-                index: 0,
-            }, {
-                name: "switch",
-                value: true,
-                show: false,
-                index: 1
-            }, {
-                name: "switch",
-                value: false,
-                show: false,
-                index: 2
-            }],
-
-            select_list: [{
-                label: "1",
-                value: "1",
-                show: false,
-                index: 0,
-                name: 'select'
-            }, {
-                label: "2",
-                value: "2",
-                show: false,
-                index: 1,
-                name: 'select'
-            }, {
+            inputNumber: {
                 label: "3",
-                value: "3",
-                show: false,
-                index: 2,
-                name: 'select'
-            }],
+                index: 0,
+                name: 'inputNumber',
+                value: 1,
+            },
+            slider: {
+                label: "3",
+                index: 0,
+                name: 'slider',
+                value:40
+            },
+
+            radio: '1',
+
+        
             options: [{
                 value: '选项1',
                 label: '黄金糕'
@@ -161,7 +160,7 @@ page = new Vue({
                 '#c7158577'
             ],
 
-
+            inputNumber1:1
 
         };
     },
@@ -182,9 +181,13 @@ page = new Vue({
     computed: {
 
     },
+    beforeCreate: function () {
+
+
+       
+    },
     created: function () {
-        debugger;
-        $("template1").get(0).outerHTML.replace(/template1/, "template");
+       
     },
     mounted: function () {
         this.init();
@@ -380,6 +383,14 @@ component = new Vue({
                 //name: "Select 选择器",
                 list_name: 'select_list',
                 name: 'select'
+            }, {
+                //name: "inputNumber",
+                list_name: 'inputNumber_list',
+                name: 'inputNumber'
+            }, {
+                //name: "inputNumber",
+                list_name: 'slider_list',
+                name: 'slider'
             }],
         };
     },
@@ -456,7 +467,8 @@ vue_test = new Vue({
                 value: '选项5',
                 label: '北京烤鸭'
               }],
-              value: ''
+              value: '',
+              inputNumber:1
         };
     },
     components: {
