@@ -35,6 +35,7 @@
 		}
 		.hot-use{
 			margin-right: 5%;
+			cursor: pointer;
 		}
 	</style>
 
@@ -59,7 +60,7 @@
 			</el-row>
 			<el-row>
 			<span class="hot-use" v-for="(item,index) in hot_use_list" @click="assign_value(item)">
-					<a href="">{{item}}</a>
+					<a>{{item}}</a>
 					
 				</span>
 			</el-row>
