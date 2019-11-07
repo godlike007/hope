@@ -17,7 +17,30 @@ es6 = new Vue({
             setting_data:{
                 '字符串':[{
                     id:'_模板字符串',
-                    name:'模板字符串${}'
+                    name:'模板字符串${}',
+                    hot:'item.field,value,fn()'
+                },
+                {
+                    id:'_模板字符串嵌套',
+                    name:'模板字符串${}嵌套',
+                    hot:''
+                },
+                {
+                    id:'_模板字符串本身',
+                    name:'模板字符串${}本身',
+                    hot:''
+                },{
+                    id:'_标签模板tag',
+                    name:'标签模板tag',
+                    hot:''
+                },{
+                    id:'_indexOf加强',
+                    name:'includes(), startsWith(), endsWith()',
+                    hot:''
+                },{
+                    id:'_repeat()',
+                    name:'repeat()',
+                    hot:''
                 }]
             },
 
@@ -64,7 +87,8 @@ es6 = new Vue({
         },
         toggel_hot_use(item) {
             debugger;
-            this.hot_use_list = item.split(",");
+
+            this.hot_use_list = item.hot.split(",");
 
         },
         assign_value(item) {

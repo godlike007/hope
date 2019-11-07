@@ -33,7 +33,8 @@
 			right: 10%;
 			top: 0px;
 		}
-		.hot-use{
+
+		.hot-use {
 			margin-right: 5%;
 			cursor: pointer;
 		}
@@ -50,29 +51,146 @@
 
 		</el-row>
 		<div class="code">
-			<textarea id="code_container" cols="30" rows="30" v-model="code"></textarea>
+			<textarea id="code_container" cols="100" rows="30" v-model="code"></textarea>
 		</div>
 
 		<div class="setting">
 			<el-row>
 				<el-input v-model="handler_value_name" placeholder="填写操作对象名称" clearable>
-				
+
 			</el-row>
 			<el-row>
-			<span class="hot-use" v-for="(item,index) in hot_use_list" @click="assign_value(item)">
+				<span class="hot-use" v-for="(item,index) in hot_use_list" @click="assign_value(item)">
 					<a>{{item}}</a>
-					
+
 				</span>
 			</el-row>
-			<el-button v-for="(item,index) in setting_list" round  @mouseover.native="toggel_hot_use('item.field,value')" @click="add_code(item)">{{item.name}}</el-button>
+			<el-button v-for="(item,index) in setting_list" round @mouseover.native="toggel_hot_use(item)"
+				@click="add_code(item)">{{item.name}}
+			</el-button>
 		</div>
 
 		<div class="code-pools" style="display: none;">
 
 			<template v-if="cur_section=='字符串'">
-				<div id="_模板字符串" >
+				<div id="_模板字符串">
 					${#}
 				</div>
+				<div id="_模板字符串嵌套" >
+					const data = [
+						{ first: '<Jane>', last: 'Bond' },
+						{ first: 'Lars', last: '<Croft>' },
+					];
+
+					const tmpl = addrs => `
+					<table>
+					${addrs.map(addr => `
+						<tr><td>${addr.first}</td></tr>
+						<tr><td>${addr.last}</td></tr>
+					`).join('')}
+					</table>
+					`;
+					console.log(tmpl(data));
+				</div>
+				<div id="_模板字符串本身">
+					let func = (name) => `Hello ${name}!`;
+					func('Jack') // "Hello Jack!"
+				</div>
+
+
+				<div id="_标签模板tag">
+						let total = 30;
+						let msg = passthru`The total is ${total} (${total*1.05} with tax)`;
+						
+						//方法1
+						function passthru(literals) {
+						  let result = '';
+						  let i = 0;
+						
+						  while (i < literals.length) {
+							result += literals[i++];
+							if (i < arguments.length) {
+							  result += arguments[i];
+							}
+						  }
+						
+						  return result;
+						}
+						//方法2
+						function passthru(literals, ...values) {
+							let output = "";
+							let index;
+							for (index = 0; index < literals.length; index++) {
+								debugger;
+							  output += literals[index] + (!!values[index]?values[index]:'');
+							}
+					
+							return output;
+						  }
+						
+						msg // "The total is 30 (31.5 with tax)"
+
+
+						//过滤 HTML 字符串，防止用户输入恶意内容
+						let message =
+							SaferHTML`<p>${sender} has sent you a message.</p>`;
+
+							function SaferHTML(templateData) {
+							let s = templateData[0];
+							for (let i = 1; i < arguments.length; i++) {
+								let arg = String(arguments[i]);
+
+								// Escape special characters in the substitution.
+								s += arg.replace(/&/g, "&amp;")
+										.replace(/</g, "&lt;")
+										.replace(/>/g, "&gt;");
+
+								// Don't escape special characters in the template.
+								s += templateData[i];
+							}
+							return s;
+							}
+							let sender = '<script>alert("abc")</script>'; // 恶意代码
+							let message = SaferHTML`<p>${sender} has sent you a message.</p>`;
+
+							//多语言转换（国际化处理）
+							i18n`Welcome to ${siteName}, you are visitor number ${visitorNumber}!`
+							// "欢迎访问xxx，您是第xxxx位访问者！"
+
+							//raw属性,转义字符串
+							tag`First line\nSecond line`
+
+							function tag(strings) {
+							console.log(strings.raw[0]);
+							// strings.raw[0] 为 "First line\\nSecond line"
+							// 打印输出 "First line\nSecond line"
+							}
+
+				</div>
+
+
+				<div id="_indexOf加强">
+						let s = 'Hello world!';
+
+					s.startsWith('Hello') // true
+					s.endsWith('!') // true
+					s.includes('o') // true
+
+					s.startsWith('world', 6) // true
+					s.endsWith('Hello', 5) // true
+					s.includes('Hello', 6) // false
+					</div>
+
+					<div id="_repeat()">
+							'x'.repeat(3) // "xxx"
+							'hello'.repeat(2) // "hellohello"
+							'na'.repeat(0) // ""
+
+							'na'.repeat(2.9) // "nana"
+
+							'na'.repeat('3') // "nanana"
+						</div>
+
 			</template>
 
 			<template v-if="cur_section=='数值'">
