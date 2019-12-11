@@ -1,4 +1,3 @@
-
 //  request.load({
 
 //     url: "./config/attributes.html",
@@ -40,33 +39,32 @@ var config = {
 //_config2 = get_config_data("#select_config");
 
 
-var render_ele_widget_param = function (jqId, config,template_type) {
+var render_ele_widget_param = function (jqId, config, template_type) {
 
     config.forEach(function (o, index) {
 
-        if(o.default == "fixed_value_attribute"){
+        if (o.default == "fixed_value_attribute") {
             $(jqId).attr(o.param, `item.widget.list[${index}].value`);
-        }
-        else{
-            if(!!template_type){
-debugger;
+        } else {
+            if (!!template_type) {
+                debugger;
                 let t = document.querySelector(`#${template_type}_template`);
 
 
                 $(t.content.querySelectorAll(jqId)).attr(":" + o.param, `item.widget.list[${index}].value`);
             }
 
-           
+
         }
 
-       
+
 
     })
 
 
 }
-render_ele_widget_param("el-slider", config.inputNumber,'slider');
-render_ele_widget_param("el-input-number", config.inputNumber,'inputNumber');
+render_ele_widget_param("el-slider", config.inputNumber, 'slider');
+render_ele_widget_param("el-input-number", config.inputNumber, 'inputNumber');
 render_ele_widget_param("#page el-switch", config.switch);
 render_ele_widget_param("#page el-select", config.select);
 
@@ -76,8 +74,8 @@ page = new Vue({
     el: "#page",
     data() {
         return {
-            
- 
+
+
             switch1: true,
             item_list: [],
             switch: {
@@ -102,12 +100,12 @@ page = new Vue({
                 label: "3",
                 index: 0,
                 name: 'slider',
-                value:40
+                value: 40
             },
 
             radio: '1',
 
-        
+
             options: [{
                 value: '选项1',
                 label: '黄金糕'
@@ -160,7 +158,7 @@ page = new Vue({
                 '#c7158577'
             ],
 
-            inputNumber1:1
+            inputNumber1: 1
 
         };
     },
@@ -184,10 +182,10 @@ page = new Vue({
     beforeCreate: function () {
 
 
-       
+
     },
     created: function () {
-       
+
     },
     mounted: function () {
         this.init();
@@ -454,21 +452,21 @@ vue_test = new Vue({
             options: [{
                 value: '选项1',
                 label: '黄金糕'
-              }, {
+            }, {
                 value: '选项2',
                 label: '双皮奶'
-              }, {
+            }, {
                 value: '选项3',
                 label: '蚵仔煎'
-              }, {
+            }, {
                 value: '选项4',
                 label: '龙须面'
-              }, {
+            }, {
                 value: '选项5',
                 label: '北京烤鸭'
-              }],
-              value: '',
-              inputNumber:1
+            }],
+            value: '',
+            inputNumber: 1
         };
     },
     components: {
@@ -479,13 +477,13 @@ vue_test = new Vue({
 
     },
     mounted: function () {
-       
+
     },
 
     methods: {
         init() {},
         add(item) {
-         
+
         },
 
     }
