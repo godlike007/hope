@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>园丁鸟家装</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage full-screen backgrounds." />
+	<meta name="keywords" content="fullpage,jquery,demo,screen,fullscreen,backgrounds,full-screen" />
+	<meta name="Resource-type" content="Document" />
+
+
+	<link rel="stylesheet" type="text/css" href="bowerbird/css/fullpage.css" />
+	<link rel="stylesheet" type="text/css" href="bowerbird/css/examples.css" />
+	<style>
+		/* Style for our header texts
+	* --------------------------------------- */
+		h1 {
+			font-size: 5em;
+			font-family: arial, helvetica;
+			color: #fff;
+			margin: 0;
+			padding: 1rem;
+			background-color: #000;
+			opacity: .4;
+			width: 36%;
+			margin: auto;
+		}
+
+		/* Centered texts in each section
+	* --------------------------------------- */
+		.section {
+			text-align: center;
+		}
+
+
+		/* Backgrounds will cover all the section
+	* --------------------------------------- */
+		.section {
+			background-size: cover;
+		}
+
+		.slide {
+			background-size: cover;
+		}
+
+		/* Defining each section background and styles
+	* --------------------------------------- */
+		#section0 {
+			background-image: url(bowerbird/image/first.jpg);
+		}
+
+		#section0 h1 {
+			top: 50%;
+			transform: translateY(-50%);
+			position: relative;
+		}
+
+		#section2 {
+			background-image: url(bowerbird/image/designer.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#section3 {
+			background-image: url(bowerbird/image/customer/bg.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#section3 h1 {
+			color: #000;
+		}
+
+
+		/*Adding background for the slides
+	* --------------------------------------- */
+		#slide1 {
+			background-image: url(bowerbird/image/1.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide2 {
+			background-image: url(bowerbird/image/2.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide3 {
+			background-image: url(bowerbird/image/3.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide4 {
+			background-image: url(bowerbird/image/4.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide5 {
+			background-image: url(bowerbird/image/5.jpg);
+			padding: 6% 0 0 0;
+		}
+
+
+		/* Bottom menu
+	* --------------------------------------- */
+		#infoMenu li a {
+			color: #fff;
+		}
+
+		a.designer {
+			display: block;
+			color: inherit;
+			padding: 0 10px;
+		}
+
+		.designer-pic {
+			display: block;
+			margin: 30% auto 0;
+			width: 15rem;
+			height: 15rem;
+			border-radius: 50%;
+			overflow: hidden;
+			border: 4px solid #8e8f90;
+			-webkit-transition: All .4s ease-in-out;
+			transition: All .4s ease-in-out;
+		}
+
+		.designer-pic img {
+			width: 15rem;
+			border: none;
+		}
+
+		.designer-name {
+			display: block;
+			text-align: center;
+			font-size: 4rem;
+			margin-top: 5rem;
+			margin-bottom: 3rem;
+			font-weight: 700;
+			color: #fff;
+		}
+
+		.designer-tag {
+			display: block;
+			text-align: center;
+			font-size: 3rem;
+			line-height: 24px;
+			margin: 1rem auto 2rem;
+			color: #fff;
+		}
+
+		.designer-content {
+			display: block;
+			text-align: center;
+			font-size: 2rem;
+			line-height: 3rem;
+			margin: 1rem auto;
+			color: #fff;
+			width: 43%;
+		}
+		.bold{
+			font-weight: bold;
+		}
+
+		#section3 img{
+			width: 75%;
+			border: 1rem solid #fff;
+			border-radius: 10px;
+		}
+
+		#section3 .say{
+
+			width: 78%;
+    margin: auto;
+    background-color: #fff;
+    margin: 3rem  auto;
+    border-radius: 10px;
+
+		}
+		#section3 .say h2{
+			font-size: 4rem;
+    padding: 1rem 0;
+
+		}
+		#section3 .say .content{
+			font-size: 2.4rem;
+    line-height: 5rem;
+    text-align: left;
+    padding: 0 3rem 4rem;
+		}
+
+		.logo{
+			padding-top: 75%;
+		}
+		.logo>div{
+			font-size: 5.5rem;
+			color: #fff;
+		}
+		.logo>.sub{
+			font-size: 2rem;
+			color: #fff;
+		}
+
+
+	</style>
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+</head>
+
+<body>
+
+
+	<div id="fullpage">
+		<div class="section " id="section0">
+			<div class="logo">
+				<div>园丁鸟</div>
+				<div class="sub">专注健康时尚家装</div>		
+			</div>
+				
+		</div>
+		<div class="section" id="section1">
+			<div class="slide" id="slide1">
+				<h1>客厅</h1>
+			</div>
+			<div class="slide" id="slide2">
+				<h1>卧室</h1>
+			</div>
+			<div class="slide" id="slide3">
+				<h1>厨房</h1>
+			</div>
+			<div class="slide" id="slide4">
+				<h1>餐厅</h1>
+			</div>
+			<div class="slide" id="slide5">
+				<h1>卫生间</h1>
+			</div>
+		</div>
+		<div class="section" id="section2">
+
+			<a class="designer" target="_blank"><span class="designer-pic"><img
+						src="https://prd-opba.oss-cn-beijing.aliyuncs.com/sjj/1522742776412kv2h0nj7raigdeo.jpg?x-oss-process=image/resize,m_fixed,h_126,w_126"
+						alt="梁建国"></span><span class="designer-name">周瑜杨</span><span
+					class="designer-tag">金螳螂优秀设计师</span>
+				<span class="designer-content bold">擅长风格</span>
+
+				<span class="designer-content">混搭、中式、美式</span>
+				<span class="designer-content bold">个人简介</span>
+				<span class="designer-content">创基金 理事 水平线室内设计有限公司(北京 | 深圳) 创始人，设计总监 中央美术学院建筑学院、清华大学美术学院实践导师 四川美术学院研究生导师
+					中国陈设艺术委员会副主任 “光华龙腾奖”2015中国设计业十大杰出青年</span>
+
+			</a>
+
+		</div>
+		<div class="section" id="section3">
+			<div class="slide">
+				<img src="bowerbird/image/customer/1.jpg" alt="梁建国"> 	
+
+				<div class="say">
+					<h2>业主有话说</h2>
+					<div class="content">
+						水电师傅做事很用心，特别是电工师傅胡立斌做事特别细致认真，弱电都是单管单线穿，由于卧室地面没有改动，电线都是走顶的，电线在顶部固定非常用心。工程监理胡经理也非常用心，积极沟通给予了很多帮助，范设计师在施工期间不厌其烦多次来现场沟通，不断完善方案。装修是一件非常操心的事，深深的感受到专业的团队和专业的服务是非常重要的。谢谢他们的付出！
+					</div>
+				</div>
+			</div>
+			<div class="slide">
+				<img src="bowerbird/image/customer/2.jpg" alt="梁建国"> 	
+				<div class="say">
+				<h2>业主有话说</h2>
+					<div class="content">
+						去年在相城区买的单身公寓今年5月份拿到的房子因为房子的承重墙问题拖了两个多月才开始准备装修打算装修完出租掉所以还是蛮心急的影响我的收入呀~在拿房前看过一次拿完房才正式看起来···
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src="bowerbird/js/fullpage.js"></script>
+	<script type="text/javascript" src="bowerbird/js/examples.js"></script>
+
+	<script type="text/javascript">
+		var myFullpage = new fullpage('#fullpage', {
+			verticalCentered: false
+		});
+	</script>
+</body>
+
+</html>
