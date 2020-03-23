@@ -98,5 +98,34 @@ base = new Vue({
 
 
 $(function () {
-
+    debugger;
+    $.ajax({
+        url: 'http://appservice.jtljia.net/appjia/commonReport/detail/',
+        beforeSend: function (request) {
+            request.setRequestHeader("app-device-id", 'HUAWEIEVA-TL00-B2T7N16C10001991');
+            request.setRequestHeader("app-device-type", 'android');
+            request.setRequestHeader("timestamp", 'android');
+            request.setRequestHeader("systemName", '4.32.0');
+            request.setRequestHeader("sign", 'fca872206da145ef94605bb5fed3fa91');
+            request.setRequestHeader("content-type", 'application/json');
+        },
+        data: {
+            pageCode:'org_order_following',
+                    orgId:'',
+        },
+        async:false,
+        type: 'post',
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (m) {
+debugger;
+         
+           
+            
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log("失败");
+        }
+    });
 })

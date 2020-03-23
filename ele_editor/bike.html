@@ -32,81 +32,187 @@
 			text-align: center;
 		}
 
-		.content {
-			
-		}
-		a{
+		.content {}
+
+		a {
 			cursor: pointer;
 		}
+
 		.content .info,
-		.content .video{
+		.content .video {
 			width: 50%;
 			float: left;
 		}
-		.content .base>div{
+
+		.content .base>div {
 			float: left;
 			width: 33%;
 		}
-		.content .index >div{
+
+		.content .index>div {
 			float: left;
 			width: 33%;
-			text-align:center;
+			text-align: center;
 		}
-		.content .project .item>div{
+
+		.content .project .item>div {
 			float: left;
-			text-align:center;
+			text-align: center;
 		}
 
 
-		.content .project .item .title{
+		.content .project .item .title {
 			float: left;
 			width: 33%;
-			text-align:center;
-		}
-		.content .project .item .status{
-			float: left;
-			width: 33%;
-			text-align:center;
+			text-align: center;
 		}
 
-		.top-list{
+		.content .project .item .status {
+			float: left;
+			width: 33%;
+			text-align: center;
+		}
+
+		.top-list {
 			float: left;
 			width: 50%;
 		}
-		.top-list .item{
+
+		.top-list .item {
 			float: left;
 			width: 100%;
 		}
-		.top-list .item div{
+
+		.top-list .item div {
 			float: left;
 		}
-		.top-list .item .title+div{
+
+		.top-list .item .title+div {
 			float: right;
 			margin-right: 10%;
 		}
 
-		.video .item{
+		.video .item {
 			float: left;
 			width: 100%;
 		}
-		.video .item div{
+
+		.video .item div {
 			float: left;
 			width: 30%;
 		}
-		.video .item .title+div{
+
+		.video .item .title+div {
 			float: right;
 			text-align: right;
 		}
 
+		.config-detail {}
+
+		.config-detail .item>div {
+			float: left;
+		}
+
+		.total .name,
+		.config-detail .item .name {
+			float: left;
+			width: 30%;
+			text-align: right;
+		}
+
+		.total .price,
+		.config-detail .item .price {
+			float: left;
+			width: 70%;
+			text-align: right;
+		}
+
+
+		.el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+  }
+  
+  .el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+  }
 	</style>
 
 </head>
 
 <body>
-	<div class="header">
-		实施施工数据
-	</div>
-	<div id="monitoring" class="content">
+
+
+
+	<div id="bike" class="content">
+
+		<div class="canvas">
+
+			<svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+				<circle cx="100" cy="50" r="40" stroke="grey" stroke-width="2" fill="grey" />
+				<polygon points="220,100 300,210 170,250 123,234" style="fill:#cccccc;
+		stroke:#000000;stroke-width:1" />
+
+			</svg>
+
+		</div>
+		<div class="config-detail">
+			<div v-for="(item, index) in config_detail_list" class="item">
+				<div class="name">{{item.name}}</div>
+				<div class="price">{{item.price}}</div>
+
+			</div>
+			<div class="total">
+				<div class="name">总价</div>
+				<div class="price">{{total}}</div>
+			</div>
+		</div>
+
+
+		<el-drawer title="配件列表" :visible.sync="drawer" size="50%">
+			<div>
+								
+				<div v-for="(item, index) in parts_list" class="item">
+					
+					<template>
+						<el-carousel  type="card" height="200px">
+						  <el-carousel-item v-for="detail in item.detail" :key="item">
+							
+							<img src="" alt="">
+						  </el-carousel-item>
+						</el-carousel>
+					  </template>
+
+
+
+				</div>
+
+
+				<el-drawer title="我是里面的" :append-to-body="true" :before-close="handleClose" :visible.sync="innerDrawer">
+					<p>_(:зゝ∠)_</p>
+				</el-drawer>
+			</div>
+		</el-drawer>
+
+
+
+
+
+
+		<div class="header">
+			实施施工数据
+		</div>
+
+
+
 		<div class="info">
 			<div class="base">
 				<div>苏州店/全国</div>
@@ -117,7 +223,7 @@
 				<div v-for="(item, index) in index_list" class="item">
 					<div>{{item.title}}</div>
 					<div>{{item.value}}</div>
-					
+
 				</div>
 			</div>
 			<div class="project">
@@ -126,7 +232,7 @@
 					<div class="title">{{index+1}}{{item.title}}</div>
 					<div class="status">{{item.status}}</div>
 					<div><a>查看</a></div>
-					
+
 				</div>
 			</div>
 			<div class="top-list">
@@ -143,7 +249,7 @@
 					<div>{{index+1}}</div>
 					<div class="title">{{item.name}}</div>
 					<div>{{item.num}}单</div>
-					
+
 				</div>
 			</div>
 
@@ -151,12 +257,12 @@
 		<div class="video">
 			<div>视频监控</div>
 			<div v-for="(item, index) in video_list" class="item">
-					<div class="title">{{index+1}}{{item.title}}</div>
-					<div><a>更多</a></div>
+				<div class="title">{{index+1}}{{item.title}}</div>
+				<div><a>更多</a></div>
 				<div class="resourse">
 					<video src=""></video>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
@@ -169,82 +275,117 @@
 <script>
 
 
-monitoring = new Vue({
-		el: "#monitoring",
+	bike = new Vue({
+		el: "#bike",
 		data() {
 			return {
 				index_list: [{
 					title: '今日开工',
-					value:20,
+					value: 20,
 				}, {
 					title: '今日在建',
-					value:15,
+					value: 15,
 				}, {
 					title: '今日完工',
-					value:5,
+					value: 5,
 				}, {
 					title: '待开工',
-					value:5,
+					value: 5,
 				}, {
 					title: '待验收',
-					value:2,
+					value: 2,
 				}, {
 					title: '停工',
-					value:1,
+					value: 1,
 				}],
 				project_list: [{
 					title: '海德公园',
-					status:'视频监控中'
+					status: '视频监控中'
 				}, {
 					title: '海尚壹品',
-					status:'信号中断'
+					status: '信号中断'
 				}, {
 					title: '中海国际',
-					status:'正在重连中'
+					status: '正在重连中'
 				}, {
 					title: '金色万科',
-					status:'视频监控中'
+					status: '视频监控中'
 				}],
 				manager_list: [{
 					name: '张三',
-					num:2,
+					num: 2,
 				}, {
 					name: '李四',
-					num:4,
+					num: 4,
 				}, {
 					name: '王五',
-					num:1,
+					num: 1,
 				}, {
 					name: '赵四',
-					num:3,
+					num: 3,
 				}],
 				housekeeper_list: [{
 					name: '雷军',
-					num:7,
+					num: 7,
 				}, {
 					name: '马云',
-					num:1,
+					num: 1,
 				}, {
 					name: '张一鸣',
-					num:5,
+					num: 5,
 				}, {
 					name: '马化腾',
-					num:3,
+					num: 3,
 				}],
 				video_list: [{
 					title: '海德公园',
-				
+
 				}, {
 					title: '金色万科',
 				}],
+
+
+				config_detail_list: [{
+					name: '车架套装',
+					value: '',
+					price: '300',
+				}, {
+					name: '轮毂',
+					value: '',
+					price: '400',
+				}, {
+					name: '牙盘',
+					value: '',
+					price: '400',
+				}, {
+					name: '变速套装',
+					value: '',
+					price: '400',
+				}, {
+					name: '刹车',
+					value: '',
+					price: '300',
+				}, {
+					name: '坐垫',
+					value: '',
+					price: '300',
+				}, {
+					name: '脚踏',
+					value: '',
+					price: '300',
+				}],
+				total: '333',
+				drawer: false,
+				innerDrawer: false,
+
 				//cur_time:(new Date()).toLocaleString()
 			};
 		},
 
 		computed: {
-			cur_time(){
-				var d =  new Date();
-				return (d.getMonth()+1)+'月'+d.getDate()+'日  '+d.getHours()+':'+d.getMinutes();
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
 			}
 		},
 		mounted: function () {
@@ -256,6 +397,15 @@ monitoring = new Vue({
 
 		methods: {
 			init() { },
+
+			handleClose(done) {
+				this.$confirm('还有未保存的工作哦确定关闭吗？')
+					.then(_ => {
+						done();
+					})
+					.catch(_ => { });
+			},
+
 			toggel_section(item) {
 				this.cur_section = item.name;
 				this.setting_list = this.setting_data[item.name];
