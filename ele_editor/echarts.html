@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="./element/element.js"></script>
 	<script type="text/javascript" src="request.js"></script>
 	<!-- import CSS -->
-	<link rel="stylesheet" href="./css3d/index.css">
+	<link rel="stylesheet" href="index.css">
 	<!-- import JavaScript -->
 	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
 	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
@@ -159,10 +159,6 @@
 				
 			</div>
 		</div>
-
-		<div v-for="(item,index) in map_unit_list" class="map-unit">
-			{{index}}
-		</div>
 	</div>
 
 
@@ -177,7 +173,6 @@ monitoring = new Vue({
 		el: "#monitoring",
 		data() {
 			return {
-				map_unit_list:[],
 				index_list: [{
 					title: '今日开工',
 					value:20,
@@ -260,14 +255,7 @@ monitoring = new Vue({
 		},
 
 		methods: {
-			init() { 
-				var that = this;
-            for(i=0;i<100;i++){
-                that.map_unit_list.push({
-                    index:i
-                })
-            }
-			},
+			init() { },
 			toggel_section(item) {
 				this.cur_section = item.name;
 				this.setting_list = this.setting_data[item.name];

@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ele实时编辑器</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<script src="jquery.min.js"></script>
+
+	<link rel="stylesheet" href="./element/element.css">
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="./element/element.js"></script>
+	<script type="text/javascript" src="request.js"></script>
+	<script type="text/javascript" src="./shit_js_data.js"></script>
+	<script type="text/javascript" src="./prism.js"></script>
+	<link rel="stylesheet" href="./prism.css">
+	<!-- import CSS -->
+	<link rel="stylesheet" href="index.css">
+	<!-- import JavaScript -->
+	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+
+	<style>
+
+	</style>
+
+</head>
+
+<body>
+
+	<div id="_error" class="container">
+		<el-autocomplete class="inline-input" v-model="user_error" :fetch-suggestions="querySearch" placeholder="请输入内容"
+			:trigger-on-focus="false" @select="handleSelect"></el-autocomplete>
+
+		<el-card class="box-card">
+			<div slot="header" class="clearfix">
+				<span>说明</span>
+
+			</div>
+			<div class="text item">
+				{{info}}
+			</div>
+		</el-card>
+		<el-card class="box-card" v-if="!!notice">
+			<div slot="header" class="clearfix">
+				<span>注意：</span>
+
+			</div>
+			<div class="text item">
+				{{notice}}
+			</div>
+		</el-card>
+
+						
+		<el-card class="box-card">
+			<div slot="header" class="clearfix">
+				<span>示例</span>
+
+			</div>
+			<div class="text item">
+<pre>{{code}}</pre>
+					
+
+			</div>
+		</el-card>
+		
+
+
+	</div>
+	<script src='' id="s1"></script>
+
+</body>
+
+
+</html>
+<script>
+
+
+	_error = new Vue({
+		el: "#_error",
+		data() {
+			return {
+				error_list: [],
+				user_error: '',
+				info: '',
+				restaurants: [],
+				notice: '',
+				code: ''
+				//cur_time:(new Date()).toLocaleString()
+			};
+		},
+
+		computed: {
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
+			}
+		},
+		mounted: function () {
+			debugger;
+			this.restaurants = this.loadAll();
+			//this.init();
+			this.$nextTick(function () {
+
+			})
+		},
+
+		methods: {
+			init() {},
+			loadAll() {
+				return data;
+			},
+
+			handleSelect(item) {
+				$("#s1").attr("src","");
+				this.code = item.example;
+				this.notice = item.notice;
+				this.info = item.info;
+				//$("code").first(0).html(this.code);
+				this.$nextTick(function(){
+					$("#s1").attr("src","./prism.js");
+				})
+			},
+			querySearch(queryString, cb) {
+				debugger;
+				var restaurants = this.restaurants;
+				var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+
+				// 调用 callback 返回建议列表的数据
+				cb(results);
+			},
+			createFilter(queryString) {
+				return (restaurant) => {
+					return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)||queryString.toLowerCase().indexOf(restaurant.value.toLowerCase()) > 0;
+				};
+			},
+			check_error(e) {
+
+				this.error_list.forEach(function (o) {
+					if (user_error.indexOf(o.key) > 0) {
+
+					}
+				})
+				this.cur_section = item.name;
+				this.setting_list = this.setting_data[item.name];
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+
+		}
+	});
+</script>
