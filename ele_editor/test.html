@@ -27,7 +27,7 @@
 	<script type="text/javascript" src="./element/element.js"></script>
 	<script type="text/javascript" src="request.js"></script>
 	<script type="text/javascript" src="/css3d/test.js"></script>
-	<script type="text/javascript" src="/css3d/transform.js"></script>
+	<script type="text/javascript" src="/css3d/move.js"></script>
 
 	<!-- import CSS -->
 
@@ -42,6 +42,9 @@
 <body>
 
 	<div id="map" class="content">
+		<div id="dd">
+			ddddd
+		</div>
 
 
 		<div id="tank" class="tank" @click="select_tank">
@@ -50,7 +53,7 @@
 			<div class="a3"></div>
 		</div>
 
-		<div @click="locate_here(item,index+1)" v-for="(item,index) in map_unit_list" class="map-unit"
+		<div @click="locate_here(item,index)" v-for="(item,index) in map_unit_list" class="map-unit"
 			:class="index == cur_index?'selected':''">
 			{{index+1}}
 		</div>
@@ -62,7 +65,8 @@
 
 </body>
 
-<script  type="text/javascript"  src='/css3d/move.js'></script>
+<script type="text/javascript" src='/css3d/move.js'></script>
+
 </html>
 <script>
 
@@ -72,6 +76,7 @@
 			return {
 				map_unit_list: [],
 				cur_index: '',
+				cur_tank_location_index: 0,
 
 
 				index_list: [{
@@ -158,36 +163,123 @@
 		methods: {
 			init() {
 				var that = this;
-				let center = [15,15];
+				let center = [15, 15];
 
 				for (i = 0; i < 100; i++) {
 					let x_offset = 0;
 					let z_offset = 0;
 
-					x_offset=30*(i%10);
-					z_offset=30*parseInt((i)/10);
-					
+					x_offset = 30 * (i % 10);
+					z_offset = 30 * parseInt((i) / 10);
+
 
 					that.map_unit_list.push({
-						index: i+1,
-						x:15+x_offset,
-						z:-15-z_offset,
+						index: i + 1,
+						x: x_offset,
+						y: z_offset,
 					})
 				}
 			},
 			locate_here(item, index) {
 				debugger;
+
 				this.cur_index = index;
+				this.render_path(this.cur_tank_location_index, index, item);
+
+
+			},
+			render_path(start_index, end_index, item) {
+				debugger;
+
+				let x_offset = end_index % 10;
+				let y_offset = parseInt(end_index / 10);
+
+				if (x_offset > y_offset) {
+
+
+					let offsetX = item.x + 'px';
+					let offsetY = item.y + 'px';
+					let offsetYX = (item.x - item.y) + 'px';
+
+					move('#tank')
+						.set('transform', 'translate3d(' + offsetYX + ',0px,30px)')
+						.duration('1s')
+						.end();
+
+					setTimeout(function () {
+						move('#tank')
+							.set('transform', 'translate3d(' + offsetYX + ',0,30px) rotate(45deg)')
+							.duration('1s')
+							.end();
+					}, 1000);
+
+					setTimeout(function () {
+						move('#tank')
+							.set('transform', 'translate3d(' + offsetX + ',' + offsetY + ',30px) rotate(45deg)')
+							.duration('1s')
+							.end();
+
+					}, 2000);
+
+
+
+					// setTimeout(function (){
+					// 	move('#tank')
+					//   .set('transform', 'translate3d('+offsetX+','+offsetY+',30px) rotate(0deg)')
+					//   .duration('1s')
+					//   .end();
+					// }, 3000);
+
+
+					//   move('#tank')
+					//   .set('transform', 'translate3d('+ex+',0,30px) rotate(45deg)')
+					//   .duration('1s')
+					//   .end();
+
+
+					// 						move('#tank')
+					//   .set('transform', 'translateX('+ex+')px)')
+					//   .duration('1s')
+					//   .set('transform', 'rotate(45deg)')
+					//   .duration('1s')
+					//   .set('transform', 'translate3d('+offset+',0,'+offset+'))')
+					//   .duration('1s')
+					//   .end();
+				}
+				else {
+
+				}
+
 
 			},
 			select_tank(e) {
 				debugger;
 
 			},
-			attack(){
-				$('#tank').css({
-					"transition-property":'rotate(45deg)'
-				});
+			attack() {
+				// $('#tank').css({
+				// 	transform:'translateZ(30px) rotate(45deg)'
+				// });
+
+				move('#tank')
+					.set('transform', 'translateZ(30px) rotate(45deg)')
+					.duration('1s')
+					.end();
+
+
+				// 				var el = document.getElementById("tank");
+				// dynamics.animate(el, {
+				// 	translateZ: 30,
+				// 	rotateZ:45,
+				//   scale: 2,
+				//   opacity: 0.5
+				// }, {
+				//   type: dynamics.spring,
+				//   frequency: 200,
+				//   friction: 200,
+				//   duration: 1500
+				// })
+
 			},
 			toggel_section(item) {
 				this.cur_section = item.name;
