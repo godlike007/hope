@@ -37,7 +37,7 @@
 				<el-container>
 					<el-main>
 						<div class="preview" :class="is_real?'real':''">
-							<div
+							<div id="preview_canvas"
 								v-for="(item, index) in data"
 								class="item"
 								:class="cur_item_id == item.id ? 'cur-item' : ''"
@@ -907,7 +907,9 @@
 	</div>
 </template>
 <script>
-debugger;
+
+	
+
 let id = 1000;
 
 const css_vals = [
@@ -1200,7 +1202,81 @@ export default {
 			}
 		};
 	},
-
+	mounted(){
+		
+		
+		
+		this.$nextTick(function(){
+			window.onload=function()
+			{
+				var oBox=document.querySelector('#preview_canvas');
+			
+				var y=-60;
+				var x=45;
+				oBox.onmousedown=function(ev)
+				{
+					var oEvent=ev||event;
+					var disX=oEvent.clientX-y;
+					var disY=oEvent.clientY-x;
+					document.onmousemove=function(ev)
+					{
+						var oEvent=ev||event;
+						x=oEvent.clientY-disY;
+						y=oEvent.clientX-disX;
+						oBox.style.transform='perspective(800px) rotateX('+x+'deg) rotateZ('+y+'deg)';
+					};
+					document.onmouseup=function()
+					{
+						document.onmousemove=null;
+						document.onmouseup=null;
+					};
+					return false;
+				};
+				
+				var translateX = 0;
+				var translateY = 0;
+				var translateZ = 0;
+				document.onkeydown = function(ev1){
+				                var ev2 = ev1 || window.event;
+				                switch(ev2.keyCode){
+				                    case 37:
+				                    case 100:
+				              debugger;
+										translateX-=10;										
+										oBox.style.transform='perspective(800px) rotateX('+x+'deg) rotateZ('+y+'deg) translate3d('+translateX+'px,'+translateY+'px,0)';
+				                    break;
+				                    case 38:
+				                    case 104:
+									debugger;
+									translateY-=10;
+									oBox.style.transform='perspective(800px) rotateX('+x+'deg) rotateZ('+y+'deg) translate3d('+translateX+'px,'+translateY+'px,0)';
+									
+				                        
+				                    break;
+				                    case 39:
+				                    case 102:
+				                   debugger;
+										ev2.translateX+=10;
+										oBox.style.transform='perspective(800px) rotateX('+x+'deg) rotateZ('+y+'deg) translate3d('+translateX+'px,'+translateY+'px,0)';
+				                    break;
+				                    case 40:
+				                    case 98:
+debugger;
+										translateY+=10;
+										oBox.style.transform='perspective(800px) rotateX('+x+'deg) rotateZ('+y+'deg) translate3d('+translateX+'px,'+translateY+'px,0)';
+				                    break;
+				                    default:
+				                        console.log("请按上下左右键");
+				                    break;
+				                }
+				   
+				                
+				            }
+				
+			};
+			
+		})
+	},
 	methods: {
 		update_render() {		
 			debugger;
@@ -1215,6 +1291,7 @@ export default {
 			this.config_item_list.forEach(function(o) {
 				that.cur_item.css.style += o.name + ':' + o.value + ';';
 			});
+			debugger;
 		},
 		toggel_attr_add_px(val_name) {
 			this.cur_config_attr = val_name;
@@ -1482,6 +1559,13 @@ export default {
 		}
 	}
 };
+
+
+
+
+
+
+
 </script>
 
 <style>
@@ -1494,6 +1578,7 @@ export default {
 		padding-left: 10px;
 	}
 	.preview{
+		width: 400px;;
 		height: 400px;
 	}
 .custom-tree-node {
