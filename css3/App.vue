@@ -25,6 +25,12 @@
 				<el-container>
 					<el-main>
 						<div id="preview" class="preview" :class="is_real ? 'real' : ''">
+							
+							
+							<div id="coordinates">
+								
+							</div>
+							
 							<div
 								id="preview_canvas"
 								v-for="(item, index) in data"
@@ -496,12 +502,19 @@
 										translate3d({{ css_attr_detail.transform.translate3d.x }},{{ css_attr_detail.transform.translate3d.y }},{{
 											css_attr_detail.transform.translate3d.z
 										}})
+										
+										<el-switch
+										  v-model="css_attr_detail.transform.translate3d.is_forward"
+										  active-text="正向"
+										  inactive-text="反向">
+										</el-switch>
+	
 									</div>
 
-									<template>
-										<div class="block"><el-slider @change="toggel_transform" v-model="css_attr_detail.transform.translate3d.x" show-input></el-slider></div>
-										<div class="block"><el-slider @change="toggel_transform" v-model="css_attr_detail.transform.translate3d.y" show-input></el-slider></div>
-										<div class="block"><el-slider @change="toggel_transform" v-model="css_attr_detail.transform.translate3d.z" show-input></el-slider></div>
+									<template>sd
+										<div class="block"><el-slider :max="1000" @change="toggel_transform" v-model="css_attr_detail.transform.translate3d.x" show-input></el-slider></div>
+										<div class="block"><el-slider :max="1000" @change="toggel_transform" v-model="css_attr_detail.transform.translate3d.y" show-input></el-slider></div>
+										<div class="block"><el-slider :max="1000" @change="toggel_transform" v-model="css_attr_detail.transform.translate3d.z" show-input></el-slider></div>
 									</template>
 								</el-col>
 
@@ -876,7 +889,9 @@ export default {
 					translate3d: {
 						x: 0,
 						y: 0,
-						z: 0
+						z: 0,
+						is_forward:true
+						
 					},
 					scale3d: {
 						x: 1,
@@ -910,6 +925,8 @@ export default {
 		this.$nextTick(function() {
 			window.onload = function() {
 				var oBox = document.querySelector('#preview_canvas');
+				var coordinates = document.querySelector('#coordinates');
+				
 
 				var y = -60;
 				var x = 45;
@@ -932,6 +949,23 @@ export default {
 						x = oEvent.clientY - disY;
 						y = oEvent.clientX - disX;
 						oBox.style.transform = 'perspective(800px) rotateX(' + x + 'deg) rotateZ(' + y + 'deg)  translate3d(' + translateX + 'px,' + translateY + 'px,0)';
+					};
+					document.onmouseup = function() {
+						document.onmousemove = null;
+						document.onmouseup = null;
+					};
+					return false;
+				};
+				
+				coordinates.onmousedown = function(ev) {
+					var oEvent = ev || event;
+					var disX = oEvent.clientX - y;
+					var disY = oEvent.clientY - x;
+					document.onmousemove = function(ev) {
+						var oEvent = ev || event;
+						x = oEvent.clientY - disY;
+						y = oEvent.clientX - disX;
+						coordinates.style.transform = 'perspective(800px) rotateX(' + x + 'deg) rotateZ(' + y + 'deg)  translate3d(' + translateX + 'px,' + translateY + 'px,0)';
 					};
 					document.onmouseup = function() {
 						document.onmousemove = null;
@@ -963,6 +997,44 @@ export default {
 							left+=oBox.offsetWidth;
 							top+=oBox.offsetHeight;
 							oBox.style.marginLeft = left + 'px';
+						}
+					} else if (event.originalEvent.detail) {
+						//Firefox滚轮事件
+						if (detal > 0) {
+							//当滑轮向下滚动时
+							alert('下滚');
+						}
+						if (detal < 0) {
+							//当滑轮向上滚动时
+							alert('上滚');
+						}
+					}
+				});
+				
+				$("#preview").bind('mousewheel DOMMouseScroll', function(event) {
+					//on也可以 bind监听
+					//Chorme
+					
+					var wheel = event.originalEvent.wheelDelta;
+					var detal = event.originalEvent.detail;
+					if (event.originalEvent.wheelDelta) {
+						//判断浏览器IE,谷歌滚轮事件
+						if (wheel > 0) {
+							debugger;
+							zoom++;
+							//当滑轮向上滚动时
+							coordinates.style.zoom = zoom;
+							left-=coordinates.offsetWidth;
+							top-=coordinates.offsetHeight;
+							coordinates.style.marginLeft = left + 'px';
+						}
+						if (wheel < 0) {
+							zoom--;
+							//当滑轮向下滚动时
+							coordinates.style.zoom = zoom;
+							left+=coordinates.offsetWidth;
+							top+=coordinates.offsetHeight;
+							coordinates.style.marginLeft = left + 'px';
 						}
 					} else if (event.originalEvent.detail) {
 						//Firefox滚轮事件
@@ -1036,6 +1108,68 @@ export default {
 							break;
 					}
 				};
+			
+			document.onkeydown = function(ev1) {
+					debugger;
+					var ev2 = ev1 || window.event;
+					switch (ev2.keyCode) {
+						case 68:
+							debugger;
+							left += 20;
+							coordinates.style.marginLeft = left + 'px';
+			
+							break;
+						case 65:
+							debugger;
+							left -= 20;
+							coordinates.style.marginLeft = left + 'px';
+			
+							break;
+						case 87:
+							debugger;
+							top -= 20;
+							coordinates.style.marginTop = top + 'px';
+			
+							break;
+						case 83:
+							debugger;
+							top += 20;
+							coordinates.style.marginTop = top + 'px';
+			
+							break;
+						case 37:
+						case 100:
+							debugger;
+							translateY += 10;
+							coordinates.style.transform = 'perspective(800px) rotateX(' + x + 'deg) rotateZ(' + y + 'deg) translate3d(' + translateX + 'px,' + translateY + 'px,0)';
+							break;
+						case 38:
+						case 104:
+							debugger;
+			
+							translateX -= 10;
+							coordinates.style.transform = 'perspective(800px) rotateX(' + x + 'deg) rotateZ(' + y + 'deg) translate3d(' + translateX + 'px,' + translateY + 'px,0)';
+			
+							break;
+						case 39:
+						case 102:
+							debugger;
+							translateY -= 10;
+							coordinates.style.transform = 'perspective(800px) rotateX(' + x + 'deg) rotateZ(' + y + 'deg) translate3d(' + translateX + 'px,' + translateY + 'px,0)';
+			
+							break;
+						case 40:
+						case 98:
+							translateX += 10;
+							coordinates.style.transform = 'perspective(800px) rotateX(' + x + 'deg) rotateZ(' + y + 'deg) translate3d(' + translateX + 'px,' + translateY + 'px,0)';
+							break;
+						default:
+							console.log('请按上下左右键');
+							break;
+					}
+				};
+			
+			
 			};
 		});
 	},
@@ -1073,9 +1207,17 @@ export default {
 		},
 		toggel_transform() {
 			debugger;
-			this.css_attr.transform = `translate3d(${this.css_attr_detail.transform.translate3d.x}px,${this.css_attr_detail.transform.translate3d.y}px,${
-				this.css_attr_detail.transform.translate3d.z
-			}px)`;
+			if(-this.css_attr_detail.transform.translate3d.is_forward){
+				this.css_attr.transform = `translate3d(${this.css_attr_detail.transform.translate3d.x}px,${this.css_attr_detail.transform.translate3d.y}px,${
+					this.css_attr_detail.transform.translate3d.z
+				}px)`;
+			}
+			else{
+				this.css_attr.transform = `translate3d(${-this.css_attr_detail.transform.translate3d.x}px,${-this.css_attr_detail.transform.translate3d.y}px,${
+					-this.css_attr_detail.transform.translate3d.z
+				}px)`;
+			}
+			
 			this.css_attr.transform += ` scale3d(${this.css_attr_detail.transform.scale3d.x},${this.css_attr_detail.transform.scale3d.y},${
 				this.css_attr_detail.transform.scale3d.z
 			})`;
@@ -1375,5 +1517,14 @@ body span {
 .preview.real .item {
 	border: none;
 	padding: 0px;
+}
+
+#coordinates{
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(rgba(0, 0, 0, 0) 50%, #5a5858 71%), linear-gradient(#4646461a 0.125em, transparent 0), linear-gradient(90deg, #4646461a 0.125em, transparent 0);
+	    background-position: 50% 50%;
+	    background-size: 100%, 3em 3em, 3em 3em;
+		border: 1px solid #4646461a;
 }
 </style>
