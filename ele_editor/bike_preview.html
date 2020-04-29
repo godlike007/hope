@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ele实时编辑器</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<script src="jquery.min.js"></script>
+
+	<!-- <link rel="stylesheet" href="./element/element.css"> -->
+	<script type="text/javascript" src="vue.js"></script>
+	<!-- <script type="text/javascript" src="./element/element.js"></script> -->
+	<script type="text/javascript" src="request.js"></script>
+	<!-- import CSS -->
+	<link rel="stylesheet" href="./bike/vant.css" />
+	<link rel="stylesheet" href="./bike/index.css" />
+	<script src="./bike/vant.js"></script>
+	<script src="./bike/data.js"></script>
+	<!-- import JavaScript -->
+	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+
+
+	<style>
+.cube-scroll-list-wrapper .cube-tab-bar {
+  flex-wrap: wrap;
+}
+.cube-scroll-list-wrapper .cube-tab-bar .cube-tab {
+  width: 100%;
+  flex-basis: unset;
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #db8931;
+  transition: all 0.3s ease-in;
+}
+.cube-scroll-list-wrapper .cube-tab-bar .cube-tab.cube-tab_active {
+  color: #fff;
+  font-size: 16px;
+  background-color: #a74b00;
+}
+.left-panel {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+}
+.right-panel {
+  position: absolute;
+  top: 44px;
+  left: 80px;
+  right: 0;
+  bottom: 0;
+}
+.right-panel li {
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+.right-panel li img {
+  width: 102px;
+  margin: 0 10px 0 20px;
+  border: 1px solid #ff9f38;
+  border-radius: 3px;
+  box-shadow: 0 1px 5px 0 #000;
+}
+.right-panel li span {
+  color: #db8931;
+}
+
+	</style>
+
+</head>
+
+<body>
+
+
+
+	<div id="config" class="content">
+		<template></template>
+		<cube-page type="scroll-tab-view" title="ScrollTab">
+			<div slot="content">
+				<div class="left-panel">
+					<cube-scroll>
+						<cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
+					</cube-scroll>
+				</div>
+				<div class="right-panel">
+					<cube-scroll ref="scroll">
+
+						<div v-for="(item, index) in scrollData" class="scroll-data">
+							<div class="title">
+								{{item.title}}
+							</div>
+							<div class="img-item-list"  v-for="(img_item, index) in item.img_item_list">
+								<img :src="img_item.url" alt="">
+							</div>
+
+						</div>
+
+
+
+						<ul>
+							<li v-for="(hero, index) in scrollData">
+								<!-- <img :src="hero.avatar" alt=""> -->
+								<span>{{hero.name}}</span>
+							</li>
+						</ul>
+					</cube-scroll>
+				</div>
+			</div>
+		</cube-page>
+		</template>
+	</div>
+
+
+</body>
+
+
+</html>
+<script>
+	const DATA_MAP = {
+		'车架': [{
+				title:'Missile/雷神',
+				img_item_list:[{
+					url:'./bike/img/1.jpg'
+				}]
+			},{
+				title:'TWITTER/骓特',
+				img_item_list:[{
+					url:'./bike/img/2.jpg'
+				},{
+					url:'./bike/img/3.jpg'
+				}]
+			}],
+    '近战': MELEE_HEROES,
+    '远程': REMOTE_HEROES,
+    '辅助': SUPPORT_HEROES,
+    '法师': MAGIC_HEROES,
+    '打野': JUNGLE_HEROES,
+    '坦克': TANK_HEROES,
+    '隐身': INVISIBLE_HEROES,
+    '后期': CARRY_HEROES,
+    '闪烁': BLINK_HEROES,
+    '爆发': HIGH_DAMAGE_HEROES,
+    '召唤': INVOKE_HEROES,
+    '眩晕': DIZZY_HEROES,
+    '治疗': HEALER_HEROES
+	}
+	const genTabLabels = Object.keys(DATA_MAP).map(label => ({
+		label
+	}))
+
+	bike = new Vue({
+		el: "#config",
+		data() {
+			return {
+				selectedLabel: '全部',
+				scrollData: [],
+				tabs: genTabLabels
+			};
+		},
+
+		computed: {
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
+			}
+		},
+		mounted: function () {
+			this.init();
+
+		},
+		watch: {
+			selectedLabel(newV) {
+				console.log(newV)
+			}
+		},
+		created() {
+			//this.scrollData = DATA_MAP[this.selectedLabel]
+			this.scrollData = [{
+				title:'Missile/雷神',
+				img_item_list:[{
+					url:'./bike/img/1.jpg'
+				}]
+			},{
+				title:'TWITTER/骓特',
+				img_item_list:[{
+					url:'./bike/img/2.jpg'
+				},{
+					url:'./bike/img/3.jpg'
+				}]
+			}]
+		},
+		methods: {
+			init() { },
+			changeHandler(label) {
+				this.scrollData = DATA_MAP[label]
+				this.$nextTick(() => {
+					// reset better-scroll'postion
+					this.$refs.scroll.scrollTo(0, 0)
+					// you need to caculate scroll-content height when your dom has changed in nextTick
+					this.$refs.scroll.refresh()
+				})
+			},
+			sure_submit() {
+				location.href = 'bike_config.html';
+			},
+
+			handleClose(done) {
+				this.$confirm('还有未保存的工作哦确定关闭吗？')
+					.then(_ => {
+						done();
+					})
+					.catch(_ => { });
+			},
+
+			toggel_section(item) {
+				this.cur_section = item.name;
+				this.setting_list = this.setting_data[item.name];
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			add_code(item) {
+				this.code += $.trim($("#" + item.id).html().replace(/\#/, this.handler_value_name)) + "\n";
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			toggel_hot_use(item) {
+				debugger;
+
+				this.hot_use_list = item.hot.split(",");
+
+			},
+			assign_value(item) {
+				this.handler_value_name = item;
+
+
+			},
+		}
+	});
+
+
+
+</script>

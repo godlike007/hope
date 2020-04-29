@@ -1,0 +1,38 @@
+body{
+  font-size: 18px;;
+}
+
+
+
+.price{
+  font-size: 14px;
+  text-align: center;
+  margin: 6%;
+}
+.price .num{
+  color: #ee0a24;
+  font-size: 24px;
+}
+
+.order{
+  background-color: #6ac5ff;
+  color: #fff;
+  text-align: center;
+  height: 3rem;
+  line-height: 3rem;
+  font-size: 18px;
+  width: 100%;
+  letter-spacing: 1px;
+  position: fixed;
+  bottom: 0px;
+}
+
+.custom-button {
+  width: 26px;
+  color: #fff;
+  font-size: 10px;
+  line-height: 18px;
+  text-align: center;
+  background-color: #ee0a24;
+  border-radius: 100px;
+}
