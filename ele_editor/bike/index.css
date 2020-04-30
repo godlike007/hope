@@ -169,12 +169,56 @@ table {
 }
 .scroll-data .title{
 	height: 2rem;
+    width: 100%;
+    float: left;
+    line-height: 2rem;
+    font-size: 16px;
+	font-weight: bold;
+	text-indent: 0.5rem;
 }
 
 .scroll-data .img-item-list{
-	width: 100%;
+	width: 30%;
+    height: 7rem;
+	float: left;
+	margin-right: 3%;
+    margin-bottom: 3%;
 }
 .scroll-data .img-item-list img{
-	width: 6rem;
-	float: left;
+	width: 100%;
+}
+.scroll-data .img-item-list .select-this{
+display: none;
+}
+.scroll-data .img-item-list.cur .select-this{
+display: block;
+position: absolute;
+display: block;
+    position: absolute;
+    margin-top: -1.2rem;
+    width: 30%;
+    height: 1.2rem;
+    line-height: 1.2rem;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    opacity: 0.6;
+}
+
+
+.selected-item .title{
+	height: 2rem;
+    width: 100%;
+    float: left;
+    line-height: 2rem;
+    font-size: 16px;
+	font-weight: bold;
+	text-indent: 0.5rem;
+	color: #ee0a24;
+}
+.select-item-img{
+	
+}
+.select-item-img img{
+	width: 80%;
 }

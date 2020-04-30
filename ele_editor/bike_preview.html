@@ -32,53 +32,59 @@
 
 
 	<style>
-.cube-scroll-list-wrapper .cube-tab-bar {
-  flex-wrap: wrap;
-}
-.cube-scroll-list-wrapper .cube-tab-bar .cube-tab {
-  width: 100%;
-  flex-basis: unset;
-  height: 40px;
-  line-height: 40px;
-  font-size: 14px;
-  color: #db8931;
-  transition: all 0.3s ease-in;
-}
-.cube-scroll-list-wrapper .cube-tab-bar .cube-tab.cube-tab_active {
-  color: #fff;
-  font-size: 16px;
-  background-color: #a74b00;
-}
-.left-panel {
-  position: absolute;
-  top: 44px;
-  left: 0;
-  bottom: 0;
-  width: 80px;
-}
-.right-panel {
-  position: absolute;
-  top: 44px;
-  left: 80px;
-  right: 0;
-  bottom: 0;
-}
-.right-panel li {
-  height: 80px;
-  display: flex;
-  align-items: center;
-}
-.right-panel li img {
-  width: 102px;
-  margin: 0 10px 0 20px;
-  border: 1px solid #ff9f38;
-  border-radius: 3px;
-  box-shadow: 0 1px 5px 0 #000;
-}
-.right-panel li span {
-  color: #db8931;
-}
+		.cube-scroll-list-wrapper .cube-tab-bar {
+			flex-wrap: wrap;
+		}
 
+		.cube-scroll-list-wrapper .cube-tab-bar .cube-tab {
+			width: 100%;
+			flex-basis: unset;
+			height: 40px;
+			line-height: 40px;
+			font-size: 14px;
+			color: #000;
+			transition: all 0.3s ease-in;
+		}
+
+		.cube-scroll-list-wrapper .cube-tab-bar .cube-tab.cube-tab_active {
+			color: #fff;
+			font-size: 16px;
+			background-color: red;
+		}
+
+		.left-panel {
+			position: absolute;
+			top: 44px;
+			left: 0;
+			bottom: 0;
+			width: 80px;
+		}
+
+		.right-panel {
+			position: absolute;
+			top: 44px;
+			left: 80px;
+			right: 0;
+			bottom: 0;
+		}
+
+		.right-panel li {
+			height: 80px;
+			display: flex;
+			align-items: center;
+		}
+
+		.right-panel li img {
+			width: 102px;
+			margin: 0 10px 0 20px;
+			border: 1px solid #ff9f38;
+			border-radius: 3px;
+			box-shadow: 0 1px 5px 0 #000;
+		}
+
+		.right-panel li span {
+			color: #db8931;
+		}
 	</style>
 
 </head>
@@ -99,24 +105,37 @@
 				<div class="right-panel">
 					<cube-scroll ref="scroll">
 
+						
+					<template v-if="selectedLabel!='已选'"> 
+					
+						
 						<div v-for="(item, index) in scrollData" class="scroll-data">
 							<div class="title">
 								{{item.title}}
 							</div>
-							<div class="img-item-list"  v-for="(img_item, index) in item.img_item_list">
+							<div class="img-item-list" @click="select_cur(item,img_item,index)"
+								v-for="(img_item, index1) in item.img_item_list"
+								:class="img_item.url==cur_url[selectedLabel]?'cur':''">
 								<img :src="img_item.url" alt="">
+								<div class="select-this">选中</div>
+
 							</div>
 
 						</div>
+					</template>
+					<template v-if="selectedLabel=='已选'"> 
+						<div v-for="(item, index) in scrollData" class="selected-item">
+							<div class="title">
+								{{item.type}}:{{item.title}}
+							</div>
+							<div class="select-item-img">
+								<img :src="item.url" alt="">
 
+							</div>
 
+						</div>
+					</template>
 
-						<ul>
-							<li v-for="(hero, index) in scrollData">
-								<!-- <img :src="hero.avatar" alt=""> -->
-								<span>{{hero.name}}</span>
-							</li>
-						</ul>
 					</cube-scroll>
 				</div>
 			</div>
@@ -130,33 +149,106 @@
 
 </html>
 <script>
-	const DATA_MAP = {
+	 DATA_MAP = {
 		'车架': [{
-				title:'Missile/雷神',
-				img_item_list:[{
-					url:'./bike/img/1.jpg'
-				}]
+			title: 'Missile/雷神',
+			img_item_list: [{
+				url: './bike/img/1.jpg'
+			}]
+		}, {
+			title: 'TWITTER/骓特',
+			img_item_list: [{
+				url: './bike/img/2.jpg'
+			}, {
+				url: './bike/img/3.jpg'
+			}]
+		}],
+		'牙盘': [{
+			title: 'Valeo/法雷奥',
+			img_item_list: [{
+				url: './bike/img/4.jpg'
+			}, {
+				url: './bike/img/5.jpg'
+			}, {
+				url: './bike/img/6.jpg'
+			}, {
+				url: './bike/img/7.jpg'
+			}]
+		}, {
+			title: 'litepro',
+			img_item_list: [{
+				url: './bike/img/8.jpg'
+			}, {
+				url: './bike/img/9.jpg'
+			}, {
+				url: './bike/img/10.jpg'
+			}]
+		}],
+		'前叉': [{
+			title: 'LUTU/陆途',
+			img_item_list: [{
+				url: './bike/img/11.jpg'
 			},{
-				title:'TWITTER/骓特',
-				img_item_list:[{
-					url:'./bike/img/2.jpg'
-				},{
-					url:'./bike/img/3.jpg'
-				}]
-			}],
-    '近战': MELEE_HEROES,
-    '远程': REMOTE_HEROES,
-    '辅助': SUPPORT_HEROES,
-    '法师': MAGIC_HEROES,
-    '打野': JUNGLE_HEROES,
-    '坦克': TANK_HEROES,
-    '隐身': INVISIBLE_HEROES,
-    '后期': CARRY_HEROES,
-    '闪烁': BLINK_HEROES,
-    '爆发': HIGH_DAMAGE_HEROES,
-    '召唤': INVOKE_HEROES,
-    '眩晕': DIZZY_HEROES,
-    '治疗': HEALER_HEROES
+				url: './bike/img/12.jpg'
+			}]
+		}, {
+			title: 'PROJAVA',
+			img_item_list: [{
+				url: './bike/img/13.jpg'
+			}]
+		}],
+		'变速': [{
+			title: 'Sram',
+			img_item_list: [{
+				url: './bike/img/14.jpg'
+			}]
+		}],
+		'坐垫': [{
+			title: 'SELLE ROYAL',
+			img_item_list: [{
+				url: './bike/img/15.jpg'
+			}]
+		}],
+		'轮组': [{
+			title: 'KOOZER',
+			img_item_list: [{
+				url: './bike/img/16.jpg'
+			},{
+				url: './bike/img/17.jpg'
+			}]
+		}],
+		'已选': [
+			{
+				type:'车架',
+				name:'',
+				url:'',
+			},
+			{
+				type:'牙盘',
+				name:'',
+				url:'',
+			},
+			{
+				type:'前叉',
+				name:'',
+				url:'',
+			},
+			{
+				type:'变速',
+				name:'',
+				url:'',
+			},
+			{
+				type:'坐垫',
+				name:'',
+				url:'',
+			},
+			{
+				type:'轮组',
+				name:'',
+				url:'',
+			}
+			]
 	}
 	const genTabLabels = Object.keys(DATA_MAP).map(label => ({
 		label
@@ -166,9 +258,10 @@
 		el: "#config",
 		data() {
 			return {
-				selectedLabel: '全部',
+				selectedLabel: '车架',
 				scrollData: [],
-				tabs: genTabLabels
+				tabs: genTabLabels,
+				cur_url: {},
 			};
 		},
 
@@ -189,30 +282,44 @@
 		},
 		created() {
 			//this.scrollData = DATA_MAP[this.selectedLabel]
-			this.scrollData = [{
-				title:'Missile/雷神',
-				img_item_list:[{
-					url:'./bike/img/1.jpg'
-				}]
-			},{
-				title:'TWITTER/骓特',
-				img_item_list:[{
-					url:'./bike/img/2.jpg'
-				},{
-					url:'./bike/img/3.jpg'
-				}]
-			}]
+			this.scrollData = DATA_MAP['车架'];
 		},
 		methods: {
-			init() { },
+			init() {
+				var that = this;
+				// this.tabs.forEach(item => {
+				// 	debugger;
+				// 	that.cur_url[item.title] = item.img_item_list[0].url;
+				// });
+
+			},
 			changeHandler(label) {
-				this.scrollData = DATA_MAP[label]
+
+				this.scrollData = DATA_MAP[label];
 				this.$nextTick(() => {
 					// reset better-scroll'postion
 					this.$refs.scroll.scrollTo(0, 0)
 					// you need to caculate scroll-content height when your dom has changed in nextTick
 					this.$refs.scroll.refresh()
 				})
+			},
+			select_cur(item, img_item, index) {
+				debugger;
+				this.cur_url[this.selectedLabel] = img_item.url;
+
+				DATA_MAP['已选'].forEach(e => {
+					debugger;
+					if(e.type==this.selectedLabel){
+						e.title=item.title;
+						e.url=img_item.url;
+						e.type=this.selectedLabel;
+					}
+				});
+
+				
+
+
+				this.$forceUpdate();
 			},
 			sure_submit() {
 				location.href = 'bike_config.html';
