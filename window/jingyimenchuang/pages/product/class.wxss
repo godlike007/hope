@@ -58,20 +58,26 @@ swiper-item{
   justify-content: space-between;
   text-align: center; 
    overflow-x: auto;
-  
+  padding: 0 2%;
+  justify-content: flex-start;
+
 }
 .swiper{
   height: 100%;
 }
 .swiper-tab-item{
-  width: 150rpx;
+  width: auto;
+  padding: 0 1%;
   color: #000;
   font-size: 30rpx;
+  margin-right: 40rpx;
+
 }
 .active{
   color: #45bbff;
   font-size: 30rpx;
   font-weight: bold;
+  border-bottom: 1px solid #45bbff;
 }
 .product_types{
   padding:13rpx 20rpx;

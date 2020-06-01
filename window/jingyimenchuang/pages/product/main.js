@@ -26,6 +26,11 @@ Page({
     wx.showLoading({
       title: '',
     });
+
+    wx.setNavigationBarTitle({
+      title: '产品'
+    })
+
     setTimeout(function () {
       wx.hideLoading()
     }, 500);

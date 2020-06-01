@@ -1,5 +1,5 @@
 <view class="body">
-  <view class='herder-title'>产品</view>
+  <!-- <view class='herder-title'>产品</view> -->
   <view wx:for="{{imgaList}}" wx:for-item="image" class="previewimg">
     <navigator url="/pages/product/class?type={{image.target}}">
       <view class="product_list_block">
