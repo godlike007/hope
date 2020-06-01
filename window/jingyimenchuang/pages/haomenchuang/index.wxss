@@ -1,0 +1,89 @@
+/* pages/index/index.wxss */
+.firstFloor{
+  height: auto;
+  background-color: rgba(163, 159, 159, 0.514);
+  text-align: center;
+  padding-top: 3px;
+}
+.bjtitle{
+    font-size: 20px;
+    font-weight: bold;
+    padding:10px 0;
+}
+.phoneTxt{
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  line-height: 40px;
+  height: 40px;
+}
+.floor{
+   text-align: center;
+   font-size: 18px;
+}
+.submitBtn{
+  width: 95%;
+  margin-top:2px;
+  margin-bottom: 2px;
+}
+.view{
+  padding: 3px 0;
+}
+.more-show{
+  float: right;
+  margin-right:7px;
+
+}
+.more-jiantou{
+  font-size: 16px;
+  color: rgba(99, 94, 94, 0.87);
+}
+.group-title-left{
+  width: 100%;
+  float: left;
+  text-align: left;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.group-title{
+  line-height: auto;
+  padding: 3px 0px;
+  margin-bottom: 3px;
+  margin-top:10px;
+}
+.bottom_line{
+  border-bottom: 2px solid #ccc;
+}
+.room-picker{
+  padding:8px 0;
+  border-top: 1px solid #ccc;
+  width:50%;
+  display: inline-block;
+}
+.picker-right-border{
+  border-right: 1px solid #ccc;
+  width:49%;
+}
+
+.middle_menu{
+  width: 710rpx;
+ /* margin-left: 20rpx;*/
+  margin-top: 50rpx;
+  height: 196rpx;
+  padding: 0 15rpx;
+  
+}
+.middle_menu .menu_item{
+  width: 158rpx;
+  height: 169rpx;
+  margin: 0 10rpx;
+  float: left;
+  
+	font-size: 28rpx;
+	line-height: 28rpx;
+	color: #333333;
+  text-align: center;
+}
+.middle_menu .menu_item .icocss{
+  width: 200rpx;
+  height: 130rpx;
+}

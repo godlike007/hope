@@ -1,0 +1,34 @@
+<view class="page_body">
+  <view class="userinfo">
+    <view class="userinfo-avatar">
+      <open-data  type="userAvatarUrl"></open-data>
+    </view>
+    <open-data type="userNickName"></open-data>
+  </view>
+  <view class='herder-title'>
+    <view><text class="my_order_txt">我的订单</text>
+    <navigator class="nav-all-orde" url="/pages/usercenter/myorder">
+      <view class="all-order">全部订单 <image style="width:12rpx;height:23rpx;" src="{{youjianICON}}"></image></view>
+    </navigator>
+    </view>
+    
+    <view class='middle_menu block'>
+      <navigator url="/pages/usercenter/myorder?orderStatus=1"><view class="menu_item daifukuan">待付款</view></navigator>
+      <navigator url="/pages/usercenter/myorder?orderStatus=2"><view class="menu_item daifahuo">待发货</view></navigator>
+      <navigator url="/pages/usercenter/myorder?orderStatus=3"><view class="menu_item daishouhuo">待收货</view></navigator>
+      <navigator url="/pages/usercenter/myorder?orderStatus=4"><view class="menu_item yiwancheng">已完成</view></navigator>
+  </view>
+
+  </view>
+
+  <view class="baoxiu-content" bindtap="getUserAddress">
+    收货地址<view class="all-order"> <image style="width:12rpx;height:23rpx;" src="{{youjianICON}}"></image></view>
+   </view>
+
+    <navigator url="/pages/usercenter/aboutOur">
+      <view class="baoxiu-content">
+        设置<view class="all-order"> <image style="width:12rpx;height:23rpx;" src="{{youjianICON}}"></image></view>
+      </view>
+    </navigator>
+   <view></view>
+</view>

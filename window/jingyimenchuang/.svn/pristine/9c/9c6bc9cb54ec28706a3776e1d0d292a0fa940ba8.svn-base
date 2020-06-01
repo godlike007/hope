@@ -1,0 +1,10 @@
+<view>
+  <view class='herder-title'>工程案例</view>
+  <view wx:for="{{imgaList}}" wx:for-item="image" class="previewimg">
+    <!-- <view class='bottom_line'></view> -->
+		<view class="product_list_block">
+      <image src="{{image}}" data-src="{{image}}" bindtap="previewImage" class='commomn_image'></image>
+    </view>
+	</view>
+  <button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button>
+</view>

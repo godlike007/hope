@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>问卷小精灵</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<script src="jquery.min.js"></script>
+
+	<link rel="stylesheet" href="./element/element.css">
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="./element/element.js"></script>
+	<script type="text/javascript" src="request.js"></script>
+	<!-- import CSS -->
+	<!-- import JavaScript -->
+	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+
+	<style>
+		body {
+			margin: 0px;
+		}
+
+		.header {
+			text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 20px;
+    font-weight: bold;
+		}
+
+		.content {
+			padding: 2%;
+		}
+
+		.item {
+			padding: 3%;
+			border: 1px solid #adadad;
+			border-radius: 10px;
+			margin-bottom: 3%;
+		}
+
+		#survey {}
+
+		.done {
+			position: fixed;
+			bottom: 0px;
+			height: 3rem;
+			background-color: #409eff;
+			width: 100%;
+			line-height: 3rem;
+			text-align: center;
+			color: #fff;
+		}
+
+		.el-message-box {
+    width: 15rem;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	<div id="survey">
+		<div class="header">
+			汽车导购问卷调查
+
+		</div>
+
+		<div class="content">
+
+			<div v-for="(item, index) in item_list" class="item">
+
+		
+					<template v-if="item.type==1">
+						<div>{{index+1}}. {{item.title}}</div>
+
+						<el-checkbox-group v-model="item.checkbox.value" @change="test">
+							<el-checkbox v-for="(item1, index1) in item.checkbox.list" :label="item1.label">
+								{{item1.label}}</el-checkbox>
+						</el-checkbox-group>
+
+
+					</template>
+
+					<template v-if="item.type==2">
+						<div>{{index+1}}. {{item.title}}</div>
+						<el-radio-group v-model="item.radio.value">
+							<el-radio v-for="(item1, index1) in item.radio.list" :label="item1.label">
+								{{item1.label}}</el-radio>
+						</el-radio-group>
+					</template>
+
+					<template v-if="item.type==3">
+						<div>{{index+1}}. {{item.title}}</div>
+					</template>
+
+
+
+
+			</div>
+
+
+		</div>
+
+		<div v-if="!is_preview" class="done" @click="done">
+			提交
+		</div>
+	</div>
+
+
+</body>
+
+
+</html>
+<script>
+
+
+	survey = new Vue({
+		el: "#survey",
+		data() {
+			return {
+				map_unit_list: [],
+				item_list: [{
+					title: 'bba选什么好',
+					type: '1',
+					checkbox: {
+						value: [],
+						list: [{
+							label:'奔驰'
+						},{
+							label:'宝马'
+						},{
+							label:'奥迪'
+						}],
+						label: ''
+					},
+					radio: {
+						value: '',
+						list: [],
+						label: ''
+					},
+					completion: {
+						value: '',
+						list: [],
+					}
+				}],
+				is_preview: false
+				//cur_time:(new Date()).toLocaleString()
+			};
+		},
+
+		computed: {
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
+			}
+		},
+		mounted: function () {
+			this.init();
+			this.$nextTick(function () {
+
+			})
+		},
+
+		methods: {
+			init() {
+				var that = this;
+				for (i = 0; i < 100; i++) {
+					that.map_unit_list.push({
+						index: i
+					})
+				}
+			},
+			add_new() {
+				this.item_list.push({
+					title: '',
+					type: '1',
+					checkbox: {
+						value: [],
+						list: [],
+						label: ''
+					},
+					radio: {
+						value: '',
+						list: [],
+						label: ''
+					},
+					completion: {
+						value: '',
+						list: [],
+					}
+				})
+
+			},
+			add_new_checkbox(item) {
+				item.checkbox.list.push({
+					label: '选项',
+				});
+				//this.$forceUpdate();
+
+			},
+			del_checkbox(item, index) {
+				item.splice(index, 1);
+
+			},
+			add_new_radio(item) {
+				item.radio.list.push({
+					label: '选项',
+				})
+
+			},
+			del_radio(item, index) {
+				item.splice(index, 1);
+
+			},
+			render_checkbox_option(item, index) {
+
+
+			},
+			done(item, index) {
+				this.$confirm('确认提交吗?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+				}).then(() => {
+					
+					
+				}).catch(() => {
+					
+					
+				});
+
+			},
+			test(e) {
+				debugger;
+
+			},
+
+
+			toggel_section(item) {
+				this.cur_section = item.name;
+				this.setting_list = this.setting_data[item.name];
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			add_code(item) {
+				this.code += $.trim($("#" + item.id).html().replace(/\#/, this.handler_value_name)) + "\n";
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			del_item(item, index) {
+				item.splice(index, 1);
+
+			},
+
+
+			toggel_hot_use(item) {
+				debugger;
+
+				this.hot_use_list = item.hot.split(",");
+
+			},
+			assign_value(item) {
+				this.handler_value_name = item;
+
+
+			},
+		}
+	});
+
+
+
+</script>

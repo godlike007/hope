@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>问卷小精灵</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<script src="jquery.min.js"></script>
+
+	<link rel="stylesheet" href="./element/element.css">
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="./element/element.js"></script>
+	<script type="text/javascript" src="request.js"></script>
+	<!-- import CSS -->
+	<!-- import JavaScript -->
+	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+
+	<style>
+		body {
+			margin: 0px;
+		}
+
+		.header {
+			text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 20px;
+    font-weight: bold;
+
+		}
+
+		.content {
+			padding: 2%;
+		}
+
+		.item {
+			padding: 3%;
+			border: 1px solid #adadad;
+			border-radius: 10px;
+			margin-bottom: 3%;
+		}
+
+		#survey {
+			padding-bottom: 5rem;
+		}
+
+		.create {
+			position: fixed;
+			bottom: 0px;
+			height: 3rem;
+			background-color: #409eff;
+			width: 100%;
+			line-height: 3rem;
+			text-align: center;
+			color: #fff;
+		}
+
+		.el-message-box {
+			width: 15rem;
+		}
+
+		.back {
+			position: fixed;
+			bottom: 10%;
+			right: 6%;
+			background-color: #000;
+			opacity: .5;
+			width: 4rem;
+			height: 4rem;
+			border-radius: 2rem;
+			color: #fff;
+			line-height: 4rem;
+			text-align: center;
+		}
+		.mode{
+			text-align: center;
+			height: 3rem;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="survey">
+		<div class="header">
+			汽车导购问卷调查
+
+		</div>
+
+		<div class="content">
+			<div class="mode">
+				<el-switch v-model="is_preview" active-text="预览" inactive-text="编辑">
+				</el-switch>
+			</div>
+			<div v-for="(item, index) in item_list" class="item">
+
+				<template v-if="is_preview">
+					<template v-if="item.type==1">
+						<div>{{index+1}}. {{item.title}}</div>
+
+						<el-checkbox-group v-model="item.checkbox.value" @change="test">
+							<el-checkbox v-for="(item1, index1) in item.checkbox.list" :label="item1.label">
+								{{item1.label}}</el-checkbox>
+						</el-checkbox-group>
+
+
+					</template>
+
+					<template v-if="item.type==2">
+						<div>{{index+1}}. {{item.title}}</div>
+						<el-radio-group v-model="item.radio.value">
+							<el-radio v-for="(item1, index1) in item.radio.list" :label="item1.label">
+								{{item1.label}}</el-radio>
+						</el-radio-group>
+					</template>
+
+					<template v-if="item.type==3">
+						<div>{{index+1}}. {{item.title}}</div>
+					</template>
+
+
+				</template>
+
+				<template v-else>
+					<el-row>
+						<el-col :span="24">
+							<el-radio-group v-model="item.type">
+								<el-radio label="1">多选</el-radio>
+								<el-radio label="2">单选</el-radio>
+								<el-radio label="3">填空</el-radio>
+							</el-radio-group>
+						</el-col>
+					</el-row>
+					<el-row>
+						<el-col :span="24">&nbsp;</el-col>
+					</el-row>
+					<template v-if="item.type==1">
+						<el-row>
+							<el-col :span="2">{{index+1}}.</el-col>
+							<el-col :span="22">
+
+								<el-input size="mini" v-model="item.title" placeholder="请输入内容"></el-input>
+							</el-col>
+						</el-row>
+
+						<template v-for="(item1, index1) in item.checkbox.list">
+
+							<el-row>
+								<el-col :span="2">&nbsp;</el-col>
+								<el-col :span="18">
+									<el-input @input="render_checkbox_option" size="mini" v-model="item1.label"
+										placeholder="请输入内容"></el-input>
+								</el-col>
+								<el-col :span="4">
+									<el-button size="mini" type="danger" icon="el-icon-delete"
+										@click="del_checkbox(item.checkbox.list,index1)" circle>
+									</el-button>
+
+								</el-col>
+							</el-row>
+
+
+
+						</template>
+
+
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="add_new_checkbox(item,index)"
+							circle>
+						</el-button>
+
+					</template>
+
+					<template v-if="item.type==2">
+
+						<el-row>
+							<el-col :span="2">{{index+1}}.</el-col>
+							<el-col :span="22">
+
+								<el-input size="mini" v-model="item.title" placeholder="请输入内容"></el-input>
+							</el-col>
+						</el-row>
+
+
+						<template v-for="(item1, index1) in item.radio.list">
+							<el-row>
+								<el-col :span="2">&nbsp;</el-col>
+								<el-col :span="18">
+									<el-input size="mini" v-model="item1.label" placeholder="请输入内容"></el-input>
+								</el-col>
+								<el-col :span="4">
+									<el-button size="mini" type="danger" icon="el-icon-delete"
+										@click="del_radio(item1,index1)" circle>
+									</el-button>
+
+								</el-col>
+							</el-row>
+
+
+						</template>
+
+						<el-button size="mini" type="primary" icon="el-icon-plus" @click="add_new_radio(item,index)"
+							circle>
+						</el-button>
+					</template>
+
+					<template v-if="item.type==3">
+
+						<el-row>
+							<el-col :span="2">{{index+1}}.</el-col>
+							<el-col :span="22">
+
+								<el-input size="mini" v-model="item.title" placeholder="请输入内容"></el-input>
+							</el-col>
+						</el-row>
+
+					</template>
+					<el-row type="flex" justify="center">
+						<el-col :span="12">
+
+							<el-button size="mini" type="danger" @click="del_item(item_list,index)"
+								icon="el-icon-delete">
+								删除该项
+							</el-button>
+						</el-col>
+					</el-row>
+
+
+				</template>
+
+			</div>
+
+
+			<el-button v-if="!is_preview" type="primary" @click="add_new">新增问题</el-button>
+		</div>
+
+		<div class="back" @click="back">
+			返回
+		</div>
+
+		<div v-if="!is_preview" class="create" @click="create">
+			生成问卷
+		</div>
+	</div>
+
+
+</body>
+
+
+</html>
+<script>
+
+
+	survey = new Vue({
+		el: "#survey",
+		data() {
+			return {
+				map_unit_list: [],
+				item_list: [{
+					title: 'bba选什么好',
+					type: '1',
+					checkbox: {
+						value: [],
+						list: [{
+							label:'奔驰'
+						},{
+							label:'宝马'
+						},{
+							label:'奥迪'
+						}],
+						label: ''
+					},
+					radio: {
+						value: '',
+						list: [],
+						label: ''
+					},
+					completion: {
+						value: '',
+						list: [],
+					}
+				}],
+				is_preview: false
+				//cur_time:(new Date()).toLocaleString()
+			};
+		},
+
+		computed: {
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
+			}
+		},
+		mounted: function () {
+			this.init();
+			this.$nextTick(function () {
+
+			})
+		},
+
+		methods: {
+			init() {
+				var that = this;
+				for (i = 0; i < 100; i++) {
+					that.map_unit_list.push({
+						index: i
+					})
+				}
+			},
+			add_new() {
+				this.item_list.push({
+					title: '',
+					type: '1',
+					checkbox: {
+						value: [],
+						list: [],
+						label: ''
+					},
+					radio: {
+						value: '',
+						list: [],
+						label: ''
+					},
+					completion: {
+						value: '',
+						list: [],
+					}
+				})
+
+			},
+			add_new_checkbox(item) {
+				item.checkbox.list.push({
+					label: '选项',
+				});
+				//this.$forceUpdate();
+
+			},
+			del_checkbox(item, index) {
+				item.splice(index, 1);
+
+			},
+			add_new_radio(item) {
+				item.radio.list.push({
+					label: '选项',
+				})
+
+			},
+			del_radio(item, index) {
+				item.splice(index, 1);
+
+			},
+			render_checkbox_option(item, index) {
+
+
+			},
+			create(item, index) {
+				this.$confirm('确认生成该试卷吗?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+				}).then(() => {
+
+
+				}).catch(() => {
+
+
+				});
+
+			},
+			back(item, index) {
+				location.href = 'onlineSurvey_list.html';
+
+			},
+			test(e) {
+				debugger;
+
+			},
+
+
+			toggel_section(item) {
+				this.cur_section = item.name;
+				this.setting_list = this.setting_data[item.name];
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			add_code(item) {
+				this.code += $.trim($("#" + item.id).html().replace(/\#/, this.handler_value_name)) + "\n";
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			del_item(item, index) {
+				item.splice(index, 1);
+
+			},
+
+
+			toggel_hot_use(item) {
+				debugger;
+
+				this.hot_use_list = item.hot.split(",");
+
+			},
+			assign_value(item) {
+				this.handler_value_name = item;
+
+
+			},
+		}
+	});
+
+
+
+</script>

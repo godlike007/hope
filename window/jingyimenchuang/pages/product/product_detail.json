@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "贤人做窗",
+  "usingComponents": {
+    "bjModal": "/component/bjModal/bjModal"
+  }
+}

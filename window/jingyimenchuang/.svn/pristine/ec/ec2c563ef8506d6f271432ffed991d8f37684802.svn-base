@@ -1,0 +1,8 @@
+<view>
+  <view class='herder-title'>APP智能控制灯</view>
+  <view wx:for="{{imgaList}}" wx:for-item="image" class="previewimg">
+    <view class='bottom_line'>{{image.title}}</view>
+		<image src="{{image.url}}" data-src="{{image.url}}" bindtap="previewImage" class='taocan-pic'></image>
+	</view>
+  <button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button>
+</view>

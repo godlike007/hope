@@ -1,0 +1,379 @@
+
+<view class="firstFloor">
+  <swiper
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    circular="{{circular}}"
+    style='width:690rpx;height:360rpx;margin: 0 auto;'
+  >
+    <block wx:for="{{bannerList}}" wx:key="item">
+      <swiper-item>
+        <navigator url="{{item.path}}" open-type="{{item.openType}}">
+          <image src="{{item.image}}" class="slide-image" data-src="{{item.image}}" style='width:100%;height:360rpx;border-radius: 40rpx;' />
+        </navigator>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view>
+  </view>
+</view>
+
+<view class='body-content'> 
+  <view class='middle_menu block'>
+      <navigator url="/pages/pingroup/index"><view class="menu_item pintuan">拼团</view></navigator>
+      <navigator url="/pages/taocan/xitongchuang/index" open-type="switchTab"><view class="menu_item menchuang">门窗</view></navigator>
+      <navigator url="/pages/taocan/linyufang/oto_linedown"><view class="menu_item linyufang">淋浴房</view></navigator>
+      <navigator url="/pages/taocan/yimen/index"><view class="menu_item yimen">移门</view></navigator>
+      <navigator url="/pages/baoxiu/baoxiu_create"><view class="menu_item baoxiu">报修</view></navigator>
+  </view>
+
+  <view class='product_list'>
+    <view class="product_list_block">
+        <view class='group-title-left'>
+            推荐品牌
+        </view>
+
+        <view class="brand-block-flow">
+          <view class="brand-block">
+            
+            <view class = "door-brand">
+              <image class='p_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/2fb528eb2b264a17ac54bbd5c779cc29.jpg'   data-src=""></image>
+              <view class="brand-name-desc">
+                好门窗
+              </view>
+            </view>
+            
+            <view class = "door-brand">
+              <image class='p_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/a7b7b9e0219e4579a2e7031f33bbabd2.jpg'   data-src=""></image>
+              <view class="brand-name-desc">
+                凤铝铝材
+              </view>
+            </view>
+
+            <view class = "door-brand">
+              <image class='p_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/28/25010cb0c6a5416798a204253ff9feec.jpg?x-oss-process=image/resize,w_350/auto-orient,1/quality,q_95/format,jpg'   data-src=""></image>
+              <view class="brand-name-desc">
+                日本 YKK
+              </view>
+            </view>
+
+            <view class = "door-brand">
+              <image class='p_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/0b8a7ec714b047e1a569d930587c5fcd.jpg?x-oss-process=image/resize,w_380/auto-orient,1/quality,q_95/format,jpg'   data-src=""></image>
+              <view class="brand-name-desc">
+                德国旭格
+              </view>
+            </view>
+
+          </view>
+        </view>
+        
+    </view>
+    <!--
+    <view class="product_list_block">
+        <view class='group-title-left bottom_line'>精选门窗
+          <view class='more-show'>
+          </view>
+        </view>
+
+        <view>
+          <navigator url="/pages/taocan/xitongchuang/index"  open-type="switchTab">
+            <image class='commomn_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/c20dc12945734f298949fa3f5926be3d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/c20dc12945734f298949fa3f5926be3d.jpg"></image>
+          </navigator>
+        </view>
+        
+        <view>
+          <navigator url="/pages/taocan/xitongchuang/index"  open-type="switchTab">
+            <image class='commomn_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/ae6c7f8ae27a4b1990a47ff2fa194f35.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/ae6c7f8ae27a4b1990a47ff2fa194f35.jpg"></image>
+          </navigator>
+        </view>
+
+    </view>
+       -->
+  </view>
+    <!--
+<view class="product_list_block">
+        <view class='group-title-left bottom_line'>精选移门
+          <view class='more-show'>
+          </view>
+        </view>
+
+        <view>
+          <navigator url="/pages/taocan/yimen/index" >
+            <image class='commomn_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/35a073975e214a14a589ae183936f25f.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/35a073975e214a14a589ae183936f25f.jpg?x-oss-process=image/resize,w_350/auto-orient,1/quality,q_95/format,jpg"></image>
+          </navigator>
+        </view>
+
+        <view>
+          <navigator url="/pages/taocan/yimen/index">
+            <image class='commomn_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/6dd97bbc53a64fa88d1a3bff6bd4a236.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/6dd97bbc53a64fa88d1a3bff6bd4a236.jpg?x-oss-process=image/resize,w_350/auto-orient,1/quality,q_95/format,jpg"></image>
+          </navigator>
+        </view>
+
+        <view>
+          <navigator url="/pages/taocan/yimen/index">
+            <image class='commomn_image' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/cf4fcb72e7d1492fbb4bce492bc530c7.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/cf4fcb72e7d1492fbb4bce492bc530c7.jpg"></image>
+          </navigator>
+        </view>
+
+</view>
+     
+  <view class="product_types">
+      <view class='group-title-left'>精选纱窗
+        <view class='more-show'>
+        </view>
+      </view>
+  </view>
+
+  <view class="product_list_block shachuang_floor">
+      <view>
+          
+          <view class="shachuang_block">
+            <view class="shachuang-title">F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+                <navigator url="/pages/taocan/shachuang/index">
+                  <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+                </navigator>
+          </view>
+
+          <view  class="shachuang_block" style="margin-left: 23rpx;">
+            <view class="shachuang-title">无闪缝框中框</view>
+            <view class="shachuang-gongneng">内开窗/推拉窗</view>
+                <navigator url="/pages/taocan/shachuang/index">
+                  <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+                </navigator>
+            </view>
+          </view>
+      
+  </view>
+-->
+
+<view class="swiper-tab">
+  <view class="swiper-tab-item {{currentTab==0?'active':''}}" data-current="0" bindtap='clickTab'>精选门窗</view>
+  <view class="swiper-tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap='clickTab'>优质移门</view>
+  <view class="swiper-tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap='clickTab'>品牌纱窗</view>
+</view>
+
+<view class="product_list_block shachuang_floor">
+<swiper class="swiper" current="{{curentTab}}" duration="300" bindchange="swiperTab">
+  <!--精选门窗 -->
+  <swiper-item style="display:{{currentTab != 0 ? 'none' : 'block'}}">
+    <view>
+        <view class="shachuang_block">
+            <navigator url="/pages/taocan/shachuang/index">
+              <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+            </navigator>
+            <view class="shachuang-title">0F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+            <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view  class="shachuang_block" style="margin-left: 23rpx;">
+          <navigator url="/pages/taocan/shachuang/index">
+            <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+          </navigator>
+          <view class="shachuang-title">无闪缝框中框</view>
+          <view class="shachuang-gongneng">内开窗/推拉窗</view>
+          <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+    </view>
+
+    <view>
+        <view class="shachuang_block">
+            <navigator url="/pages/taocan/shachuang/index">
+              <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+            </navigator>
+            <view class="shachuang-title">0F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+            <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view  class="shachuang_block" style="margin-left: 23rpx;">
+          <navigator url="/pages/taocan/shachuang/index">
+            <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+          </navigator>
+          <view class="shachuang-title">无闪缝框中框</view>
+          <view class="shachuang-gongneng">内开窗/推拉窗</view>
+          <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+    </view>
+  </swiper-item>
+
+  <!--优质移门 -->
+  <swiper-item style="display:{{currentTab != 1 ? 'none' : 'block'}}">
+    <view>
+        <view class="shachuang_block">
+            <navigator url="/pages/taocan/shachuang/index">
+              <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+            </navigator>
+            <view class="shachuang-title">1F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+            <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view  class="shachuang_block" style="margin-left: 23rpx;">
+          <navigator url="/pages/taocan/shachuang/index">
+            <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+          </navigator>
+          <view class="shachuang-title">无闪缝框中框</view>
+          <view class="shachuang-gongneng">内开窗/推拉窗</view>
+          <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+    </view>
+
+    <view>
+        <view class="shachuang_block">
+            <navigator url="/pages/taocan/shachuang/index">
+              <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+            </navigator>
+            <view class="shachuang-title">F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+            <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view  class="shachuang_block" style="margin-left: 23rpx;">
+          <navigator url="/pages/taocan/shachuang/index">
+            <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+          </navigator>
+          <view class="shachuang-title">无闪缝框中框</view>
+          <view class="shachuang-gongneng">内开窗/推拉窗</view>
+          <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+    </view>
+  </swiper-item>
+
+  <!--品牌纱窗 -->
+  <swiper-item style="display:{{currentTab != 2 ? 'none' : 'block'}}">
+    <view>
+        <view class="shachuang_block">
+            <navigator url="/pages/taocan/shachuang/index">
+              <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+            </navigator>
+            <view class="shachuang-title">2F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+            <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view  class="shachuang_block" style="margin-left: 23rpx;">
+          <navigator url="/pages/taocan/shachuang/index">
+            <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+          </navigator>
+          <view class="shachuang-title">无闪缝框中框</view>
+          <view class="shachuang-gongneng">内开窗/推拉窗</view>
+          <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+    </view>
+
+    <view>
+        <view class="shachuang_block">
+            <navigator url="/pages/taocan/shachuang/index">
+              <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/b5197bc757104d338b7e9b25497f100d.jpg"></image>
+            </navigator>
+            <view class="shachuang-title">F款防撬框中框</view>
+            <view class="shachuang-gongneng">防护/防盗/防蚊</view>
+            <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view  class="shachuang_block" style="margin-left: 23rpx;">
+          <navigator url="/pages/taocan/shachuang/index">
+            <image class='commomn_image shachuang_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/f651126fccb84744a514394f4b251137.jpg"></image>
+          </navigator>
+          <view class="shachuang-title">无闪缝框中框</view>
+          <view class="shachuang-gongneng">内开窗/推拉窗</view>
+          <view class="product-price">￥960<view class="product-price-danwei">元/平米</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/pingroup/activity_detail?activityId={{order.id}}">
+                <button class="product-buy-btn">立即抢购</button>
+              </navigator>
+            </view>
+        </view>
+    </view>
+  </swiper-item>
+
+</swiper>
+</view>
+
+
+ <view class="product_list_block">
+      <view class='group-title-left' style="line-height:90rpx;">成功案例
+        <view class='more-show'>
+        </view>
+      </view>
+
+      <view>
+        <view class="project_case">
+            <navigator url="/pages/case/index">
+              <image class='commomn_image project_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/a7fac567e402492a91744236ce30d0a9.jpg?x-oss-process=image/resize,w_450/auto-orient,1/quality,q_100/format,jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/a7fac567e402492a91744236ce30d0a9.jpg?x-oss-process=image/resize,w_450/auto-orient,1/quality,q_100/format,jpg"></image>
+            </navigator>
+        </view>
+
+        <view class="project_case" style="margin-left: 10rpx;">
+            <navigator url="/pages/case/index">
+              <image class='commomn_image project_img' src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/951db99e862644a2abed1917162efbae.jpg?x-oss-process=image/resize,w_450/auto-orient,1/quality,q_100/format,jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/31/951db99e862644a2abed1917162efbae.jpg?x-oss-process=image/resize,w_450/auto-orient,1/quality,q_100/format,jpg"></image>
+            </navigator>
+        </view>
+
+      </view>
+  </view>
+
+  <view class="hot-telephone"> 
+        <image class="tuijian" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAkCAYAAACXOioTAAAB8UlEQVRIia3WT4hNYRzG8c8dijSDNDZIzc7KwsJOoZCRhX8bCiUrJoxZsLDRJIoyRdnQLCg2ikkpO5PFoJTF1EiRREnyp/yZNNfivUfT7b7nvvec82xOp+c5ffu973t+76+24sWYWVqJU9iORRjFEKaV1NzGswsDGEb3LH8AC3GwLKirARvD5SZIpgPYXAVoL/rb5E5XAdqVkFuPVWVBaxKzO8qCliRmV5cFzSRm/5YF/UjI1XGrLOhtm8wfHMbDsqBXOf6EcFiul4FkoOc5/k5MloVkoPEc/3sVkAz0Eh8ifuo/lgSq417ET+kaySC4E/H3a91oC4PG8bqFvxhHqgTN4FokcxI9VYEI/0qrLrFUuHUrA33F1UhuEH1VgeCS1lXNx5UqQZ9xIZLtF27jSkCEqt5F8iNYVhXoN45G8r24jTlVgAhT0c2Itw7nI948LO8EBMfwKeIN4RxqjfceXBT2+D2mhIHmv2pNk2qztuCB+FI9xWPhkDTv3TT24H4KCM7gbLtQRD+Fyp7lLV2mYfHu3k4LhIbdnQKqC0vzpCCsD4MpIMISbBMuySLalwqCb9igWGW9nYDgCzbhboffPeoUBL+wG8eFma+dpnCiCIhwQEaE4SVvsLyBtfhYFJRpEluFtjSKN0KvnMBGHNIY2f4B25hcPKuwdi8AAAAASUVORK5CYII=" bindtap="callPhone" style="margin-right: 15rpx;"></image>
+        客服热线：400-9628-520
+      </view>
+</view>

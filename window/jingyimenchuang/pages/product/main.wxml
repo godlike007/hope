@@ -1,0 +1,18 @@
+<view class="body">
+  <view class='herder-title'>产品</view>
+  <view wx:for="{{imgaList}}" wx:for-item="image" class="previewimg">
+    <navigator url="/pages/product/class?type={{image.target}}">
+      <view class="product_list_block">
+        <view class="product_module">
+          <image src="{{image.url}}" data-src="{{image.url}}" class='commomn_image'></image>
+        </view>
+      </view>
+
+      <view class="title_btn">
+        <view class='bottom_line'>{{image.title}}</view>
+        <button class="goto">点击进入</button>
+      </view>
+    </navigator>
+	</view>
+
+</view>

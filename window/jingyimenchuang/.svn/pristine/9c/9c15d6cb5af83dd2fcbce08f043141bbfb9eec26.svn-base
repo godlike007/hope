@@ -1,0 +1,130 @@
+/* pages/pingroup/activity_detail.wxss */
+.body{
+  font-size: 28rpx;
+  /*background-color: #dcdcdc;*/
+}
+.header_pic{
+  width: 100%;
+  height: 460rpx;
+}
+.header-title{
+  background-color: #E0433E;
+  line-height: 47rpx;
+  font-size: 28rpx;
+  color: #fff;
+  padding-left: 15rpx;
+  margin-top: -15rpx;
+}
+.market-price{
+  width:50%;
+}
+.special-remark{
+  width: 50%;
+  color: #000;
+  font-size: 23rpx;
+  float: right;
+  text-align: right;
+  padding-right: 32rpx;
+}
+.old-price{
+  font-size: 23rpx;
+  color: #cccccc;
+}
+.huaxian{text-decoration:line-through}
+.remark{
+  background-color: #FFEEF0;
+  /*line-height: 63rpx;*/
+  font-size: 23rpx;
+  color: rgb(241, 16, 16);
+  padding-right: 10rpx;
+  margin: 0 2%;
+  margin-top: 15rpx;
+  border-radius: 3px;
+  align-items: center;/* css3 定义body的元素垂直居中*/
+  /*justify-content: center; */ /* css3 定义body的里的元素水平居中*/
+  display: flex;
+}
+.zongji{
+  line-height: 63rpx;
+  margin-top: 14rpx;
+  background-color: #ffffff;
+  padding-left: 15rpx;
+}
+.zongji.canyu{
+  display: inline-block;
+}
+.history-table-wrap{
+ background-color: #ffffff;
+ position: relative;
+ width: 100%;
+ height: 150rpx;
+ overflow-y: scroll;
+ overflow-x: hidden;
+}
+/* 表格代码  */
+.table{
+ /* border:1px solid #dadada;*/
+ border-right:0;
+ border-bottom: 0;
+ /*width: 98%;
+ margin-left: 1%;*/
+}
+.tr{
+ width:100%;
+ display: flex;
+ justify-content: space-between;
+}
+.th,.td{
+ padding: 10px;
+ /*border-bottom: 1px solid #dadada;
+ border-right: 1px solid #dadada;*/
+ text-align: center;
+ width: 100%;
+ align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.th1,.th3,.td1,.td3{
+ width: 30%;
+}
+.th1,.td5{
+ width: 100%;
+}
+.th{
+ font-weight: 800;
+ background-color: #b66242;
+ font-size: 28rpx;
+ color: #330e0e;
+}
+.td{
+ font-size: 20rpx;
+}
+.goGroupBtn{
+  background-position: 0rpx 0rpx;
+  background-repeat: no-repeat;
+  background-image: url("https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/12/12/ef68423658b84d689ba5c0f2f6aa4553.jpg");
+  height: 55rpx;
+  width: 130rpx;
+  line-height: 2.0;
+  color: #ffffff;
+  font-size: 24rpx;
+}
+.tuijian{
+  width:52rpx;
+  height:57rpx;
+}
+.hot-telephone{
+  padding-left: 15rpx;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.padding-L-common{
+  padding-left: 15rpx;
+}
+.dividing_line{
+  display: inline-block;
+  line-height: 8rpx;
+  background-color: #f2f2f2;
+  width: 100%
+}
