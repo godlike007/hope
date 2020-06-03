@@ -1,0 +1,166 @@
+<view class="firstFloor">
+  <swiper
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    circular="{{circular}}"
+    style='width:100%;height:220px;'
+  >
+    <block wx:for="{{imgUrls}}" wx:key="item">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" data-src="{{item}}" bindtap="previewImage" style='width:100%;' />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view>
+  </view>
+</view>
+
+<view class='middle_menu'> 
+    <view class='menu_item'>
+      <image src='/images/hao_logopng.png' class="icocss"/>
+      <view class='more-show'>
+          <navigator url="/pages/haomenchuang/index">
+          <font class="more-jiantou">好门窗</font>
+          </navigator>
+        </view>
+    </view>
+    <view class='menu_item'>
+      <image src='/images/hao_logopng.png' class="icocss" />
+      建材
+    </view>
+    <view class='menu_item'>
+      <image src='/images/fangwu1.png' class="icocss"/>
+      家居
+    </view>
+    <view class='menu_item'>
+      <image src='/images/life.png' class="icocss"/>
+      生活
+    </view>
+</view>
+
+<view class="floor">
+  <view class="view">
+      <view class="bjtitle">咨询客服</view>
+      <view>
+      <!--
+        <picker bindchange="bindPickerChangeRoom" value="{{index}}" range="{{rooArray}}" class='room-picker picker-right-border'>
+            <view class="picker">{{rooArray[roomNum]}}室</view>
+        </picker>
+        <picker bindchange="bindPickerChangeTing" value="{{index}}" range="{{rooArray}}" class='room-picker'>
+            <view class="picker">{{rooArray[tingNum]}}厅</view>
+        </picker>
+         -->
+      <input type='text' class="phoneTxt" value="{{comminutyName}}" placeholder="请输入小区名称" bindinput="bindComminutyNameInput" maxlength='30'></input>
+      </view>
+      <view>
+        <input type='number' class="phoneTxt" value="{{phone}}" placeholder="请输入手机号" bindinput="bindReplaceInput" maxlength='11'></input>
+      </view>
+  </view>
+  <view class="view">
+    <!-- <button type="warn" class="submitBtn" id="submitBtn" bindtap="submitFrom" formType="reset" open-type="getPhoneNumber" lang="zh_CN" bindgetphonenumber="getPhoneNumber" >获取报价</button> -->
+
+    <button type="warn" class="submitBtn" id="submitBtn" formType="reset" bindtap="submitFrom">获取报价</button>
+   <button class="submitBtn" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号</button>
+  </view>
+</view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>系统窗
+        <view class='more-show'>
+          <navigator url="/pages/taocan/xitongchuang/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+  </view>
+</view>
+
+  <view class='floor'>
+    <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/16/196036eb31ef4a7bb9fc61026b1cd11b.jpg' style='width:100%' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/16/196036eb31ef4a7bb9fc61026b1cd11b.jpg" bindtap="previewSingleImage"></image>
+  <!-- <button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button> -->
+  </view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>纱窗
+        <view class='more-show'>
+          <navigator url="/pages/taocan/shachuang/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+  </view>
+</view>
+
+  <view class='floor'>
+    <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/7521bc9169d54e43804288e8de7e5505.jpg' style='width:100%' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/7521bc9169d54e43804288e8de7e5505.jpg" bindtap="previewSingleImage"></image>
+  </view>
+
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>移窗
+        <view class='more-show'>
+          <navigator url="/pages/taocan/yichuang/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+      <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/0d7c8a309c2d496fa03f14da25d4b457.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/0d7c8a309c2d496fa03f14da25d4b457.jpg" bindtap="previewSingleImage" style='width:100%'></image>
+  </view>
+  
+</view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>移门
+        <view class='more-show'>
+          <navigator url="/pages/taocan/yimen/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+      <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/d7cd7ec2aff642a7af4efa7ace811810.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/d7cd7ec2aff642a7af4efa7ace811810.jpg" bindtap="previewSingleImage" style='width:100%'></image>
+  </view>
+</view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>淋浴房
+        <view class='more-show'>
+          <navigator url="/pages/taocan/linyufang/oto_linedown">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+  </view>
+</view>
+
+  <view class='floor'>
+    <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/4d2f880f77824ff8af7dbdb790ba4b25.jpg' style='width:100%' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/4d2f880f77824ff8af7dbdb790ba4b25.jpg" bindtap="previewSingleImage"></image>
+  </view>
+
+
+<!--
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>射灯
+        <view class='more-show'>
+          <navigator url="/pages/shedeng/shedeng">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+      <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/01/17/2bc32c451b694d4fb1bfe0f47c3205e0.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/01/17/2bc32c451b694d4fb1bfe0f47c3205e0.jpg" bindtap="previewSingleImage" style='width:100%'></image>
+  </view>
+</view>
+ -->
+<button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button>
+<view class='floor'>
+  地址：苏州吴江好得家4楼璟艺门窗
+  <view style='padding:5px 0;'>   </view>
+</view>
+

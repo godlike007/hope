@@ -1,0 +1,99 @@
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>系统窗
+        <view class='more-show'>
+          <navigator url="/pages/taocan/xitongchuang/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+  </view>
+</view>
+
+  <view class='floor'>
+    <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/16/196036eb31ef4a7bb9fc61026b1cd11b.jpg' style='width:100%' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/16/196036eb31ef4a7bb9fc61026b1cd11b.jpg" bindtap="previewSingleImage"></image>
+  <!-- <button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button> -->
+  </view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>纱窗
+        <view class='more-show'>
+          <navigator url="/pages/taocan/shachuang/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+  </view>
+</view>
+
+  <view class='floor'>
+    <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/7521bc9169d54e43804288e8de7e5505.jpg' style='width:100%' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/7521bc9169d54e43804288e8de7e5505.jpg" bindtap="previewSingleImage"></image>
+  </view>
+
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>移窗
+        <view class='more-show'>
+          <navigator url="/pages/taocan/yichuang/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+      <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/0d7c8a309c2d496fa03f14da25d4b457.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/0d7c8a309c2d496fa03f14da25d4b457.jpg" bindtap="previewSingleImage" style='width:100%'></image>
+  </view>
+  
+</view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>移门
+        <view class='more-show'>
+          <navigator url="/pages/taocan/yimen/index">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+      <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/d7cd7ec2aff642a7af4efa7ace811810.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/d7cd7ec2aff642a7af4efa7ace811810.jpg" bindtap="previewSingleImage" style='width:100%'></image>
+  </view>
+</view>
+
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>淋浴房
+        <view class='more-show'>
+          <navigator url="/pages/taocan/linyufang/oto_linedown">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+  </view>
+</view>
+
+  <view class='floor'>
+    <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/4d2f880f77824ff8af7dbdb790ba4b25.jpg' style='width:100%' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/06/22/4d2f880f77824ff8af7dbdb790ba4b25.jpg" bindtap="previewSingleImage"></image>
+  </view>
+
+
+<!--
+<view class='floor'>
+  <view class="group-title">
+      <view class='group-title-left bottom_line'>射灯
+        <view class='more-show'>
+          <navigator url="/pages/shedeng/shedeng">
+          <font class="more-jiantou">更多></font>
+          </navigator>
+        </view>
+      </view>
+      <image src='https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/01/17/2bc32c451b694d4fb1bfe0f47c3205e0.jpg' data-src="https://jtljia.oss-cn-hangzhou.aliyuncs.com/jia-web/2019/01/17/2bc32c451b694d4fb1bfe0f47c3205e0.jpg" bindtap="previewSingleImage" style='width:100%'></image>
+  </view>
+</view>
+ -->
+<button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button>
+<view class='floor'>
+  地址：苏州吴江好得家4楼璟艺门窗
+  <view style='padding:5px 0;'>   </view>
+</view>
+

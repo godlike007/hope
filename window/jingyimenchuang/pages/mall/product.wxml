@@ -1,0 +1,7 @@
+<view>
+  <view wx:for="{{imgaList}}" wx:for-item="image" >
+    <view class='bottom_line'>全家福套餐{{index+1}}</view>
+		<image src="{{image}}" data-src="{{image}}" bindtap="previewImage" class='taocan-pic'></image>
+	</view>
+  <button type="primary" class="submitBtn" id="submitBtn" bindtap="callPhone">咨询客服</button>
+</view>

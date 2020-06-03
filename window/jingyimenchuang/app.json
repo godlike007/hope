@@ -1,0 +1,77 @@
+{
+  "pages":[
+    
+    "pages/index2/index",
+    "pages/settlement/payment",
+    "pages/settlement/user_settlement",
+    "pages/fengyangtai/index",
+    "pages/product/product_detail",
+    "pages/product/class",
+    "pages/taocan/shachuang/index",
+    "pages/settlement/order_settlement",
+    "pages/service/idea",
+
+    "pages/usercenter/myorder",
+    "pages/usercenter/wode",
+    "pages/usercenter/aboutOur",
+    "pages/baoxiu/baoxiu_create",
+    "pages/product/main",
+
+    "pages/pingroup/index",
+    "pages/reservation/yuyue",
+    "pages/user/register",
+    "pages/pingroup/activity_detail",
+    "pages/user/usercenter",
+    "pages/baoxiu/baoxiu_list",
+    
+    "pages/baoxiu/baoxiu_detail",
+    "pages/taocan/linyufang/oto_linedown",
+
+    "pages/taocan/xitongchuang/index",
+    "pages/taocan/yimen/index",
+    "pages/taocan/yichuang/index",
+    "pages/activity/zhuanpan",
+    "pages/activity/yuandan",
+    "pages/case/index",
+    "pages/test/select"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2FABEE",
+    "navigationBarTitleText": "贤人做窗",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#A0A0A0",
+    "selectedColor": "#45ADE8",
+    "list": [
+      {
+        "pagePath": "pages/index2/index",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home_hover.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/product/main",
+        "iconPath": "images/classification.png",
+        "selectedIconPath": "images/classification_hover.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/reservation/yuyue",
+        "iconPath": "images/order.png",
+        "selectedIconPath": "images/order_hover.png",
+        "text": "预约"
+      },
+      {
+        "pagePath": "pages/usercenter/wode",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine_hover.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "debug": true,
+  "sitemapLocation": "sitemap1.json"
+}

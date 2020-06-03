@@ -1,0 +1,25 @@
+const API = {
+
+  getStore: 'organize/simpleDatas',
+  // getWebCount: 'lookup/getWebCount/',
+  // getPhones: 'projectcase/phones/',
+  addReservation: 'userReservation/addReservation',
+  updateReservation: 'userReservation/updateReservation',
+  saveReservation: 'userReservation/saveReservation',
+  validateImage: 'ValidateImage.do',
+  tknValue: 'msg/tknValue/',
+  svcd: 'msg/svcd/',
+  smsgContent: 'msg/smsgcontent',
+  packagePrice: "organize/packagePrice",
+  //装修案例
+  jsonAd: 'wapAd/jsonAd',
+  queryWap: 'projectcase/querywap',
+  detail: 'projectcase/detail',
+  accreditReservation: 'userReservation/accreditReservation',
+  serverHost: 'https://user.jtljia.com/jia-web/',
+  sourceCode: 'ZMT',
+  indexSourcePage: "快速报价页",
+  hmcApiHost:"https://api.xianrenn.com/hmc-web/"
+}
+
+module.exports = API;

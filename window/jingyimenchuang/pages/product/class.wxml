@@ -1,0 +1,63 @@
+<view class="swiper-tab">
+  <view class="swiper-tab-item {{currentTab==10001?'active':''}}" data-current="10001" bindtap='clickTab'>门窗      </view>
+  <view class="swiper-tab-item {{currentTab==10002?'active':''}}" data-current="10002" bindtap='clickTab'>移门</view>
+  <view class="swiper-tab-item {{currentTab==10003?'active':''}}" data-current="10003" bindtap='clickTab'>纱窗</view>
+  <view class="swiper-tab-item {{currentTab==10004?'active':''}}" data-current="10004" bindtap='clickTab'>淋浴房</view>
+  <!-- <view class="swiper-tab-item {{currentTab==10004?'active':''}}" data-current="10004" bindtap='clickTab'>淋浴房</view>
+  <view class="swiper-tab-item {{currentTab==10004?'active':''}}" data-current="10004" bindtap='clickTab'>淋浴房</view>
+  <view class="swiper-tab-item {{currentTab==10004?'active':''}}" data-current="10004" bindtap='clickTab'>淋浴房</view>
+  <view class="swiper-tab-item {{currentTab==10004?'active':''}}" data-current="10004" bindtap='clickTab'>淋浴房</view>
+  <view class="swiper-tab-item {{currentTab==10004?'active':''}}" data-current="10004" bindtap='clickTab'>淋浴房</view> -->
+</view>
+
+<view class="shachuang_floor" style="height:100%;">
+<swiper class="swiper" current="{{curentTab}}" duration="300" bindchange="swiperTab" >
+  <!--精选门窗 style="display:{{currentTab != 10001 ? 'none' : 'block'}}" -->
+  <swiper-item style="height:auto !important;">
+  <block wx:for="{{productList}}" wx:for-item="product" >
+        <view data-cid='{{product. productId}}'  class="shachuang_block" wx:if="{{index%2 ==0}}">
+          <navigator url="/pages/product/product_detail?productId={{product.productId}}&orderType=2">
+            <image class='commomn_image shachuang_img' src='{{product.picUrl}}?x-oss-process=image/resize,w_380/auto-orient,1/quality,q_95/format,jpg'></image>
+          </navigator>
+          <view class="shachuang-title">{{product.name}}</view>
+          <view class="shachuang-gongneng">{{product.brief}}</view>
+          <view class="shachuang-gongneng yuanjia-txt">原价：￥<text class="yuanjia-num">{{product.price}}元/{{product.unit}}</text></view>
+          <view class="product-price">￥{{product.orderPrice}}<view class="product-price-danwei">元/{{product.unit}}</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/product/product_detail?productId={{product. productId}}&orderType=2">
+                <button class="product-buy-btn">立即购买</button>
+              </navigator>
+            </view>
+        </view>
+
+        <view data-cid='{{product. productId}}'  class="shachuang_block" wx:if="{{index%2 ==1}}" style="margin-left: 23rpx;">
+          <navigator url="/pages/product/product_detail?productId={{product. productId}}&orderType=2">
+            <image class='commomn_image shachuang_img' src='{{product.picUrl}}?x-oss-process=image/resize,w_380/auto-orient,1/quality,q_95/format,jpg'></image>
+          </navigator>
+          <view class="shachuang-title">{{product.name}}</view>
+          <view class="shachuang-gongneng">{{product.brief}}</view>
+          <view class="shachuang-gongneng yuanjia-txt">原价：<text class="yuanjia-num">￥{{product.price}}元/{{product.unit}}</text></view>
+          <view class="product-price">￥{{product.orderPrice}}<view class="product-price-danwei">元/{{product.unit}}</view></view>
+            <view class="product-buy">
+              <navigator url="/pages/product/product_detail?productId={{product. productId}}&orderType=2">
+                <button class="product-buy-btn">立即购买</button>
+              </navigator>
+            </view>
+        </view>
+</block>
+
+        <view wx:if="{{productList == null || productList.length ==0 }}">
+          <view class="no_online_product"> 商品加载中.....</view>
+        </view>
+    
+  </swiper-item>
+</swiper>
+</view>
+
+<view>
+  <button class="kefu" open-type="contact" bindcontact="handleContact"></button>
+</view>
+
+<view class="flow-telephone">
+    <button class="kefu-telephone"   bindtap="callPhone"></button>
+</view>

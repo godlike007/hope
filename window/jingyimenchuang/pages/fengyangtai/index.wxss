@@ -1,0 +1,25 @@
+.bottom_line{
+  font-size: 18px;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.herder-title{
+  text-align: center;
+}
+.commomn_image {
+  position: relative;
+  border-radius: 20rpx;
+  width: 100%;
+  height: 400rpx;
+  border: 1rpx solid #dcdcdc;
+}
+.product_list_block{
+  padding:5rpx 30rpx;
+  background-color: #fff;
+  font-size: 30rpx;
+}
+.product_list_block.txtcontent{
+  line-height: 81rpx;
+  font-weight: bold;
+}

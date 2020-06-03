@@ -44,7 +44,41 @@
 
 		<div class="spritespin"></div>
 
-		<table class="table table-striped">
+
+			<div class="introduction">
+				<div>
+					<div class="title">
+						{{overview.title}}
+					</div>
+					<div class="description">
+						{{overview.description}}
+					</div>
+				</div>
+
+				<div v-for="(item, index) in advantages_list" class="item">
+					<img :src="item.src" alt="">
+					<div class="txt">
+						<div class="title">
+							{{item.title}}
+						</div>
+						<div class="description">
+							{{item.description}}
+						</div>
+						<div class="feature" >
+
+							<div v-for="(feature, index1) in item.feature_list" >
+								{{feature.name}}
+							</div>
+
+							
+						</div>
+
+					</div>
+				</div>				
+			</div>
+
+		<!-- <table class="table table-striped">
+
 			<tbody>
 				<tr>
 					<th>Frame</th>
@@ -114,7 +148,9 @@
 		</table>
 		<div class="price">
 			标准版 ¥<span class="num">{{price}}</span>
-		</div>
+
+		</div> -->
+
 
 		<div class="order" @click="start_order">
 			订制该车
@@ -277,6 +313,19 @@
 				parts_list: [],
 				price:2499,
 
+				overview:{
+					title:'',
+					description:'',
+				},
+				advantages_list:[{
+					src:'/bike/detail/1.jpg',
+					title:'',
+					description:'',
+					feature_list:[{
+						name:''
+					}],
+				}],
+
 				//cur_time:(new Date()).toLocaleString()
 			};
 		},
@@ -290,7 +339,24 @@
 		mounted: function () {
 			this.init();
 			this.$nextTick(function () {
-
+				$('.spritespin').spritespin({
+					source: [
+						'/bike/rad_zoom_001.jpg',
+						'/bike/rad_zoom_005.jpg',
+						'/bike/rad_zoom_010.jpg',
+						'/bike/rad_zoom_015.jpg',
+						'/bike/rad_zoom_020.jpg',
+						'/bike/rad_zoom_025.jpg',
+						'/bike/rad_zoom_030.jpg',
+						'/bike/rad_zoom_034.jpg',
+					],
+					width: 300,
+					height: 227,
+					// reverse interaction direction
+					sense: -1,
+					animate: false,
+					responsive: true
+				});
 			})
 		},
 

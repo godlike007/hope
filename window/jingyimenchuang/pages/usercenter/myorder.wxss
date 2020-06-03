@@ -1,0 +1,155 @@
+/* pages/product/class.wxss */
+.dividing_line{
+  display: inline-block;
+  line-height: 20rpx;
+  background-color: #f2f2f2;
+  width: 100%
+}
+.header-title{
+  font-size: 27rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+.product-price-v{
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #dddddd;
+  color:#999;
+}
+.ensure{
+  font-size: 27rpx;
+  padding: 30rpx 0rpx;
+  padding-bottom: 10rpx;
+}
+.ensure-right{
+  margin-left: 60rpx;
+}
+.product-text{
+  width: 234rpx;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20rpx;
+}
+.guige{
+  margin-top: 34rpx;
+  color: #999;
+}
+.price-text{
+  width: 272rpx;
+  display: inline-block;
+  text-align: right;
+  vertical-align: top;
+}
+
+.shachuang_floor{
+  /* padding:20rpx 20rpx;
+  background-color: #F4F4F4; */
+}
+.shachuang_block{
+  width: 308rpx;
+  display: inline-block;
+  background-color: #fff;
+  padding: 20rpx  19rpx;
+  line-height: 80rpx;
+  margin-bottom: 20rpx;
+  border-radius: 12rpx;
+}
+.commomn_image {
+  position: relative;
+  width: 100%;
+  height: 400rpx;
+}
+.shachuang_img{
+  width: 310rpx;
+  height: 330rpx;
+}
+.shachuang-title{
+  line-height: 35rpx;
+  margin-top: 20rpx;
+  font-size: 30rpx;
+}
+.shachuang-gongneng{
+  font-size: 24rpx;
+  color: #999;
+  line-height: 35rpx;
+  margin-top: 10rpx;
+}
+
+.swiper-tab{
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  text-align: center;  
+}
+.swiper{
+  height: 1500rpx;
+}
+.swiper-tab-item{
+  width: 30%;
+  color: #000;
+  font-size: 30rpx;
+}
+.active{
+  color: #45bbff;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.product_types{
+  padding:13rpx 20rpx;
+  background-color: #fff;
+  margin-bottom:15rpx;
+}
+.product-price{
+  color: #f66741;
+  font-size: 30rpx;
+  line-height: 35rpx;
+  margin-top: 10rpx;
+}
+.product-price .product-price-danwei{
+  float: right;
+  margin-right: 59px;
+  font-size: 27rpx;
+}
+.product-buy{
+  margin-top: 15rpx;
+}
+.product-buy-btn{
+  line-height: 64rpx;
+  width: 300rpx;
+  background-color: #f76841;
+  color: #fff;
+  font-size: 30rpx;
+  border-radius: 40rpx;
+}
+.project_case{
+  display: inline-block;
+  width: 341rpx;
+}
+.project_img{
+  height:220rpx;
+  width:100%;
+}
+.no_online_product{
+  font-size: 30rpx;
+  text-align: center;
+}
+.statusDesc{
+  width: 90rpx;
+  float: right;
+  color:#f66741
+}
+.topayBtn{
+  line-height: 40rpx;
+  width: 101rpx;
+  font-size: 24rpx;
+  background-color: #ccc !important;
+  padding-left: 0;
+  padding-right: 0;
+  color: #ffffff !important;
+}
+.topay{
+  float: right;
+  margin-top: 25rpx;
+}
