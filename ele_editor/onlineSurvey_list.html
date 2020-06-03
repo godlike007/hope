@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ele实时编辑器</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+	<script src="jquery.min.js"></script>
+
+	<link rel="stylesheet" href="./element/element.css">
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="./element/element.js"></script>
+	<script type="text/javascript" src="request.js"></script>
+	<!-- import CSS -->
+	<!-- import JavaScript -->
+	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+
+	<style>
+		body {
+			margin: 0px;
+		}
+
+		.header {
+			text-align: center;
+		}
+
+		.content {
+			padding: 2%;
+		}
+
+		.item {
+			padding: 3%;
+			border-radius: 10px;
+			margin-bottom: 3%;
+			background-color: #e9e9e9;
+		}
+
+		#survey {}
+
+		.create {
+			position: fixed;
+			bottom: 0px;
+			height: 3rem;
+			background-color: #409eff;
+			width: 100%;
+			line-height: 3rem;
+			text-align: center;
+			color: #fff;
+		}
+
+		.el-message-box {
+			width: 15rem;
+		}
+
+
+		.item.cur {
+			background-color: #409eff;
+			color: #fff;
+		}
+
+		.item.ing {
+			background-color: #67C23A;
+			color: #fff;
+		}
+
+		#survey .el-button {
+			width: 100%;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<div id="survey">
+		<div class="header">
+			问卷列表
+
+
+		</div>
+
+		<div class="content">
+
+			<div v-for="(item, index) in item_list" class="item" :class="render(item,index)"
+				@click="toggel(item,index)">
+
+
+
+
+				<el-row>
+					<el-col :span="20">
+						<div>{{index+1}}. {{item.title}}</div>
+					</el-col>
+					<el-col :span="4">
+						<div v-if="item.status==1">填报中</div>
+					</el-col>
+				</el-row>
+
+			</div>
+
+
+			<el-button @click="add_new">新增试卷</el-button>
+		</div>
+
+
+
+		<el-row>
+			<el-col :span="8">
+				<el-button v-if="cur_status==1" icon="el-icon-edit" type="primary" @click="view">查看</el-button>
+				<el-button v-if="cur_status==0" icon="el-icon-edit" type="primary" @click="edit">编辑</el-button>
+			</el-col>
+			<el-col :span="8">
+				<el-button icon="el-icon-delete" type="danger" @click="del">删除</el-button>
+			</el-col>
+			<el-col :span="8">
+				<el-button v-if="cur_status==0" icon="el-icon-video-play" type="success" @click="start">发起填报</el-button>
+
+				<el-button v-if="cur_status==1" icon="el-icon-video-pause" type="warning" @click="stop">终止填报</el-button>
+			</el-col>
+		</el-row>
+
+
+	</div>
+
+
+</body>
+
+
+</html>
+<script>
+
+
+	survey = new Vue({
+		el: "#survey",
+		data() {
+			return {
+				map_unit_list: [],
+				item_list: [{
+					title: '汽车导购问卷调查',
+					status: 0,
+				}, {
+					title: '武统湾湾问卷调查',
+					status: 1,
+				}, {
+					title: '天基系统资金问卷调查',
+					status: 0,
+				}],
+				cur_index: 0,
+				cur_status: 0
+
+				//cur_time:(new Date()).toLocaleString()
+			};
+		},
+
+		computed: {
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
+			}
+		},
+		mounted: function () {
+			this.init();
+			this.$nextTick(function () {
+
+			})
+		},
+
+		methods: {
+			init() {
+				var that = this;
+
+			},
+			add_new() {
+				location.href = 'onlineSurvey.html';
+
+			},
+			toggel(item, index) {
+				this.cur_index = index;
+				this.cur_status = item.status;
+
+			},
+			render(item, index) {
+				let c = (this.cur_index == index ? 'cur' : '');
+				// if (item.status == 1) {
+				// 	c = 'ing'
+				// }
+				return c;
+
+			},
+			del_checkbox(item, index) {
+				item.splice(index, 1);
+
+			},
+			add_new_radio(item) {
+				item.radio.list.push({
+					label: '选项',
+				})
+
+			},
+			del_radio(item, index) {
+				item.splice(index, 1);
+
+			},
+			render_checkbox_option(item, index) {
+
+
+			},
+			create(item, index) {
+				this.$confirm('确认生成该试卷吗?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+				}).then(() => {
+
+
+				}).catch(() => {
+
+
+				});
+
+			},
+			view() {
+				location.href = 'onlineSurvey_done.html';
+
+			},
+			edit() {
+				location.href = 'onlineSurvey_edit.html';
+
+			},
+			del() {
+
+
+
+
+				if (this.item_list[this.cur_index].status == 1) {
+					this.$message.error({
+						message: '该问卷正在填报中无法删除',
+
+					});
+				}
+				else {
+
+					this.$confirm('确认删除该问卷吗?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+					}).then(() => {
+						this.item_list.splice(this.cur_index, 1);
+
+					}).catch(() => {
+
+
+					});
+
+
+
+				}
+
+
+
+
+			},
+			start() {
+				var that = this;
+
+
+				this.$confirm('确认开启填报吗?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+				}).then(() => {
+
+					if (this.item_list[this.cur_index].status == 1) {
+						this.$message.error({
+							message: '该问卷已发起填报',
+
+						});
+					}
+					else {
+						let start_title = "";
+						that.item_list.forEach(e => {
+							if (e.status == 1) {
+								start_title = e.title;
+							}
+						});
+
+						if (!!start_title) {
+							this.$message.warning({
+								message: '请先终止填报中的问卷：' + start_title,
+
+							});
+						}
+						else {
+							this.$message.success({
+								message: '该问卷开启填报',
+
+							});
+
+							// 	that.item_list.forEach((e,index) => {
+							// 	if (index == that.cur_index) {
+							// 		e.status = 1
+							// 	}
+							// 	else{
+							// 		e.status = 0;
+							// 	}
+
+
+							// });
+							that.item_list[that.cur_index].status = 1;
+						}
+
+
+
+					}
+
+
+				}).catch(() => {
+
+
+				});
+
+			},
+
+			stop(item) {
+				let that = this;
+				this.$confirm('确认终止吗?', '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+				}).then(() => {
+					that.item_list[that.cur_index].status = 0;
+					that.cur_status = 0;
+					that.$message.success({
+								message: that.item_list[this.cur_index].title+'填报终止成功',
+
+							});
+
+				}).catch(() => {
+
+
+				});
+
+			},
+			toggel_section(item) {
+				this.cur_section = item.name;
+				this.setting_list = this.setting_data[item.name];
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			add_code(item) {
+				this.code += $.trim($("#" + item.id).html().replace(/\#/, this.handler_value_name)) + "\n";
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			del_item(item, index) {
+				item.splice(index, 1);
+
+			},
+
+
+			toggel_hot_use(item) {
+				debugger;
+
+				this.hot_use_list = item.hot.split(",");
+
+			},
+			assign_value(item) {
+				this.handler_value_name = item;
+
+
+			},
+		}
+	});
+
+
+
+</script>

@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>ele实时编辑器</title>
+	<title>单车私享</title>
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport"
@@ -22,16 +22,40 @@
 	<!-- <script type="text/javascript" src="./element/element.js"></script> -->
 	<script type="text/javascript" src="request.js"></script>
 	<!-- import CSS -->
-	<link rel="stylesheet" href="./bike/vant.css" />
-	<link rel="stylesheet" href="./bike/config.css" />
-	<script src="./bike/vant.js"></script>
+	<link rel="stylesheet" href="./bike/cubeui.css" />
+	<link rel="stylesheet" href="./bike/homepage.css" />
+	<script src="./bike/cubeui.js"></script>
 	<!-- import JavaScript -->
 	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
 	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
 	<script src="./bike/spritespin.js" type="text/javascript"></script>
 
 	<style>
+		.item{
 
+		}
+
+		.item img{
+			
+		}
+
+		.item .content{
+			
+		}
+
+		.item .title{
+			
+		}
+
+		.item .introduce{
+			
+		}
+		.item .price{
+			
+		}
+		.item .go-detail{
+			
+		}
 	</style>
 
 </head>
@@ -40,19 +64,43 @@
 
 
 
-	<div id="config" class="content">
-		<div>
-			性别：
-			<cube-radio-group v-model="selected" :options="options" />
-		</div>
-		<div>
-			身高范围：
-			<cube-radio-group v-model="selected1" :options="options1" />
-		</div>
-		<div class="order" @click="sure_submit">
-			确定提交
+	<div id="homepage">
+
+
+		<div v-for="(item, index) in bike_list" class="item">
+			<div class="img">
+				<!-- <img :src="item.src" alt=""> -->
+
+				<cube-slide :data="item.src_list"  :loop="false"/>
+			</div>
+
+			<div class="content">
+				<div class="title">
+					{{item.title}}
+				</div>
+				<div class="introduce">
+					{{item.introduce}}
+				</div>
+				<div class="price">
+					{{item.price}}
+				</div>
+				<div class="go-detail" @click="go_detail">
+					详情
+				</div>
+			</div>
 		</div>
 
+		<div class="type-btn">
+			<div @click="show_type(1)">
+				山地车
+			</div>
+			<div @click="show_type(2)">
+				折叠车
+			</div>
+			<div @click="show_type(3)">
+				公路车
+			</div>
+		</div>
 
 
 
@@ -67,9 +115,125 @@
 
 
 	bike = new Vue({
-		el: "#config",
+		el: "#homepage",
 		data() {
 			return {
+				bike_list1: [{
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '都市精灵',
+					introduce: '适合城市骑行，碳纤前叉转向轻盈',
+					price: '2300',
+				}, {
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '城市猎人青春版',
+					introduce: '折叠轻便，出游通勤两不误',
+					price: '2400',
+				}, {
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '选用竞速级配件，助力都市骑行，让骑行更迅捷更专业',
+					introduce: '300',
+					price: '2700',
+				}, {
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '赤色幽灵',
+					introduce: '选用特制公路越野胎，全路况模式长续航公路骑行和砂石路骑行两不误',
+					price: '1900',
+				}],
+
+				bike_list2: [{
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '都市精灵',
+					introduce: '适合城市骑行，碳纤前叉转向轻盈',
+					price: '2300',
+				}, {
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '城市猎人青春版',
+					introduce: '折叠轻便，出游通勤两不误',
+					price: '2400',
+				}],
+
+				bike_list3: [{
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '都市精灵',
+					introduce: '适合城市骑行，碳纤前叉转向轻盈',
+					price: '2300',
+				}, {
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '城市猎人青春版',
+					introduce: '折叠轻便，出游通勤两不误',
+					price: '2400',
+				}, {
+					src_list: [{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide01.png'
+					},
+					{
+						url: 'http://www.didichuxing.com/',
+						image: '//webapp.didistatic.com/static/webapp/shield/cube-ui-examples-slide02.png'
+					}],
+					title: '选用竞速级配件，助力都市骑行，让骑行更迅捷更专业',
+					introduce: '300',
+					price: '2700',
+				}],
+
+				bike_list:[],
+
 
 				config_detail_list: [{
 					name: '车架套装',
@@ -128,9 +292,16 @@
 		},
 
 		methods: {
-			init() { },
-			sure_submit() {
-				location.href='bike_preview.html';
+			init() {
+
+				this.bike_list = this.bike_list1;
+				
+			 },
+			show_type(type) {
+				//location.href = 'bike_detail.html';
+			},
+			go_detail() {
+				location.href = 'bike_detail.html';
 			},
 			handleClose(done) {
 				this.$confirm('还有未保存的工作哦确定关闭吗？')
