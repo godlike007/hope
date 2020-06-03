@@ -91,12 +91,12 @@
 }
 .bottom-index-tab{
   float:left;
-  width:50%;
+  width:15%;
   font-size: 28rpx;
   text-align: center;
 }
 .bottom-buy-tab{
-  width:50%;
+  width:70%;
   display: inline-block;
   background-color: #f76841;
   color:#fff;

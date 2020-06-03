@@ -53,6 +53,10 @@
     <view class="bottom-buy-tabBar">
       <navigator url="/pages/index2/index" open-type="switchTab">
       <view class="bottom-index-tab">
+        <view class="indexIcon-view"><image src="{{service_icon}}" class="indexIcon"/></view>
+        <view class="index-tab-txt">客服</view>
+      </view>
+      <view class="bottom-index-tab">
         <view class="indexIcon-view"><image src="{{indexIcon}}" class="indexIcon"/></view>
         <view class="index-tab-txt">首页</view>
       </view>
