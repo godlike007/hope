@@ -106,9 +106,9 @@
 </view>
 
 <view class="product_list_block shachuang_floor">
-<swiper class="swiper swiper-disabled" current="{{curentTab}}" duration="300" bindchange="swiperTab">
+<view  current="{{curentTab}}" duration="300" bindchange="swiperTab">
   <!--精选门窗 -->
-  <swiper-item style="display:{{currentTab != 1 ? 'none' : 'block'}}" class="swiper-item">
+  <view style="display:{{currentTab != 1 ? 'none' : 'block'}}" class="swiper-item">
     <view>
         <view class="shachuang_block">
             <navigator url="/pages/product/product_detail?productId=10001">
@@ -172,10 +172,10 @@
             </view>
         </view>
     </view>
-  </swiper-item>
+  </view>
 
   <!--优质移门 -->
-  <swiper-item style="display:{{currentTab != 2 ? 'none' : 'block'}}" class="swiper-item">
+  <view style="display:{{currentTab != 2 ? 'none' : 'block'}}" class="swiper-item">
     <view>
         <view class="shachuang_block">
             <navigator url="/pages/product/product_detail?productId=10035">
@@ -239,10 +239,10 @@
             </view>
         </view>
     </view>
-  </swiper-item>
+  </view>
 
   <!--品牌纱窗 -->
-  <swiper-item style="display:{{currentTab != 3 ? 'none' : 'block'}}" class="swiper-item">
+  <view style="display:{{currentTab != 3 ? 'none' : 'block'}}" class="swiper-item">
     <view>
         <view class="shachuang_block">
             <navigator url="/pages/product/product_detail?productId=10023">
@@ -306,9 +306,9 @@
             </view>
         </view>
     </view>
-  </swiper-item>
+  </view>
 
-</swiper>
+</view>
 </view>
 
 
