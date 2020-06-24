@@ -165,10 +165,10 @@ Page({
       visitDate:this.data.visitDate
     };
 
-    if (params.projectName.replace(/(^\s*)|(\s*$)/g, "") == "") {
-      this.errorShow("请选择服务项目");
-      return;
-    }
+    // if (params.projectName.replace(/(^\s*)|(\s*$)/g, "") == "") {
+    //   this.errorShow("请选择服务项目");
+    //   return;
+    // }
 
     if (params.customerName.replace(/(^\s*)|(\s*$)/g, "") == "") {
       this.errorShow("请输入姓名");
@@ -186,18 +186,18 @@ Page({
       this.errorShow("请输入小区地址");
       return;
     }
-    if (params.buildingNum.replace(/(^\s*)|(\s*$)/g, "") == "") {
-      this.errorShow("请输入楼栋号");
-      return;
-    }
-    if (params.roomNum.replace(/(^\s*)|(\s*$)/g, "") == "") {
-      this.errorShow("请输入房号");
-      return;
-    }
-    if (params.visitDate.replace(/(^\s*)|(\s*$)/g, "") == "") {
-      this.errorShow("请选择预约日期");
-      return;
-    }
+    // if (params.buildingNum.replace(/(^\s*)|(\s*$)/g, "") == "") {
+    //   this.errorShow("请输入楼栋号");
+    //   return;
+    // }
+    // if (params.roomNum.replace(/(^\s*)|(\s*$)/g, "") == "") {
+    //   this.errorShow("请输入房号");
+    //   return;
+    // }
+    // if (params.visitDate.replace(/(^\s*)|(\s*$)/g, "") == "") {
+    //   this.errorShow("请选择预约日期");
+    //   return;
+    // }
 
     var _bodyObj = this;
     _bodyObj.saveUser(params);
