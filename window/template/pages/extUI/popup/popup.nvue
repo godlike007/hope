@@ -1,0 +1,466 @@
+<template>
+	<view>
+		<element-list v-for="item in items" :key="item.value" :type="item.value" text="1" />
+
+		<view class="uni-flex uni-row">
+			<view class="text" style="-webkit-flex: 1;flex: 1;"><button type="primary" plain="true" @click="add" size="mini">add</button></view>
+			<view class="text" style="-webkit-flex: 1;flex: 1;"><button type="primary" plain="true" size="mini">del</button></view>
+		</view>
+
+		<view class="uni-list-cell">
+			<view class="uni-list-cell-left">当前选择</view>
+			<view class="uni-list-cell-db">
+				<picker mode="multiSelector" @columnchange="bindMultiPickerColumnChange" :value="multiIndex" :range="multiArray">
+					<view class="uni-input">{{ multiArray[0][multiIndex[0]] }}，{{ multiArray[1][multiIndex[1]] }}，{{ multiArray[2][multiIndex[2]] }}</view>
+				</picker>
+			</view>
+		</view>
+
+		<view class="text">
+			<view class="example-body"><button size="mini" class="button" type="primary" @click="togglePopup('bottom', 'share')">底部分享</button></view>
+		</view>
+
+		<!-- 底部分享弹窗 -->
+		<uni-popup ref="showshare" :type="type" @change="change">
+			<view class="uni-title uni-common-mt uni-common-pl">size 有效值</view>
+			<view class="uni-list">
+				<radio-group @change="radioChange">
+					<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items1" :key="item.value">
+						<view>
+							<radio :value="item.value" :checked="index === current1" />
+						</view>
+						<view>{{item.name}}</view>
+					</label>
+				</radio-group>
+			</view>
+			
+			<view class="uni-title uni-common-mt uni-common-pl">type 有效值</view>
+			<view class="uni-list">
+				<radio-group @change="radioChange">
+					<label class="uni-list-cell uni-list-cell-pd" v-for="(item, index) in items2" :key="item.value">
+						<view>
+							<radio :value="item.value" :checked="index === current2" />
+						</view>
+						<view>{{item.name}}</view>
+					</label>
+				</radio-group>
+			</view>
+			<view class="uni-title uni-common-mt uni-common-pl">按钮是否镂空</view>
+			<view class="uni-list-cell uni-list-cell-pd">
+				<view class="uni-list-cell-db">不镂空</view>
+				<switch checked />
+			</view>
+		</uni-popup>
+	</view>
+</template>
+
+<script>
+import uniBadge from '@/components/uni-badge/uni-badge.vue';
+import uniSection from '@/components/uni-section/uni-section.vue';
+import elementList from '@/components/element-list.vue';
+import uniPopup from '@/components/uni-popup/uni-popup.vue';
+export default {
+	components: {
+		uniPopup,
+		elementList
+	},
+	data() {
+		return {
+			items1: [{
+					value: 'default',
+					name: '默认大小'
+				},
+				{
+					value: 'mini',
+					name: '小尺寸',
+					checked: 'true'
+				}
+			],
+			current1: 0,
+			items2: [{
+					value: 'primary',
+					name: '蓝色'
+				},
+				{
+					value: 'default',
+					name: '白色',
+					checked: 'true'
+				},
+				{
+					value: 'warn',
+					name: '红色',
+				}
+			],
+			current2: 0,
+			
+			
+			type: '',
+			list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+			content: '顶部弹 popup',
+			bottomData: [
+				{
+					text: '微信',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
+					name: 'wx'
+				},
+				{
+					text: '支付宝',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
+					name: 'wx'
+				},
+				{
+					text: 'QQ',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
+					name: 'qq'
+				},
+				{
+					text: '新浪',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png',
+					name: 'sina'
+				},
+				{
+					text: '百度',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
+					name: 'copy'
+				},
+				{
+					text: '其他',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
+					name: 'more'
+				}
+			],
+
+			items: [],
+			multiArray: [['内置组件', '扩展组件'], ['视图容器', '基础内容', '表单组件'], ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view']],
+			multiIndex: [0, 0, 0],
+			components_list: [
+				{
+					name: '内置组件',
+					next: ['视图容器', '基础内容', '表单组件'],
+					children: [
+						{
+							name: '视图容器',
+							next: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view'],
+							children: [
+								{
+									name: 'view'
+								},
+								{
+									name: 'scroll-view'
+								},
+								{
+									name: 'swiper'
+								},
+								{
+									name: 'movable-view'
+								},
+								{
+									name: 'cover-view'
+								}
+							]
+						},
+						{
+							name: '基础内容',
+							next: ['text', 'rich-text', 'progress'],
+							children: [
+								{
+									name: 'text'
+								},
+								{
+									name: 'rich-text'
+								},
+								{
+									name: 'progress'
+								}
+							]
+						},
+						{
+							name: '表单组件',
+							next: ['button', 'checkbox', 'form', 'input', 'label', 'picker', 'picker-view', 'radio', 'slider', 'switch', 'textarea'],
+							children: [
+								{
+									name: 'button'
+								},
+								{
+									name: 'checkbox'
+								},
+								{
+									name: 'form'
+								},
+								{
+									name: 'input'
+								},
+								{
+									name: 'label'
+								},
+								{
+									name: 'picker'
+								},
+								{
+									name: 'picker-view'
+								},
+								{
+									name: 'radio'
+								},
+								{
+									name: 'slider'
+								},
+								{
+									name: 'switch'
+								},
+								{
+									name: 'textarea'
+								}
+							]
+						}
+					]
+				}
+			],
+
+			type1: '',
+			list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+			content: '顶部弹 popup',
+			bottomData: [
+				{
+					text: '微信',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
+					name: 'wx'
+				},
+				{
+					text: '支付宝',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
+					name: 'wx'
+				},
+				{
+					text: 'QQ',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
+					name: 'qq'
+				},
+				{
+					text: '新浪',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png',
+					name: 'sina'
+				},
+				{
+					text: '百度',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
+					name: 'copy'
+				},
+				{
+					text: '其他',
+					icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
+					name: 'more'
+				}
+			]
+		};
+	},
+	onBackPress() {
+		this.$refs['showpopup'].close();
+		this.$refs['showtip'].close();
+		this.$refs['showimage'].close();
+		this.$refs['showshare'].close();
+	},
+	methods: {
+		radioChange(evt) {
+			for (let i = 0; i < this.items1.length; i++) {
+				if (this.items1[i].value === evt.target.value) {
+					this.current = i;
+					break;
+				}
+			}
+		},
+		togglePopup(type, open) {
+			switch (type) {
+				case 'top':
+					this.content = '顶部弹出 popup';
+					break;
+
+				case 'bottom':
+					this.content = '底部弹出 popup';
+					break;
+				case 'center':
+					this.content = '居中弹出 popup';
+					break;
+			}
+			this.type = type;
+			this.$nextTick(() => {
+				this.$refs['show' + open].open();
+			});
+		},
+		cancel(type) {
+			this.$refs['show' + type].close();
+		},
+		change(e) {
+			console.log('是否打开:' + e.show);
+		},
+		add: function(e) {
+			let that = this;
+			this.items.push({
+				value: that.multiArray[2][that.multiIndex[2]]
+			});
+		},
+		bindMultiPickerColumnChange: function(e) {
+			console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value);
+			this.multiIndex[e.detail.column] = e.detail.value;
+			switch (e.detail.column) {
+				case 0: //拖动第1列
+					switch (this.multiIndex[0]) {
+						case 0:
+							this.multiArray[1] = this.components_list[0].next;
+							this.multiArray[2] = this.components_list[0].children[0].next;
+							break;
+						case 1:
+							this.multiArray[1] = this.components_list[1].next;
+							this.multiArray[2] = this.components_list[1].children[0].next;
+							break;
+					}
+					this.multiIndex.splice(1, 1, 0);
+					this.multiIndex.splice(2, 1, 0);
+					break;
+				case 1: //拖动第2列
+					switch (
+						this.multiIndex[0] //判断第一列是什么
+					) {
+						case 0:
+							switch (this.multiIndex[1]) {
+								case 0:
+									this.multiArray[2] = this.components_list[0].children[0].next;
+									break;
+								case 1:
+									this.multiArray[2] = this.components_list[0].children[1].next;
+									break;
+								case 2:
+									this.multiArray[2] = this.components_list[0].children[2].next;
+									break;
+							}
+							break;
+						case 1:
+							switch (this.multiIndex[1]) {
+								case 0:
+									this.multiArray[2] = this.components_list[1].children[0].next;
+									break;
+								case 1:
+									this.multiArray[2] = this.components_list[1].children[1].next;
+									break;
+								case 2:
+									this.multiArray[2] = this.components_list[0].children[2].next;
+									break;
+							}
+							break;
+					}
+
+					this.multiIndex.splice(2, 1, 0);
+					break;
+			}
+			this.$forceUpdate();
+		}
+	},
+	onBackPress() {
+		this.$refs['showpopup'].close();
+		this.$refs['showtip'].close();
+		this.$refs['showimage'].close();
+		this.$refs['showshare'].close();
+	}
+};
+</script>
+<style>
+/* 底部分享 */
+.uni-share {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	flex-direction: column;
+	/* #endif */
+	background-color: #fff;
+}
+
+.uni-share-title {
+	line-height: 60rpx;
+	font-size: 24rpx;
+	padding: 15rpx 0;
+	text-align: center;
+}
+
+.uni-share-content {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 15px;
+}
+
+.uni-share-content-box {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: column;
+	align-items: center;
+	width: 200rpx;
+}
+
+.uni-share-content-image {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 60rpx;
+	height: 60rpx;
+	overflow: hidden;
+	border-radius: 10rpx;
+}
+
+.content-image {
+	width: 60rpx;
+	height: 60rpx;
+}
+
+.uni-share-content-text {
+	font-size: 26rpx;
+	color: #333;
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.uni-share-btn {
+	height: 90rpx;
+	line-height: 90rpx;
+	font-size: 14px;
+	border-top-color: #f5f5f5;
+	border-top-width: 1px;
+	border-top-style: solid;
+	text-align: center;
+	color: #666;
+}
+
+.flex-item {
+	width: 33.3%;
+	height: 200rpx;
+	text-align: center;
+	line-height: 200rpx;
+}
+
+.flex-item-V {
+	width: 100%;
+	height: 150rpx;
+	text-align: center;
+	line-height: 150rpx;
+}
+
+.text {
+	margin: 15rpx 10rpx;
+	padding: 0 20rpx;
+	background-color: #ebebeb;
+	height: 70rpx;
+	line-height: 70rpx;
+	text-align: center;
+	color: #777;
+	font-size: 26rpx;
+}
+
+.desc {
+	/* text-indent: 40rpx; */
+}
+</style>

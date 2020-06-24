@@ -1,0 +1,463 @@
+<template>
+	<view class="page">
+		<element-list v-for="item in items" :key="item.value" :type="item.value" text="1" />
+
+		<button type="primary" plain="true" @click="add" size="mini">add</button>
+		<button type="primary" plain="true" size="mini">del</button>
+
+		<view class="uni-list-cell">
+			<view class="uni-list-cell-left">当前选择</view>
+			<view class="uni-list-cell-db">
+				<picker mode="multiSelector" @columnchange="bindMultiPickerColumnChange" :value="multiIndex" :range="multiArray">
+					<view class="uni-input">{{ multiArray[0][multiIndex[0]] }}，{{ multiArray[1][multiIndex[1]] }}，{{ multiArray[2][multiIndex[2]] }}</view>
+				</picker>
+			</view>
+		</view>
+		
+		
+		<view class="example-body">
+			<button class="button" type="primary" @click="togglePopup('bottom', 'share')" size="mini">底部分享</button>
+		</view>
+		
+		<!-- 底部分享弹窗 -->
+		<uni-popup ref="showshare" :type="type" @change="change">
+			<view class="uni-share">
+				<text class="uni-share-title">分享到</text>
+				<view class="uni-share-content">
+					<view v-for="(item, index) in bottomData" :key="index" class="uni-share-content-box">
+						<view class="uni-share-content-image">
+							<image :src="item.icon" class="content-image" mode="widthFix" />
+						</view>
+						<text class="uni-share-content-text">{{ item.text }}</text>
+					</view>
+				</view>
+				<text class="uni-share-btn" @click="cancel('share')">取消分享</text>
+			</view>
+		</uni-popup>
+	</view>
+</template>
+
+<script>
+import uniBadge from '@/components/uni-badge/uni-badge.vue';
+import uniSection from '@/components/uni-section/uni-section.vue';
+import elementList from '@/components/element-list.vue';
+import uniPopup from '@/components/uni-popup/uni-popup.vue'
+export default {
+	components: {
+		elementList,
+		uniPopup
+	},
+	data() {
+		return {
+			items: [],
+			multiArray: [['内置组件', '扩展组件'], ['视图容器', '基础内容', '表单组件'], ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view']],
+			multiIndex: [0, 0, 0],
+			components_list: [
+				{
+					name: '内置组件',
+					next: ['视图容器', '基础内容', '表单组件'],
+					children: [
+						{
+							name: '视图容器',
+							next: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view'],
+							children: [
+								{
+									name: 'view'
+								},
+								{
+									name: 'scroll-view'
+								},
+								{
+									name: 'swiper'
+								},
+								{
+									name: 'movable-view'
+								},
+								{
+									name: 'cover-view'
+								}
+							]
+						},
+						{
+							name: '基础内容',
+							next: ['text', 'rich-text', 'progress'],
+							children: [
+								{
+									name: 'text'
+								},
+								{
+									name: 'rich-text'
+								},
+								{
+									name: 'progress'
+								}
+							]
+						},
+						{
+							name: '表单组件',
+							next: ['button', 'checkbox', 'form', 'input', 'label', 'picker', 'picker-view', 'radio', 'slider', 'switch', 'textarea'],
+							children: [
+								{
+									name: 'button'
+								},
+								{
+									name: 'checkbox'
+								},
+								{
+									name: 'form'
+								},
+								{
+									name: 'input'
+								},
+								{
+									name: 'label'
+								},
+								{
+									name: 'picker'
+								},
+								{
+									name: 'picker-view'
+								},
+								{
+									name: 'radio'
+								},
+								{
+									name: 'slider'
+								},
+								{
+									name: 'switch'
+								},
+								{
+									name: 'textarea'
+								}
+							]
+						}
+					]
+				}
+			],
+			
+			
+			type1: '',
+				list: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+				content: '顶部弹 popup',
+				bottomData: [{
+						text: '微信',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-2.png',
+						name: 'wx'
+					},
+					{
+						text: '支付宝',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-8.png',
+						name: 'wx'
+					},
+					{
+						text: 'QQ',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/gird-3.png',
+						name: 'qq'
+					},
+					{
+						text: '新浪',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-1.png',
+						name: 'sina'
+					},
+					{
+						text: '百度',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-7.png',
+						name: 'copy'
+					},
+					{
+						text: '其他',
+						icon: 'https://img-cdn-qiniu.dcloud.net.cn/uni-ui/grid-5.png',
+						name: 'more'
+					}
+				]
+			
+		};
+		
+	},
+	onBackPress() {
+		this.$refs['showpopup'].close()
+		this.$refs['showtip'].close()
+		this.$refs['showimage'].close()
+		this.$refs['showshare'].close()
+	},
+	methods: {
+		cancel(type) {
+			this.$refs['show' + type].close()
+		},
+		change(e) {
+			console.log('是否打开:' + e.show)
+		},
+		togglePopup(type, open) {
+			switch (type) {
+				case 'top':
+					this.content = '顶部弹出 popup'
+					break
+		
+				case 'bottom':
+					this.content = '底部弹出 popup'
+					break
+				case 'center':
+					this.content = '居中弹出 popup'
+					break
+			}
+			this.type = type
+			this.$nextTick(() => {
+				this.$refs['show' + open].open()
+			})
+		},
+		add: function(e) {
+	
+			let that = this;
+			this.items.push({
+				value: that.multiArray[2][that.multiIndex[2]]
+			});
+		},
+		bindMultiPickerColumnChange: function(e) {
+			console.log('修改的列为：' + e.detail.column + '，值为：' + e.detail.value);
+			this.multiIndex[e.detail.column] = e.detail.value;
+			switch (e.detail.column) {
+				case 0: //拖动第1列
+					switch (this.multiIndex[0]) {
+						case 0:
+							this.multiArray[1] = this.components_list[0].next;
+							this.multiArray[2] = this.components_list[0].children[0].next;
+							break;
+						case 1:
+							this.multiArray[1] = this.components_list[1].next;
+							this.multiArray[2] = this.components_list[1].children[0].next;
+							break;
+					}
+					this.multiIndex.splice(1, 1, 0);
+					this.multiIndex.splice(2, 1, 0);
+					break;
+				case 1: //拖动第2列
+					switch (
+						this.multiIndex[0] //判断第一列是什么
+					) {
+						case 0:
+							switch (this.multiIndex[1]) {
+								case 0:
+									this.multiArray[2] = this.components_list[0].children[0].next;
+									break;
+								case 1:
+									this.multiArray[2] = this.components_list[0].children[1].next;
+									break;
+								case 2:
+									this.multiArray[2] = this.components_list[0].children[2].next;
+									break;
+							}
+							break;
+						case 1:
+							switch (this.multiIndex[1]) {
+								case 0:
+									this.multiArray[2] = this.components_list[1].children[0].next;
+									break;
+								case 1:
+									this.multiArray[2] = this.components_list[1].children[1].next;
+									break;
+								case 2:
+									this.multiArray[2] = this.components_list[0].children[2].next;
+									break;
+							}
+							break;
+					}
+
+					this.multiIndex.splice(2, 1, 0);
+					break;
+			}
+			this.$forceUpdate();
+		}
+	}
+};
+</script>
+
+<style>
+/* 头条小程序组件内不能引入字体 */
+/* #ifdef MP-TOUTIAO */
+@font-face {
+	font-family: uniicons;
+	font-weight: normal;
+	font-style: normal;
+	src: url('~@/static/uni.ttf') format('truetype');
+}
+
+/* #endif */
+
+/* #ifndef APP-NVUE */
+page {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	background-color: #efeff4;
+	min-height: 100%;
+	height: 600px;
+}
+
+view {
+	font-size: 14px;
+	line-height: inherit;
+}
+
+.page{
+	height: 600px;
+}
+
+.example {
+	padding: 0 15px 15px;
+}
+
+.example-info {
+	padding: 15px;
+	color: #3b4144;
+	background: #ffffff;
+}
+
+.example-body {
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0;
+	font-size: 14px;
+	background-color: #ffffff;
+}
+
+/* #endif */
+.example {
+	padding: 0 15px;
+}
+
+.example-info {
+	/* #ifndef APP-NVUE */
+	display: block;
+	/* #endif */
+	padding: 15px;
+	color: #3b4144;
+	background-color: #ffffff;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.example-info-text {
+	font-size: 14px;
+	line-height: 20px;
+	color: #3b4144;
+}
+
+.example-body {
+	flex-direction: column;
+	padding: 15px;
+	background-color: #ffffff;
+}
+
+.word-btn-white {
+	font-size: 18px;
+	color: #ffffff;
+}
+
+.word-btn {
+	/* #ifndef APP-NVUE */
+	display: flex;
+	/* #endif */
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	height: 48px;
+	margin: 15px;
+	background-color: #007aff;
+}
+
+.word-btn--hover {
+	background-color: #4ca2ff;
+}
+
+/* #ifdef MP-ALIPAY */
+.uni-badge {
+	margin-left: 20rpx;
+}
+
+/* #endif */
+.example-body {
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.uni-badge-left-margin {
+	margin-left: 20rpx;
+}
+
+
+
+
+/* 底部分享 */
+	.uni-share {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		flex-direction: column;
+		/* #endif */
+		background-color: #fff;
+	}
+
+	.uni-share-title {
+		line-height: 60rpx;
+		font-size: 24rpx;
+		padding: 15rpx 0;
+		text-align: center;
+	}
+
+	.uni-share-content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding: 15px;
+	}
+
+	.uni-share-content-box {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: column;
+		align-items: center;
+		width: 200rpx;
+	}
+
+	.uni-share-content-image {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		width: 60rpx;
+		height: 60rpx;
+		overflow: hidden;
+		border-radius: 10rpx;
+	}
+
+	.content-image {
+		width: 60rpx;
+		height: 60rpx;
+	}
+
+	.uni-share-content-text {
+		font-size: 26rpx;
+		color: #333;
+		padding-top: 5px;
+		padding-bottom: 10px;
+	}
+
+	.uni-share-btn {
+		height: 90rpx;
+		line-height: 90rpx;
+		font-size: 14px;
+		border-top-color: #f5f5f5;
+		border-top-width: 1px;
+		border-top-style: solid;
+		text-align: center;
+		color: #666;
+	}
+</style>
