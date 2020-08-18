@@ -1,0 +1,37 @@
+let isDone: boolean
+let isDone: number 
+let isDone: string 
+let list: number[] = [1, 2, 3];let list: Array<number> = [1, 2, 3];
+let x: [string, number]=['hello', 10];
+
+枚举-----
+
+数字枚举
+enum Direction {
+    Up = 1,
+    Down,
+    Left,
+    Right
+}
+1234
+
+enum Direction {
+
+
+    Up,
+    Down,
+    Left,
+    Right
+}
+0123
+
+字符串枚举
+enum Direction {
+    Up = "UP",
+    Down = "DOWN",
+    Left = "LEFT",
+    Right = "RIGHT",
+}
+没有自增长的行为，字符串枚举可以很好的序列化
+
+计算的和常量成员
