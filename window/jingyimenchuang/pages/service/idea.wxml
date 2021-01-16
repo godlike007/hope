@@ -1,4 +1,0 @@
-<!--pages/service/idea.wxml-->
-<view>
-  <image src="http://img.xianrenn.com/hmc-web/service/service-idea.jpg" style="width: 100%;" mode="widthFix"></image>
-</view>

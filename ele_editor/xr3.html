@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>ele实时编辑器</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+	<meta http-equiv="Expires" content="0">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-control" content="no-cache">
+	<meta http-equiv="Cache" content="no-cache">
+
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+
+
+	<link href="./xr/css/fullpage.css" rel="stylesheet" />
+	<link href="./xr/css/animate.css" rel="stylesheet" />
+	<link rel="stylesheet" href="./element/element.css">
+
+	<script src="jquery.min.js"></script>
+	<script type="text/javascript" src="vue.js"></script>
+	<script type="text/javascript" src="./element/element.js"></script>
+	<script type="text/javascript" src="request.js"></script>
+	<!-- import CSS -->
+
+	<!-- import JavaScript -->
+	<!-- <script src="https://unpkg.com/mint-ui/lib/index.js"></script> -->
+	<!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script> -->
+	<style>
+		/* Style for our header texts
+	* --------------------------------------- */
+		h1 {
+			font-size: 5em;
+			font-family: arial, helvetica;
+			color: #fff;
+			margin: 0;
+			padding: 1rem;
+			background-color: #000;
+			opacity: .4;
+			width: 36%;
+			margin: auto;
+		}
+
+		/* Centered texts in each section
+	* --------------------------------------- */
+		.section {
+			text-align: center;
+		}
+
+
+		/* Backgrounds will cover all the section
+	* --------------------------------------- */
+		.section {
+			background-size: cover;
+		}
+
+		.slide {
+			background-size: cover;
+		}
+
+		/* Defining each section background and styles
+	* --------------------------------------- */
+		#section0 {
+			background-image: url(xr/image/bg.jpg);
+		}
+
+		#section0 h1 {
+			top: 50%;
+			transform: translateY(-50%);
+			position: relative;
+		}
+
+		#section2 {
+			background-image: url(xr/image/designer.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#section3 {
+			background-image: url(xr/image/customer/bg.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#section3 h1 {
+			color: #000;
+		}
+
+
+		/*Adding background for the slides
+	* --------------------------------------- */
+		#slide1 {
+			background-image: url(xr/image/1.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide2 {
+			background-image: url(xr/image/2.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide3 {
+			background-image: url(xr/image/3.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide4 {
+			background-image: url(xr/image/4.jpg);
+			padding: 6% 0 0 0;
+		}
+
+		#slide5 {
+			background-image: url(xr/image/5.jpg);
+			padding: 6% 0 0 0;
+		}
+
+
+		/* Bottom menu
+	* --------------------------------------- */
+		#infoMenu li a {
+			color: #fff;
+		}
+
+		a.designer {
+			display: block;
+			color: inherit;
+			padding: 0 10px;
+		}
+
+		.designer-pic {
+			display: block;
+			margin: 30% auto 0;
+			width: 15rem;
+			height: 15rem;
+			border-radius: 50%;
+			overflow: hidden;
+			border: 4px solid #8e8f90;
+			-webkit-transition: All .4s ease-in-out;
+			transition: All .4s ease-in-out;
+		}
+
+		.designer-pic img {
+			width: 15rem;
+			border: none;
+		}
+
+		.designer-name {
+			display: block;
+			text-align: center;
+			font-size: 4rem;
+			margin-top: 5rem;
+			margin-bottom: 3rem;
+			font-weight: 700;
+			color: #fff;
+		}
+
+		.designer-tag {
+			display: block;
+			text-align: center;
+			font-size: 3rem;
+			line-height: 24px;
+			margin: 1rem auto 2rem;
+			color: #fff;
+		}
+
+		.designer-content {
+			display: block;
+			text-align: center;
+			font-size: 2rem;
+			line-height: 3rem;
+			margin: 1rem auto;
+			color: #fff;
+			width: 43%;
+		}
+
+		.bold {
+			font-weight: bold;
+		}
+
+		#section3 img {
+			width: 75%;
+			border: 1rem solid #fff;
+			border-radius: 10px;
+		}
+
+		#section3 .say {
+
+			width: 78%;
+			margin: auto;
+			background-color: #fff;
+			margin: 3rem auto;
+			border-radius: 10px;
+
+		}
+
+		#section3 .say h2 {
+			font-size: 4rem;
+			padding: 1rem 0;
+
+		}
+
+		#section3 .say .content {
+			font-size: 2.4rem;
+			line-height: 5rem;
+			text-align: left;
+			padding: 0 3rem 4rem;
+		}
+
+		.logo {
+			padding-top: 75%;
+		}
+
+		.logo>div {
+			font-size: 5.5rem;
+			color: #fff;
+		}
+
+		.logo>.sub {
+			font-size: 2rem;
+			color: #fff;
+		}
+
+
+		#menu {
+			margin: 0;
+			padding: 0;
+			position: fixed;
+			right: 10px;
+			top: 10px;
+			list-style-type: none;
+			z-index: 70;
+		}
+
+		#menu li {
+			float: left;
+			margin: 0 10px 0 0;
+			font-size: 14px;
+		}
+
+		#menu a {
+			float: left;
+			padding: 10px 20px;
+			/* background-color: #fff; */
+			color: #fff;
+			text-decoration: none;
+		}
+
+		#menu .active a {
+			color: #F54248;
+			border-bottom: 2px solid #F54248;
+		}
+
+		.section {
+			text-align: center;
+			font: 50px "Microsoft Yahei";
+			color: #fff;
+		}
+
+		.section p {
+			font: 30px "Microsoft Yahei";
+		}
+
+		.animated-item {
+			display: none;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div id="xr">
+
+
+		<div id="fullpage">
+
+
+			<ul id="menu">
+				<li data-menuanchor="page1" class="active"><a href="#page1">关于我们</a></li>
+				<li data-menuanchor="page2"><a href="#page2">产品介绍</a></li>
+				<li data-menuanchor="page3"><a href="#page3">用户评价</a></li>
+				<li data-menuanchor="page4"><a href="#page4">合作加盟</a></li>
+			</ul>
+
+			<div class="section " id="section0">
+				<div class="logo">
+					<img src="./xr/image/logo.jpg" alt="">
+				</div>
+
+				<img class="animated-item" id="qr" src="./xr/image/code.png" alt="">
+				<img class="animated-item" id="phone" src="./xr/image/phone.png" alt="">
+			</div>
+			<div class="section" id="section1">
+				<div class="slide" id="slide1">
+					<img class="animated-item" id="slide1_title" src="./xr/image/code.png" alt="">
+					<img v-show="slide1_img_index==1" class="animated-item" id="slide1_1" src="./xr/image/phone.png" alt="">
+					<img v-show="slide1_img_index==2" class="animated-item" id="slide1_2" src="./xr/image/phone.png" alt="">
+					<img v-show="slide1_img_index==3" class="animated-item" id="slide1_3" src="./xr/image/phone.png" alt="">
+
+
+					<div class="introduce">
+						<div class="index">0{{slide1_introduce_index}}</div>
+						<div class="tab">
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+						</div>
+						<div v-show="slide1_img_index==1" class="content">
+							<div class="title">工人接单</div>
+							<div class="text"></div>
+						</div>
+						<div v-show="slide1_img_index==2" class="content">
+							<div class="title">一品阁</div>
+							<div class="text"></div>
+						</div>
+						<div v-show="slide1_img_index==3" class="content">
+							<div class="title">上门维修</div>
+							<div class="text"></div>
+						</div>
+
+						<div class="control">
+							<div class="prev" @click="toggel_prev_page(1)">上</div>
+							<div class="next" @click="toggel_next_page(1,3)">下</div>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="slide" id="slide2">
+					<img class="animated-item" id="slide1_title" src="./xr/image/code.png" alt="">
+					<img v-show="slide1_img_index==1" class="animated-item" id="slide1_1" src="./xr/image/phone.png" alt="">
+					<img v-show="slide1_img_index==2" class="animated-item" id="slide1_2" src="./xr/image/phone.png" alt="">
+					<img v-show="slide1_img_index==3" class="animated-item" id="slide1_3" src="./xr/image/phone.png" alt="">
+
+
+					<div class="introduce">
+						<div class="index">0{{slide1_introduce_index}}</div>
+						<div class="tab">
+							<div class="bar"></div>
+							<div class="bar"></div>
+							<div class="bar"></div>
+						</div>
+						<div v-show="slide1_img_index==1" class="content">
+							<div class="title">接单</div>
+							<div class="text"></div>
+						</div>
+						<div v-show="slide1_img_index==2" class="content">
+							<div class="title">复尺</div>
+							<div class="text"></div>
+						</div>
+						<div v-show="slide1_img_index==3" class="content">
+							<div class="title">安装</div>
+							<div class="text"></div>
+						</div>
+
+						<div class="control">
+							<div class="prev" @click="toggel_prev_page(1)">上</div>
+							<div class="next" @click="toggel_next_page(1,3)">下</div>
+						</div>
+					</div>
+				</div>
+				<div class="slide" id="slide3">
+					<h1>供应商管理系统</h1>
+					<p>商家进驻维护商品信息供电商平台展示</p>
+					<img class="animated-item" id="slide1_3" src="./xr/image/phone.png" alt="">
+				</div>
+				<div class="slide" id="slide4">
+					<h1>我们的公众号</h1>
+				</div>
+
+			</div>
+			<div class="section" id="section2">
+					<div class="remark">
+						<div class="user">王先生</div>
+						<div class="content">家里窗生锈了，就在贤人置家上找的服务，上门测量到安装非常顺利，感觉非常方便，再也不用自己去找人修了</div>
+					</div>
+				
+			</div>
+			<div class="section" id="section3">
+				
+			</div>
+		</div>
+
+	</div>
+	<script type="text/javascript" src="xr/js/fullpage.js"></script>
+
+</body>
+
+
+</html>
+<script>
+	xr = new Vue({
+		el: "#xr",
+		data() {
+			return {
+				map_unit_list: [],
+				index_list: [{
+					title: '今日开工',
+					value: 20,
+				}, {
+					title: '今日在建',
+					value: 15,
+				}, {
+					title: '今日完工',
+					value: 5,
+				}, {
+					title: '待开工',
+					value: 5,
+				}, {
+					title: '待验收',
+					value: 2,
+				}, {
+					title: '停工',
+					value: 1,
+				}],
+				project_list: [{
+					title: '海德公园',
+					status: '视频监控中'
+				}, {
+					title: '海尚壹品',
+					status: '信号中断'
+				}, {
+					title: '中海国际',
+					status: '正在重连中'
+				}, {
+					title: '金色万科',
+					status: '视频监控中'
+				}],
+				manager_list: [{
+					name: '张三',
+					num: 2,
+				}, {
+					name: '李四',
+					num: 4,
+				}, {
+					name: '王五',
+					num: 1,
+				}, {
+					name: '赵四',
+					num: 3,
+				}],
+				housekeeper_list: [{
+					name: '雷军',
+					num: 7,
+				}, {
+					name: '马云',
+					num: 1,
+				}, {
+					name: '张一鸣',
+					num: 5,
+				}, {
+					name: '马化腾',
+					num: 3,
+				}],
+				video_list: [{
+					title: '海德公园',
+
+				}, {
+					title: '金色万科',
+				}],
+
+				slide1_img_index:'',
+				slide2_img_index:'',
+				slide3_img_index:'',
+				slide4_img_index:'',
+
+				slide1_introduce_index:'',
+				slide2_introduce_index:'',
+				slide3_introduce_index:'',
+				slide4_introduce_index:'',
+
+
+				//cur_time:(new Date()).toLocaleString()
+			};
+		},
+
+		computed: {
+			cur_time() {
+				var d = new Date();
+				return (d.getMonth() + 1) + '月' + d.getDate() + '日  ' + d.getHours() + ':' + d.getMinutes();
+			}
+		},
+		mounted: function () {
+			this.init();
+			this.$nextTick(function () {
+
+			})
+		},
+
+		methods: {
+			init() {
+				var that = this;
+				for (i = 0; i < 100; i++) {
+					that.map_unit_list.push({
+						index: i
+					})
+				}
+
+				that.$nextTick(function () {
+					$('#fullpage').fullpage({
+							anchors: ['page1', 'page2', 'page3', 'page4'],
+							menu: '#menu',
+							afterLoad: function (value) {
+								debugger;
+								if (value.index == 0) {
+									setTimeout(function () {
+										$('#qr').show();
+
+										$('#qr').addClass(
+											"animated slideInLeft");
+									}, 1000);
+
+
+									setTimeout(function () {
+										$('#phone').show();
+
+										$('#phone').addClass(
+											"animated slideInRight");
+									}, 1500);
+
+								}
+
+							},
+							onLeave: function (value) {
+								$(".animated-item").hide();
+
+							}
+						}
+
+					);
+				})
+			},
+			
+			
+			toggel_prev_page(index) {
+				if(this["slide"+index+"_introduce_index"]>1){
+					this["slide"+index+"_introduce_index"]--;
+				}
+				
+			},
+			toggel_next_page(index,max) {
+				if(this["slide"+index+"_introduce_index"]<max){
+					this["slide"+index+"_introduce_index"]++;
+				}
+			},
+			toggel_section(item) {
+				this.cur_section = item.name;
+				this.setting_list = this.setting_data[item.name];
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			add_code(item) {
+				this.code += $.trim($("#" + item.id).html().replace(/\#/, this.handler_value_name)) + "\n";
+
+				this.$nextTick(function () {
+
+				})
+
+			},
+			toggel_hot_use(item) {
+				debugger;
+
+				this.hot_use_list = item.hot.split(",");
+
+			},
+			assign_value(item) {
+				this.handler_value_name = item;
+
+
+			},
+		}
+	});
+</script>
